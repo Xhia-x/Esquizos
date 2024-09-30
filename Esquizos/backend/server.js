@@ -5,12 +5,18 @@ import cors from 'cors';
 const app = express();
 const PORT = 5000;
 
-// Habilitar CORS y JSON parsing
-app.use(cors());
+// Configuración detallada de CORS
+const corsOptions = {
+    origin: 'http://localhost:5173', // Permitir solo el frontend en este puerto
+    optionsSuccessStatus: 200
+};
+app.use(cors(corsOptions)); // Usar las opciones de CORS
+
+// Habilitar JSON parsing
 app.use(express.json());
 
 // Conectar a MongoDB
-mongoose.connect('mongodb+srv://ifarias21:12345@cluster0.a9yuo.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', {
+mongoose.connect('mongodb+srv://ifarias21:12345@cluster0.a9yuo.mongodb.net/Construbd?retryWrites=true&w=majority&appName=Cluster0', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
@@ -23,24 +29,31 @@ const userSchema = new mongoose.Schema({
     password: String
 });
 
-const User = mongoose.model('User', userSchema);
+const User = mongoose.model('User', userSchema, 'User');
 
-// Endpoint de prueba
+// Endpoint para el login
 app.post('/login', async (req, res) => {
     const { username, password } = req.body;
+    
+    console.log(`Valores recibidos: Username = ${username}, Password = ${password}`); // Debugging
 
     try {
+
+        const { username, password } = req.body;
         const user = await User.findOne({ username, password });
         if (user) {
-            res.status(200).json({ message: 'Inicio de sesión exitoso' });
+            res.json({ mensaje: 'Inicio de sesión exitoso' , username: user.username});
         } else {
-            res.status(401).json({ message: 'Credenciales incorrectas' });
+            res.status(401).json({ mensaje: 'Credenciales incorrectas' });
         }
     } catch (error) {
         res.status(500).json({ message: 'Error en el servidor', error });
     }
 });
 
+
+
+// Iniciar el servidor
 app.listen(PORT, () => {
     console.log(`Servidor corriendo en el puerto ${PORT}`);
 });
