@@ -1,35 +1,71 @@
 <template>
   <div class="login-page">
-    <!-- Contenedor de la mitad izquierda con el formulario de login -->
     <div class="left-section">
-      <!-- Logo que redirige a la página de login -->
       <router-link to="/">
         <img src="@/assets/logono.png" alt="Logo" class="logo" />
       </router-link>
       <div class="login-container">
         <h2>Login</h2>
-        <form>
+        <form @submit.prevent="loginUser">
           <div class="form-group">
             <label for="username">Username</label>
-            <input type="text" id="username" />
+            <input type="text" id="username" v-model="username" />
           </div>
           <div class="form-group">
             <label for="password">Password</label>
-            <input type="password" id="password" />
+            <input type="password" id="password" v-model="password" />
           </div>
           <button type="submit">Login</button>
+          <p v-if="message" class="message">{{ message }}</p> <!-- Mensaje de error/success -->
         </form>
-        <!-- Botón para registrarse que redirige al registro -->
         <router-link to="/register" class="register-link">No tienes una cuenta? Registrate aqui</router-link>
       </div>
     </div>
-
-    <!-- Contenedor de la mitad derecha con la imagen y fondo degradado -->
     <div class="right-section">
       <img src="@/assets/monopoly.png" alt="Monopoly" class="monopoly-image" />
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      username: '',
+      password: '',
+      message: ''
+    };
+  },
+  methods: {
+    async loginUser() {
+        try {
+            console.log("Enviando:", this.username, this.password); // Debug
+
+            const response = await fetch('http://localhost:5038/api/USERS/Login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    username: this.username,
+                    password: this.password
+                })
+            });
+
+            if (response.ok) {
+                this.message = "Login exitoso";
+            } else {
+                const errorData = await response.json();
+                this.message = errorData.message || "Error en el inicio de sesión";
+            }
+        } catch (error) {
+            console.error("Error durante el login:", error);
+            this.message = "An error occurred during login";
+        }
+    }
+}
+};
+</script>
 
 <style scoped>
 /* Estilo general de la página de login */
@@ -38,7 +74,6 @@
   height: 100vh;
 }
 
-/* Sección izquierda (Formulario de Login) */
 .left-section {
   flex: 1;
   display: flex;
@@ -103,7 +138,6 @@ button:hover {
   background-color: #00b35f;
 }
 
-/* Estilo del enlace para registrarse */
 .register-link {
   display: block;
   text-align: center;
@@ -116,7 +150,6 @@ button:hover {
   text-decoration: underline;
 }
 
-/* Sección derecha (Imagen y fondo degradado rosa) */
 .right-section {
   flex: 1;
   background: linear-gradient(45deg, #ff69b4, #ffb6c1);
@@ -129,5 +162,10 @@ button:hover {
   width: 80%;
   height: auto;
   object-fit: contain;
+}
+
+.message {
+  color: white;
+  text-align: center;
 }
 </style>
