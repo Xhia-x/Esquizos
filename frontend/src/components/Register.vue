@@ -69,7 +69,7 @@ export default {
             .then(({data}) => {
                 if (data.status === true) {
                     alert("Registered Successfully");
-                    this.$router.push({ name: 'HelloWorld' });
+                    this.$router.push({ name: 'Login' });
                 } else {
                     alert("Register FAILED");
                 }

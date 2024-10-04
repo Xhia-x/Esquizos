@@ -1,5 +1,6 @@
 <template>
   <div>
+    <video src="assets/video.mp4" autoplay="true" muted="true" loop="true"></video>
     <router-view/>
   </div>
 </template>
@@ -19,4 +20,21 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 }
+
+body {
+  background: none;
+  position: relative;
+  margin: 0;
+}
+
+video {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  min-width: 105%;
+  min-height: 100%;
+  transform: translateX(calc((100% - 100vw) / 2));
+  z-index: -210;
+}
+
 </style>
