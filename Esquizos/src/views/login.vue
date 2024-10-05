@@ -9,7 +9,7 @@
         <input placeholder="Ingresa una contraseña" type="password" class="input" v-model="password" /> <!-- v-model para sincronizar la contraseña -->
         <button type="submit">Ingresar</button>
 
-        <RouterLink></RouterLink>
+        <RouterLink to="tablero">tablero</RouterLink>
 
         <!-- Mensaje de éxito o error -->
         <p v-if="message" :class="{ success: isSuccess, error: !isSuccess }">{{ message }}</p> 
