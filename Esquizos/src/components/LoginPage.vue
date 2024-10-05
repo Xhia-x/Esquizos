@@ -68,7 +68,8 @@
           return {
               user: {
                   email: '',
-                  password: ''
+                  password: '',
+                  username: ''
               }
           };
       },
