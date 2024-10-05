@@ -1,35 +1,42 @@
 const express = require('express');
-const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
-const cors = require('cors');
-const User = require('./User');
-
 const app = express();
-app.use(cors());
-app.use(bodyParser.json());
+const mongoose = require('mongoose');
+var routes = require('./route/routes');
+mongoose.set('strictQuery', false);
+const cors = require('cors');
 
-// Conectar a MongoDB
-mongoose.connect('mongodb+srv://yanko:KW2auVzu0h02eDOt@cluster0.ycbhi.mongodb.net/Proyecto1?retryWrites=true&w=majority&appName=Cluster0', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-}).then(() => {
-  console.log('Conectado a MongoDB');
-}).catch((err) => {
-  console.error('Error al conectar a MongoDB', err);
+/*
+const bodyParser = require("body-parser");
+const path = require('path');
+const bcryp = require('bcrypt');
+*/
+
+
+app.listen(9992, function check(err){
+    if(err){
+        console.log("ERROR!");
+    } else {
+        console.log("LISTENING ON PORT 9992...");
+    }
 });
 
-// Ruta para iniciar sesión
-app.post('/login', async (req, res) => {
-  const { username, password } = req.body;
-  const user = await User.findOne({ username, password });
-  if (user) {
-    res.json({ mensaje: 'Inicio de sesión exitoso' , username: user.username});
-  } else {
-    res.status(401).json({ mensaje: 'Credenciales incorrectas' });
-  }
-});
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    next();
+  });
 
-const PORT = 3000;
-app.listen(PORT, () => {
-  console.log(`Servidor escuchando en el puerto ${PORT}`);
-});
+
+async function connectToDatabase() {
+    try {
+        await mongoose.connect("mongodb://localhost:27017/users")
+        console.log("Connected to DB");
+    } catch (err) {
+        console.log("Error connecting to DB", err);
+    }
+}
+connectToDatabase();
+
+app.use(express.json());
+app.use(routes);
