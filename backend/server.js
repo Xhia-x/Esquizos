@@ -20,17 +20,12 @@ app.listen(9992, function check(err){
     }
 });
 
-app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-    next();
-  });
+
 
 
 async function connectToDatabase() {
     try {
-        await mongoose.connect("mongodb://localhost:27017/users")
+        await mongoose.connect('mongodb+srv://yanko:KW2auVzu0h02eDOt@cluster0.ycbhi.mongodb.net/Proyecto1?retryWrites=true&w=majority&appName=Cluster0')
         console.log("Connected to DB");
     } catch (err) {
         console.log("Error connecting to DB", err);
