@@ -60,17 +60,14 @@
   </template>
   
   <script>
+  import User from '../models/User.js';
   import axios from 'axios';
   
   export default {
       name: 'LoginPage',
       data() {
           return {
-              user: {
-                  email: '',
-                  password: '',
-                  username: ''
-              }
+              user: new User('', '', false)
           };
       },
       methods: {
@@ -79,6 +76,10 @@
               .then(({data}) => {
                   if (data.status === true) {
                       alert("Logged Successfully");
+                      localStorage.setItem('user', data.username);
+                      console.log(data.msg);
+                      console.log(data.username);
+                      console.log(localStorage.getItem('user'));
                       this.$router.push({ name: 'CrearPartida' });
                   } else {
                       alert("Login FAILED");

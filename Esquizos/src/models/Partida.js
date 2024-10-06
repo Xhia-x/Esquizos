@@ -5,7 +5,7 @@ export default class Partida {
       this.jugadores = jugadores; // Array de jugadores
       this.link = link;
       this.dineroInicial = 0;
-      this.dineroFinal = 0;
+      this.tiempoMaximo = Infinity;
     }
   }
   

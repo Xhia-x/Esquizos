@@ -39,11 +39,15 @@ export default {
         crearPartida() {
             this.partida.nombre = this.nombre;
             this.partida.nJugadores = this.jugadores;
+            this.partida.jugadores.push(localStorage.getItem('user'));
             this.generarLink();
+            console.log(localStorage.getItem('user'));
+            const partidaSerialized = JSON.stringify(this.partida);
+
             console.log(this.partida.nombre);
             this.$router.push({ 
                 name: 'ConfigurarPartida', 
-                params: { partida: this.partida } 
+                query: { partida: partidaSerialized } 
             });
         },
         

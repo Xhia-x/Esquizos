@@ -12,7 +12,7 @@
                     <div class="form-group">
                         <label for="tiempoMaximo">Tiempo Máximo:</label>
                         <select id="tiempoMaximo" v-model="tiempoMaximo" required>
-                            <option value="Infinity">Sin límite</option>
+                            <option value="-1">Sin límite</option>
                             <option value="900">15 minutos</option>
                             <option value="1800">30 minutos</option>
                             <option value="3600">1 hora</option>
@@ -29,22 +29,52 @@
 </template>
 
 <script>
+import axios from 'axios';
 import Partida from '../models/Partida.js';
 export default {
     name: 'ConfigurarPartida',
     data() {
         return {
-            partida: new Partida('', 0,[], ''),
+            partida: this.obtenerPartida() || new Partida('', 0, [], ''),
             dineroInicial: 20000,
-            tiempoMaximo: Infinity,
+            tiempoMaximo: -1,
         };
     },
     methods: {
+        obtenerPartida() {
+        const partidaQuery = this.$route.query.partida;
+        if (partidaQuery) {
+            try {
+                return JSON.parse(partidaQuery); // Deserialize JSON to an object
+            } catch (error) {
+                console.error('Error parsing partida query:', error);
+                return null;
+            }
+        }
+        return null;
+    },
         definirPartida() {
             this.partida.dineroInicial = this.dineroInicial;
-            this.partida.tiempoMaximo = this.tiempoMaximo;
+            this.partida.tiempoMaximo = parseInt(this.tiempoMaximo);
+            console.log(this.partida.nombre);
+            console.log(this.partida.link);
+            console.log(this.partida.nJugadores);
             console.log(this.partida.dineroInicial);
             console.log(this.partida.tiempoMaximo);
+            console.log(this.partida.jugadores);
+            axios.post("http://localhost:9992/partida", this.partida)
+              .then(({data}) => {
+                  if (data.status === true) {
+                      alert("Partida Creada");
+                      
+                  } else {
+                      alert("FAILED");
+                  }
+              })
+              .catch(err => {
+                  console.error(err);
+                  alert("Error, Try Again");
+              });
         }
     }
 };
