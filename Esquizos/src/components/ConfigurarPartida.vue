@@ -18,7 +18,16 @@
                             <option value="3600">1 hora</option>
                             <option value="7200">2 horas</option>
                         </select>
-
+                    </div>
+                    <div class="form-group">
+                        <label for="tiempoPorTurno">Tiempo por turno:</label>
+                        <select id="tiempoPorTurno" v-model="tiempoPorTurno" required>
+                            <option value="-1">Sin límite</option>
+                            <option value="300">5 minutos</option>
+                            <option value="600">10 minutos</option>
+                            <option value="900">15 minutos</option>
+                            <option value="1800">30 minutos</option>
+                        </select>
                     </div>
                     <button type="submit">Definir Reglas</button>
                 </form>
@@ -36,8 +45,9 @@ export default {
     data() {
         return {
             partida: this.obtenerPartida() || new Partida('', 0, [], ''),
-            dineroInicial: 20000,
+            dineroInicial: 1500,
             tiempoMaximo: -1,
+            tiempoPorTurno: -1
         };
     },
     methods: {
@@ -56,19 +66,20 @@ export default {
         definirPartida() {
             this.partida.dineroInicial = this.dineroInicial;
             this.partida.tiempoMaximo = parseInt(this.tiempoMaximo);
+            this.partida.tiempoPorTurno = parseInt(this.tiempoPorTurno);
             console.log(this.partida.nombre);
             console.log(this.partida.link);
             console.log(this.partida.nJugadores);
             console.log(this.partida.dineroInicial);
             console.log(this.partida.tiempoMaximo);
             console.log(this.partida.jugadores);
+            console.log(this.partida.tiempoPorTurno);
             axios.post("http://localhost:9992/partida", this.partida)
               .then(({data}) => {
                   if (data.status === true) {
                       alert("Partida Creada");
-                      
                   } else {
-                      alert("FAILED");
+                      alert("Nombre de Partida ya existe, Intente con otro");
                   }
               })
               .catch(err => {
