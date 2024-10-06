@@ -11,7 +11,7 @@ var registerPartidaControllerFn = async (req, res) => {
             res.status(200).send({ "status": true, "message": result.msg });
             console.log("Partida registered successfully");
         } else {
-            res.status(400).send({ "status": false, "message": result.msg });
+            res.send({ "status": false, "message": result.msg });
             console.log("Failed partida registration");
         }
 

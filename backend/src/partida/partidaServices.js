@@ -12,6 +12,7 @@ module.exports.registerPartidaDBService = (partidaData) => {
         partida.link = partidaData.link;
         partida.dineroInicial = partidaData.dineroInicial;
         partida.tiempoMaximo = partidaData.tiempoMaximo;
+        partida.tiempoPorTurno = partidaData.tiempoPorTurno;
 
         console.log(partida.nombre);
         console.log(partida.administrador);

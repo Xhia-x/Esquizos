@@ -7,6 +7,7 @@ export default class Partida {
       this.link = link;
       this.dineroInicial = 0;
       this.tiempoMaximo = Infinity;
+      this.tiempoPorTurno = Infinity;
     }
   }
   
