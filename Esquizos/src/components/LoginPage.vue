@@ -79,7 +79,7 @@
               .then(({data}) => {
                   if (data.status === true) {
                       alert("Logged Successfully");
-                      this.$router.push({ name: 'Home' });
+                      this.$router.push({ name: 'CrearPartida' });
                   } else {
                       alert("Login FAILED");
                   }
