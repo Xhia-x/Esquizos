@@ -1,8 +1,12 @@
 
 <template>
 
+    <pop-up v-if="Popup" @close="togglePopup" />
+
 
 <div class="loader">
+
+  
 
 <button class="readmore-btn" @click="togglePopup()">
    
@@ -168,3 +172,44 @@ export default {
 
 </style>
 
+<style lang="scss">
+.pop-up{
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index:10 ;
+    padding: 32px 16px 120px;
+    height: 100vh;
+    width: 100%;
+    background-color: rgba($color:#52a07e, $alpha: 0.5);
+    display: grid;
+    place-items: center;
+
+    &-close{
+        position: absolute;
+        height: 52px;
+        width: 52px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        top: 0;
+        right: 0;
+        font-size: 3rem;
+        color: #d6d6d6;
+        cursor: pointer;
+
+    }
+
+    &-inner{
+        background-color: #fff;
+        color: #000;
+        position: relative;
+        width: 60%;
+        padding: 40px;
+        border-radius: 8px;
+        box-shadow: 0 5px 5px rgba($color: #000, $alpha: 0.2);
+    }
+
+}
+
+</style>
