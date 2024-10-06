@@ -36,3 +36,23 @@ module.exports.registerPartidaDBService = (partidaData) => {
         }
     });
 };
+
+
+module.exports.buscarPartidaDBService = async (partidaData) => {
+    try {
+        const result = await partidaModel.findOne({ nombre: partidaData.nombre });
+        console.log(partidaData);
+
+        if (result) {
+            console.log("Partida encontrada");
+            return { status: true, msg: "Partida encontrada", partida: result  };
+        } else {
+            console.log("INVALID DATA");
+            return { status: false, msg: "INVALID DATA" };
+        }
+
+    } catch (error) {
+        console.log("INVALID DATA");
+        return { status: false, msg: "INVALID DATA" };
+    }
+};
