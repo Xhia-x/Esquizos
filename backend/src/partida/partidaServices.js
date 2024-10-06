@@ -6,6 +6,7 @@ module.exports.registerPartidaDBService = (partidaData) => {
         var partida = new partidaModel();
 
         partida.nombre = partidaData.nombre;
+        partida.administrador = partidaData.administrador;
         partida.nJugadores = partidaData.nJugadores;
         partida.jugadores = partidaData.jugadores;
         partida.link = partidaData.link;
@@ -13,6 +14,7 @@ module.exports.registerPartidaDBService = (partidaData) => {
         partida.tiempoMaximo = partidaData.tiempoMaximo;
 
         console.log(partida.nombre);
+        console.log(partida.administrador);
         console.log(partida.nJugadores);
         console.log(partida.jugadores);
         console.log(partida.link);
