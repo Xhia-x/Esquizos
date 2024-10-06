@@ -10,7 +10,6 @@
 </div>
 </template>
 
-  
 <script>
 export default {
     data() {
@@ -46,7 +45,6 @@ export default {
 };
 </script>
 
-  
 <style scoped>
 .level-selector-wrapper {
     display: flex;
@@ -63,7 +61,6 @@ export default {
     gap: 20px;
     padding: 20px;
     background-color: rgba(255, 255, 255, 0.8);
-    /* Fondo blanco y semitransparente */
     border-radius: 10px;
 }
 
@@ -97,7 +94,7 @@ export default {
     border: none;
     color: #fff;
     cursor: pointer;
-    background-color: #7d2ae8;
+    background-color: #c70000c2;
     transition: all 0.2s ease;
 }
 
@@ -119,15 +116,15 @@ export default {
 
 .button:hover:before {
     top: -70%;
-    background-image: radial-gradient(circle, #7d2ae8 20%, transparent 20%),
-        radial-gradient(circle, transparent 20%, #7d2ae8 20%, transparent 30%),
-        radial-gradient(circle, #7d2ae8 20%, transparent 20%),
-        radial-gradient(circle, #7d2ae8 20%, transparent 20%),
-        radial-gradient(circle, transparent 10%, #7d2ae8 15%, transparent 20%),
-        radial-gradient(circle, #7d2ae8 20%, transparent 20%),
-        radial-gradient(circle, #7d2ae8 20%, transparent 20%),
-        radial-gradient(circle, #7d2ae8 20%, transparent 20%),
-        radial-gradient(circle, #7d2ae8 20%, transparent 20%);
+    background-image: radial-gradient(circle, #c70000c2 20%, transparent 20%),
+        radial-gradient(circle, transparent 20%, #c70000c2 20%, transparent 30%),
+        radial-gradient(circle, #c70000c2 20%, transparent 20%),
+        radial-gradient(circle, #c70000c2 20%, transparent 20%),
+        radial-gradient(circle, transparent 10%, #c70000c2 15%, transparent 20%),
+        radial-gradient(circle, #c70000c2 20%, transparent 20%),
+        radial-gradient(circle, #c70000c2 20%, transparent 20%),
+        radial-gradient(circle, #c70000c2 20%, transparent 20%),
+        radial-gradient(circle, #c70000c2 20%, transparent 20%);
     background-size: 10% 10%, 20% 20%, 15% 15%, 20% 20%, 18% 18%, 10% 10%, 15% 15%,
         10% 10%, 18% 18%;
     background-position: 50% 120%;
@@ -154,13 +151,13 @@ export default {
 
 .button:hover::after {
     bottom: -70%;
-    background-image: radial-gradient(circle, #7d2ae8 20%, transparent 20%),
-        radial-gradient(circle, #7d2ae8 20%, transparent 20%),
-        radial-gradient(circle, transparent 10%, #7d2ae8 15%, transparent 20%),
-        radial-gradient(circle, #7d2ae8 20%, transparent 20%),
-        radial-gradient(circle, #7d2ae8 20%, transparent 20%),
-        radial-gradient(circle, #7d2ae8 20%, transparent 20%),
-        radial-gradient(circle, #7d2ae8 20%, transparent 20%);
+    background-image: radial-gradient(circle, #c70000c2 20%, transparent 20%),
+        radial-gradient(circle, #c70000c2 20%, transparent 20%),
+        radial-gradient(circle, transparent 10%, #c70000c2 15%, transparent 20%),
+        radial-gradient(circle, #c70000c2 20%, transparent 20%),
+        radial-gradient(circle, #c70000c2 20%, transparent 20%),
+        radial-gradient(circle, #c70000c2 20%, transparent 20%),
+        radial-gradient(circle, #c70000c2 20%, transparent 20%);
     background-size: 15% 15%, 20% 20%, 18% 18%, 20% 20%, 15% 15%, 20% 20%, 18% 18%;
     background-position: 50% 0%;
     animation: greenbottomBubbles 0.6s ease;

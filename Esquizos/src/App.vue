@@ -18,7 +18,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 
 body {
@@ -31,7 +30,7 @@ video {
   position: absolute;
   right: 0;
   bottom: 0;
-  min-width: 105%;
+  min-width: 100%;
   min-height: 100%;
   transform: translateX(calc((100% - 100vw) / 2));
   z-index: -210;
