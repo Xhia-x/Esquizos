@@ -3,19 +3,24 @@
       <video src="../assets/video.mp4" autoplay="true" muted="true" loop="true"></video>
       <div class="mainContainer">
             <div class="crear-partida">
-                <h1>Crear Partida de Monopoly</h1>
-                <form @submit.prevent="crearPartida">
+                <h1>Configurar Partida de Monopoly</h1>
+                <form @submit.prevent="definirPartida">
                     <div class="form-group">
-                        <label for="nombre">Nombre de la Partida:</label>
-                        <input type="text" id="nombre" v-model="nombre" required />
+                        <label for="dineroInicial">Dinero Inicial:</label>
+                        <input type="text" id="dineroInicial" v-model="dineroInicial" required />
                     </div>
                     <div class="form-group">
-                        <label for="jugadores">Número de Jugadores:</label>
-                        <select id="jugadores" v-model="jugadores" required>
-                            <option v-for="i in 6" :key="i" :value="i + 2">{{ i + 2 }}</option>
+                        <label for="tiempoMaximo">Tiempo Máximo:</label>
+                        <select id="tiempoMaximo" v-model="tiempoMaximo" required>
+                            <option value="Infinity">Sin límite</option>
+                            <option value="900">15 minutos</option>
+                            <option value="1800">30 minutos</option>
+                            <option value="3600">1 hora</option>
+                            <option value="7200">2 horas</option>
                         </select>
+
                     </div>
-                    <button type="submit">Crear Partida</button>
+                    <button type="submit">Definir Reglas</button>
                 </form>
             </div>
         </div>
@@ -25,32 +30,22 @@
 
 <script>
 import Partida from '../models/Partida.js';
-
 export default {
-    name: 'CrearPartida',
+    name: 'ConfigurarPartida',
     data() {
         return {
             partida: new Partida('', 0,[], ''),
-            nombre: '',
-            jugadores: 3
+            dineroInicial: 20000,
+            tiempoMaximo: Infinity,
         };
     },
     methods: {
-        crearPartida() {
-            this.partida.nombre = this.nombre;
-            this.partida.nJugadores = this.jugadores;
-            this.generarLink();
-            console.log(this.partida.nombre);
-            this.$router.push({ 
-                name: 'ConfigurarPartida', 
-                params: { partida: this.partida } 
-            });
-        },
-        
-        generarLink() {
-            this.partida.link = '/partida/' + this.partida.nombre;
+        definirPartida() {
+            this.partida.dineroInicial = this.dineroInicial;
+            this.partida.tiempoMaximo = this.tiempoMaximo;
+            console.log(this.partida.dineroInicial);
+            console.log(this.partida.tiempoMaximo);
         }
-        
     }
 };
 </script>
