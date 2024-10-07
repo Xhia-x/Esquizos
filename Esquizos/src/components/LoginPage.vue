@@ -1,7 +1,7 @@
 <template>
 
   <body>
-      <video src="../assets/video.mp4" autoplay="true" muted="true" loop="true"></video>
+        
       <div class="mainContainer">
           <div class="text">
               <h1>MONOPOLY</h1>
@@ -48,9 +48,6 @@
                           </div>
                           <button type="submit" class="btn btn-danger w-100">Login</button>
                       </form>
-                      <div class="text-center mt-3">
-                          <small>Don't have an account? <a href="#/register" class="text-primary">Register</a></small>
-                      </div>
                   </div>
               </div>
           </div>
@@ -80,7 +77,7 @@
                       console.log(data.msg);
                       console.log(data.username);
                       console.log(localStorage.getItem('user'));
-                      this.$router.push({ name: 'CrearPartida' });
+                      this.$router.push({ name: 'Home' });
                   } else {
                       alert("Login FAILED");
                   }
@@ -141,7 +138,7 @@
   
   img {
       position: relative;
-      max-width: 100%;
+      max-width: 50%;
       height: auto;
   }
   
@@ -158,9 +155,11 @@
   .card {
       position: relative;
       border-radius: 0;
-      height: 450px;
+      height: auto;
       max-width: 100%;
       width: auto;
+      align-items:normal;
+      text-align: center;
   }
   
   .text-primary {
