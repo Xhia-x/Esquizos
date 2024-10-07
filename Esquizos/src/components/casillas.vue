@@ -1,30 +1,25 @@
 <template>
-    <div class="card">
-        <div class="card__img"></div>
-        <div class="card__descr-wrapper">
-            <p class="card__title">
-            Project
-        </p>
-        <p class="card__descr">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque blanditiis nemo fugit autem possimus, magnam consequatur sint esse.
-        </p>
-        <div class="card__Pie">
-            <div>
-              <h3>Price</h3>
-            </div>
-        </div>
-        </div>
+  <div class="card">
+    <div class="card__img"></div>
+    <div class="card__descr-wrapper">
+      <p class="card__title">Avenida</p>
+      <p class="card__descr">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque blanditiis nemo fugit autem possimus, magnam consequatur sint esse.
+      </p>
+      <div class="card__price">Price: $200</div> <!-- Aquí agregamos el precio -->
+      <div class="card__links">
+      </div>
     </div>
-
+  </div>
 </template>
 
-<style>
+<style scoped>
 .card {
   --font-color: #323232;
   --bg-color: #e0e0e0;
-  width: 250px;
-  height: 350px;
-  border-radius: 20px;
+  width: 170px;
+  height: 230px;
+
   background: var(--bg-color);
   display: flex;
   flex-direction: column;
@@ -38,57 +33,56 @@
 
 .card__img {
   width: 100%;
-  height: 100%;
+  height: 70px;
   object-fit: cover;
-  border-radius: 20px 20px 0 0;
+
   background-color: blueviolet;
 }
 
 .card__descr-wrapper {
-  padding: 15px;
+  padding: 3px;
   display: grid;
 }
 
 .card__title {
   color: var(--font-color);
   text-align: center;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   font-weight: 900;
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .card__descr {
   color: var(--font-color);
+  font-size: 12px;
 }
 
 .svg {
-  width: 25px;
-  height: 25px;
+  width: 20px;
+  height: 20px;
   transform: translateY(25%);
   fill: var(--font-color);
 }
 
-.card__Pie {
-  margin-top: 10px;
+.card__links {
+  margin-top: 8px;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-between;
   align-self: flex-end;
-  
 }
 
-.card__Pie h3 {
-  color: #000000;
+.card__links .link {
+  color: var(--font-color);
   font-weight: 600;
-  font-size: 15px;
+  font-size: 12px;
   text-decoration: none;
-  text-align: center;
-  margin: 0;
 }
 
-
-
+.card__links .link:hover {
+  text-decoration: underline;
+}
 </style>
+
 
 <script>
 
