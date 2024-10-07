@@ -1,5 +1,7 @@
 <template>
     <Casilla />
+
+    
 </template>
 
 <style>
