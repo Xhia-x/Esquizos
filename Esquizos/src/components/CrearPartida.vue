@@ -1,7 +1,14 @@
 <template>
     <body>
       <video src="../assets/video.mp4" autoplay="true" muted="true" loop="true"></video>
+ 
       <div class="mainContainer">
+
+        <Reglas>
+           
+        </Reglas>
+
+ 
             <div class="crear-partida">
                 <h1>Crear Partida de Monopoly</h1>
                 <form @submit.prevent="crearPartida">
@@ -25,9 +32,16 @@
 
 <script>
 import Partida from '../models/Partida.js';
+import Reglas from './Reglas.vue';
+import PopUp from './PopUp.vue';
+
+
 
 export default {
     name: 'CrearPartida',
+    components:{
+        Reglas, PopUp
+    },
     data() {
         return {
             partida: new Partida('', 0,[localStorage.getItem('user')], ''),
