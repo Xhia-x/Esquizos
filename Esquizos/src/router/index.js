@@ -1,15 +1,18 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import login from '@/views/login.vue'
+import { createRouter, createWebHistory } from 'vue-router';
+import Login from '../components/LoginPage.vue';
+import LevelSelector from '../components/LevelSelector.vue';
+import Ficha from '@/components/Ficha.vue';
+
+
+const routes = [
+  { path: '/', name: 'Login', component: Login },
+  { path: '/level-selector', name: 'LevelSelector', component: LevelSelector },
+  {path: '/fichas', name: 'Ficha', component: Ficha}
+];
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
-  routes: [
-    {
-      path: '/',
-      name: 'login',
-      component: login
-    },
-  ]
-})
+  history: createWebHistory(),
+  routes
+});
 
-export default router
+export default router;
