@@ -27,7 +27,6 @@ app.use((req, res, next) => {
     next();
   });
 
-
 async function connectToDatabase() {
     try {
         await mongoose.connect('mongodb+srv://yanko:KW2auVzu0h02eDOt@cluster0.ycbhi.mongodb.net/Proyecto1?retryWrites=true&w=majority&appName=Cluster0')
@@ -37,6 +36,13 @@ async function connectToDatabase() {
     }
 }
 connectToDatabase();
+
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    next();
+});
 
 app.use(express.json());
 app.use(routes);
