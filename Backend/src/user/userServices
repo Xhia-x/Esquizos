@@ -28,8 +28,8 @@ module.exports.loginUserDBService = async (userData) => {
         const result = await userModel.findOne({ email: userData.email });
 
         if (result) {
-            const decrypted = encryptor.decrypt(result.password);
-            if (decrypted == userData.password) {
+            //const decrypted = encryptor.decrypt(result.password);
+            if (result.password == userData.password) {
                 console.log("VALIDATED");
                 return { status: true, msg: "User Validated" };
             } else {
