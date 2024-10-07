@@ -5,6 +5,7 @@ import ConfigurarPartida from '@/components/ConfigurarPartida.vue'
 import VerPartida from '@/components/VerPartida.vue'
 import LevelSelector from '../components/LevelSelector.vue';
 import Ficha from '@/components/Ficha.vue';
+import Home from '@/components/Home.vue'
 
 const routes = [
   { path: '/', name: 'Login', component: Login },
@@ -12,7 +13,8 @@ const routes = [
   {path: '/configurarPartida', name: 'ConfigurarPartida', component: ConfigurarPartida},
   {path: '/partida/:nombrePartida', name: 'VerPartida', component: VerPartida},
   {path: '/level-selector', name: 'LevelSelector', component: LevelSelector },
-  {path: '/fichas', name: 'Ficha', component: Ficha}
+  {path: '/fichas', name: 'Ficha', component: Ficha},
+  {path: '/home', name: 'Home', component: Home}
 ]
 
 const router = createRouter({
