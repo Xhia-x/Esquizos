@@ -1,14 +1,21 @@
 <template>
   <body>
-      <div class="container vh-100 d-flex justify-content-center align-items-center">
-          <div class="card shadow p-4 col-md-4">
-              <h2 class="text-primary mb-4">Home</h2>
-              <div class="d-flex justify-content-between">
-                  <button class="btn btn-danger me-2" onclick="location.href='/crearPartida'">Crear partida</button>
-                  <button class="btn btn-danger">Unirse a partida</button>
-              </div>
-          </div>
-      </div>
+    <div class="container vh-100 d-flex justify-content-center align-items-center">
+        <div class="d-flex justify-content-center">
+          <a href="/crearPartida" class="link-offset-2 link-underline link-underline-opacity-0">
+            <div class="card shadow p-4 col-md-4">
+              <img class="img-thumbnail" src="https://ae01.alicdn.com/kf/S40076f46e889430794c308a68f8bccd7a/P-ster-de-dibujos-animados-Mr-Monopoly-Big-Rich-Man-pintura-en-lienzo-dinero-arte-de.jpg">
+              <h2>Crear partida</h2>
+            </div>
+          </a>
+          <a class="link-offset-2 link-underline link-underline-opacity-0">
+            <div class="card shadow p-4 col-md-4">
+              <img class="img-thumbnail" src="https://ae01.alicdn.com/kf/S5647db58d8c6430786562d968f2e9348E/P-ster-de-dibujos-animados-Mr-Monopoly-Big-Rich-Man-pintura-en-lienzo-dinero-arte-de.jpg">
+              <h2>Unirse a partida</h2>
+            </div>
+          </a>
+        </div>
+    </div>
   </body>
   </template>
 
@@ -30,6 +37,22 @@ export default {
 
 <style scoped>
 
+.a{
+  margin: 20%;
+}
+
+.d-flex {
+  align-items: center;
+  width: 100%; 
+  margin: auto;
+}
+
+.card:hover {filter: sepia(40%);}
+
+.img {
+    width: 10%;
+    height: auto;
+}
 
 body {
   background: none;
@@ -37,8 +60,15 @@ body {
 }
 
 .card {
+  display: flex;
   position: relative;
-  border-radius: 8px;
+  border-radius: 0;
+  height: auto;
+  max-width: 90%;
+  width: 65%; 
+  text-align: center;
+  margin: 2%; 
+  transition: all 0.3s ease;
 }
 
 .text-primary {
