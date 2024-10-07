@@ -4,7 +4,7 @@
           <div class="card shadow p-4 col-md-4">
               <h2 class="text-primary mb-4">Home</h2>
               <div class="d-flex justify-content-between">
-                  <button class="btn btn-danger me-2" onclick="location.href='/create'">Crear partida</button>
+                  <button class="btn btn-danger me-2" onclick="location.href='/crearPartida'">Crear partida</button>
                   <button class="btn btn-danger">Unirse a partida</button>
               </div>
           </div>
