@@ -8,16 +8,16 @@
   
       <!-- Lado superior (casillas vacías) -->
       <div class="side top-side">
-        <div class="property"></div>
-        <div class="property"></div>
-        <div class="property"></div>
-        <div class="property"></div>
-        <div class="property"></div>
-        <div class="property"></div>
-        <div class="property"></div>
-        <div class="property"></div>
-        <div class="property"></div>
-        <div class="property"></div>
+        <div class="property"><Casilla /></div>
+        <div class="property"><Casilla /></div>
+        <div class="property"><Casilla /></div>
+        <div class="property"><Casilla /></div>
+        <div class="property"><Casilla /></div>
+        <div class="property"><Casilla /></div>
+        <div class="property"><Casilla /></div>
+        <div class="property"><Casilla /></div>
+        <div class="property"><Casilla /></div>
+        <div class="property"><Casilla /></div>
       </div>
   
       <!-- Lado derecho (casillas vacías) -->
@@ -35,15 +35,15 @@
   
       <!-- Lado inferior (casillas vacías) -->
       <div class="side bottom-side">
-        <div class="property"></div>
-        <div class="property"></div>
-        <div class="property"></div>
-        <div class="property"></div>
-        <div class="property"></div>
-        <div class="property"></div>
-        <div class="property"></div>
-        <div class="property"></div>
-        <div class="property"></div>
+        <div class="property"><Casilla /></div>
+        <div class="property"><Casilla /></div>
+        <div class="property"><Casilla /></div>
+        <div class="property"><Casilla /></div>
+        <div class="property"><Casilla /></div>
+        <div class="property"><Casilla /></div>
+        <div class="property"><Casilla /></div>
+        <div class="property"><Casilla /></div>
+        <div class="property"><Casilla /></div>
       </div>
   
       <!-- Lado izquierdo (casillas vacías) -->
@@ -72,24 +72,29 @@
 
   <script>
    import dados from './dados.vue';
+   import Casilla from '@/components/casillas.vue';
+
   export default {
     name: "MonopolyView",
     components: {
-      dados
+      dados,
+      Casilla
     }
   };
   </script>
   
   <style scoped>
-  .monopoly-board {
-    display: grid;
-    grid-template-columns: repeat(11, 1fr);
-    grid-template-rows: repeat(11, 1fr);
-    width: 1500px;
-    height: 1200px;
-    border: 2px solid black;
-    position: relative;
-  }
+ .monopoly-board {
+  display: grid;
+  grid-template-columns: repeat(11, 1fr);
+  grid-template-rows: repeat(11, 1fr);
+  width: 2000px; /* Incrementa el tamaño del tablero */
+  height: 1600px; /* Ajusta el tamaño a 1600px de alto */
+  border: 2px solid black;
+  position: relative;
+}
+
+
   
   .corner {
     background-color: lightgray;
@@ -152,11 +157,14 @@
   }
   
   .property {
-    width: 150px;
-    height: 150px;
+    width: 170px;
+    height: 230px;
     background-color: white;
     border: 1px solid black;
-    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: visible;
 
   }
 

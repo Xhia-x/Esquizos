@@ -13,69 +13,60 @@
   </template>
   
   <script>
-  import { ref } from 'vue'
-  
-  export default {
-    name: "dados-component",
-    setup() {
-      const images = ref([
-        { id: 1, url: require('@/assets/dice1.png'), name: 'dado1' },
-        { id: 2, url: require('@/assets/dice2.png'), name: 'dado2' },
-        { id: 3, url: require('@/assets/dice3.png'), name: 'dado3' },
-        { id: 4, url: require('@/assets/dice4.png'), name: 'dado4' },
-        { id: 5, url: require('@/assets/dice5.png'), name: 'dado5' },
-        { id: 6, url: require('@/assets/dice6.png'), name: 'dado6' },
-      ])
-  
-      // Estado para los dos dados
-      const currentImage1 = ref(images.value[0])
-      const currentImage2 = ref(images.value[0])
-  
-      let rolling = ref(false)
-      let currentTimeout = null
-  
-      // Función para seleccionar una imagen aleatoria para un dado
-      const changeImage = (currentImage) => {
-        const randomIndex = Math.floor(Math.random() * images.value.length)
-        currentImage.value = images.value[randomIndex]
-      }
-  
-      // Función para detener los dados después de un tiempo con desaceleración
-      const rollDiceWithDeceleration = (timeElapsed = 0, intervalTime = 50) => {
-        if (timeElapsed >= 5000) {
-          rolling.value = false
-          return
-        }
-  
-        // Cambiar la imagen de ambos dados
-        changeImage(currentImage1)
-        changeImage(currentImage2)
-  
-        // Aumentamos gradualmente el intervalo para simular la desaceleración
-        intervalTime = Math.min(1000, intervalTime + 50)
-        currentTimeout = setTimeout(() => {
-          rollDiceWithDeceleration(timeElapsed + intervalTime, intervalTime)
-        }, intervalTime)
-      }
-  
-      // Función que inicia el lanzamiento de ambos dados
-      const startRolling = () => {
-        if (rolling.value) return
-        rolling.value = true
-  
-        // Si hay un timeout activo, lo limpiamos antes de iniciar otro
-        if (currentTimeout) {
-          clearTimeout(currentTimeout)
-        }
-  
-        // Iniciamos el proceso de desaceleración para ambos dados
-        rollDiceWithDeceleration()
-      }
-  
-      return { currentImage1, currentImage2, startRolling }
+import { ref } from 'vue'
+import dice1 from '@/assets/dice1.png'
+import dice2 from '@/assets/dice2.png'
+import dice3 from '@/assets/dice3.png'
+import dice4 from '@/assets/dice4.png'
+import dice5 from '@/assets/dice5.png'
+import dice6 from '@/assets/dice6.png'
+
+export default {
+  name: "dados-component",
+  setup() {
+    const images = ref([
+      { id: 1, url: dice1, name: 'dado1' },
+      { id: 2, url: dice2, name: 'dado2' },
+      { id: 3, url: dice3, name: 'dado3' },
+      { id: 4, url: dice4, name: 'dado4' },
+      { id: 5, url: dice5, name: 'dado5' },
+      { id: 6, url: dice6, name: 'dado6' },
+    ])
+
+    const currentImage1 = ref(images.value[0])
+    const currentImage2 = ref(images.value[0])
+    let rolling = ref(false)
+    let currentTimeout = null
+
+    const changeImage = (currentImage) => {
+      const randomIndex = Math.floor(Math.random() * images.value.length)
+      currentImage.value = images.value[randomIndex]
     }
+
+    const rollDiceWithDeceleration = (timeElapsed = 0, intervalTime = 50) => {
+      if (timeElapsed >= 5000) {
+        rolling.value = false
+        return
+      }
+      changeImage(currentImage1)
+      changeImage(currentImage2)
+      intervalTime = Math.min(1000, intervalTime + 50)
+      currentTimeout = setTimeout(() => {
+        rollDiceWithDeceleration(timeElapsed + intervalTime, intervalTime)
+      }, intervalTime)
+    }
+
+    const startRolling = () => {
+      if (rolling.value) return
+      rolling.value = true
+      if (currentTimeout) clearTimeout(currentTimeout)
+      rollDiceWithDeceleration()
+    }
+
+    return { currentImage1, currentImage2, startRolling }
   }
-  </script>
+}
+</script>
   
   <style scoped>
   .Dados-tirada {
