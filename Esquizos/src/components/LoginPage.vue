@@ -74,7 +74,6 @@
                     if (data.status === true) {
                         alert("Logged Successfully");
                         localStorage.setItem('user', data.username);
-                        console.log(data.msg);
                         console.log(data.username);
                         console.log(localStorage.getItem('user'));
                         this.$router.push({ name: 'Home' });

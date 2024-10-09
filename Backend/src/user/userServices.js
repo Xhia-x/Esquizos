@@ -25,7 +25,7 @@ module.exports.loginUserDBService = async (userData) => {
         if (result) {
             if (result.password == userData.password) {
                 console.log("VALIDATED");
-                return { status: true, msg: "User Validated" };
+                return { status: true, msg: "User Validated", username: result.username };
             } else {
                 console.log("VALIDATION FAILED");
                 return { status: false, msg: "User validation FAILED" };
