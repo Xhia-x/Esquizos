@@ -66,13 +66,14 @@
 import Partida from '../models/Partida.js';
 import Reglas from './Reglas.vue';
 import axios from 'axios';
-
+import autenticadorSesion from '../mixins/AutenticadorSesion.js';
 
 export default {
     name: 'CrearPartida',
     components:{
         Reglas
     },
+    mixins: [autenticadorSesion],
     data() {
         return {
             partida: new Partida('', 0,"", ''),
