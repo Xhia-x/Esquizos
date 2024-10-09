@@ -18,6 +18,7 @@
     "express": "^4.21.0",
     "multer": "^1.4.5-lts.1",
     "package": "file:",
+    "socket.io-client": "^4.8.0",
     "sweetalert2": "^11.14.1",
     "vue": "^3.2.13",
     "vue-router": "^4.0.13",
