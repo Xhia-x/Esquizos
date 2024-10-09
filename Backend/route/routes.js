@@ -6,6 +6,7 @@
 
     router.route('/user/login').post(userController.loginUserControllerFn);
     router.route('/user/register').post(userController.registerUserControllerFn);
+    router.route('/user/:username').get(userController.buscarUserControllerFn);
 
     router.route('/partida').post(partidaController.registerPartidaControllerFn);
     router.route('/partida/:nombrePartida').get(partidaController.buscarPartidaControllerFn);

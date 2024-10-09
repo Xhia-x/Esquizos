@@ -27,7 +27,7 @@ var loginUserControllerFn = async (req, res) => {
         result = await userService.loginUserDBService(req.body);
 
         if(result.status){
-            res.send({"status": true, "message": result.msg});
+            res.send({"status": true, "message": result.msg, "username": result.username});
             console.log("primer if");
         } else {
             res.send({"status": false, "message": result.msg});
@@ -41,5 +41,26 @@ var loginUserControllerFn = async (req, res) => {
     }
 }
 
+var buscarUserControllerFn = async (req, res) => {
+    try {
 
-module.exports = {registerUserControllerFn, loginUserControllerFn};
+        const usernameBuscar = req.params.username;
+        
+        var result = await userService.buscarUserDBService( {username: usernameBuscar} );
+        console.log(result.status);
+
+        if(result.status){
+            res.json(result.user);
+            console.log("Usuario encontrado");
+        } else {
+            res.status(404).send('Usuario no encontrado');
+            console.log("Usuario no encontrado");
+        }
+
+    } catch (err) {
+        res.status(500).send({ "status": false, "message": "Error en el servidor" });
+        console.log(err);
+    }
+}
+
+module.exports = {registerUserControllerFn, loginUserControllerFn, buscarUserControllerFn};
