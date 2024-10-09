@@ -75,7 +75,7 @@ export default {
     },
     data() {
         return {
-            partida: new Partida('', 0,[localStorage.getItem('user')], ''),
+            partida: new Partida('', 0,"", ''),
             nombre: '',
             jugadores: 3,
             dineroInicial: 1500,
@@ -93,7 +93,9 @@ export default {
             this.partida.dineroInicial = this.dineroInicial;
             this.partida.tiempoMaximo = parseInt(this.tiempoMaximo);
             this.partida.tiempoPorTurno = parseInt(this.tiempoPorTurno);
-            this.partida.administrador = localStorage.getItem('user');
+
+            this.partida.administrador = localStorage.getItem('user') || sessionStorage.getItem('user');
+
             this.generarLink();
             console.log(localStorage.getItem('user'));
             console.log("jugadores: "+this.partida.jugadores);

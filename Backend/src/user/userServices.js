@@ -40,3 +40,21 @@ module.exports.loginUserDBService = async (userData) => {
         return { status: false, msg: "INVALID DATA" };
     }
 };
+
+module.exports.buscarUserDBService = async (userData) => {
+    try {
+        const result = await userModel.findOne({ username: userData.username });
+
+        if (result) {
+            console.log("Usuario encontrado");
+            return { status: true, msg: "Usuario encontrado", user: result  };
+        } else {
+            console.log("INVALID DATA");
+            return { status: false, msg: "INVALID DATA" };
+        }
+
+    } catch (error) {
+        console.log("INVALID DATA");
+        return { status: false, msg: "INVALID DATA" };
+    }
+};
