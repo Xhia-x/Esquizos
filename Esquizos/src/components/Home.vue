@@ -1,6 +1,17 @@
 <template>
   <body>
-<<<<<<< HEAD
+    <div class="d-flex justify-content-start">
+      <div class="btn-group">
+        <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+          Bienvenido, {{ username }}
+        </button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="#">Algo</a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item" href="#" @click="cerrarSesion">Cerrar sesión</a></li>
+        </ul>
+      </div>
+    </div>
     <div class="container vh-100 d-flex justify-content-center align-items-center">
         <div class="d-flex justify-content-center">
           <a href="/crearPartida" class="link-offset-2 link-underline link-underline-opacity-0">
@@ -17,19 +28,6 @@
           </a>
         </div>
     </div>
-=======
-      <div class="container vh-100 d-flex justify-content-center align-items-center">
-          <div class="card shadow p-4 col-md-4">
-              <h2 class="text-primary mb-4">Home</h2>
-              <h3 class="text-center">Bienvenido, {{ username }}</h3> <!-- Agregar esta línea -->
-              <div class="d-flex justify-content-between">
-                  <button class="btn btn-danger me-2" onclick="location.href='/crearPartida'">Crear partida</button>
-                  <button class="btn btn-danger">Unirse a partida</button>
-                  <button class="btn btn-danger" @click="cerrarSesion">Cerrar sesión</button>
-              </div>
-          </div>
-      </div>
->>>>>>> origin/Pruebas
   </body>
   </template>
 
@@ -60,7 +58,7 @@ export default {
     if (storedUser) {
         this.username = storedUser;
     }
-}
+  }
 }
 </script>
 
@@ -68,15 +66,16 @@ export default {
 
 <style scoped>
 
-.a{
-  margin: 20%;
+.btn-group{
+  align-self: flex-end;
+  margin-bottom: 0;
 }
 
-.d-flex {
-  align-items: center;
-  width: 100%; 
-  margin: auto;
+.a{
+  margin: 20%;
+  align-self: center;
 }
+
 
 .card:hover {filter: sepia(40%);}
 
@@ -90,16 +89,58 @@ body {
   position: relative;
 }
 
-.card {
-  display: flex;
-  position: relative;
-  border-radius: 0;
+.card{
+  transition:0.5s;
+  margin-top: 0;
+  cursor:pointer;
+  margin: auto;
+  width: 50%;
   height: auto;
-  max-width: 90%;
-  width: 65%; 
-  text-align: center;
-  margin: 2%; 
-  transition: all 0.3s ease;
+}
+.card-title{  
+  font-size:15px;
+  transition:1s;
+  cursor:pointer;
+}
+.card-title i{  
+  font-size:15px;
+  transition:1s;
+  cursor:pointer;
+  color:#ffa710
+}
+.card-title i:hover{
+  transform: scale(1.25) rotate(100deg); 
+  color:#18d4ca;
+  
+}
+.card:hover{
+  transform: scale(1.05);
+  box-shadow: 10px 10px 15px rgba(0,0,0,0.3);
+}
+.card-text{
+  height:80px;  
+}
+
+.card::before, .card::after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  transform: scale3d(0, 0, 1);
+  transition: transform .3s ease-out 0s;
+  background: rgba(255, 255, 255, 0.1);
+  content: '';
+  pointer-events: none;
+}
+.card::before {
+  transform-origin: left top;
+}
+.card::after {
+  transform-origin: right bottom;
+}
+.card:hover::before, .card:hover::after, .card:focus::before, .card:focus::after {
+  transform: scale3d(1, 1, 1);
 }
 
 .text-primary {
