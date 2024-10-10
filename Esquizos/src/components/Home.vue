@@ -12,7 +12,7 @@
         </ul>
       </div>
     </div>
-    <div class="container vh-100 d-flex justify-content-center align-items-center">
+    <div class="container vh-100 d-flex justify-content-center">
         <div class="d-flex justify-content-center">
           <a href="/crearPartida" class="link-offset-2 link-underline link-underline-opacity-0">
             <div class="card shadow p-4 col-md-4">
@@ -66,6 +66,11 @@ export default {
 
 <style scoped>
 
+
+.d-flex{
+  margin-bottom: 2%;
+}
+
 .btn-group{
   align-self: flex-end;
   margin-bottom: 0;
@@ -73,6 +78,7 @@ export default {
 
 .a{
   margin: 20%;
+  margin-top: 0;
   align-self: center;
 }
 
@@ -94,7 +100,7 @@ body {
   margin-top: 0;
   cursor:pointer;
   margin: auto;
-  width: 50%;
+  width: 56%;
   height: auto;
 }
 .card-title{  
