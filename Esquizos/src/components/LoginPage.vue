@@ -67,14 +67,36 @@
                 user: new User('', '', false)
             };
         },
+        mounted() {
+            const storedUser = localStorage.getItem('user') || sessionStorage.getItem('user');
+            
+            if (storedUser) {
+                axios.get(`http://localhost:9992/user/${storedUser}`)
+                    .then(({ data }) => {
+                        if (data) {
+                            this.user = data; 
+                        }
+                        this.$router.push({ name: 'Home' });
+                    })
+                    .catch(err => {
+                        console.error(err);
+                    });
+            }
+
+        },
         methods: {
             login() {
                 axios.post("http://localhost:9992/user/login", this.user)
                 .then(({data}) => {
                     if (data.status === true) {
                         alert("Logged Successfully");
-                        localStorage.setItem('user', data.username);
-                        console.log(data.msg);
+                        if (this.user.rememberMe) {
+                            localStorage.setItem('email', this.user.email);
+                            localStorage.setItem('user', data.username);
+                        } else {
+                            sessionStorage.setItem('email', this.user.email);
+                            sessionStorage.setItem('user', data.username);
+                        }
                         console.log(data.username);
                         console.log(localStorage.getItem('user'));
                         this.$router.push({ name: 'Home' });

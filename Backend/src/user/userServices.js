@@ -25,7 +25,7 @@ module.exports.loginUserDBService = async (userData) => {
         if (result) {
             if (result.password == userData.password) {
                 console.log("VALIDATED");
-                return { status: true, msg: "User Validated" };
+                return { status: true, msg: "User Validated", username: result.username };
             } else {
                 console.log("VALIDATION FAILED");
                 return { status: false, msg: "User validation FAILED" };
@@ -33,6 +33,24 @@ module.exports.loginUserDBService = async (userData) => {
         } else {
             console.log("INVALID DATA");
             return { status: false, msg: "Invalid Data" };
+        }
+
+    } catch (error) {
+        console.log("INVALID DATA");
+        return { status: false, msg: "INVALID DATA" };
+    }
+};
+
+module.exports.buscarUserDBService = async (userData) => {
+    try {
+        const result = await userModel.findOne({ username: userData.username });
+
+        if (result) {
+            console.log("Usuario encontrado");
+            return { status: true, msg: "Usuario encontrado", user: result  };
+        } else {
+            console.log("INVALID DATA");
+            return { status: false, msg: "INVALID DATA" };
         }
 
     } catch (error) {

@@ -65,14 +65,14 @@
 
       
       <div class="ruletaDado">
-        <dados />
+        <dados/>
       </div>
     </div>
   </template>
 
   <script>
-   import dados from './dados.vue';
-   import Casilla from '@/components/casillas.vue';
+  import dados from './dados.vue';
+  import Casilla from '@/components/casillas.vue';
 
   export default {
     name: "MonopolyView",
