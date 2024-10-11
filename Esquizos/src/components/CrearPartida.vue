@@ -1,12 +1,16 @@
 <template>
     <body>
-      <video src="../assets/video.mp4" autoplay="true" muted="true" loop="true"></video>
- 
-      <div class="mainContainer">
-
+        <div class="botonReglas">
         <Reglas>
            
         </Reglas>
+        </div>
+ 
+      <video src="../assets/video.mp4" autoplay="true" muted="true" loop="true"></video>
+    
+      <div class="mainContainer">
+
+        
 
  
             <div class="crear-partida">
@@ -215,6 +219,18 @@ button {
     border: none;
     border-radius: 4px;
     cursor: pointer;
+}
+
+.botonReglas{
+    position: absolute;
+  top: 10px;
+  left: 10px; /* Cambiado de right a left */
+  padding: 10px 20px;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  z-index: 1;
 }
 
 button:hover {

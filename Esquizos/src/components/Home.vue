@@ -1,5 +1,10 @@
 <template>
   <body>
+    <div class="botonReglas">
+        <Reglas>
+           
+        </Reglas>
+        </div>
       <div class="container vh-100 d-flex justify-content-center align-items-center">
           <div class="card shadow p-4 col-md-4">
               <h2 class="text-primary mb-4">Home</h2>
@@ -18,11 +23,18 @@
 
 <script>
 import autenticadorSesion from '../mixins/AutenticadorSesion.js';
+import PopUp from './PopUp.vue';
+import Reglas from './Reglas.vue';
+
 
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: 'Home',
   mixins: [autenticadorSesion],
+  components: {
+    PopUp,
+    Reglas
+  },
   data () {
     return {
       msg: 'Welcome to Your Vue.js App',
@@ -67,6 +79,18 @@ body {
 .btn{
   background-color: red;
   margin: 10%;
+}
+
+.botonReglas{
+  position: absolute;
+  top: 10px;
+  left: 10px; /* Cambiado de right a left */
+  padding: 10px 20px;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  z-index: 1;
 }
 
 video {
