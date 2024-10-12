@@ -9,5 +9,10 @@ export default class Partida {
       this.tiempoMaximo = Infinity;
       this.tiempoPorTurno = Infinity;
     }
+
+    generarLinkCompartir(){
+      const linkCompartir = "http://localhost:8080/partida/"+this.nombre;
+      return linkCompartir;
+    }
   }
   

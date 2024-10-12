@@ -34,8 +34,9 @@ const images = ref([
 const socket = io('http://localhost:9992');
 // Función para emitir el evento de lanzamiento de dados
 const emitRollDice = (dice1Value, dice2Value) => {
+  const partidaActual = window.location.pathname.split('/').pop();
   console.log('Emitiendo evento rollDice usuario:', localStorage.getItem('user'));
-  socket.emit('rollDice', { user: localStorage.getItem('user'), dice1: dice1Value, dice2: dice2Value });
+  socket.emit('rollDice', { user: localStorage.getItem('user') || sessionStorage.getItem('user'), dice1: dice1Value, dice2: dice2Value, partida: partidaActual });
 };
 
 // Función para inicializar el socket
@@ -56,6 +57,8 @@ export default {
     let currentTimeout = null
 
     onMounted(() => {
+      const partidaActual = window.location.pathname.split('/').pop(); 
+      socket.emit('joinPartida', partidaActual);
       initializeSocket(currentImage1, currentImage2);
     });
 
