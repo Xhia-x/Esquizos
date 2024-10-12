@@ -62,37 +62,100 @@
     <div class="center-logo">
       <img src="@/assets/monopolylogo.png" alt="Monopoly Logo" />
     </div>
+  <div class="ruletaDado">
 
-    <div class="ruletaDado">
-      <dados />
+    <dados @diceRolled="movePieceBasedOnDice" />
+    
+  </div>
+
+    <!-- Ficha -->
+    <div
+      class="container"
+      :style="pieces[0].style"
+      @click="movePiece(0)"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
     </div>
   </div>
 </template>
 
-  <script>
-  import dados from './dados.vue';
-  import Casilla from '@/components/casillas.vue';
+<script>
+import dados from './dados.vue';
+import Casilla from '@/components/casillas.vue';
 
-  export default {
-    name: "MonopolyView",
-    components: {
-      dados,
-      Casilla
+export default {
+  name: "MonopolyView",
+  components: {
+    dados,
+    Casilla
+  },
+  data() {
+    return {
+      pieces: [
+        {
+          top: 90, // Comienza en el cuadro inferior derecho
+          left: 90,
+          style: {
+            top: '90%',
+            left: '90%',
+            transform: 'translate(-50%, -50%)'
+          }
+        }
+      ],
+      step: 10, // Porcentaje de movimiento en cada dirección
+    };
+  },
+  methods: {
+    // Mover la ficha un número específico de pasos basado en el valor de los dados
+    movePieceBasedOnDice(steps) {
+      const piece = this.pieces[0];
+
+      for (let i = 0; i < steps; i++) {
+        this.moveOneStep(piece);
+      }
+
+      // Actualizar el estilo de la ficha
+      piece.style = {
+        top: piece.top + '%',
+        left: piece.left + '%',
+        transform: 'translate(-50%, -50%)'
+      };
+    },
+
+    // Mover la ficha un paso alrededor del tablero
+    moveOneStep(piece) {
+      if (piece.top === 90 && piece.left > 0) {
+        // Mover hacia la izquierda
+        piece.left = Math.max(0, piece.left - this.step);
+      } else if (piece.left === 0 && piece.top > 0) {
+        // Mover hacia arriba
+        piece.top = Math.max(0, piece.top - this.step);
+      } else if (piece.top === 0 && piece.left < 90) {
+        // Mover hacia la derecha
+        piece.left = Math.min(90, piece.left + this.step);
+      } else if (piece.left === 90 && piece.top < 90) {
+        // Mover hacia abajo
+        piece.top = Math.min(90, piece.top + this.step);
+      }
     }
-  };
-  </script>
-  
- <style scoped>
-  .monopoly-board {
-    display: grid;
-    grid-template-columns: 230px repeat(9, 170px) 230px;
-    grid-template-rows: 230px repeat(9, 170px) 230px;
-    width: auto;
-    height: auto;
-    border: 2px solid black;
-    padding: 0;
-    margin: 0;
-    gap: 0;
+  }
+};
+</script>
+
+<style scoped>
+.monopoly-board {
+  display: grid;
+  grid-template-columns: 230px repeat(9, 170px) 230px;
+  grid-template-rows: 230px repeat(9, 170px) 230px;
+  width: auto;
+  height: auto;
+  border: 2px solid black;
+  padding: 0;
+  margin: 0;
+  gap: 0;
 }
 
 /* Esquinas cuadradas */
@@ -182,7 +245,6 @@
   transform: rotate(90deg); /* Casillas laterales izquierdas mirando hacia la derecha */
 }
 
-
 /* Alineación de las casillas superiores e inferiores */
 .top-side {
   grid-column: 2 / span 9;
@@ -209,40 +271,72 @@
   align-items: center;
 }
 
-/* Mover las casillas del lado derecho más a la izquierda */
-.right-side .property {
-  grid-column-start: 11; /* Ajustar esta propiedad para moverlas más cerca o lejos */
-}
-
-/* Mover las casillas del lado izquierdo más a la derecha */
-.left-side .property {
-  grid-column-start: 1; /* Ajustar esta propiedad para moverlas más cerca o lejos */
-}
-
-
 /* Logo centrado */
-  .center-logo {
-    grid-column: 5 / span 3;
-    grid-row: 5 / span 3;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.center-logo {
+  grid-column: 5 / span 3;
+  grid-row: 5 / span 3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.center-logo img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+/* Ficha */
+.container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  height: 96px;
+  width: 96px;
+  animation: rotate_3922 1.2s linear infinite;
+  background-color: #9b59b6;
+  background-image: linear-gradient(#9b59b6, #84cdfa, #5ad1cd);
+  transform-origin: center;
+  z-index: 1;
+}
+
+
+
+.container::after {
+  content: "";
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  background-color: #fff;
+  border: solid 5px #ffffff;
+  border-radius: 50%;
+}
+
+@keyframes rotate_3922 {
+  from {
+    transform: rotate(0deg);
   }
 
-  .center-logo img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
+  to {
+    transform: rotate(360deg);
   }
+}
 
-  .ruletaDado {
+.ruletaDado {
     grid-column: 5 / span 3;
-    grid-row: 7; /* Cambia a una fila más baja para mover los dados hacia abajo */
+    grid-row: 7;
+    /* Cambia a una fila más baja para mover los dados hacia abajo */
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: row;
     gap: 20px;
-    margin-top: 100px; /* Agrega un margen superior para ajustar la posición si es necesario */
-  }
+    margin-top: 100px;
+    /* Agrega un margen superior para ajustar la posición si es necesario */
+}
+
 </style>
