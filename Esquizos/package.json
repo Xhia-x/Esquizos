@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "serve": "vue-cli-service serve",
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
@@ -13,14 +14,22 @@
     "axios": "^1.7.7",
     "bootstrap": "^5.3.3",
     "core-js": "^3.8.3",
+    "cors": "^2.8.5",
+    "express": "^4.21.0",
+    "multer": "^1.4.5-lts.1",
+    "package": "file:",
+    "socket.io-client": "^4.8.0",
     "sweetalert2": "^11.14.1",
     "vue": "^3.2.13",
-    "vue-router": "^4.0.13"
+    "vue-router": "^4.0.13",
+    "vuex": "^4.1.0"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.0.5",
+    "@vue/cli-service": "^5.0.8",
     "eslint": "^8.57.0",
     "eslint-plugin-vue": "^9.23.0",
+    "sass-embedded": "^1.79.4",
     "vite": "^5.3.1"
   }
 }
