@@ -1,10 +1,23 @@
 <template>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto Mono"></link>
 <div class="monopoly-board">
     <!-- Esquinas vacías -->
-    <div class="corner top-left" id="21"></div>
-    <div class="corner top-right" id="31"></div>
-    <div class="corner bottom-left" id="11"></div>
-    <div class="corner bottom-right" id="1"></div>
+    <div class="corner top-left" id="21">
+        <h1 class="carceletra1">De Paso</h1>
+        <img src="@/assets/carcel.png" class="carcel"/>
+    </div>
+    <div class="corner top-right" id="31">
+        <h1 class="letrapolicia1" >Ir a la </h1>
+        <img src="@/assets/policia.png" class="policia"/> 
+        <h1 class="letrapolicia2">carcel</h1>
+    </div>
+    <div class="corner bottom-left" id="11">
+        <img src="@/assets/Parking.png" class="parking"/>
+    </div>
+    <div class="corner bottom-right" id="1">
+        <h1 class="LetraInicio">Start</h1>
+        <img src="@/assets/Start.png" class="Start" />
+    </div>
 
     <!-- Lado superior (IDs del 22 al 30) -->
     <div class="side top-side">
@@ -51,6 +64,7 @@
         <span></span>
         <span></span>
     </div>
+    <div class="gray-background"></div>
 </div>
 </template>
 
@@ -329,4 +343,81 @@ export default {
     margin-top: 100px;
     /* Agrega un margen superior para ajustar la posición si es necesario */
 }
+
+.contendor {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* tamaño del tablero */
+    width: 100%;
+    height: 100%;
+  }
+
+  .policia {
+    width: 60%;
+    height: 60%;
+    rotate: 10deg;
+    
+  }
+
+  .letrapolicia1 {
+    font-family: 'Roboto Mono', sans-serif;
+    
+    font-size: 40px;
+    
+    margin: 0;
+    font-weight: bold;
+  }
+  .letrapolicia2 {
+    
+    font-family: 'Roboto Monos', sans-serif;
+    font-size: 40px;
+    margin: 0;
+    font-weight: bold;
+  }
+  .Start {
+    
+    width: 60%;
+    height: 60%;
+    
+  } 
+
+  .LetraInicio {
+    font-family: 'Roboto Mono', sans-serif;
+    font-weight: bold;
+    font-size: 40px;
+    margin: 0;
+    margin-right: 15%;
+    margin-top: 18%;
+    transform: rotate(-50deg); 
+    color: #ff0000;
+  }
+  .parking {
+    width: 100%;
+    height: 100%;
+    rotate: 10deg;
+  }
+  .carcel {
+    width: 90%;
+    height: 90%;
+    rotate: 45deg;
+    margin-left: 24%;
+    margin-top: 4%;
+  }
+  .carceletra1{
+    font-family: 'Roboto Mono', sans-serif;
+    font-size: 40px;
+    margin: 0;
+    font-weight: bold;
+    
+  }
+
+  .gray-background {
+    background-color: lightgray;
+    grid-column: 1 / span 11;
+    grid-row: 1 / span 11;
+    pointer-events: none;
+    z-index: -1
+  } 
+
 </style>
