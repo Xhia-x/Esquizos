@@ -57,9 +57,11 @@
                 <h1>Enlace de la Partida</h1>
                 <div class="linkContainer">
                     <p class="textoLink">{{ partida.generarLinkCompartir() }}</p>
-                    <button type="button" class="copiarLinkBoton" @click="copiarAlPortapapeles(partida.generarLinkCompartir())">Copiar</button>
+                    <button type="button" class="copiarLinkBoton" @click="copiarAlPortapapeles(partida.generarLinkCompartir())">Copiar link</button>
                 </div>
                 <button type="button" class="accederAPartidaBoton" @click="accederPartida">Acceder a la Partida</button>
+                <button @click="mostrarCampoInvitar(partida)">Invitar jugador</button>
+                <InvitarJugador v-if="partida.nombre === partidaInvitacion" :partida="partida" :partidaInvitacion="partidaInvitacion"/>
             </div>
 
 
@@ -78,22 +80,24 @@ import Partida from '../models/Partida.js';
 import Reglas from './Reglas.vue';
 import axios from 'axios';
 import autenticadorSesion from '../mixins/AutenticadorSesion.js';
+import InvitarJugador from './InvitarJugador.vue';
 
 export default {
     name: 'CrearPartida',
     components:{
-        Reglas
+        Reglas, InvitarJugador
     },
     mixins: [autenticadorSesion],
     data() {
         return {
-            partida: new Partida('', 0,"", ''),
+            partida: new Partida('', 0,"", '', 0, 0, 0),
             nombre: '',
             jugadores: 3,
             dineroInicial: 1500,
             tiempoMaximo: -1,
             tiempoPorTurno: -1,
-            partidaCreada: false
+            partidaCreada: false,
+            partidaInvitacion: null
         };
     },
     methods: {
@@ -165,7 +169,10 @@ export default {
         },
         copiarAlPortapapeles(texto) {
             navigator.clipboard.writeText(texto);
-        }
+        },
+        mostrarCampoInvitar(partida) {
+            this.partidaInvitacion = this.partidaInvitacion === partida.nombre ? null : partida.nombre;
+        }      
         
     }
 };

@@ -9,6 +9,7 @@
           <li><a class="dropdown-item" href="#">Algo</a></li>
           <li><hr class="dropdown-divider"></li>
           <li><a class="dropdown-item" href="#" @click="cerrarSesion">Cerrar sesión</a></li>
+          <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#invitacionesModal">Invitaciones</a></li>
         </ul>
       </div>
     </div>
@@ -27,7 +28,15 @@
             </div>
           </a>
         </div>
+        <a href="/partidasCreadas" class="link-offset-2 link-underline link-underline-opacity-0">
+            <div class="card shadow p-4 col-md-4">
+              <img class="img-thumbnail" src="https://ae01.alicdn.com/kf/S40076f46e889430794c308a68f8bccd7a/P-ster-de-dibujos-animados-Mr-Monopoly-Big-Rich-Man-pintura-en-lienzo-dinero-arte-de.jpg">
+              <h2>Ver Partidas creadas</h2>
+            </div>
+          </a>
     </div>
+
+    <VistaInvitaciones />
   </body>
   </template>
 
@@ -35,10 +44,14 @@
 
 <script>
 import autenticadorSesion from '../mixins/AutenticadorSesion.js';
+import VistaInvitaciones from './VistaInvitaciones.vue';
 
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: 'Home',
+  components: {
+    VistaInvitaciones
+  },
   mixins: [autenticadorSesion],
   data () {
     return {

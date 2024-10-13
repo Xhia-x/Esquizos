@@ -21,7 +21,6 @@ module.exports.registerUserDBService = (userData) => {
 module.exports.loginUserDBService = async (userData) => {
     try {
         const result = await userModel.findOne({ email: userData.email });
-
         if (result) {
             if (result.password == userData.password) {
                 console.log("VALIDATED");
