@@ -1,5 +1,3 @@
-
-
 <template>
 
     <!-- Lado superior -->
@@ -48,28 +46,25 @@
       
       <div class="corner top-left">
         
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto Mono"></link>
+<div class="monopoly-board">
+    <!-- Esquinas vacías -->
+    <div class="corner top-left" id="21">
         <h1 class="carceletra1">De Paso</h1>
         <img src="@/assets/carcel.png" class="carcel"/>
-        
-      </div>
-      
-      <!-- Casilla de Policia -->
-      <div class="corner top-right">
-        
+    </div>
+    <div class="corner top-right" id="31">
         <h1 class="letrapolicia1" >Ir a la </h1>
         <img src="@/assets/policia.png" class="policia"/> 
         <h1 class="letrapolicia2">carcel</h1>
-        
-      </div>
-      <!-- Casilla de parking -->
-      <div class="corner bottom-left">
-        <img src="@/assets/Parking.png" class="parking"/> 
-      </div>
-      <!-- Casilla de inicio -->
-      <div class="corner bottom-right">
+    </div>
+    <div class="corner bottom-left" id="11">
+        <img src="@/assets/Parking.png" class="parking"/>
+    </div>
+    <div class="corner bottom-right" id="1">
         <h1 class="LetraInicio">Start</h1>
         <img src="@/assets/Start.png" class="Start" />
-      </div>
+    </div>
 
     <!-- Lado izquierdo -->
     <div class="side left-side">
@@ -83,54 +78,42 @@
       <div class="property-rotate-left"><Casilla color="" title="Carrer de la Marina" price="100" /></div>
       <div class="property-rotate-left"><Casilla color="purple" title="Carrer de la Marina" price="100" /></div>
     </div>
+    <!-- Lado superior (IDs del 22 al 30) -->
+    <div class="side top-side">
+        <div class="property-top" :id="22 + index" v-for="(casilla, index) in 9" :key="22 + index">
+            <Casilla />
+        </div>
+    </div>
 
-      <!-- Lado derecho -->
-      <div class="side right-side">
-        <div class="property-rotate-right"><Casilla /></div>
-        <div class="property-rotate-right"><Casilla /></div>
-        <div class="property-rotate-right"><Casilla /></div>
-        <div class="property-rotate-right"><Casilla /></div>
-        <div class="property-rotate-right"><Casilla /></div>
-        <div class="property-rotate-right"><Casilla /></div>
-        <div class="property-rotate-right"><Casilla /></div>
-        <div class="property-rotate-right"><Casilla /></div>
-        <div class="property-rotate-right"><Casilla /></div>
-      </div>
+    <!-- Lado derecho (IDs del 32 al 40) -->
+    <div class="side right-side">
+        <div class="property-rotate-right" :id="32 + index" v-for="(casilla, index) in 9" :key="32 + index">
+            <Casilla />
+        </div>
+    </div>
 
-      <!-- Lado inferior -->
-      <div class="side bottom-side">
-        <div class="property-bottom"><Casilla /></div>
-        <div class="property-bottom"><Casilla /></div>
-        <div class="property-bottom"><Casilla /></div>
-        <div class="property-bottom"><Casilla /></div>
-        <div class="property-bottom"><Casilla /></div>
-        <div class="property-bottom"><Casilla /></div>
-        <div class="property-bottom"><Casilla /></div>
-        <div class="property-bottom"><Casilla /></div>
-        <div class="property-bottom"><Casilla /></div>
-      </div>
+    <!-- Lado inferior (IDs del 10 al 2, invertidos) -->
+    <div class="side bottom-side">
+        <div class="property-bottom" :id="10 - index" v-for="(casilla, index) in 9" :key="10 - index">
+            <Casilla />
+        </div>
+    </div>
 
-      <!-- Lado izquierdo -->
-      <div class="side left-side">
-        <div class="property-rotate-left"><Casilla /></div>
-        <div class="property-rotate-left"><Casilla /></div>
-        <div class="property-rotate-left"><Casilla /></div>
-        <div class="property-rotate-left"><Casilla /></div>
-        <div class="property-rotate-left"><Casilla /></div>
-        <div class="property-rotate-left"><Casilla /></div>
-        <div class="property-rotate-left"><Casilla /></div>
-        <div class="property-rotate-left"><Casilla /></div>
-        <div class="property-rotate-left"><Casilla /></div>
-      </div>
+    <!-- Lado izquierdo (IDs del 20 al 12, invertidos) -->
+    <div class="side left-side">
+        <div class="property-rotate-left" :id="20 - index" v-for="(casilla, index) in 9" :key="20 - index">
+            <Casilla />
+        </div>
+    </div>
 
-      <!-- Logo centrado -->
-      <div class="center-logo">
+    <!-- Logo centrado -->
+    <div class="center-logo">
         <img src="@/assets/monopolylogo.png" alt="Monopoly Logo" />
-      </div>
-      <div class="gray-background"></div>
-      <div class="ruletaDado">
-        <dados />
-      </div>
+    </div>
+
+    <!-- Ruleta y dado -->
+    <div class="ruletaDado">
+        <dados @diceRolled="movePieceBasedOnDice" />
     </div>
 
     <!-- Ficha -->
@@ -140,6 +123,7 @@
         <span></span>
         <span></span>
     </div>
+    <div class="gray-background"></div>
 </div>
 </template>
 
@@ -415,10 +399,11 @@ export default {
     align-items: center;
     flex-direction: row;
     gap: 20px;
-    margin-top: 100px; /* Agrega un margen superior para ajustar la posición si es necesario */
-  }
+    margin-top: 100px;
+    /* Agrega un margen superior para ajustar la posición si es necesario */
+}
 
-  .contendor {
+.contendor {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -494,5 +479,4 @@ export default {
     z-index: -1
   } 
 
-  
 </style>
