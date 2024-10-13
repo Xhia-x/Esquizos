@@ -17,7 +17,7 @@ module.exports.crearInvitacionDBService = (invitacionData) => {
             const partidaBuscada = await invitacionModel.findOne({ invitado: invitacionData.invitado, partida: invitacionData.partida});
             if (usuarioInvitado) {
                 if (partidaBuscada) {
-                    reject({ status: false, msg: "Usuario ya esta en la partida" });
+                    resolve({ status: false, msg: "Usuario ya esta en la partida" });
                 }
                 else{
                     await invitacion.save();
