@@ -1,5 +1,11 @@
 <template>
   <body>
+
+    <div class="botonReglas">
+        <Reglas>
+           
+        </Reglas>
+        </div>
     <div class="d-flex justify-content-start">
       <div class="btn-group">
         <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
@@ -11,6 +17,7 @@
           <li><a class="dropdown-item" href="#" @click="cerrarSesion">Cerrar sesión</a></li>
           <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#invitacionesModal">Invitaciones</a></li>
         </ul>
+  
       </div>
     </div>
     <div class="container vh-100 d-flex justify-content-center">
@@ -45,6 +52,9 @@
 <script>
 import autenticadorSesion from '../mixins/AutenticadorSesion.js';
 import VistaInvitaciones from './VistaInvitaciones.vue';
+import PopUp from './PopUp.vue';
+import Reglas from './Reglas.vue';
+
 
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
@@ -53,6 +63,10 @@ export default {
     VistaInvitaciones
   },
   mixins: [autenticadorSesion],
+  components: {
+    PopUp,
+    Reglas
+  },
   data () {
     return {
       msg: 'Welcome to Your Vue.js App',
@@ -168,7 +182,22 @@ body {
 
 .btn{
   background-color: red;
-  margin: 10%;
+  position: absolute;
+  top: 0;
+  right: -1500px;
+  margin: 10px;
+}
+
+.botonReglas{
+  position: absolute;
+  top: 10px;
+  left: 10px; /* Cambiado de right a left */
+  padding: 10px 20px;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  z-index: 1;
 }
 
 video {

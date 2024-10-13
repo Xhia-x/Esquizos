@@ -1,6 +1,12 @@
 <template>
 
     <body>
+        <div class="botonReglas">
+        <Reglas>
+           
+        </Reglas>
+        </div>
+ 
           
         <div class="mainContainer">
             <div class="text">
@@ -59,9 +65,15 @@
     <script>
     import User from '../models/User.js';
     import axios from 'axios';
+    import Reglas from './Reglas.vue';
+    import PopUp from './PopUp.vue';
     
     export default {
         name: 'LoginPage',
+        components: {
+            Reglas,
+            PopUp
+        },
         data() {
             return {
                 user: new User('', '', false)
@@ -191,6 +203,18 @@
     
     button{
         background-color: red;
+    }
+
+    .botonReglas{
+        position: absolute;
+        top: 10px;
+        left: 10px; /* Cambiado de right a left */
+        padding: 10px 20px;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        z-index: 1;
     }
     
     video {
