@@ -2,11 +2,14 @@
     <div class="partidas-container">
         <h1>Partidas Creadas</h1>
         <ul class="lista-partidas">
-            <li v-for="partida in partidas" :key="partida.id" class="partida-item">
+            <li v-for="partida in partidas" :key="partida.nombre" class="partida-item">
                 <h2>{{ partida.nombre }}</h2>
                 <p>Número de jugadores: {{ partida.nJugadores }}</p>
                 <button @click="accederPartida(partida.nombre)">Acceder a la partida</button>
                 <button @click="compartirPartida(partida.generarLinkCompartir())">Compartir partida</button>
+                <button @click="mostrarCampoInvitar(partida)">Invitar jugador</button>
+                <InvitarJugador v-if="partida.nombre === partidaInvitacion" :partida="partida" :partidaInvitacion="partidaInvitacion"
+                />
             </li>
         </ul>
     </div>
@@ -17,13 +20,18 @@
 import axios from "axios";
 import autenticadorSesion from '../mixins/AutenticadorSesion.js';
 import Partida from '../models/Partida.js';
+import InvitarJugador from './InvitarJugador.vue';
 
 export default {
     name: "PartidasCreadas",
     mixins: [autenticadorSesion],
+    components: {
+        InvitarJugador
+    },
     data() {
         return {
-            partidas: []
+            partidas: [],
+            partidaInvitacion: null,
         };
     },
     created() {
@@ -50,7 +58,11 @@ export default {
         },
         volverAtras() {
             this.$router.push({ name: 'Home' });
-        }
+        },
+        mostrarCampoInvitar(partida) {
+            this.partidaInvitacion = this.partidaInvitacion === partida.nombre ? null : partida.nombre;
+        }      
+        
     }
 };
 </script>

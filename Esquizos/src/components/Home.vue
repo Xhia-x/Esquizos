@@ -9,6 +9,7 @@
           <li><a class="dropdown-item" href="#">Algo</a></li>
           <li><hr class="dropdown-divider"></li>
           <li><a class="dropdown-item" href="#" @click="cerrarSesion">Cerrar sesión</a></li>
+          <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#invitacionesModal">Invitaciones</a></li>
         </ul>
       </div>
     </div>
@@ -34,6 +35,8 @@
             </div>
           </a>
     </div>
+
+    <VistaInvitaciones />
   </body>
   </template>
 
@@ -41,10 +44,14 @@
 
 <script>
 import autenticadorSesion from '../mixins/AutenticadorSesion.js';
+import VistaInvitaciones from './VistaInvitaciones.vue';
 
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: 'Home',
+  components: {
+    VistaInvitaciones
+  },
   mixins: [autenticadorSesion],
   data () {
     return {
