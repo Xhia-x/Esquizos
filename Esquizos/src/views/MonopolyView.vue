@@ -1,35 +1,35 @@
 <template>
 <div class="monopoly-board">
     <!-- Esquinas vacías -->
-    <div class="corner top-left" id="corner-top-left"></div>
-    <div class="corner top-right" id="corner-top-right"></div>
-    <div class="corner bottom-left" id="corner-bottom-left"></div>
-    <div class="corner bottom-right" id="corner-bottom-right"></div>
+    <div class="corner top-left" id="21"></div>
+    <div class="corner top-right" id="31"></div>
+    <div class="corner bottom-left" id="11"></div>
+    <div class="corner bottom-right" id="1"></div>
 
-    <!-- Lado superior -->
+    <!-- Lado superior (IDs del 22 al 30) -->
     <div class="side top-side">
-        <div class="property-top" :id="'top-' + index" v-for="(casilla, index) in 9" :key="'top-' + index">
+        <div class="property-top" :id="22 + index" v-for="(casilla, index) in 9" :key="22 + index">
             <Casilla />
         </div>
     </div>
 
-    <!-- Lado derecho -->
+    <!-- Lado derecho (IDs del 32 al 40) -->
     <div class="side right-side">
-        <div class="property-rotate-right" :id="'right-' + index" v-for="(casilla, index) in 9" :key="'right-' + index">
+        <div class="property-rotate-right" :id="32 + index" v-for="(casilla, index) in 9" :key="32 + index">
             <Casilla />
         </div>
     </div>
 
-    <!-- Lado inferior -->
+    <!-- Lado inferior (IDs del 10 al 2, invertidos) -->
     <div class="side bottom-side">
-        <div class="property-bottom" :id="'bottom-' + index" v-for="(casilla, index) in 9" :key="'bottom-' + index">
+        <div class="property-bottom" :id="10 - index" v-for="(casilla, index) in 9" :key="10 - index">
             <Casilla />
         </div>
     </div>
 
-    <!-- Lado izquierdo -->
+    <!-- Lado izquierdo (IDs del 20 al 12, invertidos) -->
     <div class="side left-side">
-        <div class="property-rotate-left" :id="'left-' + index" v-for="(casilla, index) in 9" :key="'left-' + index">
+        <div class="property-rotate-left" :id="20 - index" v-for="(casilla, index) in 9" :key="20 - index">
             <Casilla />
         </div>
     </div>
@@ -111,25 +111,7 @@ export default {
 
         // Método para obtener el ID de la casilla basado en la posición de la ficha
         getCasillaIdFromPosition(position) {
-            if (position === 0) {
-                return 'corner-bottom-right';
-            } else if (position === 10) {
-                return 'corner-bottom-left';
-            } else if (position === 20) {
-                return 'corner-top-left';
-            } else if (position === 30) {
-                return 'corner-top-right';
-            } else if (position < 10) {
-                // Casillas del lado inferior (invertido)
-                return `bottom-${9 - (position - 1)}`;
-            } else if (position < 20) {
-                // Casillas del lado izquierdo (invertido)
-                return `left-${9 - (position - 11)}`;
-            } else if (position < 30) {
-                return `top-${position - 21}`;
-            } else {
-                return `right-${position - 31}`;
-            }
+            return position;
         }
     }
 };
