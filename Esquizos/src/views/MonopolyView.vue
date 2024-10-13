@@ -1,89 +1,124 @@
 <template>
-  <div class="monopoly-board">
+<div class="monopoly-board">
     <!-- Esquinas vacías -->
-    <div class="corner top-left"></div>
-    <div class="corner top-right"></div>
-    <div class="corner bottom-left"></div>
-    <div class="corner bottom-right"></div>
+    <div class="corner top-left" id="21"></div>
+    <div class="corner top-right" id="31"></div>
+    <div class="corner bottom-left" id="11"></div>
+    <div class="corner bottom-right" id="1"></div>
 
-    <!-- Lado superior -->
+    <!-- Lado superior (IDs del 22 al 30) -->
     <div class="side top-side">
-      <div class="property-top"><Casilla /></div>
-      <div class="property-top"><Casilla /></div>
-      <div class="property-top"><Casilla /></div>
-      <div class="property-top"><Casilla /></div>
-      <div class="property-top"><Casilla /></div>
-      <div class="property-top"><Casilla /></div>
-      <div class="property-top"><Casilla /></div>
-      <div class="property-top"><Casilla /></div>
-      <div class="property-top"><Casilla /></div>
+        <div class="property-top" :id="22 + index" v-for="(casilla, index) in 9" :key="22 + index">
+            <Casilla />
+        </div>
     </div>
 
-    <!-- Lado derecho -->
+    <!-- Lado derecho (IDs del 32 al 40) -->
     <div class="side right-side">
-      <div class="property-rotate-right"><Casilla /></div>
-      <div class="property-rotate-right"><Casilla /></div>
-      <div class="property-rotate-right"><Casilla /></div>
-      <div class="property-rotate-right"><Casilla /></div>
-      <div class="property-rotate-right"><Casilla /></div>
-      <div class="property-rotate-right"><Casilla /></div>
-      <div class="property-rotate-right"><Casilla /></div>
-      <div class="property-rotate-right"><Casilla /></div>
-      <div class="property-rotate-right"><Casilla /></div>
+        <div class="property-rotate-right" :id="32 + index" v-for="(casilla, index) in 9" :key="32 + index">
+            <Casilla />
+        </div>
     </div>
 
-    <!-- Lado inferior -->
+    <!-- Lado inferior (IDs del 10 al 2, invertidos) -->
     <div class="side bottom-side">
-      <div class="property-bottom"><Casilla /></div>
-      <div class="property-bottom"><Casilla /></div>
-      <div class="property-bottom"><Casilla /></div>
-      <div class="property-bottom"><Casilla /></div>
-      <div class="property-bottom"><Casilla /></div>
-      <div class="property-bottom"><Casilla /></div>
-      <div class="property-bottom"><Casilla /></div>
-      <div class="property-bottom"><Casilla /></div>
-      <div class="property-bottom"><Casilla /></div>
+        <div class="property-bottom" :id="10 - index" v-for="(casilla, index) in 9" :key="10 - index">
+            <Casilla />
+        </div>
     </div>
 
-    <!-- Lado izquierdo -->
+    <!-- Lado izquierdo (IDs del 20 al 12, invertidos) -->
     <div class="side left-side">
-      <div class="property-rotate-left"><Casilla /></div>
-      <div class="property-rotate-left"><Casilla /></div>
-      <div class="property-rotate-left"><Casilla /></div>
-      <div class="property-rotate-left"><Casilla /></div>
-      <div class="property-rotate-left"><Casilla /></div>
-      <div class="property-rotate-left"><Casilla /></div>
-      <div class="property-rotate-left"><Casilla /></div>
-      <div class="property-rotate-left"><Casilla /></div>
-      <div class="property-rotate-left"><Casilla /></div>
+        <div class="property-rotate-left" :id="20 - index" v-for="(casilla, index) in 9" :key="20 - index">
+            <Casilla />
+        </div>
     </div>
 
     <!-- Logo centrado -->
     <div class="center-logo">
-      <img src="@/assets/monopolylogo.png" alt="Monopoly Logo" />
+        <img src="@/assets/monopolylogo.png" alt="Monopoly Logo" />
     </div>
 
+    <!-- Ruleta y dado -->
     <div class="ruletaDado">
-      <dados />
+        <dados @diceRolled="movePieceBasedOnDice" />
     </div>
-  </div>
+
+    <!-- Ficha -->
+    <div class="ficha" :style="pieces[0].style" @click="movePiece(0)">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+</div>
 </template>
 
-  <script>
-  import dados from './dados.vue';
-  import Casilla from '@/components/casillas.vue';
+<script>
+import dados from './dados.vue';
+import Casilla from '@/components/casillas.vue';
 
-  export default {
+export default {
     name: "MonopolyView",
     components: {
-      dados,
-      Casilla
+        dados,
+        Casilla
+    },
+    data() {
+        return {
+            pieces: [{
+                currentPosition: 1, // Posición inicial de la ficha (esquina inferior derecha)
+                style: {
+                    top: '90%',
+                    left: '90%',
+                    transform: 'translate(-50%, -50%)'
+                }
+            }],
+            step: 5, // Porcentaje de movimiento en cada dirección
+        };
+    },
+    methods: {
+        // Mover la ficha según los pasos dados
+        movePieceBasedOnDice(steps) {
+            let position = this.pieces[0].currentPosition || 0; // Posición actual de la ficha
+
+            for (let i = 1; i <= steps; i++) {
+                setTimeout(() => {
+                    position = (position + 1) % 40; // Asegurarse de que no se pase de las 40 casillas
+                    this.pieces[0].currentPosition = position;
+
+                    // Determinar la nueva casilla
+                    const casillaId = this.getCasillaIdFromPosition(position);
+                    this.movePieceToCasilla(casillaId);
+                }, i * 500); // 300ms de pausa entre cada movimiento, ajustable para la velocidad de la animación
+            }
+        },
+
+        // Método adicional para mover la ficha a la casilla específica
+        movePieceToCasilla(casillaId) {
+            const casillaElement = document.getElementById(casillaId);
+            if (casillaElement) {
+                const rect = casillaElement.getBoundingClientRect();
+
+                // Ajustar las coordenadas de la ficha
+                this.pieces[0].style = {
+                    top: `${rect.top + window.scrollY}px`, // Añadir scrollY para corregir si hay desplazamiento de la página
+                    left: `${rect.left + window.scrollX}px`, // Añadir scrollX para corregir si hay desplazamiento de la página
+                    transform: 'translate(-50%, -50%)' // Mantener la ficha centrada
+                };
+            }
+        },
+
+        // Método para obtener el ID de la casilla basado en la posición de la ficha
+        getCasillaIdFromPosition(position) {
+            return position;
+        }
     }
-  };
-  </script>
-  
- <style scoped>
-  .monopoly-board {
+};
+</script>
+
+<style scoped>
+.monopoly-board {
     display: grid;
     grid-template-columns: 230px repeat(9, 170px) 230px;
     grid-template-rows: 230px repeat(9, 170px) 230px;
@@ -97,152 +132,201 @@
 
 /* Esquinas cuadradas */
 .corner {
-  background-color: lightgray;
-  border: 2px solid black;
-  width: 230px;
-  height: 230px;
-  box-sizing: border-box;
+    background-color: lightgray;
+    border: 2px solid black;
+    width: 230px;
+    height: 230px;
+    box-sizing: border-box;
 }
 
 .top-left {
-  grid-column: 1;
-  grid-row: 1;
+    grid-column: 1;
+    grid-row: 1;
 }
 
 .top-right {
-  grid-column: 11;
-  grid-row: 1;
+    grid-column: 11;
+    grid-row: 1;
 }
 
 .bottom-left {
-  grid-column: 1;
-  grid-row: 11;
+    grid-column: 1;
+    grid-row: 11;
 }
 
 .bottom-right {
-  grid-column: 11;
-  grid-row: 11;
+    grid-column: 11;
+    grid-row: 11;
 }
 
 /* Lados del tablero */
 .side {
-  display: grid;
-  padding: 0;
-  margin: 0;
-  gap: 0;
+    display: grid;
+    padding: 0;
+    margin: 0;
+    gap: 0;
 }
 
-.top-side, .bottom-side {
-  grid-column: 2 / span 9;
-  display: grid;
-  grid-template-columns: repeat(9, 170px); /* Asegura que las casillas coincidan con las esquinas */
+.top-side,
+.bottom-side {
+    grid-column: 2 / span 9;
+    display: grid;
+    grid-template-columns: repeat(9, 170px);
+    /* Asegura que las casillas coincidan con las esquinas */
 }
 
-.right-side, .left-side {
-  grid-row: 2 / span 9;
-  display: grid;
-  grid-template-rows: repeat(9, 170px); /* Asegura que las casillas coincidan con las esquinas */
-  justify-items: stretch;
-  align-items: center; /* Asegura que las casillas laterales estén alineadas con las esquinas */
+.right-side,
+.left-side {
+    grid-row: 2 / span 9;
+    display: grid;
+    grid-template-rows: repeat(9, 170px);
+    /* Asegura que las casillas coincidan con las esquinas */
+    justify-items: stretch;
+    align-items: center;
+    /* Asegura que las casillas laterales estén alineadas con las esquinas */
 }
 
 .right-side {
-  grid-column: 11;
-  margin-left: 28px; /* Mueve hacia la derecha */
+    grid-column: 11;
+    margin-left: 28px;
+    /* Mueve hacia la derecha */
 }
 
 .left-side {
-  grid-column: 1;
-  margin-left: 33px; /* Mueve hacia la derecha */
+    grid-column: 1;
+    margin-left: 33px;
+    /* Mueve hacia la derecha */
 }
 
 /* Casillas con tamaño fijo */
-.property-top, .property-bottom, .property-rotate-right, .property-rotate-left {
-  width: 170px;
-  height: 170px;
-  background-color: white;
-  border: 1px solid black;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
+.property-top,
+.property-bottom,
+.property-rotate-right,
+.property-rotate-left {
+    width: 170px;
+    height: 170px;
+    background-color: white;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
 }
 
 .property-top {
-  transform: rotate(180deg); /* Casillas superiores mirando hacia abajo */
+    transform: rotate(180deg);
+    /* Casillas superiores mirando hacia abajo */
 }
 
 .property-rotate-right {
-  transform: rotate(-90deg); /* Casillas laterales derechas mirando hacia la izquierda */
+    transform: rotate(-90deg);
+    /* Casillas laterales derechas mirando hacia la izquierda */
 }
 
 .property-rotate-left {
-  transform: rotate(90deg); /* Casillas laterales izquierdas mirando hacia la derecha */
+    transform: rotate(90deg);
+    /* Casillas laterales izquierdas mirando hacia la derecha */
 }
-
 
 /* Alineación de las casillas superiores e inferiores */
 .top-side {
-  grid-column: 2 / span 9;
-  grid-row: 1;
-  display: grid;
-  grid-template-columns: repeat(9, 170px); /* Ajusta el tamaño para que coincida con las esquinas */
-  justify-items: stretch;
-  align-items: center; /* Alinea el contenido de las casillas */
+    grid-column: 2 / span 9;
+    grid-row: 1;
+    display: grid;
+    grid-template-columns: repeat(9, 170px);
+    /* Ajusta el tamaño para que coincida con las esquinas */
+    justify-items: stretch;
+    align-items: center;
+    /* Alinea el contenido de las casillas */
 }
 
 .bottom-side {
-  grid-column: 2 / span 9;
-  grid-row: 11;
-  display: grid;
-  grid-template-columns: repeat(9, 170px); /* Ajusta el tamaño para que coincida con las esquinas */
-  justify-items: stretch;
-  align-items: center; /* Alinea el contenido de las casillas */
+    grid-column: 2 / span 9;
+    grid-row: 11;
+    display: grid;
+    grid-template-columns: repeat(9, 170px);
+    /* Ajusta el tamaño para que coincida con las esquinas */
+    justify-items: stretch;
+    align-items: center;
+    /* Alinea el contenido de las casillas */
 }
 
 /* Alineación de las casillas laterales con las esquinas */
-.left-side, .right-side {
-  grid-template-rows: repeat(9, 170px); /* Ajusta el tamaño para que coincida con las esquinas */
-  justify-items: stretch;
-  align-items: center;
+.left-side,
+.right-side {
+    grid-template-rows: repeat(9, 170px);
+    /* Ajusta el tamaño para que coincida con las esquinas */
+    justify-items: stretch;
+    align-items: center;
 }
-
-/* Mover las casillas del lado derecho más a la izquierda */
-.right-side .property {
-  grid-column-start: 11; /* Ajustar esta propiedad para moverlas más cerca o lejos */
-}
-
-/* Mover las casillas del lado izquierdo más a la derecha */
-.left-side .property {
-  grid-column-start: 1; /* Ajustar esta propiedad para moverlas más cerca o lejos */
-}
-
 
 /* Logo centrado */
-  .center-logo {
+.center-logo {
     grid-column: 5 / span 3;
     grid-row: 5 / span 3;
     display: flex;
     justify-content: center;
     align-items: center;
-  }
+}
 
-  .center-logo img {
+.center-logo img {
     max-width: 100%;
     max-height: 100%;
     object-fit: contain;
-  }
+}
 
-  .ruletaDado {
+/* Ficha */
+.ficha {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    height: 96px;
+    width: 96px;
+    animation: rotate_3922 1.2s linear infinite;
+    background-color: #9b59b6;
+    background-image: linear-gradient(#9b59b6, #84cdfa, #5ad1cd);
+    transform-origin: center;
+    z-index: 1;
+    transition: top 0.5s ease, left 0.5s ease, transform 0.5s ease;
+    /* Añadido */
+}
+
+.ficha::after {
+    content: "";
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    background-color: #fff;
+    border: solid 5px #ffffff;
+    border-radius: 50%;
+}
+
+@keyframes rotate_3922 {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.ruletaDado {
     grid-column: 5 / span 3;
-    grid-row: 7; /* Cambia a una fila más baja para mover los dados hacia abajo */
+    grid-row: 7;
+    /* Cambia a una fila más baja para mover los dados hacia abajo */
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: row;
     gap: 20px;
-    margin-top: 100px; /* Agrega un margen superior para ajustar la posición si es necesario */
-  }
+    margin-top: 100px;
+    /* Agrega un margen superior para ajustar la posición si es necesario */
+}
 </style>
