@@ -45,7 +45,7 @@
     </div>
 
     <!-- Ficha -->
-    <div class="container" :style="pieces[0].style" @click="movePiece(0)">
+    <div class="ficha" :style="pieces[0].style" @click="movePiece(0)">
         <span></span>
         <span></span>
         <span></span>
@@ -67,39 +67,49 @@ export default {
     data() {
         return {
             pieces: [{
-                currentPosition: 0, // Posición inicial de la ficha (esquina inferior derecha)
+                currentPosition: 1, // Posición inicial de la ficha (esquina inferior derecha)
                 style: {
                     top: '90%',
                     left: '90%',
                     transform: 'translate(-50%, -50%)'
                 }
             }],
-            step: 10, // Porcentaje de movimiento en cada dirección
+            step: 5, // Porcentaje de movimiento en cada dirección
         };
     },
     methods: {
-        // Mover la ficha un número específico de pasos basado en el valor de los dados
+        // Mover la ficha según los pasos dados
         movePieceBasedOnDice(steps) {
-            let position = this.pieces[0].currentPosition || 0; // Posición actual
-            position = (position + steps) % 40; // Asumiendo que hay 40 casillas en total (36 + 4 esquinas)
-            this.pieces[0].currentPosition = position;
+            let position = this.pieces[0].currentPosition || 0; // Posición actual de la ficha
 
-            // Determinar la casilla correspondiente basada en la posición
-            const casillaId = this.getCasillaIdFromPosition(position);
+            for (let i = 1; i <= steps; i++) {
+                setTimeout(() => {
+                    position = (position + 1) % 40; // Asegurarse de que no se pase de las 40 casillas
+                    this.pieces[0].currentPosition = position;
 
-            // Mover la ficha a la nueva casilla
+                    // Determinar la nueva casilla
+                    const casillaId = this.getCasillaIdFromPosition(position);
+                    this.movePieceToCasilla(casillaId);
+                }, i * 500); // 300ms de pausa entre cada movimiento, ajustable para la velocidad de la animación
+            }
+        },
+
+        // Método adicional para mover la ficha a la casilla específica
+        movePieceToCasilla(casillaId) {
             const casillaElement = document.getElementById(casillaId);
             if (casillaElement) {
                 const rect = casillaElement.getBoundingClientRect();
+
+                // Ajustar las coordenadas de la ficha
                 this.pieces[0].style = {
-                    top: `${rect.top}px`,
-                    left: `${rect.left}px`,
-                    transform: 'translate(-50%, -50%)'
+                    top: `${rect.top + window.scrollY}px`, // Añadir scrollY para corregir si hay desplazamiento de la página
+                    left: `${rect.left + window.scrollX}px`, // Añadir scrollX para corregir si hay desplazamiento de la página
+                    transform: 'translate(-50%, -50%)' // Mantener la ficha centrada
                 };
             }
         },
 
-        // Obtener el ID de la casilla basado en la posición de la ficha
+        // Método para obtener el ID de la casilla basado en la posición de la ficha
         getCasillaIdFromPosition(position) {
             if (position === 0) {
                 return 'corner-bottom-right';
@@ -110,9 +120,11 @@ export default {
             } else if (position === 30) {
                 return 'corner-top-right';
             } else if (position < 10) {
-                return `bottom-${position - 1}`;
+                // Casillas del lado inferior (invertido)
+                return `bottom-${9 - (position - 1)}`;
             } else if (position < 20) {
-                return `left-${position - 11}`;
+                // Casillas del lado izquierdo (invertido)
+                return `left-${9 - (position - 11)}`;
             } else if (position < 30) {
                 return `top-${position - 21}`;
             } else {
@@ -284,7 +296,7 @@ export default {
 }
 
 /* Ficha */
-.container {
+.ficha {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -292,14 +304,16 @@ export default {
     border-radius: 50%;
     height: 96px;
     width: 96px;
+    animation: rotate_3922 1.2s linear infinite;
     background-color: #9b59b6;
     background-image: linear-gradient(#9b59b6, #84cdfa, #5ad1cd);
     transform-origin: center;
     z-index: 1;
-    transition: top 0.5s ease, left 0.5s ease, transform 0.5s ease; /* Añadido */
+    transition: top 0.5s ease, left 0.5s ease, transform 0.5s ease;
+    /* Añadido */
 }
 
-.container::after {
+.ficha::after {
     content: "";
     position: absolute;
     top: 10px;
@@ -310,8 +324,6 @@ export default {
     border: solid 5px #ffffff;
     border-radius: 50%;
 }
-
-
 
 @keyframes rotate_3922 {
     from {
