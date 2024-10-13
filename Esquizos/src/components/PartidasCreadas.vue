@@ -47,6 +47,9 @@ export default {
         compartirPartida(link) {       
             navigator.clipboard.writeText(link);
             alert(`Link de la partida copiado al portapapeles: ${link}`);
+        },
+        volverAtras() {
+            this.$router.push({ name: 'Home' });
         }
     }
 };
