@@ -7,6 +7,7 @@ import Ficha from '@/components/Ficha.vue';
 import Home from '@/components/Home.vue'
 import MonopolyView from '@/views/MonopolyView.vue';
 import PartidasCreadas from '@/components/PartidasCreadas.vue';
+import FigurasMonopoly from '@/views/FigurasMonopoly.vue';
 
 const routes = [
   { path: '/', name: 'Login', component: Login },
@@ -16,7 +17,8 @@ const routes = [
   {path: '/fichas', name: 'Ficha', component: Ficha},
   {path: '/home', name: 'Home', component: Home},
   {path: '/monopolyView', name: 'MonopolyView', component: MonopolyView},
-  {path: '/partidasCreadas', name: 'PartidasCreadas', component: PartidasCreadas}
+  {path: '/partidasCreadas', name: 'PartidasCreadas', component: PartidasCreadas},
+  {path: '/figurasMonopoly', name: 'FigurasMonopoly', component: FigurasMonopoly},
 ]
 
 const router = createRouter({
