@@ -10,4 +10,5 @@
 
     router.route('/partida').post(partidaController.registerPartidaControllerFn);
     router.route('/partida/:nombrePartida').get(partidaController.buscarPartidaControllerFn);
+    router.route('/partida/usuario/:nombreUsuario').get(partidaController.cargarPartidasUsusarioControllerFn);
     module.exports = router; 

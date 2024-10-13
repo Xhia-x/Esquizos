@@ -87,7 +87,7 @@ export default {
     mixins: [autenticadorSesion],
     data() {
         return {
-            partida: new Partida('', 0,"", ''),
+            partida: new Partida('', 0,"", '', 0, 0, 0),
             nombre: '',
             jugadores: 3,
             dineroInicial: 1500,

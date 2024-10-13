@@ -27,6 +27,12 @@
             </div>
           </a>
         </div>
+        <a href="/partidasCreadas" class="link-offset-2 link-underline link-underline-opacity-0">
+            <div class="card shadow p-4 col-md-4">
+              <img class="img-thumbnail" src="https://ae01.alicdn.com/kf/S40076f46e889430794c308a68f8bccd7a/P-ster-de-dibujos-animados-Mr-Monopoly-Big-Rich-Man-pintura-en-lienzo-dinero-arte-de.jpg">
+              <h2>Ver Partidas creadas</h2>
+            </div>
+          </a>
     </div>
   </body>
   </template>
