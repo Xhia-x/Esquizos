@@ -57,7 +57,20 @@
                 </form>
             </div>
 
+            <div v-if="this.partidaCreada" class="enlaceGenerado">
+                <h1>Enlace de la Partida</h1>
+                <div class="linkContainer">
+                    <p class="textoLink">{{ partida.generarLinkCompartir() }}</p>
+                    <button type="button" class="copiarLinkBoton" @click="copiarAlPortapapeles(partida.generarLinkCompartir())">Copiar link</button>
+                </div>
+                <button type="button" class="accederAPartidaBoton" @click="accederPartida">Acceder a la Partida</button>
+                <button @click="mostrarCampoInvitar(partida)">Invitar jugador</button>
+                <InvitarJugador v-if="partida.nombre === partidaInvitacion" :partida="partida" :partidaInvitacion="partidaInvitacion"/>
+            </div>
+
+
             <button type="button" class="volverAtrasBoton" @click="volverAtras">volver atrás</button>
+            
 
         </div>
   
@@ -71,21 +84,24 @@ import Partida from '../models/Partida.js';
 import Reglas from './Reglas.vue';
 import axios from 'axios';
 import autenticadorSesion from '../mixins/AutenticadorSesion.js';
+import InvitarJugador from './InvitarJugador.vue';
 
 export default {
     name: 'CrearPartida',
     components:{
-        Reglas
+        Reglas, InvitarJugador
     },
     mixins: [autenticadorSesion],
     data() {
         return {
-            partida: new Partida('', 0,"", ''),
+            partida: new Partida('', 0,"", '', 0, 0, 0),
             nombre: '',
             jugadores: 3,
             dineroInicial: 1500,
             tiempoMaximo: -1,
-            tiempoPorTurno: -1
+            tiempoPorTurno: -1,
+            partidaCreada: false,
+            partidaInvitacion: null
         };
     },
     methods: {
@@ -116,15 +132,19 @@ export default {
             axios.post("http://localhost:9992/partida", this.partida)
             .then(({data}) => {
                 if (data.status === true) {
+                    this.partidaCreada = true;
                     alert("Partida Creada");
-                    this.$router.push({ name: 'Home' });
                 } else {
+                    this.partidaCreada = false;
                     alert("Nombre de Partida ya existe, Intente con otro");
+                    
                 }
             })
             .catch(err => {
                 console.error(err);
+                this.partidaCreada = false;
                 alert("Error, Try Again");
+                
             });
         },
         generarLink() {
@@ -147,7 +167,16 @@ export default {
                 return false;
             }
             return true;
-        }
+        },
+        accederPartida() {
+            this.$router.push({ name: 'VerPartida', params: { nombrePartida: this.partida.nombre } });
+        },
+        copiarAlPortapapeles(texto) {
+            navigator.clipboard.writeText(texto);
+        },
+        mostrarCampoInvitar(partida) {
+            this.partidaInvitacion = this.partidaInvitacion === partida.nombre ? null : partida.nombre;
+        }      
         
     }
 };
@@ -164,26 +193,17 @@ export default {
     margin-bottom: 15px;
 }
 
+h1 {
+    font-size: 20px;
+}
+
 body {
     background: none;
     position: relative;
-    margin: 0;
-    margin: 0;
     display: flex;
     align-items: center;
     justify-content: center;
     height: 100vh;
-}
-
-video {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    min-width: 100%;
-    min-height: 100%;
-    transform: translateX(calc((100% - 100vw) / 2));
-    z-index: -210;
-    object-fit: cover;
 }
 
 .crear-partida {
@@ -196,12 +216,13 @@ video {
 }
 
 .form-group {
-    margin-bottom: 15px;
+    margin-bottom: 5px;
 }
 
 label {
     display: block;
     margin-bottom: 5px;
+    font-size: 11px;
 }
 
 input,
@@ -219,6 +240,7 @@ button {
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    margin-top: 10px;
 }
 
 .botonReglas{
@@ -238,14 +260,52 @@ button:hover {
 }
 
 .volverAtrasBoton {
-        background-color: #3498db;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        position: absolute;
-        right: 20px;
-        top: 20px;
-        width: 200px;
-    }
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    width: 200px;
+}
+
+.enlaceGenerado {
+    max-width: 400px;
+    padding: 20px;
+    margin: 0 auto;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    margin-top: 20px;
+}
+
+.accederAPartidaBoton {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 200px;
+}
+
+.textoLink {
+    font-size: 14px;
+    margin-bottom: 10px;
+    background-color: #e6e6e6;
+    width: 80%;
+    margin: auto;
+}
+
+.copiarLinkBoton {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 200px;
+    height: 30px;
+    padding: 0%;
+}
 </style>

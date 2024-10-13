@@ -47,10 +47,16 @@ app.use(routes);
 io.on('connection', (socket) => {
     console.log('Usuario conectado ' + socket.id);
 
+    // Escuchar cuando el cliente pide unirse a una partida 
+    socket.on('joinPartida', (partida) => {
+        socket.join(partida);  
+        console.log(`Usuario ${socket.id} se unió a la partida ${partida}`);
+    });
+
     socket.on('rollDice', (data) => {
-        const { user, dice1, dice2 } = data;
-        console.log(`Usuario ${user}, numeros: ${dice1} - ${dice2}`);
-        io.emit('diceRolled', { dice1, dice2 });
+        const { user, dice1, dice2, partida } = data;
+        console.log(`Usuario ${user} en la partida ${partida}, numeros: ${dice1} - ${dice2}`);
+        io.to(partida).emit('diceRolled', { dice1, dice2 });
       });
 
     socket.on('disconnect', () => {
