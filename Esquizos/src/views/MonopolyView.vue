@@ -69,8 +69,8 @@ export default {
             pieces: [{
                 currentPosition: 1, // Posición inicial de la ficha (esquina inferior derecha)
                 style: {
-                    top: '90%',
-                    left: '90%',
+                    top: '1850px',
+                    left: '1850px',
                     transform: 'translate(-50%, -50%)'
                 }
             }],
