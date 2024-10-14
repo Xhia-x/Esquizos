@@ -1,6 +1,12 @@
 <template>
 
     <body>
+        <div class="botonReglas">
+        <Reglas>
+           
+        </Reglas>
+        </div>
+ 
           
         <div class="mainContainer">
             <div class="text">
@@ -59,13 +65,36 @@
     <script>
     import User from '../models/User.js';
     import axios from 'axios';
+    import Reglas from './Reglas.vue';
+    import PopUp from './PopUp.vue';
     
     export default {
         name: 'LoginPage',
+        components: {
+            Reglas,
+            PopUp
+        },
         data() {
             return {
                 user: new User('', '', false)
             };
+        },
+        mounted() {
+            const storedUser = localStorage.getItem('user') || sessionStorage.getItem('user');
+            
+            if (storedUser) {
+                axios.get(`http://localhost:9992/user/${storedUser}`)
+                    .then(({ data }) => {
+                        if (data) {
+                            this.user = data; 
+                        }
+                        this.$router.push({ name: 'Home' });
+                    })
+                    .catch(err => {
+                        console.error(err);
+                    });
+            }
+
         },
         methods: {
             login() {
@@ -73,8 +102,13 @@
                 .then(({data}) => {
                     if (data.status === true) {
                         alert("Logged Successfully");
-                        localStorage.setItem('user', data.username);
-                        console.log(data.msg);
+                        if (this.user.rememberMe) {
+                            localStorage.setItem('email', this.user.email);
+                            localStorage.setItem('user', data.username);
+                        } else {
+                            sessionStorage.setItem('email', this.user.email);
+                            sessionStorage.setItem('user', data.username);
+                        }
                         console.log(data.username);
                         console.log(localStorage.getItem('user'));
                         this.$router.push({ name: 'Home' });
@@ -169,6 +203,18 @@
     
     button{
         background-color: red;
+    }
+
+    .botonReglas{
+        position: absolute;
+        top: 10px;
+        left: 10px; /* Cambiado de right a left */
+        padding: 10px 20px;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        z-index: 1;
     }
     
     video {
