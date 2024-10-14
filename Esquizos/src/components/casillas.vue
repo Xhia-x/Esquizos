@@ -1,6 +1,7 @@
 <template>
   <div class="card">
     <div class="card__color-strip" :style="{ backgroundColor: color }"></div>
+    <img v-if="image"  alt="Imagen de la propiedad" class="card__image" />
     <div class="card__descr-wrapper">
       <p class="card__title">{{ title }}</p>
       <p class="card__descr">
@@ -9,9 +10,9 @@
       <div class="card__price">{{ price }}</div>
       <div class="card__links"></div>
     </div>
-    </div>
-
+  </div>
 </template>
+
 
 <style scoped>
 .card {
@@ -78,6 +79,15 @@
 .card__links .link:hover {
   text-decoration: underline;
 }
+
+.card__image {
+  width: 100%;
+  height: auto;
+  max-height: 100px; /* Ajusta este valor según tus necesidades */
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
 </style>
 
 
@@ -87,7 +97,7 @@
   props: {
     color: {
       type: String,
-      default: "blueviolet" // Color por defecto para la franja superior
+      default: "blueviolet"
     },
     title: {
       type: String,
@@ -100,6 +110,10 @@
     price: {
       type: Number,
       default: 200
+    },
+    image: {
+      type: String,
+      default: "" // Ruta de la imagen por defecto (vacía)
     }
   }
 };

@@ -1,4 +1,5 @@
 <template>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Chelsea Market">
   <div class="monopoly-board">
     <!-- Esquinas vacías -->
     <div class="corner top-left" id="21">
@@ -90,9 +91,12 @@
     </div>
   <!-- Botón Figuras -->
   <button class="figuras-button" @click="irAFiguras">Seleccionar Figuras</button>
-    
+  <div class="gray-background"></div>
+  <button @click="goToMonopolyView2">Ir a Monopoly View 2</button>
 </div>
-    <div class="gray-background"></div>
+    
+
+    
   
 </template>
 
@@ -172,6 +176,10 @@ export default {
          irAFiguras() {
             this.$router.push({ name: 'FigurasMonopoly' });
         },
+        
+        goToMonopolyView2() {
+            this.$router.push({ name: 'MonopolyView2' });
+        }
 
 
     }
