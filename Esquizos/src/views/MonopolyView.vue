@@ -94,7 +94,7 @@
     
 </div>
     <div class="gray-background"></div>
-  </div>
+  
 </template>
 
 <script>
