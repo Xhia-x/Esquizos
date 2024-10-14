@@ -44,4 +44,27 @@ var buscarPartidaControllerFn = async (req, res) => {
     }
 }
 
-module.exports = {registerPartidaControllerFn, buscarPartidaControllerFn};
+var cargarPartidasUsusarioControllerFn = async (req, res) => {
+    try {
+
+        const nombreUsuario = req.params.nombreUsuario; // Obtén el nombre de la partida
+        console.log("Buscando partidas de:", nombreUsuario);
+
+        var result = await partidaService.cargarPartidasUsusarioDBService( {username: nombreUsuario} );
+        console.log(result.status);
+
+        if(result.status){
+            res.json(result.partidas);
+            console.log("Partidas encontradas");
+        } else {
+            res.status(404).send('Partidas no encontradas');
+            console.log("Partidas no encontradas");
+        }
+
+    } catch (err) {
+        res.status(500).send({ "status": false, "message": "Error en el servidor" });
+        console.log(err);
+    }
+}
+
+module.exports = {registerPartidaControllerFn, buscarPartidaControllerFn,cargarPartidasUsusarioControllerFn};
