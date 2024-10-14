@@ -19,7 +19,10 @@
     "express": "^4.21.0",
     "multer": "^1.4.5-lts.1",
     "package": "file:",
+<<<<<<< HEAD
     "popper": "^1.0.1",
+=======
+>>>>>>> 7dd96b1b (Visualizacion en tiempo real de los dados)
     "socket.io-client": "^4.8.0",
     "sweetalert2": "^11.14.1",
     "vue": "^3.2.13",

@@ -11,7 +11,8 @@
 </template>
 
 <script>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
+import { io } from 'socket.io-client'
 import dice1 from '@/assets/dice1.png';
 import dice2 from '@/assets/dice2.png';
 import dice3 from '@/assets/dice3.png';
@@ -19,6 +20,7 @@ import dice4 from '@/assets/dice4.png';
 import dice5 from '@/assets/dice5.png';
 import dice6 from '@/assets/dice6.png';
 
+    const socket = io('http://localhost:9992');
 const images = ref([
   { id: 1, url: dice1, name: 'dado1' },
   { id: 2, url: dice2, name: 'dado2' },
@@ -40,6 +42,20 @@ export default {
     let finalDice1 = 1;
     let finalDice2 = 1;
 
+    // Función para emitir el evento de lanzamiento de dados
+    const emitRollDice = (dice1Value, dice2Value) => {
+      console.log('Emitiendo evento rollDice usuario:', localStorage.getItem('user'));
+      socket.emit('rollDice', { user: localStorage.getItem('user'), dice1: dice1Value, dice2: dice2Value });
+    };
+
+    onMounted(() => {
+      socket.on('diceRolled', (data) => {
+        // Actualizar las imágenes de los dados con los valores recibidos del servidor
+        currentImage1.value = images.value[data.dice1 - 1];
+        currentImage2.value = images.value[data.dice2 - 1];
+      });
+    });
+
     const changeImage = (currentImage) => {
       const randomIndex = Math.floor(Math.random() * images.value.length);
       currentImage.value = images.value[randomIndex];
@@ -57,9 +73,8 @@ export default {
       finalDice1 = changeImage(currentImage1); // Guardamos el valor final del dado 1
       finalDice2 = changeImage(currentImage2); // Guardamos el valor final del dado 2
 
-      // Incrementamos el tiempo de espera entre cambios para crear el efecto de desaceleración
-      intervalTime = Math.min(1000, intervalTime + 50);
-
+      emitRollDice(finalDice1, finalDice2); // Emitir los valores de los dados
+      intervalTime = Math.min(1000, intervalTime + 50)
       currentTimeout = setTimeout(() => {
         rollDiceWithDeceleration(timeElapsed + intervalTime, intervalTime);
       }, intervalTime);

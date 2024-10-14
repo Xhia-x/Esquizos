@@ -5,6 +5,9 @@ var routes = require('./route/routes');
 const http = require('http');
 const { Server } = require('socket.io');
 
+const http = require('http');
+const { Server } = require('socket.io');
+
 mongoose.set('strictQuery', false);
 
 const server = http.createServer(app);
