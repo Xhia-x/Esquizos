@@ -76,3 +76,20 @@ module.exports.cargarPartidasUsusarioDBService = async (userData) => {
         return { status: false, msg: "INVALID DATA" };
     }
 };
+
+module.exports.eliminarPartidaDBService = async (partidaData) => {
+    try {
+        const result = await partidaModel.deleteOne({ nombre: partidaData.nombre });
+
+        if (result.deletedCount > 0) {
+            console.log("Partida eliminada");
+            return { status: true, msg: "Partida eliminada" };
+        } else {
+            console.log("No se encontró la partida");
+            return { status: false, msg: "No se encontró la partida" };
+        }
+    } catch (error) {
+        console.log("Error al eliminar la partida");
+        return { status: false, msg: "Error al eliminar la partida" };
+    }
+};

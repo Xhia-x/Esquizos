@@ -84,7 +84,6 @@
    
     <div class="ficha" :style="pieces[0].style" @click="movePiece(0)">
     
-        <img v-if="figuraSeleccionada":src="getFiguraSrc(figuraSeleccionada)" class="ficha-imagen"/>
  
 
 
@@ -109,16 +108,18 @@ export default {
     },
     data() {
         return {
+         
             pieces: [{
                 currentPosition: 1, // Posición inicial de la ficha (esquina inferior derecha)
                 style: {
                     top: '1850px',
                     left: '1850px',
                     transform: 'translate(-50%, -50%)'
+                    
                 }
             }],
             step: 5, // Porcentaje de movimiento en cada dirección
-            figuraSeleccionada: null, // Imagen seleccionada para la ficha
+        
          
             
             
@@ -127,13 +128,7 @@ export default {
         };
         
     },
-    created() {
-        if (this.$route.params.figuraSeleccionada) {
-      this.figuraSeleccionada = this.$route.params.figuraSeleccionada;
-      console.log('Imagen seleccionada:', this.figuraSeleccionada); // Verificar la imagen seleccionada
-    }else{console.log('No se ha seleccionado ninguna imagen');}
-  },
-
+   
   
     methods: {
         // Mover la ficha según los pasos dados
@@ -177,17 +172,8 @@ export default {
          irAFiguras() {
             this.$router.push({ name: 'FigurasMonopoly' });
         },
-        getFiguraSrc(figuraName) {
-      const figuras = {
-        'hollow': require('@/assets/hollow.png'),
-        'cat': require('@/assets/cat.png'),
-        'warhammer': require('@/assets/warhammer.png'),
-        'mago': require('@/assets/mago.png'),
-        'illidan': require('@/assets/illidan.png'),
-        'oveja': require('@/assets/oveja.png')
-      };
-      return figuras[figuraName];
-    }
+
+
     }
 };
 </script>

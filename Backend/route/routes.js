@@ -15,5 +15,6 @@
 
     router.route('/invitacion').post(invitacionController.crearInvitacionControllerFn);
     router.route('/invitacion/:nombreUsuario').get(invitacionController.cargarInvitacionesUsusarioControllerFn);
+    router.route('/partida/:nombrePartida').delete(partidaController.eliminarPartidaControllerFn);
 
     module.exports = router; 
