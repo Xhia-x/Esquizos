@@ -6,7 +6,7 @@
       <p class="card__descr">
         {{ description }}
       </p>
-      <div class="card__price">Price: ${{ price }}</div>
+      <div class="card__price">{{ price }}</div>
       <div class="card__links"></div>
     </div>
     </div>
@@ -95,7 +95,7 @@
     },
     description: {
       type: String,
-      default: "Lorem ipsum dolor sit amet, consectetur adipisicing elit."
+      default: ""
     },
     price: {
       type: Number,
