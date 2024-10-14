@@ -104,7 +104,6 @@ export default {
 }
 
 .a{
-  margin: 20%;
   margin-top: 0;
   align-self: center;
 }
