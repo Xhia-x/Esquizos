@@ -6,6 +6,7 @@ import LevelSelector from '../components/LevelSelector.vue';
 import Ficha from '@/components/Ficha.vue';
 import Home from '@/components/Home.vue'
 import MonopolyView from '@/views/MonopolyView.vue';
+import MonopolyView2 from '@/views/MonopolyView2.vue';
 import PartidasCreadas from '@/components/PartidasCreadas.vue';
 import FigurasMonopoly from '@/views/FigurasMonopoly.vue';
 
@@ -17,6 +18,7 @@ const routes = [
   {path: '/fichas', name: 'Ficha', component: Ficha},
   {path: '/home', name: 'Home', component: Home},
   {path: '/monopolyView', name: 'MonopolyView', component: MonopolyView},
+  {path: '/monopolyView2', name: 'MonopolyView2', component: MonopolyView2},
   {path: '/partidasCreadas', name: 'PartidasCreadas', component: PartidasCreadas},
   {path: '/figurasMonopoly', name: 'FigurasMonopoly', component: FigurasMonopoly},
 ]
