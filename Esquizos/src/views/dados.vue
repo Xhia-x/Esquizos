@@ -30,6 +30,26 @@ const images = ref([
   { id: 6, url: dice6, name: 'dado6' },
 ]);
 
+<<<<<<< HEAD
+=======
+const socket = io('http://localhost:9992');
+// Función para emitir el evento de lanzamiento de dados
+const emitRollDice = (dice1Value, dice2Value) => {
+  const partidaActual = window.location.pathname.split('/').pop();
+  console.log('Emitiendo evento rollDice usuario:', localStorage.getItem('user'));
+  socket.emit('rollDice', { user: localStorage.getItem('user') || sessionStorage.getItem('user'), dice1: dice1Value, dice2: dice2Value, partida: partidaActual });
+};
+
+// Función para inicializar el socket
+const initializeSocket = (currentImage1, currentImage2) => {
+  socket.on('diceRolled', (data) => {
+    // Actualizar las imágenes de los dados con los valores recibidos del servidor
+    currentImage1.value = images.value[data.dice1 - 1];
+    currentImage2.value = images.value[data.dice2 - 1];
+  });
+};
+
+>>>>>>> 613931c6 (Emitir acciones de la partida solo a usuario conectados en la misma partida)
 export default {
   name: "dados-component",
   emits: ['diceRolled'],
@@ -49,11 +69,17 @@ export default {
     };
 
     onMounted(() => {
+<<<<<<< HEAD
       socket.on('diceRolled', (data) => {
         // Actualizar las imágenes de los dados con los valores recibidos del servidor
         currentImage1.value = images.value[data.dice1 - 1];
         currentImage2.value = images.value[data.dice2 - 1];
       });
+=======
+      const partidaActual = window.location.pathname.split('/').pop(); 
+      socket.emit('joinPartida', partidaActual);
+      initializeSocket(currentImage1, currentImage2);
+>>>>>>> 613931c6 (Emitir acciones de la partida solo a usuario conectados en la misma partida)
     });
 
     const changeImage = (currentImage) => {
