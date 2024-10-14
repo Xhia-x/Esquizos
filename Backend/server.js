@@ -62,4 +62,25 @@ io.on('connection', (socket) => {
     socket.on('disconnect', () => {
         console.log('User disconnected');
     });
+
+    socket.on('finalizarPartida', (data) => {
+        const { partida } = data;
+        console.log(`Finalizando partida ${partida}`);
+        // Notifica a todos los jugadores en la sala
+        io.to(partida).emit('partidaEliminada', { message: 'La partida ha sido eliminada.' });
+    
+        // Desconectar a todos los usuarios de la sala
+        const socketsInPartida = io.sockets.adapter.rooms.get(partida);
+        if (socketsInPartida) {
+            socketsInPartida.forEach(socketId => {
+                const socket = io.sockets.sockets.get(socketId);
+                if (socket) {
+                    socket.leave(partida);  // Desconectar el socket de la sala
+                    console.log(`Usuario ${socketId} desconectado de la partida ${partida}`);
+                }
+            });
+        }
+    });
 });
+
+module.exports = { io};

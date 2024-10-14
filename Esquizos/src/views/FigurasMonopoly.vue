@@ -18,7 +18,7 @@
     
             <h2> Hollow</h2>
             <div class = "rectangulo">
-        <img src ="@/assets/hollow.png" alt="Hollow" class = "animada" />
+        <img src ="@/assets/hollow.png" alt="Hollow" class = "animada"  @click="seleccionarFigura('hollow')"/>
             
         </div>
         <p class ="descripcion">El Caballero es silencioso, nunca habla, lo que añade un aire misterioso a su carácter. Está completamente envuelto en la atmósfera oscura y melancólica del reino subterráneo de Hallownest.</p>
@@ -86,6 +86,14 @@
         Reglas
     },
     methods: {
+      seleccionarFigura(figuraName) {
+      // Pasar el nombre de la figura en lugar de la ruta
+      this.$router.push({
+        name: 'MonopolyView',
+        params: { figuraSeleccionada: figuraName }
+      });
+    },
+
       volverAtras () {
         this.$router.push('/home');
       }
