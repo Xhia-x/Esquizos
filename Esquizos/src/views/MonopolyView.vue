@@ -1,55 +1,13 @@
 <template>
-
-    <!-- Lado superior -->
-    <div class="side top-side">
-      <div class="property-top"><Casilla color="red" title="Carrer de la Marina" price="100" /></div>
-      <div class="property-top"><Casilla color="" title="Carrer de la Marina" price="100" /></div>
-      <div class="property-top"><Casilla color="red" title="Carrer de la Marina" price="100" /></div>
-      <div class="property-top"><Casilla color="red" title="Carrer de la Marina" price="100" /></div>
-      <div class="property-top"><Casilla color="" title="Carrer de la Marina" price="100" /></div>
-      <div class="property-top"><Casilla color="yellow" title="Carrer de la Marina" price="100" /></div>
-      <div class="property-top"><Casilla color="yellow" title="Carrer de la Marina" price="100" /></div>
-      <div class="property-top"><Casilla color="" title="Carrer de la Marina" price="100" /></div>
-      <div class="property-top"><Casilla color="yellow" title="Carrer de la Marina" price="100" /></div>
-    </div>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto Mono"></link>
-
-    <!-- Lado derecho -->
-    <div class="side right-side">
-      <div class="property-rotate-right"><Casilla color="green" title="Carrer de la Marina" price="100" /></div>
-      <div class="property-rotate-right"><Casilla color="green" title="Carrer de la Marina" price="100" /></div>
-      <div class="property-rotate-right"><Casilla color="" title="Carrer de la Marina" price="100" /></div>
-      <div class="property-rotate-right"><Casilla color="green" title="Carrer de la Marina" price="100" /></div>
-      <div class="property-rotate-right"><Casilla color="" title="Carrer de la Marina" price="100" /></div>
-      <div class="property-rotate-right"><Casilla color="" title="Carrer de la Marina" price="100" /></div>
-      <div class="property-rotate-right"><Casilla color="blue" title="Carrer de la Marina" price="100" /></div>
-      <div class="property-rotate-right"><Casilla color="" title="Carrer de la Marina" price="100" /></div>
-      <div class="property-rotate-right"><Casilla color="blue" title="Carrer de la Marina" price="100" /></div>
-    </div>
-
-    <!-- Lado inferior -->
-    <div class="side bottom-side">
-      <div class="property-bottom"><Casilla color="lightblue" title="Carrer de la Marina" price="100" /></div>
-      <div class="property-bottom"><Casilla color="lightblue" title="Carrer de la Marina" price="100" /></div>
-      <div class="property-bottom"><Casilla color="" title="Carrer de la Marina" price="100" /></div>
-      <div class="property-bottom"><Casilla color="lightblue" title="Carrer de la Marina" price="100" /></div>
-      <div class="property-bottom"><Casilla color="" title="Carrer de la Marina" price="100" /></div>
-      <div class="property-bottom"><Casilla color="" title="Carrer de la Marina" price="100" /></div>
-      <div class="property-bottom"><Casilla color="brown" title="Carrer de la Marina" price="100" /></div>
-      <div class="property-bottom"><Casilla color="" title="Carrer de la Marina" price="100" /></div>
-      <div class="property-bottom"><Casilla color="brown" title="Carrer de la Marina" price="100" /></div>
-    </div>
-
-        
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto Mono"></link>
-<div class="monopoly-board">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Chelsea Market">
+  <div class="monopoly-board">
     <!-- Esquinas vacías -->
     <div class="corner top-left" id="21">
         <h1 class="carceletra1">De Paso</h1>
         <img src="@/assets/carcel.png" class="carcel"/>
     </div>
     <div class="corner top-right" id="31">
-        <h1 class="letrapolicia1" >Ir a la </h1>
+        <h1 class="letrapolicia1">Ir a la </h1>
         <img src="@/assets/policia.png" class="policia"/> 
         <h1 class="letrapolicia2">carcel</h1>
     </div>
@@ -61,65 +19,85 @@
         <img src="@/assets/Start.png" class="Start" />
     </div>
 
+    <!-- Lado superior -->
+    <div class="side top-side">
+      <div class="property-top"><Casilla color="red" title="Carrer de la Marina" price="100" /></div>
+      <div class="property-top"><Casilla color="" title="" price="" /></div>
+      <div class="property-top"><Casilla color="red" title="Carrer de la Marina" price="100" /></div>
+      <div class="property-top"><Casilla color="red" title="Carrer de la Marina" price="100" /></div>
+      <div class="property-top"><Casilla color="" title="" price="" /></div>
+      <div class="property-top"><Casilla color="yellow" title="Carrer de la Marina" price="100" /></div>
+      <div class="property-top"><Casilla color="yellow" title="Carrer de la Marina" price="100" /></div>
+      <div class="property-top"><Casilla color="" title="" price="" /></div>
+      <div class="property-top"><Casilla color="yellow" title="Carrer de la Marina" price="100" /></div>
+    </div>
+
+    <!-- Lado derecho -->
+    <div class="side right-side">
+      <div class="property-rotate-right"><Casilla color="green" title="Carrer de la Marina" price="100" /></div>
+      <div class="property-rotate-right"><Casilla color="green" title="Carrer de la Marina" price="100" /></div>
+      <div class="property-rotate-right"><Casilla color="" title="" price="" /></div>
+      <div class="property-rotate-right"><Casilla color="green" title="Carrer de la Marina" price="100" /></div>
+      <div class="property-rotate-right"><Casilla color="" title="" price="" /></div>
+      <div class="property-rotate-right"><Casilla color="" title="" price="" /></div>
+      <div class="property-rotate-right"><Casilla color="blue" title="Carrer de la Marina" price="100" /></div>
+      <div class="property-rotate-right"><Casilla color="" title="" price="" /></div>
+      <div class="property-rotate-right"><Casilla color="blue" title="Carrer de la Marina" price="100" /></div>
+    </div>
+
+    <!-- Lado inferior -->
+    <div class="side bottom-side">
+      <div class="property-bottom"><Casilla color="lightblue" title="Carrer de la Marina" price="100" /></div>
+      <div class="property-bottom"><Casilla color="lightblue" title="Carrer de la Marina" price="100" /></div>
+      <div class="property-bottom"><Casilla color="" title="" price="" /></div>
+      <div class="property-bottom"><Casilla color="lightblue" title="Carrer de la Marina" price="100" /></div>
+      <div class="property-bottom"><Casilla color="" title="" price="" /></div>
+      <div class="property-bottom"><Casilla color="" title="" price="" /></div>
+      <div class="property-bottom"><Casilla color="brown" title="Carrer de la Marina" price="100" /></div>
+      <div class="property-bottom"><Casilla color="" title="" price="" /></div>
+      <div class="property-bottom"><Casilla color="brown" title="Carrer de la Marina" price="100" /></div>
+    </div>
+
     <!-- Lado izquierdo -->
     <div class="side left-side">
       <div class="property-rotate-left"><Casilla color="orange" title="Carrer de la Marina" price="100" /></div>
-      <div class="property-rotate-left"><Casilla color="" title="Carrer de la Marina" price="100" /></div>
+      <div class="property-rotate-left"><Casilla color="" title="" price="" /></div>
       <div class="property-rotate-left"><Casilla color="orange" title="Carrer de la Marina" price="100" /></div>
       <div class="property-rotate-left"><Casilla color="orange" title="Carrer de la Marina" price="100" /></div>
-      <div class="property-rotate-left"><Casilla color="" title="Carrer de la Marina" price="100" /></div>
+      <div class="property-rotate-left"><Casilla color="" title="" price="" /></div>
       <div class="property-rotate-left"><Casilla color="purple" title="Carrer de la Marina" price="100" /></div>
       <div class="property-rotate-left"><Casilla color="purple" title="Carrer de la Marina" price="100" /></div>
-      <div class="property-rotate-left"><Casilla color="" title="Carrer de la Marina" price="100" /></div>
+      <div class="property-rotate-left"><Casilla color="" title="" price="" /></div>
       <div class="property-rotate-left"><Casilla color="purple" title="Carrer de la Marina" price="100" /></div>
-    </div>
-    <!-- Lado superior (IDs del 22 al 30) -->
-    <div class="side top-side">
-        <div class="property-top" :id="22 + index" v-for="(casilla, index) in 9" :key="22 + index">
-            <Casilla />
-        </div>
-    </div>
-
-    <!-- Lado derecho (IDs del 32 al 40) -->
-    <div class="side right-side">
-        <div class="property-rotate-right" :id="32 + index" v-for="(casilla, index) in 9" :key="32 + index">
-            <Casilla />
-        </div>
-    </div>
-
-    <!-- Lado inferior (IDs del 10 al 2, invertidos) -->
-    <div class="side bottom-side">
-        <div class="property-bottom" :id="10 - index" v-for="(casilla, index) in 9" :key="10 - index">
-            <Casilla />
-        </div>
-    </div>
-
-    <!-- Lado izquierdo (IDs del 20 al 12, invertidos) -->
-    <div class="side left-side">
-        <div class="property-rotate-left" :id="20 - index" v-for="(casilla, index) in 9" :key="20 - index">
-            <Casilla />
-        </div>
     </div>
 
     <!-- Logo centrado -->
     <div class="center-logo">
-        <img src="@/assets/monopolylogo.png" alt="Monopoly Logo" />
+      <img src="@/assets/monopolylogo.png" alt="Monopoly Logo" />
     </div>
 
     <!-- Ruleta y dado -->
     <div class="ruletaDado">
-        <dados @diceRolled="movePieceBasedOnDice" />
+      <dados @diceRolled="movePieceBasedOnDice" />
     </div>
 
     <!-- Ficha -->
+   
     <div class="ficha" :style="pieces[0].style" @click="movePiece(0)">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
+    
+ 
+
+
     </div>
-    <div class="gray-background"></div>
+  <!-- Botón Figuras -->
+  <button class="figuras-button" @click="irAFiguras">Seleccionar Figuras</button>
+  <div class="gray-background"></div>
+  <button @click="goToMonopolyView2">Ir a Monopoly View 2</button>
 </div>
+    
+
+    
+  
 </template>
 
 <script>
@@ -134,17 +112,28 @@ export default {
     },
     data() {
         return {
+         
             pieces: [{
                 currentPosition: 1, // Posición inicial de la ficha (esquina inferior derecha)
                 style: {
                     top: '1850px',
                     left: '1850px',
                     transform: 'translate(-50%, -50%)'
+                    
                 }
             }],
             step: 5, // Porcentaje de movimiento en cada dirección
+        
+         
+            
+            
+            
+            
         };
+        
     },
+   
+  
     methods: {
         // Mover la ficha según los pasos dados
         movePieceBasedOnDice(steps) {
@@ -180,7 +169,19 @@ export default {
         // Método para obtener el ID de la casilla basado en la posición de la ficha
         getCasillaIdFromPosition(position) {
             return position;
+        },
+
+
+         // Método para navegar a la vista FigurasMonopoly
+         irAFiguras() {
+            this.$router.push({ name: 'FigurasMonopoly' });
+        },
+        
+        goToMonopolyView2() {
+            this.$router.push({ name: 'MonopolyView2' });
         }
+
+
     }
 };
 </script>
@@ -235,13 +236,25 @@ export default {
     gap: 0;
 }
 
-.top-side,
-.bottom-side {
-    grid-column: 2 / span 9;
-    display: grid;
-    grid-template-columns: repeat(9, 170px);
-    /* Asegura que las casillas coincidan con las esquinas */
+.top-side {
+  grid-column: 2 / span 9;
+  grid-row: 1;
+  display: grid;
+  grid-template-columns: repeat(9, 170px); /* Ajusta el tamaño para que coincida con las esquinas */
+  justify-items: stretch;
+  align-items: center; /* Alinea el contenido de las casillas */
 }
+
+
+.bottom-side {
+  grid-column: 2 / span 9; /* Se asegura que las casillas ocupen 9 columnas */
+  grid-row: 11; /* Ajusta la fila inferior del tablero */
+  display: grid;
+  grid-template-columns: repeat(9, 170px); /* Asegura que las casillas tengan el tamaño adecuado */
+  justify-items: stretch;
+  align-items: center; /* Alinea el contenido de las casillas */
+}
+
 
 .right-side,
 .left-side {
@@ -267,8 +280,6 @@ export default {
 }
 
 /* Casillas con tamaño fijo */
-.property-top,
-.property-bottom,
 .property-rotate-right,
 .property-rotate-left {
     width: 170px;
@@ -284,9 +295,33 @@ export default {
 }
 
 .property-top {
-    transform: rotate(180deg);
-    /* Casillas superiores mirando hacia abajo */
+  transform: rotate(180deg); /* Casillas superiores mirando hacia abajo */
+  width: 170px;
+  height: 170px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  border: 1px solid black;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
+
+.property-bottom {
+  width: 170px;
+  height: 170px;
+  background-color: white;
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+
 
 .property-rotate-right {
     transform: rotate(-90deg);
@@ -296,38 +331,6 @@ export default {
 .property-rotate-left {
     transform: rotate(90deg);
     /* Casillas laterales izquierdas mirando hacia la derecha */
-}
-
-/* Alineación de las casillas superiores e inferiores */
-.top-side {
-    grid-column: 2 / span 9;
-    grid-row: 1;
-    display: grid;
-    grid-template-columns: repeat(9, 170px);
-    /* Ajusta el tamaño para que coincida con las esquinas */
-    justify-items: stretch;
-    align-items: center;
-    /* Alinea el contenido de las casillas */
-}
-
-.bottom-side {
-    grid-column: 2 / span 9;
-    grid-row: 11;
-    display: grid;
-    grid-template-columns: repeat(9, 170px);
-    /* Ajusta el tamaño para que coincida con las esquinas */
-    justify-items: stretch;
-    align-items: center;
-    /* Alinea el contenido de las casillas */
-}
-
-/* Alineación de las casillas laterales con las esquinas */
-.left-side,
-.right-side {
-    grid-template-rows: repeat(9, 170px);
-    /* Ajusta el tamaño para que coincida con las esquinas */
-    justify-items: stretch;
-    align-items: center;
 }
 
 /* Logo centrado */
@@ -358,7 +361,7 @@ export default {
     background-color: #9b59b6;
     background-image: linear-gradient(#9b59b6, #84cdfa, #5ad1cd);
     transform-origin: center;
-    z-index: 1;
+    z-index: 0;
     transition: top 0.5s ease, left 0.5s ease, transform 0.5s ease;
     /* Añadido */
 }
@@ -373,6 +376,7 @@ export default {
     background-color: #fff;
     border: solid 5px #ffffff;
     border-radius: 50%;
+    z-index: -1;
 }
 
 @keyframes rotate_3922 {
@@ -387,16 +391,14 @@ export default {
 
 .ruletaDado {
     grid-column: 5 / span 3;
-    grid-row: 7;
-    /* Cambia a una fila más baja para mover los dados hacia abajo */
+    grid-row: 7; /* Cambia a una fila más baja para mover los dados hacia abajo */
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: row;
     gap: 20px;
-    margin-top: 100px;
-    /* Agrega un margen superior para ajustar la posición si es necesario */
-}
+    margin-top: 100px; /* Agrega un margen superior para ajustar la posición si es necesario */
+  }
 
 .contendor {
     display: flex;
@@ -405,73 +407,105 @@ export default {
     /* tamaño del tablero */
     width: 100%;
     height: 100%;
-  }
+}
 
-  .policia {
+
+/* Estilo para el botón Figuras */
+.figuras-button {
+    position: absolute;
+    top: 600px;
+    left: 1000px;
+    transform: translateX(-50%);
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.figuras-button:hover {
+    background-color: #2980b9;
+}
+.ficha-imagen {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 50%;
+    z-index: -1; /* Colocar la imagen por encima de la ficha base */
+}
+img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    z-index: 3;
+}
+
+
+.policia {
     width: 60%;
     height: 60%;
     rotate: 10deg;
-    
-  }
+}
 
-  .letrapolicia1 {
+.letrapolicia1 {
     font-family: 'Roboto Mono', sans-serif;
-    
     font-size: 40px;
-    
     margin: 0;
     font-weight: bold;
-  }
-  .letrapolicia2 {
-    
+}
+
+.letrapolicia2 {
     font-family: 'Roboto Monos', sans-serif;
     font-size: 40px;
     margin: 0;
     font-weight: bold;
-  }
-  .Start {
-    
+}
+
+.Start {
     width: 60%;
     height: 60%;
-    
-  } 
+}
 
-  .LetraInicio {
+.LetraInicio {
     font-family: 'Roboto Mono', sans-serif;
     font-weight: bold;
     font-size: 40px;
     margin: 0;
     margin-right: 15%;
     margin-top: 18%;
-    transform: rotate(-50deg); 
+    transform: rotate(-50deg);
     color: #ff0000;
-  }
-  .parking {
+}
+
+.parking {
     width: 100%;
     height: 100%;
     rotate: 10deg;
-  }
-  .carcel {
+}
+
+.carcel {
     width: 90%;
     height: 90%;
     rotate: 45deg;
     margin-left: 24%;
     margin-top: 4%;
-  }
-  .carceletra1{
+}
+
+.carceletra1 {
     font-family: 'Roboto Mono', sans-serif;
     font-size: 40px;
     margin: 0;
     font-weight: bold;
-    
-  }
+}
 
-  .gray-background {
+.gray-background {
     background-color: lightgray;
     grid-column: 1 / span 11;
     grid-row: 1 / span 11;
     pointer-events: none;
-    z-index: -1
-  } 
-
+    z-index: -1;
+}
 </style>

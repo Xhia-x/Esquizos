@@ -100,3 +100,40 @@ export default {
   }
 };
 </script>
+
+<style>
+.contenedor {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.Dados-tirada {
+  display: flex;
+  justify-content: center;
+  gap: 20px; /* Espacio entre los dados */
+}
+
+.dado {
+  width: 150px; /* Ajusta el tamaño del dado */
+  height: 150px;
+  object-fit: contain; /* Asegura que las imágenes mantengan sus proporciones */
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+
+</style>
