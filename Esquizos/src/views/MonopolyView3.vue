@@ -1,22 +1,25 @@
 <template>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Chelsea Market">
   <div class="monopoly-board">
+    <video src="../assets/view2.mp4" autoplay="true" muted="true" loop="true"></video>
+
     <!-- Esquinas vacías -->
     <div class="corner top-left" id="21">
-        <h1 class="carceletra1">De Paso</h1>
-        <img src="@/assets/carcel.png" class="carcel"/>
+        <h1 class="carceletra1">Cárcel</h1>
+        <img src="@/assets/encerradoC.webp" class="carcel"/>
     </div>
     <div class="corner top-right" id="31">
         <h1 class="letrapolicia1">Ir a la </h1>
-        <img src="@/assets/policia.png" class="policia"/> 
+        <img src="@/assets/carcelC.png" class="policia"/> 
         <h1 class="letrapolicia2">carcel</h1>
     </div>
     <div class="corner bottom-left" id="11">
-        <img src="@/assets/Parking.png" class="parking"/>
+        <img src="@/assets/paso.webp" class="parking"/>
     </div>
     <div class="corner bottom-right" id="1">
         <h1 class="LetraInicio">Start</h1>
-        <img src="@/assets/Start.png" class="Start" />
+        <img src="@/assets/startC.webp" class="Start" />
     </div>
 
     <!-- Lado superior -->
@@ -93,7 +96,6 @@
   <button class="figuras-button" @click="irAFiguras">Seleccionar Figuras</button>
   <div class="gray-background"></div>
   <button @click="goToMonopolyView2">Ir a Monopoly View 2</button>
-  <button @click="goToMonopolyView3">Ir a Monopoly View 3</button>
 </div>
     
 
@@ -180,10 +182,6 @@ export default {
         
         goToMonopolyView2() {
             this.$router.push({ name: 'MonopolyView2' });
-        },
-
-        goToMonopolyView3() {
-            this.$router.push({ name: 'MonopolyView3' });
         }
 
 
@@ -192,19 +190,31 @@ export default {
 </script>
 
 <style scoped>
+
+.LetraInicio {
+    font-family: 'Orbitron', sans-serif; /* Fuente cyberpunk */
+    font-weight: bold;
+    font-size: 40px;
+    margin: 0;
+    margin-right: 15%;
+    margin-top: 18%;
+    transform: rotate(-50deg);
+    color: #000000;
+    text-shadow: 0 0 5px #ff0fd3, 0 0 10px #ff23de, 0 0 15px #d914fc, 0 0 20px #4c00ff;
+}
+
 .monopoly-board {
     display: grid;
     grid-template-columns: 230px repeat(9, 170px) 230px;
     grid-template-rows: 230px repeat(9, 170px) 230px;
     width: auto;
     height: auto;
-    border: 2px solid black;
     padding: 0;
     margin: 0;
     gap: 0;
+    position: absolute; /* Añade esta línea */
+    overflow: hidden;   /* Limita el contenido al tamaño del tablero */
 }
-
-
 
 /* Esquinas cuadradas */
 .corner {
@@ -424,7 +434,7 @@ export default {
     left: 1000px;
     transform: translateX(-50%);
     padding: 10px 20px;
-    background-color: #3498db;
+    background-color: #cf34d7;
     color: white;
     border: none;
     border-radius: 5px;
@@ -432,7 +442,7 @@ export default {
 }
 
 .figuras-button:hover {
-    background-color: #2980b9;
+    background-color: #ba18b7;
 }
 .ficha-imagen {
     width: 100%;
@@ -496,8 +506,7 @@ img{
 .carcel {
     width: 90%;
     height: 90%;
-    rotate: 45deg;
-    margin-left: 24%;
+    margin-left: 4%;
     margin-top: 4%;
 }
 
@@ -509,10 +518,24 @@ img{
 }
 
 .gray-background {
-    background-color: lightgray;
+    background-color: rgba(93, 12, 92, 0.332);
     grid-column: 1 / span 11;
     grid-row: 1 / span 11;
     pointer-events: none;
     z-index: -1;
 }
+
+.video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -100; 
+    object-fit: cover; 
+    pointer-events: none; 
+}
+
 </style>
+
+
