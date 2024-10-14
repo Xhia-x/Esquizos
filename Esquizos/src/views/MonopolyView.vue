@@ -39,12 +39,7 @@
       <div class="property-bottom"><Casilla color="" title="Carrer de la Marina" price="100" /></div>
       <div class="property-bottom"><Casilla color="brown" title="Carrer de la Marina" price="100" /></div>
     </div>
-  <div class="contendor">
-    <div class="monopoly-board">
-      <!-- Esquinas vacías -->
-       <!-- Casilla de carcel -->
-      
-      <div class="corner top-left">
+
         
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto Mono"></link>
 <div class="monopoly-board">
