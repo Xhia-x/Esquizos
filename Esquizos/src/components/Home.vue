@@ -52,20 +52,16 @@
 <script>
 import autenticadorSesion from '../mixins/AutenticadorSesion.js';
 import VistaInvitaciones from './VistaInvitaciones.vue';
-import PopUp from './PopUp.vue';
 import Reglas from './Reglas.vue';
 
 
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: 'Home',
-  components: {
-    VistaInvitaciones
-  },
   mixins: [autenticadorSesion],
   components: {
-    PopUp,
-    Reglas
+    Reglas,
+    VistaInvitaciones
   },
   data () {
     return {

@@ -29,7 +29,6 @@ export default {
     mixins: [autenticadorSesion],
     components: {
         InvitarJugador
-
     },
     data() {
         return {
