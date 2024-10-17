@@ -1,17 +1,18 @@
 <template>
   <div class="card">
-    <div class="card__img"></div>
+    <div class="card__color-strip" :style="{ backgroundColor: color }"></div>
+    <img v-if="image"  alt="Imagen de la propiedad" class="card__image" />
     <div class="card__descr-wrapper">
-      <p class="card__title">Avenida</p>
+      <p class="card__title">{{ title }}</p>
       <p class="card__descr">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque blanditiis nemo fugit autem possimus, magnam consequatur sint esse.
+        {{ description }}
       </p>
-      <div class="card__price">Price: $200</div> <!-- Aquí agregamos el precio -->
-      <div class="card__links">
-      </div>
+      <div class="card__price">{{ price }}</div>
+      <div class="card__links"></div>
     </div>
   </div>
 </template>
+
 
 <style scoped>
 .card {
@@ -31,12 +32,9 @@
   transform: scale(1.02);
 }
 
-.card__img {
+.card__color-strip {
   width: 100%;
   height: 70px;
-  object-fit: cover;
-
-  background-color: blueviolet;
 }
 
 .card__descr-wrapper {
@@ -81,9 +79,42 @@
 .card__links .link:hover {
   text-decoration: underline;
 }
+
+.card__image {
+  width: 100%;
+  height: auto;
+  max-height: 100px; /* Ajusta este valor según tus necesidades */
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
 </style>
 
 
 <script>
-
+  export default {
+  name: "Casilla",
+  props: {
+    color: {
+      type: String,
+      default: "blueviolet"
+    },
+    title: {
+      type: String,
+      default: "Avenida"
+    },
+    description: {
+      type: String,
+      default: ""
+    },
+    price: {
+      type: Number,
+      default: 200
+    },
+    image: {
+      type: String,
+      default: "" // Ruta de la imagen por defecto (vacía)
+    }
+  }
+};
 </script>
