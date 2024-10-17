@@ -39,11 +39,12 @@ const emitRollDice = (dice1Value, dice2Value) => {
 };
 
 // Función para inicializar el socket
-const initializeSocket = (currentImage1, currentImage2) => {
+const initializeSocket = (currentImage1, currentImage2, emit) => {
   socket.on('diceRolled', (data) => {
     // Actualizar las imágenes de los dados con los valores recibidos del servidor
     currentImage1.value = images.value[data.dice1 - 1];
     currentImage2.value = images.value[data.dice2 - 1];
+    emit('diceRolled', data.dice1, data.dice2);
   });
 };
 
@@ -62,7 +63,7 @@ export default {
     onMounted(() => {
       const partidaActual = window.location.pathname.split('/').pop(); 
       socket.emit('joinPartida', partidaActual);
-      initializeSocket(currentImage1, currentImage2);
+      initializeSocket(currentImage1, currentImage2, emit);
     });
 
     const changeImage = (currentImage) => {
@@ -74,7 +75,8 @@ export default {
     const rollDiceWithDeceleration = (timeElapsed = 0, intervalTime = 50) => {
       if (timeElapsed >= 5000) {
         rolling.value = false;
-        emit('diceRolled', finalDice1 + finalDice2); // Emitimos los valores finales cuando la animación termina
+        emitRollDice(finalDice1, finalDice2);  // Emitimos los valores finales cuando la animación termina
+        //emit('diceRolled', finalDice1, finalDice2); 
         return;
       }
 
