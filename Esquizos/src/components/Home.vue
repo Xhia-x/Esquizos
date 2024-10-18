@@ -5,7 +5,8 @@
         <Reglas>
            
         </Reglas>
-        </div>
+      </div>
+      <video src="../assets/video.mp4" autoplay="true" muted="true" loop="true"></video> 
     <div class="d-flex justify-content-start">
       <div class="btn-group">
         <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
@@ -28,7 +29,7 @@
               <h2>Crear partida</h2>
             </div>
           </a>
-          <a class="link-offset-2 link-underline link-underline-opacity-0">
+          <a href="/unirsePartida" class="link-offset-2 link-underline link-underline-opacity-0">
             <div class="card shadow p-4 col-md-4">
               <img class="img-thumbnail" src="https://ae01.alicdn.com/kf/S5647db58d8c6430786562d968f2e9348E/P-ster-de-dibujos-animados-Mr-Monopoly-Big-Rich-Man-pintura-en-lienzo-dinero-arte-de.jpg">
               <h2>Unirse a partida</h2>

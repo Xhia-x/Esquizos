@@ -10,6 +10,7 @@ import MonopolyView2 from '@/views/MonopolyView2.vue';
 import MonopolyView3 from '@/views/MonopolyView3.vue';
 import PartidasCreadas from '@/components/PartidasCreadas.vue';
 import FigurasMonopoly from '@/views/FigurasMonopoly.vue';
+import UnirsePartida from '@/components/UnirsePartida.vue';
 
 const routes = [
   { path: '/', name: 'Login', component: Login },
@@ -23,6 +24,7 @@ const routes = [
   {path: '/monopolyView3', name: 'MonopolyView3', component: MonopolyView3},
   {path: '/partidasCreadas', name: 'PartidasCreadas', component: PartidasCreadas},
   {path: '/figurasMonopoly', name: 'FigurasMonopoly', component: FigurasMonopoly},
+  {path: '/unirsePartida', name: 'UnirsePartida', component: UnirsePartida}
 ]
 
 const router = createRouter({
