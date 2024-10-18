@@ -94,7 +94,7 @@ export default {
     mixins: [autenticadorSesion],
     data() {
         return {
-            partida: new Partida('', 0,"", '', 0, 0, 0),
+            partida: new Partida('', 0, '', 0, 0, 0),
             nombre: '',
             jugadores: 3,
             dineroInicial: 1500,
@@ -116,7 +116,7 @@ export default {
             this.partida.tiempoPorTurno = parseInt(this.tiempoPorTurno);
 
             this.partida.administrador = localStorage.getItem('user') || sessionStorage.getItem('user');
-
+            this.partida.jugadores = [this.partida.administrador];
             this.generarLink();
             console.log(localStorage.getItem('user'));
             console.log("jugadores: "+this.partida.jugadores);

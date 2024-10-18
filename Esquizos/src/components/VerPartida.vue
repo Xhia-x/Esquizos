@@ -1,4 +1,5 @@
 <template>
+  <video src="../assets/video.mp4" autoplay="true" muted="true" loop="true"></video>
     <div v-if="partida">
       <h1>Partida: {{ partida.nombre }}</h1>
       <p>Número de jugadores: {{ partida.nJugadores }}</p>

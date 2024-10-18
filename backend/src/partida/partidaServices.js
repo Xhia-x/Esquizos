@@ -57,9 +57,29 @@ module.exports.buscarPartidaDBService = async (partidaData) => {
     }
 };
 
-module.exports.cargarPartidasUsusarioDBService = async (userData) => {
+module.exports.cargarPartidasUsuarioDBService = async (userData) => {
     try {
         var result = await partidaModel.find({ administrador: userData.username });
+        
+        console.log(userData);
+
+        if (result) {
+            console.log("Partidas encontradas");
+            return { status: true, msg: "Partidas encontradas", partidas: result };
+        } else {
+            console.log("INVALID DATA");
+            return { status: false, msg: "INVALID DATA" };
+        }
+
+    } catch (error) {
+        console.log("INVALID DATA CATCH");
+        return { status: false, msg: "INVALID DATA" };
+    }
+};
+
+module.exports.cargarPartidasInvitadoDBService = async (userData) => {
+    try {
+        var result = await partidaModel.find({ jugadores: userData.username });
         
         console.log(userData);
 
