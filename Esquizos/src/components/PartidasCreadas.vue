@@ -1,4 +1,5 @@
 <template>
+    <video src="../assets/video.mp4" autoplay="true" muted="true" loop="true"></video>
     <div class="partidas-container">
         <h1>Partidas Creadas</h1>
         <ul class="lista-partidas">
@@ -17,6 +18,7 @@
 </template>
 
 <script>
+
 import axios from "axios";
 import autenticadorSesion from '../mixins/AutenticadorSesion.js';
 import Partida from '../models/Partida.js';

@@ -1,9 +1,9 @@
 export default class Partida {
-    constructor(nombre, nJugadores,jugadores, link, dineroInicial, tiempoMaximo, tiempoPorTurno) {
+    constructor(nombre, nJugadores, link, dineroInicial, tiempoMaximo, tiempoPorTurno) {
       this.nombre = nombre;
-      this.administrador = jugadores[0];
+      this.administrador = "";
       this.nJugadores = nJugadores;
-      this.jugadores = jugadores; // Array de jugadores
+      this.jugadores = []; // Array de jugadores
       this.link = link;
       this.dineroInicial = dineroInicial;
       this.tiempoMaximo = tiempoMaximo;

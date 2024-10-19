@@ -1,5 +1,6 @@
 var invitacionModel = require('./invitacionModel.js');
 var userModel = require('../user/userModel.js');
+var partidaModel = require('../partida/partidaModel.js');
 
 module.exports.crearInvitacionDBService = (invitacionData) => {
     return new Promise(async function myFn(resolve, reject) {
@@ -53,3 +54,49 @@ module.exports.cargarInvitacionesDBService = async (userData) => {
         return { status: false, msg: "INVALID DATA" };
     }
 };
+
+module.exports.aceptarInvitacionDBService = async (invitacionData) => {
+    try {
+        var result = await invitacionModel.findOne({ administrador: invitacionData.administrador, invitado: invitacionData.invitado, partida: invitacionData.partida });
+        if (result) {
+            console.log("Invitacion encontrada");
+            console.log(result);
+            result.estado = "aceptada";
+            await result.save();
+
+            //añadir usuario a partida en la base de datos
+            var partida = await partidaModel.findOne({ nombre: invitacionData.partida });
+            if(partida){
+                partida.jugadores.push(invitacionData.invitado);
+                console.log(partida);
+                await partida.save();
+            }
+
+
+            return { status: true, msg: "Invitacion aceptada" };
+        } else {
+            console.log("INVALID DATA");
+            return { status: false, msg: "INVALID DATA" };
+        }
+
+    } catch (error) {
+        console.log("INVALID DATA CATCH");
+        return { status: false, msg: "INVALID DATA" };
+    }
+}
+
+module.exports.recharInvitacionesDBService = async (invitacionData) => {
+    try {
+        var result = await invitacionModel.deleteOne({ administrador: invitacionData.administrador, invitado: invitacionData.invitado, partida: invitacionData.partida });
+        if (result) {
+            console.log("Invitacion rechazada");
+            return { status: true, msg: "Invitacion rechazada" };
+        } else {
+            console.log("INVALID DATA");
+            return { status: false, msg: "INVALID DATA" };
+        }
+    } catch (error) {
+        console.log("INVALID DATA CATCH");
+        return { status: false, msg: "INVALID DATA" };
+    }
+}

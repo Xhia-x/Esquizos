@@ -9,27 +9,50 @@
         :style="piece.style"
         @click="movePiece(index)"
       >
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import {onMounted, ref } from 'vue';
+import { io } from 'socket.io-client'
+
+const socket = io('http://localhost:9992');
+// Función para emitir el evento de lanzamiento de dados
+const emitMoverFicha = (ficha, index) => {
+  const partidaActual = window.location.pathname.split('/').pop();
+  console.log('Emitiendo evento moverFicha usuario:', localStorage.getItem('user'));
+  socket.emit('moverFicha', { ficha: ficha, indice: index,user: localStorage.getItem('user') || sessionStorage.getItem('user'), partida: partidaActual });
+};
+
+// Función para inicializar el socket
+const initializeSocket = (pieces) => {
+  socket.on('movimientoGenerado', (data) => {
+    const { ficha, indice } = data;
+    pieces.value[indice] = ficha;
+  });
+};
+
 export default {
-  data() {
-    return {
-      pieces: [], // Arreglo de fichas con sus posiciones
-      step: 20 // Paso de movimiento de las fichas
-    };
-  },
-  methods: {
-    // Añadir una nueva ficha
-    addPiece() {
-      this.pieces.push({
+  setup() {
+    const pieces = ref([]); // Arreglo de fichas con sus posiciones
+    const step = 20 // Paso de movimiento de las fichas
+
+    onMounted(() => {
+      const partidaActual = window.location.pathname.split('/').pop(); 
+      socket.emit('joinPartida', partidaActual);
+      initializeSocket(pieces);
+
+      socket.on('diceRolled', (data) => {
+        const steps = data.dice1 + data.dice2; // Sumar los valores de los dados
+        movePieceByDice(steps); // Llamamos a la función para mover la ficha
+      });
+    });
+  
+
+    const addPiece = () => {
+      pieces.value.push({
         top: 50,
         left: 50,
         style: {
@@ -38,25 +61,25 @@ export default {
           transform: 'translate(-50%, -50%)'
         }
       });
-    },
-    // Mover una ficha específica al hacer clic
-    movePiece(index) {
+    };
+
+    const movePiece = (index) => {
       const directions = ['up', 'down', 'left', 'right'];
       const direction = directions[Math.floor(Math.random() * directions.length)];
-      const piece = this.pieces[index];
+      const piece = pieces.value[index];
 
       switch (direction) {
         case 'up':
-          piece.top = Math.max(0, piece.top - this.step);
+          piece.top = Math.max(0, piece.top - step);
           break;
         case 'down':
-          piece.top = Math.min(100, piece.top + this.step);
+          piece.top = Math.min(100, piece.top + step);
           break;
         case 'left':
-          piece.left = Math.max(0, piece.left - this.step);
+          piece.left = Math.max(0, piece.left - step);
           break;
         case 'right':
-          piece.left = Math.min(100, piece.left + this.step);
+          piece.left = Math.min(100, piece.left + step);
           break;
       }
 
@@ -66,9 +89,25 @@ export default {
         left: piece.left + '%',
         transform: 'translate(-50%, -50%)'
       };
-    }
+
+      emitMoverFicha(piece, index); // Emitir los valores de los movimientos al servidor
+    };
+
+    const movePieceByDice = (steps) => {
+      const index = 0; // Puedes elegir la ficha a mover según tu lógica
+      if (pieces.value[index]) {
+        const currentPiece = pieces.value[index];
+
+        // Mover la ficha en el tablero
+        currentPiece.left += steps * step; // Mover a la derecha
+        currentPiece.style.left = `${currentPiece.left}px`;
+      }
+    };
+
+    return { pieces, addPiece, movePiece };
   }
 };
+
 </script>
 
 <style scoped>
