@@ -51,7 +51,12 @@ var aceptarInvitacionControllerFn = async (req, res) => {
         if(result.status){
             res.send({"status": true, "message": "Invitacion aceptada"});
         } else {
-            res.send({"status": false, "message": "Fallo al aceptar invitacion"});
+            if(result.msg == "Partida llena"){
+                res.send({"status": false, "message": "Partida llena"});
+            }
+            else{
+                res.send({"status": false, "message": "Fallo al aceptar invitacion"});
+            }
         }
 
     } catch (err) {

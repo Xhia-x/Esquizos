@@ -59,6 +59,11 @@
             console.log(this.partida.jugadores);
             const usuario = localStorage.getItem('user') || sessionStorage.getItem('user');
             if (this.partida != null && !this.partida.jugadores.includes(usuario)) {
+              if(this.partida.jugadores.length >= this.partida.nJugadores){
+                alert("La partida está llena");
+                this.$router.push({ name: 'Home' });
+                return;
+              }
               this.alertaInvitacionPartida(usuario, nombrePartida);
               return;
             }

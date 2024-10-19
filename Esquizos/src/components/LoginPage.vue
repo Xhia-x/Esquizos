@@ -66,13 +66,11 @@
     import User from '../models/User.js';
     import axios from 'axios';
     import Reglas from './Reglas.vue';
-    import PopUp from './PopUp.vue';
     
     export default {
         name: 'LoginPage',
         components: {
-            Reglas,
-            PopUp
+            Reglas
         },
         data() {
             return {

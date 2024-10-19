@@ -43,11 +43,15 @@
     methods: {
       aceptarInvitacion(index) {
         const invitacionAceptada = this.filteredInvitaciones[index];
-        alert(`Has aceptado la invitación a la partida: ${invitacionAceptada.partida}`);
-        invitacionAceptada.estado = 'aceptada';
         axios.post('http://localhost:9992/invitacion/aceptar', invitacionAceptada)
           .then(({ data }) => {
+            if (data.status === false) {
+              alert(data.message);
+              return;
+            }
             console.log(data);
+            alert(`Has aceptado la invitación a la partida: ${invitacionAceptada.partida}`);
+            invitacionAceptada.estado = 'aceptada';
           })
           .catch(err => {
             console.error(err);
