@@ -59,18 +59,24 @@ module.exports.aceptarInvitacionDBService = async (invitacionData) => {
     try {
         var result = await invitacionModel.findOne({ administrador: invitacionData.administrador, invitado: invitacionData.invitado, partida: invitacionData.partida });
         if (result) {
-            console.log("Invitacion encontrada");
-            console.log(result);
-            result.estado = "aceptada";
-            await result.save();
+
 
             //añadir usuario a partida en la base de datos
             var partida = await partidaModel.findOne({ nombre: invitacionData.partida });
             if(partida){
+                console.log("partida: "+partida.jugadores.length);
+                if(partida.jugadores.length >= partida.nJugadores){
+                    return { status: false, msg: "Partida llena" };
+                }
                 partida.jugadores.push(invitacionData.invitado);
                 console.log(partida);
                 await partida.save();
             }
+
+            console.log("Invitacion encontrada");
+            console.log(result);
+            result.estado = "aceptada";
+            await result.save();
 
 
             return { status: true, msg: "Invitacion aceptada" };

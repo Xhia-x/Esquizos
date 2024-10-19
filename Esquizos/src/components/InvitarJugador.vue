@@ -1,5 +1,5 @@
 <template>
-    <div v-if="partida.nombre === partidaInvitacion" class="invitar-jugador">
+    <div class="invitar-jugador">
         <input type="text" v-model="nombreJugador" placeholder="Nombre de usuario" />
         <button @click="invitarJugador">Enviar invitación</button>
     </div>
@@ -12,8 +12,7 @@ import Invitacion from '../models/Invitacion.js';
 export default {
     name: "InvitarJugador",
     props: {
-        partida: Object,
-        partidaInvitacion: String
+        partida: Object
     },
     data() {
         return {
@@ -22,6 +21,11 @@ export default {
     },
     methods: {
         invitarJugador() {
+            console.log(this.partida.jugadores);
+            console.log(this.partida.nJugadores);
+            console.log(this.nombreJugador);
+            console.log(this.partida.nombre);
+            console.log(this.partida.administrador);
             if (this.nombreJugador.trim() === '') {
                 alert("Por favor, ingresa un nombre de usuario.");
                 return;

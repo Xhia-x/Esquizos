@@ -9,7 +9,7 @@
                 <button @click="accederPartida(partida.nombre)">Acceder a la partida</button>
                 <button @click="compartirPartida(partida.generarLinkCompartir())">Compartir partida</button>
                 <button @click="mostrarCampoInvitar(partida)">Invitar jugador</button>
-                <InvitarJugador v-if="partida.nombre === partidaInvitacion" :partida="partida" :partidaInvitacion="partidaInvitacion"
+                <InvitarJugador v-if="partida.nombre === partidaInvitacion" :partida="partida"
                 />
             </li>
         </ul>
@@ -44,7 +44,7 @@ export default {
         buscarPartidas(nombreUsuario) {
             axios.get(`http://localhost:9992/partida/usuario/${nombreUsuario}`)
                 .then(({ data }) => {
-                    this.partidas = data.map(partida => new Partida(partida.nombre, partida.nJugadores, partida.jugadores, partida.link, partida.dineroinicial, partida.tiempomaximo, partida.tiempoporturno));
+                    this.partidas = data.map(partida => new Partida(partida.nombre, partida.administrador,partida.nJugadores, partida.jugadores, partida.link, partida.dineroinicial, partida.tiempomaximo, partida.tiempoporturno));
                 })
                 .catch(err => {
                     console.error(err);
@@ -63,6 +63,8 @@ export default {
         },
         mostrarCampoInvitar(partida) {
             this.partidaInvitacion = this.partidaInvitacion === partida.nombre ? null : partida.nombre;
+            console.log("admin: "+partida.administrador);
+            console.log("jugadores: "+partida.jugadores);
         }      
         
     }
