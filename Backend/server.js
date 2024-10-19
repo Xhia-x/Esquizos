@@ -87,6 +87,8 @@ io.on('connection', (socket) => {
         console.log(`Usuario ${usuario} en la partida ${partida}, mueve ficha ${indice}`);
         io.to(partida).emit('movimientoGenerado', { ficha, indice});
     });
+
+    
 });
 
 module.exports = { io};
