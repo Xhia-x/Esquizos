@@ -120,4 +120,33 @@ const eliminarPartidaControllerFn = async (req, res) => {
     }
 };
 
-module.exports = {registerPartidaControllerFn, buscarPartidaControllerFn,cargarPartidasUsusarioControllerFn, cargarPartidasInvitadoControllerFn, eliminarPartidaControllerFn};
+const actualizarPartidaController = async (req, res) => {
+    const partidaNombre = req.params.nombrePartida;
+    const partidaData = req.body;
+
+    try {
+        const partida = await partidaService.buscarPartidaDBService({ nombre: partidaNombre });
+
+        if (!partida.status) {
+            return res.status(404).send({ message: 'Partida no encontrada' });
+        }
+
+        const result = await partidaService.actualizarPartidaDBService(partidaData);
+
+        if (result.status) {
+            if (io) {
+                io.emit('partidaActualizada', { message: `La partida ${partidaNombre} ha sido actualizada.` });
+            } else {
+                console.error("Socket.IO no está definido");
+            }
+            res.status(200).send({ message: result.msg });
+        } else {
+            res.status(404).send({ message: result.msg });
+        }
+    } catch (error) {
+        console.error('Error al actualizar partida:', error);
+        res.status(500).send({ message: 'Error al actualizar la partida', error: error.message });
+    }
+}
+
+module.exports = {registerPartidaControllerFn, buscarPartidaControllerFn,cargarPartidasUsusarioControllerFn, cargarPartidasInvitadoControllerFn, eliminarPartidaControllerFn, actualizarPartidaController};

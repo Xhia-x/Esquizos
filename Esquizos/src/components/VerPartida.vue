@@ -1,9 +1,11 @@
 <template>
-  <video src="../assets/video.mp4" autoplay="true" muted="true" loop="true"></video>
     <div v-if="partida">
       <h1>Partida: {{ partida.nombre }}</h1>
       <p>Número de jugadores: {{ partida.nJugadores }}</p>
       <p>Administrador: {{ partida.administrador }}</p>
+      <ul>
+        <li v-for="jugador in partida.jugadores" :key="jugador">{{ jugador }}</li>
+      </ul>
       <button v-if="comprobarAdministrador()" type="button" class="finalizarPartidaBoton" @click="finalizarPartida">Finalizar Partida</button>
       <MonopolyView />
     </div>
@@ -14,8 +16,7 @@
   import axios from 'axios';
   import MonopolyView from '@/views/MonopolyView.vue';
   import { io } from 'socket.io-client'
-
-
+  import Swal from 'sweetalert2';
 
   export default {
     name: 'VerPartida',
@@ -55,6 +56,12 @@
         axios.get(`http://localhost:9992/partida/${nombrePartida}`)
           .then(({ data }) => {
             this.partida = data;
+            console.log(this.partida.jugadores);
+            const usuario = localStorage.getItem('user') || sessionStorage.getItem('user');
+            if (this.partida != null && !this.partida.jugadores.includes(usuario)) {
+              this.alertaInvitacionPartida(usuario, nombrePartida);
+              return;
+            }
           })
           .catch(err => {
             console.error(err);
@@ -79,6 +86,36 @@
           .catch(err => {
               console.error(err);
               alert("Error al finalizar la partida");
+          });
+       },
+       alertaInvitacionPartida(usuario, nombrePartida) {
+          Swal.fire({
+            title: "No estás en la partida",
+            text: "¿Deseas unirte a la partida?",
+            showCancelButton: true,
+            confirmButtonColor: "#26a042",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Unirme"
+          }).then((result) => {
+            if (result.isConfirmed) {
+              Swal.fire({
+                title: "Has sido a la partida!",
+                text: "¡Ahora puedes jugar!",
+                icon: "success"
+              });
+              this.partida.jugadores.push(usuario);
+              axios.put(`http://localhost:9992/partida/${nombrePartida}`, this.partida)
+                .then(() => {
+                  console.log("Jugador añadido a la partida");
+                })
+                .catch(err => {
+                  console.error(err);
+                });
+              }
+
+            else{
+              this.$router.push({ name: 'Home' });
+            }
           });
        }
 
