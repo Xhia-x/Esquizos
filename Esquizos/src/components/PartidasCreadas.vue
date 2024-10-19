@@ -1,5 +1,5 @@
 <template>
-    
+    <video src="../assets/video.mp4" autoplay="true" muted="true" loop="true"></video>
     <div class="partidas-container">
         <h1>Partidas Creadas</h1>
         <ul class="lista-partidas">
@@ -29,7 +29,6 @@ export default {
     mixins: [autenticadorSesion],
     components: {
         InvitarJugador
-
     },
     data() {
         return {

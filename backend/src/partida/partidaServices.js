@@ -57,7 +57,7 @@ module.exports.buscarPartidaDBService = async (partidaData) => {
     }
 };
 
-module.exports.cargarPartidasUsusarioDBService = async (userData) => {
+module.exports.cargarPartidasUsuarioDBService = async (userData) => {
     try {
         var result = await partidaModel.find({ administrador: userData.username });
         
@@ -74,5 +74,42 @@ module.exports.cargarPartidasUsusarioDBService = async (userData) => {
     } catch (error) {
         console.log("INVALID DATA CATCH");
         return { status: false, msg: "INVALID DATA" };
+    }
+};
+
+module.exports.cargarPartidasInvitadoDBService = async (userData) => {
+    try {
+        var result = await partidaModel.find({ jugadores: userData.username });
+        
+        console.log(userData);
+
+        if (result) {
+            console.log("Partidas encontradas");
+            return { status: true, msg: "Partidas encontradas", partidas: result };
+        } else {
+            console.log("INVALID DATA");
+            return { status: false, msg: "INVALID DATA" };
+        }
+
+    } catch (error) {
+        console.log("INVALID DATA CATCH");
+        return { status: false, msg: "INVALID DATA" };
+    }
+};
+
+module.exports.eliminarPartidaDBService = async (partidaData) => {
+    try {
+        const result = await partidaModel.deleteOne({ nombre: partidaData.nombre });
+
+        if (result.deletedCount > 0) {
+            console.log("Partida eliminada");
+            return { status: true, msg: "Partida eliminada" };
+        } else {
+            console.log("No se encontró la partida");
+            return { status: false, msg: "No se encontró la partida" };
+        }
+    } catch (error) {
+        console.log("Error al eliminar la partida");
+        return { status: false, msg: "Error al eliminar la partida" };
     }
 };

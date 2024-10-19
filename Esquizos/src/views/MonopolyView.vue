@@ -1,4 +1,5 @@
 <template>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Chelsea Market">
   <div class="monopoly-board">
     <!-- Esquinas vacías -->
     <div class="corner top-left" id="21">
@@ -81,14 +82,23 @@
     </div>
 
     <!-- Ficha -->
+   
     <div class="ficha" :style="pieces[0].style" @click="movePiece(0)">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
+    
+ 
+
+
     </div>
-    <div class="gray-background"></div>
-  </div>
+  <!-- Botón Figuras -->
+  <button class="figuras-button" @click="irAFiguras">Seleccionar Figuras</button>
+  <div class="gray-background"></div>
+  <button @click="goToMonopolyView2">Ir a Monopoly View 2</button>
+  <button @click="goToMonopolyView3">Ir a Monopoly View 3</button>
+</div>
+    
+
+    
+  
 </template>
 
 <script>
@@ -103,17 +113,28 @@ export default {
     },
     data() {
         return {
+         
             pieces: [{
                 currentPosition: 1, // Posición inicial de la ficha (esquina inferior derecha)
                 style: {
                     top: '1850px',
                     left: '1850px',
                     transform: 'translate(-50%, -50%)'
+                    
                 }
             }],
             step: 5, // Porcentaje de movimiento en cada dirección
+        
+         
+            
+            
+            
+            
         };
+        
     },
+   
+  
     methods: {
         // Mover la ficha según los pasos dados
         movePieceBasedOnDice(steps) {
@@ -149,7 +170,23 @@ export default {
         // Método para obtener el ID de la casilla basado en la posición de la ficha
         getCasillaIdFromPosition(position) {
             return position;
+        },
+
+
+         // Método para navegar a la vista FigurasMonopoly
+         irAFiguras() {
+            this.$router.push({ name: 'FigurasMonopoly' });
+        },
+        
+        goToMonopolyView2() {
+            this.$router.push({ name: 'MonopolyView2' });
+        },
+
+        goToMonopolyView3() {
+            this.$router.push({ name: 'MonopolyView3' });
         }
+
+
     }
 };
 </script>
@@ -166,6 +203,8 @@ export default {
     margin: 0;
     gap: 0;
 }
+
+
 
 /* Esquinas cuadradas */
 .corner {
@@ -329,7 +368,7 @@ export default {
     background-color: #9b59b6;
     background-image: linear-gradient(#9b59b6, #84cdfa, #5ad1cd);
     transform-origin: center;
-    z-index: 1;
+    z-index: 0;
     transition: top 0.5s ease, left 0.5s ease, transform 0.5s ease;
     /* Añadido */
 }
@@ -344,6 +383,7 @@ export default {
     background-color: #fff;
     border: solid 5px #ffffff;
     border-radius: 50%;
+    z-index: -1;
 }
 
 @keyframes rotate_3922 {
@@ -375,6 +415,41 @@ export default {
     width: 100%;
     height: 100%;
 }
+
+
+/* Estilo para el botón Figuras */
+.figuras-button {
+    position: absolute;
+    top: 600px;
+    left: 1000px;
+    transform: translateX(-50%);
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.figuras-button:hover {
+    background-color: #2980b9;
+}
+.ficha-imagen {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 50%;
+    z-index: -1; /* Colocar la imagen por encima de la ficha base */
+}
+img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    z-index: 3;
+}
+
 
 .policia {
     width: 60%;
