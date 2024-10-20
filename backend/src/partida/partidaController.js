@@ -51,7 +51,30 @@ var cargarPartidasUsusarioControllerFn = async (req, res) => {
         const nombreUsuario = req.params.nombreUsuario; // Obtén el nombre de la partida
         console.log("Buscando partidas de:", nombreUsuario);
 
-        var result = await partidaService.cargarPartidasUsusarioDBService( {username: nombreUsuario} );
+        var result = await partidaService.cargarPartidasUsuarioDBService( {username: nombreUsuario} );
+        console.log(result.status);
+
+        if(result.status){
+            res.json(result.partidas);
+            console.log("Partidas encontradas");
+        } else {
+            res.status(404).send('Partidas no encontradas');
+            console.log("Partidas no encontradas");
+        }
+
+    } catch (err) {
+        res.status(500).send({ "status": false, "message": "Error en el servidor" });
+        console.log(err);
+    }
+}
+
+var cargarPartidasInvitadoControllerFn = async (req, res) => {
+    try {
+
+        const nombreUsuario = req.params.nombreUsuario; // Obtén el nombre de la partida
+        console.log("Buscando partidas donde fue invitado:", nombreUsuario);
+
+        var result = await partidaService.cargarPartidasInvitadoDBService( {username: nombreUsuario} );
         console.log(result.status);
 
         if(result.status){
@@ -97,4 +120,33 @@ const eliminarPartidaControllerFn = async (req, res) => {
     }
 };
 
-module.exports = {registerPartidaControllerFn, buscarPartidaControllerFn,cargarPartidasUsusarioControllerFn, eliminarPartidaControllerFn};
+const actualizarPartidaController = async (req, res) => {
+    const partidaNombre = req.params.nombrePartida;
+    const partidaData = req.body;
+
+    try {
+        const partida = await partidaService.buscarPartidaDBService({ nombre: partidaNombre });
+
+        if (!partida.status) {
+            return res.status(404).send({ message: 'Partida no encontrada' });
+        }
+
+        const result = await partidaService.actualizarPartidaDBService(partidaData);
+
+        if (result.status) {
+            if (io) {
+                io.emit('partidaActualizada', { message: `La partida ${partidaNombre} ha sido actualizada.` });
+            } else {
+                console.error("Socket.IO no está definido");
+            }
+            res.status(200).send({ message: result.msg });
+        } else {
+            res.status(404).send({ message: result.msg });
+        }
+    } catch (error) {
+        console.error('Error al actualizar partida:', error);
+        res.status(500).send({ message: 'Error al actualizar la partida', error: error.message });
+    }
+}
+
+module.exports = {registerPartidaControllerFn, buscarPartidaControllerFn,cargarPartidasUsusarioControllerFn, cargarPartidasInvitadoControllerFn, eliminarPartidaControllerFn, actualizarPartidaController};

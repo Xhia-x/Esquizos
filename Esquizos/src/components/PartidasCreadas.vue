@@ -1,5 +1,5 @@
 <template>
-    
+    <video src="../assets/video.mp4" autoplay="true" muted="true" loop="true"></video>
     <div class="partidas-container">
         <h1>Partidas Creadas</h1>
         <ul class="lista-partidas">
@@ -9,7 +9,7 @@
                 <button @click="accederPartida(partida.nombre)">Acceder a la partida</button>
                 <button @click="compartirPartida(partida.generarLinkCompartir())">Compartir partida</button>
                 <button @click="mostrarCampoInvitar(partida)">Invitar jugador</button>
-                <InvitarJugador v-if="partida.nombre === partidaInvitacion" :partida="partida" :partidaInvitacion="partidaInvitacion"
+                <InvitarJugador v-if="partida.nombre === partidaInvitacion" :partida="partida"
                 />
             </li>
         </ul>
@@ -29,7 +29,6 @@ export default {
     mixins: [autenticadorSesion],
     components: {
         InvitarJugador
-
     },
     data() {
         return {
@@ -45,7 +44,7 @@ export default {
         buscarPartidas(nombreUsuario) {
             axios.get(`http://localhost:9992/partida/usuario/${nombreUsuario}`)
                 .then(({ data }) => {
-                    this.partidas = data.map(partida => new Partida(partida.nombre, partida.nJugadores, partida.jugadores, partida.link, partida.dineroinicial, partida.tiempomaximo, partida.tiempoporturno));
+                    this.partidas = data.map(partida => new Partida(partida.nombre, partida.administrador,partida.nJugadores, partida.jugadores, partida.link, partida.dineroinicial, partida.tiempomaximo, partida.tiempoporturno));
                 })
                 .catch(err => {
                     console.error(err);
@@ -64,6 +63,8 @@ export default {
         },
         mostrarCampoInvitar(partida) {
             this.partidaInvitacion = this.partidaInvitacion === partida.nombre ? null : partida.nombre;
+            console.log("admin: "+partida.administrador);
+            console.log("jugadores: "+partida.jugadores);
         }      
         
     }
@@ -73,7 +74,11 @@ export default {
 <style scoped>
 .partidas-container {
     width: 80%;
-    margin: 0 auto;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f0f4f8;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .lista-partidas {
@@ -82,29 +87,82 @@ export default {
 }
 
 .partida-item {
-    background-color: #f9f9f9;
+    background-color: #ffffff;
     border: 1px solid #ddd;
-    padding: 15px;
+    padding: 20px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+}
+
+.partida-item:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+h2 {
+    color: #2c3e50;
     margin-bottom: 10px;
-    border-radius: 8px;
+}
+
+p {
+    color: #7f8c8d;
+    margin-bottom: 10px;
 }
 
 button {
-    margin-top: 10px;
-    padding: 8px 12px;
-    cursor: pointer;
-    margin-right: 10px;
-}
-
-.volverAtrasBoton {
     background-color: #3498db;
     color: white;
     border: none;
     border-radius: 5px;
+    padding: 10px 15px;
+    font-size: 14px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-right: 10px;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+.volverAtrasBoton {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 14px;
     position: absolute;
     right: 20px;
     top: 10px;
-    width: 200px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.volverAtrasBoton:hover {
+    background-color: #c0392b;
+}
+
+@media (max-width: 768px) {
+    .partidas-container {
+        width: 95%;
+    }
+
+    button {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .volverAtrasBoton {
+        width: auto;
+    }
 }
 </style>
