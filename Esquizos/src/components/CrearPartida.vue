@@ -600,4 +600,66 @@ button {
     background-color: #c70000c2;
     transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
 }
+
+.nombre-dinero-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.opciones-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px; 
+    margin-top: 20px;
+}
+
+.jugadores-group {
+    flex: 0.5; 
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; 
+}
+
+.reglas-group {
+    flex: 1.5; 
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.reglas-container {
+    display: flex;
+    gap: 40px;
+    width: 100%;
+    align-items: stretch; 
+}
+
+.jugadores-group,
+.tiempo-partida,
+.tiempo-turno {
+    flex: 1; 
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 100%; 
+}
+
+.opciones-jugadores-reglas {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    margin-top: 20px;
+    width: 100%;
+    align-items: stretch; 
+}
+
+.reglas-group h1 {
+    text-align: center;
+    width: 100%;
+    margin-bottom: 20px; 
+
+}
+
 </style>
+
