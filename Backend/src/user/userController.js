@@ -3,9 +3,8 @@ var userService = require('./userServices.js');
 var registerUserControllerFn = async (req, res) => {
     try {
 
-        console.log(req.body);
         var status = await userService.registerUserDBService(req.body);
-        console.log(status);
+        //console.log(status);
 
         if(status){
             res.send({"status": true, "message": "User registered succesfully"});
@@ -28,16 +27,15 @@ var loginUserControllerFn = async (req, res) => {
 
         if(result.status){
             res.send({"status": true, "message": result.msg, "username": result.username});
-            console.log("primer if");
+            //console.log("primer if");
         } else {
             res.send({"status": false, "message": result.msg});
-            console.log("primer if - else");
+            //console.log("primer if - else");
         }
 
     } catch (error) {
         console.log(error);
         res.send({"status": false, "message": result.msg});
-        console.log("catch");
     }
 }
 
@@ -47,7 +45,7 @@ var buscarUserControllerFn = async (req, res) => {
         const usernameBuscar = req.params.username;
         
         var result = await userService.buscarUserDBService( {username: usernameBuscar} );
-        console.log(result.status);
+        //console.log(result.status);
 
         if(result.status){
             res.json(result.user);

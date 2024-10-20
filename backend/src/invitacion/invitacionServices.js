@@ -11,7 +11,6 @@ module.exports.crearInvitacionDBService = (invitacionData) => {
         invitacion.invitado = invitacionData.invitado;
         invitacion.partida = invitacionData.partida;
         invitacion.estado = invitacionData.estado;
-        console.log(invitacionData);
 
         try {
             const usuarioInvitado = await userModel.findOne({ username: invitacionData.invitado });
@@ -38,14 +37,12 @@ module.exports.crearInvitacionDBService = (invitacionData) => {
 module.exports.cargarInvitacionesDBService = async (userData) => {
     try {
         var result = await invitacionModel.find({ invitado: userData.username });
-        
-        console.log(userData);
 
         if (result) {
-            console.log("Invitaciones encontradas");
+            //console.log("Invitaciones encontradas");
             return { status: true, msg: "Invitaciones encontradas", invitaciones: result };
         } else {
-            console.log("INVALID DATA");
+            //console.log("INVALID DATA");
             return { status: false, msg: "INVALID DATA" };
         }
 
@@ -60,28 +57,22 @@ module.exports.aceptarInvitacionDBService = async (invitacionData) => {
         var result = await invitacionModel.findOne({ administrador: invitacionData.administrador, invitado: invitacionData.invitado, partida: invitacionData.partida });
         if (result) {
 
-
-            //añadir usuario a partida en la base de datos
             var partida = await partidaModel.findOne({ nombre: invitacionData.partida });
             if(partida){
-                console.log("partida: "+partida.jugadores.length);
                 if(partida.jugadores.length >= partida.nJugadores){
                     return { status: false, msg: "Partida llena" };
                 }
                 partida.jugadores.push(invitacionData.invitado);
-                console.log(partida);
                 await partida.save();
             }
 
-            console.log("Invitacion encontrada");
-            console.log(result);
             result.estado = "aceptada";
             await result.save();
 
 
             return { status: true, msg: "Invitacion aceptada" };
         } else {
-            console.log("INVALID DATA");
+            //console.log("INVALID DATA");
             return { status: false, msg: "INVALID DATA" };
         }
 
@@ -95,10 +86,10 @@ module.exports.recharInvitacionesDBService = async (invitacionData) => {
     try {
         var result = await invitacionModel.deleteOne({ administrador: invitacionData.administrador, invitado: invitacionData.invitado, partida: invitacionData.partida });
         if (result) {
-            console.log("Invitacion rechazada");
+            //console.log("Invitacion rechazada");
             return { status: true, msg: "Invitacion rechazada" };
         } else {
-            console.log("INVALID DATA");
+            //console.log("INVALID DATA");
             return { status: false, msg: "INVALID DATA" };
         }
     } catch (error) {
