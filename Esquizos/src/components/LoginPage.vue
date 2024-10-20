@@ -7,7 +7,7 @@
         </Reglas>
         </div>
  
-          
+        <video src="../assets/video.mp4" autoplay="true" muted="true" loop="true"></video>   
         <div class="mainContainer">
             <div class="text">
                 <h1>MONOPOLY</h1>

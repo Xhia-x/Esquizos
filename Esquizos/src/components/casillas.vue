@@ -1,7 +1,7 @@
 <template>
   <div class="card">
     <div class="card__color-strip" :style="{ backgroundColor: color }"></div>
-    <img v-if="image"  alt="Imagen de la propiedad" class="card__image" />
+    <img v-if="image" alt="Imagen de la propiedad" class="card__image" />
     <div class="card__descr-wrapper">
       <p class="card__title">{{ title }}</p>
       <p class="card__descr">
@@ -13,23 +13,25 @@
   </div>
 </template>
 
-
 <style scoped>
 .card {
   --font-color: #323232;
   --bg-color: #e0e0e0;
   width: 170px;
   height: 230px;
+  z-index: 3;
 
   background: var(--bg-color);
   display: flex;
   flex-direction: column;
-  transition: .4s;
+  transition: transform 0.4s, box-shadow 0.4s;
   position: relative;
 }
 
 .card:hover {
-  transform: scale(1.02);
+  transform: scale(1.15) translate(-10px, -10px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  z-index:200;
 }
 
 .card__color-strip {
@@ -55,44 +57,18 @@
   font-size: 12px;
 }
 
-.svg {
-  width: 20px;
-  height: 20px;
-  transform: translateY(25%);
-  fill: var(--font-color);
-}
-
-.card__links {
-  margin-top: 8px;
-  display: flex;
-  justify-content: space-between;
-  align-self: flex-end;
-}
-
-.card__links .link {
-  color: var(--font-color);
-  font-weight: 600;
-  font-size: 12px;
-  text-decoration: none;
-}
-
-.card__links .link:hover {
-  text-decoration: underline;
-}
-
 .card__image {
   width: 100%;
   height: auto;
-  max-height: 100px; /* Ajusta este valor según tus necesidades */
+  max-height: 100px;
   object-fit: cover;
   margin-bottom: 10px;
 }
-
 </style>
 
-
 <script>
-  export default {
+export default {
+  // eslint-disable-next-line vue/multi-word-component-names
   name: "Casilla",
   props: {
     color: {

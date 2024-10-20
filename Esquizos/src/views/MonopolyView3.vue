@@ -27,7 +27,8 @@
         <div class="property-top" id="22">
             <Casilla color="red" title="Carrer de la Marina" price="100" />
         </div>
-        <div class="property-top" id="23" <Casilla color="" title="" price="" />
+        <div class="property-top" id="23"> <Casilla color="" title="" price="" />
+        </div>
     </div>
     <div class="property-top" id="24">
         <Casilla color="red" title="Carrer de la Marina" price="100" />
@@ -60,7 +61,8 @@
     <div class="property-rotate-right" id="33">
         <Casilla color="green" title="Carrer de la Marina" price="100" />
     </div>
-    <div class="property-rotate-right" id="34" <Casilla color="" title="" price="" />
+    <div class="property-rotate-right" id="34"> <Casilla color="" title="" price="" />
+    </div>
 </div>
 <div class="property-rotate-right" id="35">
     <Casilla color="green" title="Carrer de la Marina" price="100" />

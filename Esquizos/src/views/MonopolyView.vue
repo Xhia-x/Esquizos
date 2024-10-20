@@ -21,79 +21,83 @@
 
     <!-- Lado superior -->
     <div class="side top-side">
-      <div class="property-top"id="22"><Casilla color="red" title="Carrer de la Marina" price="100" /></div>
-      <div class="property-top"id="23"><Casilla color="" title="" price="" /></div>
-      <div class="property-top"id="24"><Casilla color="red" title="Carrer de la Marina" price="100" /></div>
-      <div class="property-top"id="25"><Casilla color="red" title="Carrer de la Marina" price="100" /></div>
-      <div class="property-top"id="26"><Casilla color="" title="" price="" /></div>
-      <div class="property-top"id="27"><Casilla color="yellow" title="Carrer de la Marina" price="100" /></div>
-      <div class="property-top"id="28"><Casilla color="yellow" title="Carrer de la Marina" price="100" /></div>
-      <div class="property-top"id="29"><Casilla color="" title="" price="" /></div>
-      <div class="property-top"id="30"><Casilla color="yellow" title="Carrer de la Marina" price="100" /></div>
-    </div>
+      <div class="property-top" id="22"><Casilla color="red" title="AV. KENTUCKY" price="220" /></div>
+      <div class="property-top" id="23"><Casilla color="" title="XD" price="" /></div>
+      <div class="property-top" id="24"><Casilla color="red" title="AV. INDIANA" price="220" /></div>
+      <div class="property-top" id="25"><Casilla color="red" title="AV.ILLINOIS" price="240" /></div>
+      <div class="property-top" id="26"><Casilla color="" title="FERROCARRIL B. & O." price="200" /></div>
+      <div class="property-top" id="27"><Casilla color="yellow" title="AV. ATLÁNTICO" price="260" /></div>
+      <div class="property-top" id="28"><Casilla color="yellow" title="AV. VENTNOR" price="260" /></div>
+      <div class="property-top" id="29"><Casilla color="" title="COMPAÑÍA DE AGUA" price="150" /></div>
+      <div class="property-top" id="30"><Casilla color="yellow" title="JARDINES MARVIN" price="280" /></div>
+    </div> 
 
     <!-- Lado derecho -->
     <div class="side right-side">
-      <div class="property-rotate-right"id="32"><Casilla color="green" title="Carrer de la Marina" price="100" /></div>
-      <div class="property-rotate-right"id="33"><Casilla color="green" title="Carrer de la Marina" price="100" /></div>
-      <div class="property-rotate-right"id="34"><Casilla color="" title="" price="" /></div>
-      <div class="property-rotate-right"id="35"><Casilla color="green" title="Carrer de la Marina" price="100" /></div>
-      <div class="property-rotate-right"id="36"><Casilla color="" title="" price="" /></div>
-      <div class="property-rotate-right"id="37"><Casilla color="" title="" price="" /></div>
-      <div class="property-rotate-right"id="38"><Casilla color="blue" title="Carrer de la Marina" price="100" /></div>
-      <div class="property-rotate-right"id="39"><Casilla color="" title="" price="" /></div>
-      <div class="property-rotate-right"id="40"><Casilla color="blue" title="Carrer de la Marina" price="100" /></div>
+      <div class="property-rotate-right" id="32"><Casilla color="green" title="AV. PACÍFICO" price="300" /></div>
+      <div class="property-rotate-right" id="33"><Casilla color="green" title="AV. CAROLINA DEL NORTE" price="300" /></div>
+      <div class="property-rotate-right" id="34"><Casilla color="" title="XD" price="" /></div>
+      <div class="property-rotate-right" id="35"><Casilla color="green" title="AV. PENNSYLVANIA" price="320" /></div>
+      <div class="property-rotate-right" id="36"><Casilla color="" title="FERROCARRÍL VÍA RÁPIDA" price="200" /></div>
+      <div class="property-rotate-right" id="37"><Casilla color="" title="XD" price="" /></div>
+      <div class="property-rotate-right" id="38"><Casilla color="blue" title="PLAZA PARK" price="350" /></div>
+      <div class="property-rotate-right" id="39"><Casilla color="" title="IMPUESTO SOBRE POSESIONES DE LUJO - PÁGUESE $100" price="" /></div>
+      <div class="property-rotate-right" id="40"><Casilla color="blue" title="EL MUELLE" price="400" /></div>
     </div>
 
     <!-- Lado inferior -->
     <div class="side bottom-side">
-      <div class="property-bottom"id="10"><Casilla color="lightblue" title="Carrer de la Marina" price="100" /></div>
-      <div class="property-bottom"id="9"><Casilla color="lightblue" title="Carrer de la Marina" price="100" /></div>
-      <div class="property-bottom"id="8"><Casilla color="" title="" price="" /></div>
-      <div class="property-bottom"id="7"><Casilla color="lightblue" title="Carrer de la Marina" price="100" /></div>
-      <div class="property-bottom"id="6"><Casilla color="" title="" price="" /></div>
-      <div class="property-bottom"id="5"><Casilla color="" title="" price="" /></div>
-      <div class="property-bottom"id="4"><Casilla color="brown" title="Carrer de la Marina" price="100" /></div>
-      <div class="property-bottom"id="3"><Casilla color="" title="" price="" /></div>
-      <div class="property-bottom"id="2"><Casilla color="brown" title="Carrer de la Marina" price="100" /></div>
+      <div class="property-bottom" id="10"><Casilla color="lightblue" title="AV. CONNECTICUT" price="120" /></div>
+      <div class="property-bottom" id="9"><Casilla color="lightblue" title="AV. VERMONT" price="100" /></div>
+      <div class="property-bottom" id="8"><Casilla color="" title="XD" price="" /></div>
+      <div class="property-bottom" id="7"><Casilla color="lightblue" title="AV. ORIENTAL" price="100" /></div>
+      <div class="property-bottom" id="6"><Casilla color="" title="FERROCARRIL READING" price="200" /></div>
+      <div class="property-bottom" id="5"><Casilla color="" title="Impuesto sobre ingreso - Páguese $200" price="" /></div>
+      <div class="property-bottom" id="4"><Casilla color="brown" title="AV. BÁLTICA" price="60" /></div>
+      <div class="property-bottom" id="3"><Casilla color="" title="XD" price="" /></div>
+      <div class="property-bottom" id="2"><Casilla color="brown" title="AV. MEDITERRÁNEO" price="60" /></div>
     </div>
 
     <!-- Lado izquierdo -->
     <div class="side left-side">
-      <div class="property-rotate-left"id="20"><Casilla color="orange" title="Carrer de la Marina" price="100" /></div>
-      <div class="property-rotate-left"id="19"><Casilla color="" title="" price="" /></div>
-      <div class="property-rotate-left"id="18"><Casilla color="orange" title="Carrer de la Marina" price="100" /></div>
-      <div class="property-rotate-left"id="17"><Casilla color="orange" title="Carrer de la Marina" price="100" /></div>
-      <div class="property-rotate-left"id="16"><Casilla color="" title="" price="" /></div>
-      <div class="property-rotate-left"id="15"><Casilla color="purple" title="Carrer de la Marina" price="100" /></div>
-      <div class="property-rotate-left"id="14"><Casilla color="purple" title="Carrer de la Marina" price="100" /></div>
-      <div class="property-rotate-left"id="13"><Casilla color="" title="" price="" /></div>
-      <div class="property-rotate-left"id="12"><Casilla color="purple" title="Carrer de la Marina" price="100" /></div>
+      <div class="property-rotate-left" id="20"><Casilla color="orange" title="AV. NUEVA YORK" price="200" /></div>
+      <div class="property-rotate-left" id="18"><Casilla color="orange" title="AV. TENNESSEE" price="180" /></div>
+      <div class="property-rotate-left" id="19"><Casilla color="" title="XD" price="" /></div>
+      <div class="property-rotate-left" id="17"><Casilla color="orange" title="PLAZA ST. JAMES" price="180" /></div>
+      <div class="property-rotate-left" id="16"><Casilla color="" title="FERROCARRIL PENSSYLVANIA" price="" /></div>
+      <div class="property-rotate-left" id="15"><Casilla color="purple" title="AV. VIRGINIA" price="160" /></div>
+      <div class="property-rotate-left" id="14"><Casilla color="purple" title="AV. ESTADOS" price="140" /></div>
+      <div class="property-rotate-left" id="13"><Casilla color="" title="COMPAÑÍA DE ELECTRICIDAD" price="150" /></div>
+      <div class="property-rotate-left" id="12"><Casilla color="purple" title="PLAZA SAN CARLOS" price="140" /></div>
     </div>
 
-    <!-- Logo centrado -->
-    <div class="center-logo">
-      <img src="@/assets/monopolylogo.png" alt="Monopoly Logo" />
-    </div>
+    
 
-    <!-- Ruleta y dado -->
-    <div class="ruletaDado">
-      <dados @diceRolled="movePieceBasedOnDice" />
+
+    <div class="center-container">
+        <button class="figuras-button" @click="irAFiguras">Seleccionar Figuras</button>
+        <div class="center-logo">
+            <img src="@/assets/monopolylogo.png" alt="Monopoly Logo" />
+        </div>
+        <div class="ruletaDado">
+            <dados @diceRolled="movePieceBasedOnDice" />
+        </div>
     </div>
 
     <!-- Ficha -->
    
-    <div class="ficha" :style="pieces[0].style" @click="movePiece(0)">
+    <div ref="ficha" class="ficha" :style="pieces[0].style" @click="movePiece(0)">
     
  
 
 
     </div>
   <!-- Botón Figuras -->
-  <button class="figuras-button" @click="irAFiguras">Seleccionar Figuras</button>
   <div class="gray-background"></div>
-  <button @click="goToMonopolyView2">Ir a Monopoly View 2</button>
+  <button @click="goToMonopolyView2" class="style=margin-right: 5%">Ir a Monopoly View 2</button>
   <button @click="goToMonopolyView3">Ir a Monopoly View 3</button>
+
+  <h1></h1>
 </div>
     
 
@@ -164,6 +168,9 @@ export default {
                     left: `${rect.left + window.scrollX}px`, // Añadir scrollX para corregir si hay desplazamiento de la página
                     transform: 'translate(-50%, -50%)' // Mantener la ficha centrada
                 };
+                this.$nextTick(() => {
+                    this.$refs.ficha.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                });
             }
         },
 
@@ -192,17 +199,68 @@ export default {
 </script>
 
 <style scoped>
+
+.center-container {
+    display: flex;
+    flex-direction: column; /* Para alinear verticalmente */
+    justify-content: center; /* Centrar verticalmente */
+    align-items: center; /* Centrar horizontalmente */
+    z-index: 2; /* Asegura que esté sobre otros elementos */
+    position: relative; /* Para que el z-index funcione correctamente */
+    grid-column: 5 / span 3; /* Asegúrate de que el contenedor ocupe las columnas deseadas */
+    grid-row: 4 / span 2; /* Ajusta la fila según sea necesario */
+}
+
 .monopoly-board {
     display: grid;
-    grid-template-columns: 230px repeat(9, 170px) 230px;
-    grid-template-rows: 230px repeat(9, 170px) 230px;
-    width: auto;
-    height: auto;
-    border: 2px solid black;
+    width: 100vw; /* La anchura del tablero se ajusta al ancho de la ventana */
+    height: 100vh; /* La altura del tablero se ajusta a la altura de la ventana */
+    max-width: 100%; /* Limita el ancho para que no exceda la ventana */
+    max-height: 100%; /* Limita la altura para que no exceda la ventana */
     padding: 0;
     margin: 0;
     gap: 0;
+    box-sizing: border-box;
 }
+
+.corner, .property-top, .property-bottom, .property-rotate-right, .property-rotate-left {
+    width: 100%;
+    height: 100%;
+    background-color: white;
+}
+
+/* Ajustes para que las casillas mantengan proporciones al redimensionar */
+/* Logo centrado */
+.center-logo {
+    grid-column: 5 / span 3;
+    grid-row: 4 / span 2; /* Coloca el logo un poco más arriba */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2; /* Asegura que el logo esté sobre otros elementos */
+}
+
+.center-logo img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+/* Ruleta y dado */
+.ruletaDado {
+    grid-column: 5 / span 3;
+    grid-row: 6 / span 2; /* Coloca los dados debajo del logo */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 20px;
+    z-index: 1; /* Coloca los dados debajo del logo */
+    margin-top: 20px; /* Ajusta el espacio entre logo y dados */
+}
+
+
+
 
 
 
@@ -291,8 +349,8 @@ export default {
 .property-rotate-left {
     width: 170px;
     height: 170px;
-    background-color: white;
-    border: 1px solid black;
+    background-color: lightgray;
+    border: 1px solid lightgray;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -308,8 +366,8 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: white;
-  border: 1px solid black;
+  background-color: lightgray;
+  border: 1px solid lightgray;
   box-sizing: border-box;
   padding: 0;
   margin: 0;
@@ -318,8 +376,8 @@ export default {
 .property-bottom {
   width: 170px;
   height: 170px;
-  background-color: white;
-  border: 1px solid black;
+  background-color: lightgray;
+  border: 1px solid lightgray;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -340,20 +398,7 @@ export default {
     /* Casillas laterales izquierdas mirando hacia la derecha */
 }
 
-/* Logo centrado */
-.center-logo {
-    grid-column: 5 / span 3;
-    grid-row: 5 / span 3;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 
-.center-logo img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-}
 
 /* Ficha */
 .ficha {
@@ -368,7 +413,7 @@ export default {
     background-color: #9b59b6;
     background-image: linear-gradient(#9b59b6, #84cdfa, #5ad1cd);
     transform-origin: center;
-    z-index: 0;
+    z-index: 500;
     transition: top 0.5s ease, left 0.5s ease, transform 0.5s ease;
     /* Añadido */
 }
@@ -396,44 +441,34 @@ export default {
     }
 }
 
-.ruletaDado {
-    grid-column: 5 / span 3;
-    grid-row: 7; /* Cambia a una fila más baja para mover los dados hacia abajo */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-    gap: 20px;
-    margin-top: 100px; /* Agrega un margen superior para ajustar la posición si es necesario */
-  }
+
 
 .contendor {
     display: flex;
     justify-content: center;
     align-items: center;
     /* tamaño del tablero */
-    width: 100%;
+    width: 100vw;
     height: 100%;
 }
 
 
 /* Estilo para el botón Figuras */
 .figuras-button {
-    position: absolute;
-    top: 600px;
-    left: 1000px;
-    transform: translateX(-50%);
-    padding: 10px 20px;
-    background-color: #3498db;
+    margin-bottom: 5%;
+    position: relative;
+    background-color: red;
     color: white;
     border: none;
+    z-index: 600;
     border-radius: 5px;
     cursor: pointer;
 }
 
 .figuras-button:hover {
-    background-color: #2980b9;
+    background-color: rgb(201, 6, 6);
 }
+
 .ficha-imagen {
     width: 100%;
     height: 100%;
