@@ -21,54 +21,54 @@
 
     <!-- Lado superior -->
     <div class="side top-side">
-      <div class="property-top"><Casilla color="red" title="Carrer de la Marina" price="100" /></div>
-      <div class="property-top"><Casilla color="" title="" price="" /></div>
-      <div class="property-top"><Casilla color="red" title="Carrer de la Marina" price="100" /></div>
-      <div class="property-top"><Casilla color="red" title="Carrer de la Marina" price="100" /></div>
-      <div class="property-top"><Casilla color="" title="" price="" /></div>
-      <div class="property-top"><Casilla color="yellow" title="Carrer de la Marina" price="100" /></div>
-      <div class="property-top"><Casilla color="yellow" title="Carrer de la Marina" price="100" /></div>
-      <div class="property-top"><Casilla color="" title="" price="" /></div>
-      <div class="property-top"><Casilla color="yellow" title="Carrer de la Marina" price="100" /></div>
+      <div class="property-top"id="22"><Casilla color="red" title="Carrer de la Marina" price="100" /></div>
+      <div class="property-top"id="23"><Casilla color="" title="" price="" /></div>
+      <div class="property-top"id="24"><Casilla color="red" title="Carrer de la Marina" price="100" /></div>
+      <div class="property-top"id="25"><Casilla color="red" title="Carrer de la Marina" price="100" /></div>
+      <div class="property-top"id="26"><Casilla color="" title="" price="" /></div>
+      <div class="property-top"id="27"><Casilla color="yellow" title="Carrer de la Marina" price="100" /></div>
+      <div class="property-top"id="28"><Casilla color="yellow" title="Carrer de la Marina" price="100" /></div>
+      <div class="property-top"id="29"><Casilla color="" title="" price="" /></div>
+      <div class="property-top"id="30"><Casilla color="yellow" title="Carrer de la Marina" price="100" /></div>
     </div>
 
     <!-- Lado derecho -->
     <div class="side right-side">
-      <div class="property-rotate-right"><Casilla color="green" title="Carrer de la Marina" price="100" /></div>
-      <div class="property-rotate-right"><Casilla color="green" title="Carrer de la Marina" price="100" /></div>
-      <div class="property-rotate-right"><Casilla color="" title="" price="" /></div>
-      <div class="property-rotate-right"><Casilla color="green" title="Carrer de la Marina" price="100" /></div>
-      <div class="property-rotate-right"><Casilla color="" title="" price="" /></div>
-      <div class="property-rotate-right"><Casilla color="" title="" price="" /></div>
-      <div class="property-rotate-right"><Casilla color="blue" title="Carrer de la Marina" price="100" /></div>
-      <div class="property-rotate-right"><Casilla color="" title="" price="" /></div>
-      <div class="property-rotate-right"><Casilla color="blue" title="Carrer de la Marina" price="100" /></div>
+      <div class="property-rotate-right"id="32"><Casilla color="green" title="Carrer de la Marina" price="100" /></div>
+      <div class="property-rotate-right"id="33"><Casilla color="green" title="Carrer de la Marina" price="100" /></div>
+      <div class="property-rotate-right"id="34"><Casilla color="" title="" price="" /></div>
+      <div class="property-rotate-right"id="35"><Casilla color="green" title="Carrer de la Marina" price="100" /></div>
+      <div class="property-rotate-right"id="36"><Casilla color="" title="" price="" /></div>
+      <div class="property-rotate-right"id="37"><Casilla color="" title="" price="" /></div>
+      <div class="property-rotate-right"id="38"><Casilla color="blue" title="Carrer de la Marina" price="100" /></div>
+      <div class="property-rotate-right"id="39"><Casilla color="" title="" price="" /></div>
+      <div class="property-rotate-right"id="40"><Casilla color="blue" title="Carrer de la Marina" price="100" /></div>
     </div>
 
     <!-- Lado inferior -->
     <div class="side bottom-side">
-      <div class="property-bottom"><Casilla color="lightblue" title="Carrer de la Marina" price="100" /></div>
-      <div class="property-bottom"><Casilla color="lightblue" title="Carrer de la Marina" price="100" /></div>
-      <div class="property-bottom"><Casilla color="" title="" price="" /></div>
-      <div class="property-bottom"><Casilla color="lightblue" title="Carrer de la Marina" price="100" /></div>
-      <div class="property-bottom"><Casilla color="" title="" price="" /></div>
-      <div class="property-bottom"><Casilla color="" title="" price="" /></div>
-      <div class="property-bottom"><Casilla color="brown" title="Carrer de la Marina" price="100" /></div>
-      <div class="property-bottom"><Casilla color="" title="" price="" /></div>
-      <div class="property-bottom"><Casilla color="brown" title="Carrer de la Marina" price="100" /></div>
+      <div class="property-bottom"id="10"><Casilla color="lightblue" title="Carrer de la Marina" price="100" /></div>
+      <div class="property-bottom"id="9"><Casilla color="lightblue" title="Carrer de la Marina" price="100" /></div>
+      <div class="property-bottom"id="8"><Casilla color="" title="" price="" /></div>
+      <div class="property-bottom"id="7"><Casilla color="lightblue" title="Carrer de la Marina" price="100" /></div>
+      <div class="property-bottom"id="6"><Casilla color="" title="" price="" /></div>
+      <div class="property-bottom"id="5"><Casilla color="" title="" price="" /></div>
+      <div class="property-bottom"id="4"><Casilla color="brown" title="Carrer de la Marina" price="100" /></div>
+      <div class="property-bottom"id="3"><Casilla color="" title="" price="" /></div>
+      <div class="property-bottom"id="2"><Casilla color="brown" title="Carrer de la Marina" price="100" /></div>
     </div>
 
     <!-- Lado izquierdo -->
     <div class="side left-side">
-      <div class="property-rotate-left"><Casilla color="orange" title="Carrer de la Marina" price="100" /></div>
-      <div class="property-rotate-left"><Casilla color="" title="" price="" /></div>
-      <div class="property-rotate-left"><Casilla color="orange" title="Carrer de la Marina" price="100" /></div>
-      <div class="property-rotate-left"><Casilla color="orange" title="Carrer de la Marina" price="100" /></div>
-      <div class="property-rotate-left"><Casilla color="" title="" price="" /></div>
-      <div class="property-rotate-left"><Casilla color="purple" title="Carrer de la Marina" price="100" /></div>
-      <div class="property-rotate-left"><Casilla color="purple" title="Carrer de la Marina" price="100" /></div>
-      <div class="property-rotate-left"><Casilla color="" title="" price="" /></div>
-      <div class="property-rotate-left"><Casilla color="purple" title="Carrer de la Marina" price="100" /></div>
+      <div class="property-rotate-left"id="20"><Casilla color="orange" title="Carrer de la Marina" price="100" /></div>
+      <div class="property-rotate-left"id="19"><Casilla color="" title="" price="" /></div>
+      <div class="property-rotate-left"id="18"><Casilla color="orange" title="Carrer de la Marina" price="100" /></div>
+      <div class="property-rotate-left"id="17"><Casilla color="orange" title="Carrer de la Marina" price="100" /></div>
+      <div class="property-rotate-left"id="16"><Casilla color="" title="" price="" /></div>
+      <div class="property-rotate-left"id="15"><Casilla color="purple" title="Carrer de la Marina" price="100" /></div>
+      <div class="property-rotate-left"id="14"><Casilla color="purple" title="Carrer de la Marina" price="100" /></div>
+      <div class="property-rotate-left"id="13"><Casilla color="" title="" price="" /></div>
+      <div class="property-rotate-left"id="12"><Casilla color="purple" title="Carrer de la Marina" price="100" /></div>
     </div>
 
     <!-- Logo centrado -->

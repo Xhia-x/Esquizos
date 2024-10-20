@@ -74,7 +74,11 @@ export default {
 <style scoped>
 .partidas-container {
     width: 80%;
-    margin: 0 auto;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f0f4f8;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .lista-partidas {
@@ -83,29 +87,82 @@ export default {
 }
 
 .partida-item {
-    background-color: #f9f9f9;
+    background-color: #ffffff;
     border: 1px solid #ddd;
-    padding: 15px;
+    padding: 20px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+}
+
+.partida-item:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+h2 {
+    color: #2c3e50;
     margin-bottom: 10px;
-    border-radius: 8px;
+}
+
+p {
+    color: #7f8c8d;
+    margin-bottom: 10px;
 }
 
 button {
-    margin-top: 10px;
-    padding: 8px 12px;
-    cursor: pointer;
-    margin-right: 10px;
-}
-
-.volverAtrasBoton {
     background-color: #3498db;
     color: white;
     border: none;
     border-radius: 5px;
+    padding: 10px 15px;
+    font-size: 14px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-right: 10px;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+.volverAtrasBoton {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 14px;
     position: absolute;
     right: 20px;
     top: 10px;
-    width: 200px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.volverAtrasBoton:hover {
+    background-color: #c0392b;
+}
+
+@media (max-width: 768px) {
+    .partidas-container {
+        width: 95%;
+    }
+
+    button {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .volverAtrasBoton {
+        width: auto;
+    }
 }
 </style>
