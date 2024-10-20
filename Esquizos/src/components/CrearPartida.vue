@@ -187,6 +187,7 @@ import Reglas from './Reglas.vue';
 import axios from 'axios';
 import autenticadorSesion from '../mixins/AutenticadorSesion.js';
 import InvitarJugador from './InvitarJugador.vue';
+import Swal from 'sweetalert2'; // Importa SweetAlert2
 
 export default {
     name: 'CrearPartida',
@@ -238,18 +239,33 @@ export default {
                 }) => {
                     if (data.status === true) {
                         this.partidaCreada = true;
-                        alert("Partida Creada");
+                        
+                        // SweetAlert2 para mostrar que la partida fue creada correctamente
+                        Swal.fire({
+                            position: "top-end",
+                            icon: "success",
+                            title: "La partida fue creada correctamente",
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+
                     } else {
                         this.partidaCreada = false;
-                        alert("Nombre de Partida ya existe, Intente con otro");
-
+                        Swal.fire({
+                            icon: "error",
+                            title: "Oops...",
+                            text: "El nombre de la partida ya existe, intenta con otro"
+                        });
                     }
                 })
                 .catch(err => {
                     console.error(err);
                     this.partidaCreada = false;
-                    alert("Error, Try Again");
-
+                    Swal.fire({
+                        icon: "error",
+                        title: "Error",
+                        text: "Hubo un error, intenta nuevamente"
+                    });
                 });
         },
         generarLink() {
@@ -262,15 +278,27 @@ export default {
         },
         comprobacionesDinero() {
             if (isNaN(this.dineroInicial)) {
-                alert("El dinero inicial debe ser un número válido");
+                Swal.fire({
+                    icon: "error",
+                    title: "Error",
+                    text: "El dinero inicial debe ser un número válido"
+                });
                 return false;
             }
             if (this.dineroInicial < 500) {
-                alert("El dinero inicial debe ser mayor a 500");
+                Swal.fire({
+                    icon: "error",
+                    title: "Error",
+                    text: "El dinero inicial debe ser mayor a 500"
+                });
                 return false;
             }
             if (this.dineroInicial > 100000) {
-                alert("El dinero inicial debe ser menor a 100.000");
+                Swal.fire({
+                    icon: "error",
+                    title: "Error",
+                    text: "El dinero inicial debe ser menor a 100.000"
+                });
                 return false;
             }
             return true;
@@ -293,6 +321,7 @@ export default {
     }
 };
 </script>
+
 
 <style scoped>
 .mainContainer {
@@ -352,13 +381,12 @@ select {
     position: absolute;
     top: 10px;
     left: 10px;
-    /* Cambiado de right a left */
     padding: 10px 20px;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    z-index: 1;
+    z-index: 1000; /* Asegúrate de que este elemento esté por encima */
 }
 
 
