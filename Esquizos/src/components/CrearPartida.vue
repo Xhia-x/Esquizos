@@ -134,10 +134,16 @@
             <h1>Enlace de la Partida</h1>
             <div class="linkContainer">
                 <p class="textoLink">{{ partida.generarLinkCompartir() }}</p>
-                <button type="button" class="copiarLinkBoton" @click="copiarAlPortapapeles(partida.generarLinkCompartir())">Copiar link</button>
+                <button type="button" class="copiarLinkBoton" @click="copiarAlPortapapeles(partida.generarLinkCompartir())">
+                    Copiar link
+                </button>
             </div>
-            <button type="button" class="accederAPartidaBoton" @click="accederPartida">Acceder a la Partida</button>
-            <button @click="mostrarCampoInvitar(partida)">Invitar jugador</button>
+            <button type="button" class="accederAPartidaBoton" @click="accederPartida">
+                Acceder a la Partida
+            </button>
+            <button class="button2" @click="mostrarCampoInvitar(partida)">
+                Invitar jugador
+            </button>
             <InvitarJugador v-if="partida.nombre === partidaInvitacion" :partida="partida" :partidaInvitacion="partidaInvitacion" />
         </div>
 
@@ -264,7 +270,7 @@ export default {
 <style scoped>
 .mainContainer {
     width: 90%;
-    max-width: 1200px;
+    max-width: 50%;
     height: 90%;
     background-color: #33333346;
     margin-top: 15px;
@@ -272,7 +278,9 @@ export default {
 }
 
 h1 {
-    font-size: 20px;
+  font-size: 1.8rem;
+  color: #333;
+  margin-bottom: 1.5rem;
 }
 
 body {
@@ -285,7 +293,7 @@ body {
 }
 
 .crear-partida {
-    max-width: 400px;
+    max-width: 600px;
     margin: 0 auto;
     padding: 20px;
     border: 1px solid #ccc;
@@ -310,8 +318,6 @@ select {
     box-sizing: border-box;
 }
 
-
-
 .botonReglas {
     position: absolute;
     top: 10px;
@@ -324,8 +330,6 @@ select {
     cursor: pointer;
     z-index: 1;
 }
-
-
 
 .volverAtrasBoton {
     background-color: #c70000c2;
@@ -340,13 +344,13 @@ select {
 }
 
 .enlaceGenerado {
-    max-width: 400px;
-    padding: 20px;
-    margin: 0 auto;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    background-color: #f9f9f9;
-    margin-top: 20px;
+  text-align: center;
+  background-color: #f0f8ff;
+  padding: 2rem;
+  border-radius: 1.5rem;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  margin: 2rem auto;
+  max-width: 600px;
 }
 
 .accederAPartidaBoton {
@@ -359,11 +363,9 @@ select {
 }
 
 .textoLink {
-    font-size: 14px;
-    margin-bottom: 10px;
-    background-color: #e6e6e6;
-    width: 80%;
-    margin: auto;
+  font-size: 1rem;
+  color: #555;
+  word-break: break-all;
 }
 
 .copiarLinkBoton {
@@ -466,73 +468,81 @@ button {
     background-color: #007bff;
 }
 
-
-
 .button2 {
-  display: inline-block;
-  transition: all 0.2s ease-in;
-  position: relative;
-  overflow: hidden;
-  z-index: 1;
-  color: #090909;
-  padding: 0.7em 1.7em;
-  cursor: pointer;
-  font-size: 18px;
-  border-radius: 0.5em;
-  background: #e8e8e8;
-  border: 1px solid #e8e8e8;
-  box-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff;
+    display: inline-block;
+    transition: all 0.2s ease-in;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    color: #090909;
+    padding: 0.7em 1.7em;
+    cursor: pointer;
+    font-size: 18px;
+    border-radius: 0.5em;
+    background: #e8e8e8;
+    border: 1px solid #e8e8e8;
+    box-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff;
 }
 
 .button2:active {
-  color: #666;
-  box-shadow: inset 4px 4px 12px #c5c5c5, inset -4px -4px 12px #ffffff;
+    color: #666;
+    box-shadow: inset 4px 4px 12px #c5c5c5, inset -4px -4px 12px #ffffff;
 }
 
 .button2:before {
-  content: "";
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%) scaleY(1) scaleX(1.25);
-  top: 100%;
-  width: 140%;
-  height: 180%;
-  background-color: rgba(0, 0, 0, 0.05);
-  border-radius: 50%;
-  display: block;
-  transition: all 0.5s 0.1s cubic-bezier(0.55, 0, 0.1, 1);
-  z-index: -1;
+    content: "";
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%) scaleY(1) scaleX(1.25);
+    top: 100%;
+    width: 140%;
+    height: 180%;
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 50%;
+    display: block;
+    transition: all 0.5s 0.1s cubic-bezier(0.55, 0, 0.1, 1);
+    z-index: -1;
 }
 
 .button2:after {
-  content: "";
-  position: absolute;
-  left: 55%;
-  transform: translateX(-50%) scaleY(1) scaleX(1.45);
-  top: 180%;
-  width: 160%;
-  height: 190%;
-  background-color: #c70000c2;
-  border-radius: 50%;
-  display: block;
-  transition: all 0.5s 0.1s cubic-bezier(0.55, 0, 0.1, 1);
-  z-index: -1;
+    content: "";
+    position: absolute;
+    left: 55%;
+    transform: translateX(-50%) scaleY(1) scaleX(1.45);
+    top: 180%;
+    width: 160%;
+    height: 190%;
+    background-color: #c70000c2;
+    border-radius: 50%;
+    display: block;
+    transition: all 0.5s 0.1s cubic-bezier(0.55, 0, 0.1, 1);
+    z-index: -1;
 }
 
 .button2:hover {
-  color: #ffffff;
-  border: 1px solid #c70000c2;
+    color: #ffffff;
+    border: 1px solid #c70000c2;
 }
 
 .button2:hover:before {
-  top: -35%;
-  background-color: #c70000c2;
-  transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
+    top: -35%;
+    background-color: #c70000c2;
+    transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
 }
 
 .button2:hover:after {
-  top: -45%;
-  background-color: #c70000c2;
-  transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
+    top: -45%;
+    background-color: #c70000c2;
+    transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
+}
+.linkContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 1rem;
+  margin-bottom: 1.5rem;
 }
 </style>
