@@ -14,6 +14,7 @@
     router.route('/partida/usuario/:nombreUsuario').get(partidaController.cargarPartidasUsusarioControllerFn);
     router.route('/partida/invitado/:nombreUsuario').get(partidaController.cargarPartidasInvitadoControllerFn);
     router.route('/partida/:nombrePartida').delete(partidaController.eliminarPartidaControllerFn);
+    router.route('/partida/:nombrePartida').put(partidaController.actualizarPartidaController);
    
 
     router.route('/invitacion').post(invitacionController.crearInvitacionControllerFn);

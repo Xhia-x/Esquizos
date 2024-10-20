@@ -113,3 +113,20 @@ module.exports.eliminarPartidaDBService = async (partidaData) => {
         return { status: false, msg: "Error al eliminar la partida" };
     }
 };
+
+module.exports.actualizarPartidaDBService = async (partidaData) => {
+    try {
+        const result = await partidaModel.updateOne({ nombre: partidaData.nombre }, partidaData);
+
+        if (result.nModified > 0) {
+            console.log("Partida actualizada");
+            return { status: true, msg: "Partida actualizada" };
+        } else {
+            console.log("No se encontró la partida");
+            return { status: false, msg: "No se encontró la partida" };
+        }
+    } catch (error) {
+        console.log("Error al actualizar la partida");
+        return { status: false, msg: "Error al actualizar la partida" };
+    }
+};
