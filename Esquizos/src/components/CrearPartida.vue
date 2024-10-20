@@ -13,116 +13,149 @@
         <div class="crear-partida">
             <h1>Crear Partida de Monopoly</h1>
             <form @submit.prevent="crearPartida">
-                <div class="form-group input-wrapper">
-                    <label for="nombre">Nombre de la Partida:</label>
-                    <input type="text" id="nombre" v-model="nombre" class="input" required />
-                </div>
-                <div class="radio-group">
-                    <label for="nombre">Cantidad de jugadores:</label>
-                    <input class="radio-input" name="jugadores" id="jugadores1" type="radio" v-model="jugadores" :value="3">
-                    <label class="radio-label" for="jugadores1">
-                        <span class="radio-inner-circle"></span>
-                        3 Jugadores
-                    </label>
 
-                    <input class="radio-input" name="jugadores" id="jugadores2" type="radio" v-model="jugadores" :value="4">
-                    <label class="radio-label" for="jugadores2">
-                        <span class="radio-inner-circle"></span>
-                        4 Jugadores
-                    </label>
+                <div class="nombre-dinero-container">
+                    <div class="form-group input-wrapper">
+                        <label for="nombre">Nombre de la Partida:</label>
+                        <input type="text" id="nombre" v-model="nombre" class="input" required />
+                    </div>
 
-                    <input class="radio-input" name="jugadores" id="jugadores3" type="radio" v-model="jugadores" :value="5">
-                    <label class="radio-label" for="jugadores3">
-                        <span class="radio-inner-circle"></span>
-                        5 Jugadores
-                    </label>
-
-                    <input class="radio-input" name="jugadores" id="jugadores4" type="radio" v-model="jugadores" :value="6">
-                    <label class="radio-label" for="jugadores4">
-                        <span class="radio-inner-circle"></span>
-                        6 Jugadores
-                    </label>
-                    <input class="radio-input" name="jugadores" id="jugadores5" type="radio" v-model="jugadores" :value="7">
-                    <label class="radio-label" for="jugadores5">
-                        <span class="radio-inner-circle"></span>
-                        7 Jugadores
-                    </label>
-                    <input class="radio-input" name="jugadores" id="jugadores6" type="radio" v-model="jugadores" :value="8">
-                    <label class="radio-label" for="jugadores6">
-                        <span class="radio-inner-circle"></span>
-                        8 Jugadores
-                    </label>
+                    <div class="form-group input-wrapper">
+                        <label for="dineroInicial">Dinero Inicial:</label>
+                        <input type="text" id="dineroInicial" v-model="dineroInicial" class="input" required />
+                    </div>
                 </div>
 
-                <h1>Reglas de la Partida</h1>
-                <div class="form-group input-wrapper">
-                    <label for="dineroInicial">Dinero Inicial:</label>
-                    <input type="text" id="dineroInicial" v-model="dineroInicial" class="input" required />
+                <div class="reglas-group">
+                    <h1>Reglas de la Partida</h1>
+                    <div class="reglas-container">
+                        
+                        <!-- Mover la cantidad de jugadores dentro de este contenedor -->
+                        <div class="jugadores-group">
+                            <label for="nombre">Cantidad de jugadores:</label>
+                            <div class="radio-group">
+                                <input class="radio-input" name="jugadores" id="jugadores1" type="radio" v-model="jugadores" :value="3">
+                                <label class="radio-label" for="jugadores1">
+                                    <span class="radio-inner-circle"></span>
+                                    3 Jugadores
+                                </label>
+
+                                <input class="radio-input" name="jugadores" id="jugadores2" type="radio" v-model="jugadores" :value="4">
+                                <label class="radio-label" for="jugadores2">
+                                    <span class="radio-inner-circle"></span>
+                                    4 Jugadores
+                                </label>
+
+                                <input class="radio-input" name="jugadores" id="jugadores3" type="radio" v-model="jugadores" :value="5">
+                                <label class="radio-label" for="jugadores3">
+                                    <span class="radio-inner-circle"></span>
+                                    5 Jugadores
+                                </label>
+
+                                <input class="radio-input" name="jugadores" id="jugadores4" type="radio" v-model="jugadores" :value="6">
+                                <label class="radio-label" for="jugadores4">
+                                    <span class="radio-inner-circle"></span>
+                                    6 Jugadores
+                                </label>
+
+                                <input class="radio-input" name="jugadores" id="jugadores5" type="radio" v-model="jugadores" :value="7">
+                                <label class="radio-label" for="jugadores5">
+                                    <span class="radio-inner-circle"></span>
+                                    7 Jugadores
+                                </label>
+
+                                <input class="radio-input" name="jugadores" id="jugadores6" type="radio" v-model="jugadores" :value="8">
+                                <label class="radio-label" for="jugadores6">
+                                    <span class="radio-inner-circle"></span>
+                                    8 Jugadores
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Tiempo máximo de la partida -->
+                        <div class="tiempo-partida">
+                            <label for="tiempoMaximo">Tiempo Maximo de la partida:</label>
+                            <input class="radio-input" name="tiempoMaximo" id="tiempoMaximo1" type="radio" v-model="tiempoMaximo" value="-1">
+                            <label class="radio-label" for="tiempoMaximo1">
+                                <span class="radio-inner-circle"></span>
+                                Sin límite
+                            </label>
+
+                            <input class="radio-input" name="tiempoMaximo" id="tiempoMaximo2" type="radio" v-model="tiempoMaximo" value="900">
+                            <label class="radio-label" for="tiempoMaximo2">
+                                <span class="radio-inner-circle"></span>
+                                15 minutos
+                            </label>
+
+                            <input class="radio-input" name="tiempoMaximo" id="tiempoMaximo3" type="radio" v-model="tiempoMaximo" value="1800">
+                            <label class="radio-label" for="tiempoMaximo3">
+                                <span class="radio-inner-circle"></span>
+                                30 minutos
+                            </label>
+
+                            <input class="radio-input" name="tiempoMaximo" id="tiempoMaximo4" type="radio" v-model="tiempoMaximo" value="3600">
+                            <label class="radio-label" for="tiempoMaximo4">
+                                <span class="radio-inner-circle"></span>
+                                1 hora
+                            </label>
+
+                            <input class="radio-input" name="tiempoMaximo" id="tiempoMaximo4" type="radio" v-model="tiempoMaximo" value="3600">
+                            <label class="radio-label" for="tiempoMaximo4">
+                                <span class="radio-inner-circle"></span>
+                                1.5 horas
+                            </label>
+
+                            <input class="radio-input" name="tiempoMaximo" id="tiempoMaximo5" type="radio" v-model="tiempoMaximo" value="7200">
+                            <label class="radio-label" for="tiempoMaximo5">
+                                <span class="radio-inner-circle"></span>
+                                2 horas
+                            </label>
+                        </div>
+
+                        <!-- Tiempo máximo por turno -->
+                        <div class="tiempo-turno">
+                            <label for="tiempoPorTurno">Tiempo Maximo por turno:</label>
+                            <input class="radio-input" name="tiempoPorTurno" id="tiempoPorTurno1" type="radio" v-model="tiempoPorTurno" value="-1">
+                            <label class="radio-label" for="tiempoPorTurno1">
+                                <span class="radio-inner-circle"></span>
+                                Sin límite
+                            </label>
+
+                            <input class="radio-input" name="tiempoPorTurno" id="tiempoPorTurno1" type="radio" v-model="tiempoPorTurno" value="-1">
+                            <label class="radio-label" for="tiempoPorTurno1">
+                                <span class="radio-inner-circle"></span>
+                                15 segundos
+                            </label>
+
+                            <input class="radio-input" name="tiempoPorTurno" id="tiempoPorTurno2" type="radio" v-model="tiempoPorTurno" value="30">
+                            <label class="radio-label" for="tiempoPorTurno2">
+                                <span class="radio-inner-circle"></span>
+                                30 segundos
+                            </label>
+
+                            <input class="radio-input" name="tiempoPorTurno" id="tiempoPorTurno3" type="radio" v-model="tiempoPorTurno" value="60">
+                            <label class="radio-label" for="tiempoPorTurno3">
+                                <span class="radio-inner-circle"></span>
+                                60 segundos
+                            </label>
+
+                            <input class="radio-input" name="tiempoPorTurno" id="tiempoPorTurno4" type="radio" v-model="tiempoPorTurno" value="90">
+                            <label class="radio-label" for="tiempoPorTurno4">
+                                <span class="radio-inner-circle"></span>
+                                90 segundos
+                            </label>
+
+                            <input class="radio-input" name="tiempoPorTurno" id="tiempoPorTurno5" type="radio" v-model="tiempoPorTurno" value="120">
+                            <label class="radio-label" for="tiempoPorTurno5">
+                                <span class="radio-inner-circle"></span>
+                                2 minutos
+                            </label>
+                        </div>
+                    </div>
                 </div>
-                <div class="radio-group">
-                    <label for="nombre">Tiempo Maximo de la partida:</label>
-                    <input class="radio-input" name="tiempoMaximo" id="tiempoMaximo1" type="radio" v-model="tiempoMaximo" value="-1">
-                    <label class="radio-label" for="tiempoMaximo1">
-                        <span class="radio-inner-circle"></span>
-                        Sin límite
-                    </label>
 
-                    <input class="radio-input" name="tiempoMaximo" id="tiempoMaximo2" type="radio" v-model="tiempoMaximo" value="900">
-                    <label class="radio-label" for="tiempoMaximo2">
-                        <span class="radio-inner-circle"></span>
-                        15 minutos
-                    </label>
 
-                    <input class="radio-input" name="tiempoMaximo" id="tiempoMaximo3" type="radio" v-model="tiempoMaximo" value="1800">
-                    <label class="radio-label" for="tiempoMaximo3">
-                        <span class="radio-inner-circle"></span>
-                        30 minutos
-                    </label>
-
-                    <input class="radio-input" name="tiempoMaximo" id="tiempoMaximo4" type="radio" v-model="tiempoMaximo" value="3600">
-                    <label class="radio-label" for="tiempoMaximo4">
-                        <span class="radio-inner-circle"></span>
-                        1 hora
-                    </label>
-
-                    <input class="radio-input" name="tiempoMaximo" id="tiempoMaximo5" type="radio" v-model="tiempoMaximo" value="7200">
-                    <label class="radio-label" for="tiempoMaximo5">
-                        <span class="radio-inner-circle"></span>
-                        2 horas
-                    </label>
-                </div>
-                <div class="radio-group">
-                    <label for="nombre">Tiempo Maximo por turno:</label>
-                    <input class="radio-input" name="tiempoPorTurno" id="tiempoPorTurno1" type="radio" v-model="tiempoPorTurno" value="-1">
-                    <label class="radio-label" for="tiempoPorTurno1">
-                        <span class="radio-inner-circle"></span>
-                        Sin límite
-                    </label>
-
-                    <input class="radio-input" name="tiempoPorTurno" id="tiempoPorTurno2" type="radio" v-model="tiempoPorTurno" value="30">
-                    <label class="radio-label" for="tiempoPorTurno2">
-                        <span class="radio-inner-circle"></span>
-                        30 segundos
-                    </label>
-
-                    <input class="radio-input" name="tiempoPorTurno" id="tiempoPorTurno3" type="radio" v-model="tiempoPorTurno" value="60">
-                    <label class="radio-label" for="tiempoPorTurno3">
-                        <span class="radio-inner-circle"></span>
-                        60 segundos
-                    </label>
-
-                    <input class="radio-input" name="tiempoPorTurno" id="tiempoPorTurno4" type="radio" v-model="tiempoPorTurno" value="90">
-                    <label class="radio-label" for="tiempoPorTurno4">
-                        <span class="radio-inner-circle"></span>
-                        90 segundos
-                    </label>
-
-                    <input class="radio-input" name="tiempoPorTurno" id="tiempoPorTurno5" type="radio" v-model="tiempoPorTurno" value="120">
-                    <label class="radio-label" for="tiempoPorTurno5">
-                        <span class="radio-inner-circle"></span>
-                        2 minutos
-                    </label>
-                </div>
+                
 
                 <button class="button2" type="submit">
                     Crear partida
@@ -284,14 +317,17 @@ body {
     height: 100vh;
 }
 
+
 .crear-partida {
-    max-width: 400px;
+    max-width: 900px; 
     margin: 0 auto;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 8px;
     background-color: #f9f9f9;
+    min-height: 520px; 
 }
+
 
 .form-group {
     margin-bottom: 5px;
@@ -464,9 +500,8 @@ button {
     width: 100%;
     padding: 10px;
     background-color: #007bff;
+    margin-top: 20px; 
 }
-
-
 
 .button2 {
   display: inline-block;
@@ -535,4 +570,65 @@ button {
   background-color: #c70000c2;
   transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
 }
+
+.nombre-dinero-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.opciones-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px; 
+    margin-top: 20px;
+}
+
+.jugadores-group {
+    flex: 0.5; 
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; 
+}
+
+.reglas-group {
+    flex: 1.5; 
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.reglas-container {
+    display: flex;
+    gap: 40px;
+    width: 100%;
+    align-items: stretch; 
+}
+
+.jugadores-group,
+.tiempo-partida,
+.tiempo-turno {
+    flex: 1; 
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 100%; 
+}
+
+.opciones-jugadores-reglas {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    margin-top: 20px;
+    width: 100%;
+    align-items: stretch; 
+}
+
+.reglas-group h1 {
+    text-align: center;
+    width: 100%;
+    margin-bottom: 20px; 
+
+}
+
 </style>
