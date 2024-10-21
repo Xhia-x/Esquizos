@@ -14,14 +14,6 @@ module.exports.registerPartidaDBService = (partidaData) => {
         partida.tiempoMaximo = partidaData.tiempoMaximo;
         partida.tiempoPorTurno = partidaData.tiempoPorTurno;
 
-        console.log(partida.nombre);
-        console.log(partida.administrador);
-        console.log(partida.nJugadores);
-        console.log(partida.jugadores);
-        console.log(partida.link);
-        console.log(partida.dineroInicial);
-        console.log(partida.tiempoMaximo);
-
         try {
             const resultNombre = await partidaModel.findOne({ nombre: partidaData.nombre });
             const resultLink = await partidaModel.findOne({ link: partidaData.link });
@@ -41,13 +33,12 @@ module.exports.registerPartidaDBService = (partidaData) => {
 module.exports.buscarPartidaDBService = async (partidaData) => {
     try {
         const result = await partidaModel.findOne({ nombre: partidaData.nombre });
-        console.log(partidaData);
 
         if (result) {
-            console.log("Partida encontrada");
+            //console.log("Partida encontrada");
             return { status: true, msg: "Partida encontrada", partida: result  };
         } else {
-            console.log("INVALID DATA");
+            //console.log("INVALID DATA");
             return { status: false, msg: "INVALID DATA" };
         }
 
@@ -60,14 +51,12 @@ module.exports.buscarPartidaDBService = async (partidaData) => {
 module.exports.cargarPartidasUsuarioDBService = async (userData) => {
     try {
         var result = await partidaModel.find({ administrador: userData.username });
-        
-        console.log(userData);
 
         if (result) {
-            console.log("Partidas encontradas");
+            //console.log("Partidas encontradas");
             return { status: true, msg: "Partidas encontradas", partidas: result };
         } else {
-            console.log("INVALID DATA");
+            //console.log("INVALID DATA");
             return { status: false, msg: "INVALID DATA" };
         }
 
@@ -80,14 +69,12 @@ module.exports.cargarPartidasUsuarioDBService = async (userData) => {
 module.exports.cargarPartidasInvitadoDBService = async (userData) => {
     try {
         var result = await partidaModel.find({ jugadores: userData.username });
-        
-        console.log(userData);
 
         if (result) {
-            console.log("Partidas encontradas");
+            //console.log("Partidas encontradas");
             return { status: true, msg: "Partidas encontradas", partidas: result };
         } else {
-            console.log("INVALID DATA");
+            //console.log("INVALID DATA");
             return { status: false, msg: "INVALID DATA" };
         }
 
@@ -102,10 +89,10 @@ module.exports.eliminarPartidaDBService = async (partidaData) => {
         const result = await partidaModel.deleteOne({ nombre: partidaData.nombre });
 
         if (result.deletedCount > 0) {
-            console.log("Partida eliminada");
+            //console.log("Partida eliminada");
             return { status: true, msg: "Partida eliminada" };
         } else {
-            console.log("No se encontró la partida");
+            //console.log("No se encontró la partida");
             return { status: false, msg: "No se encontró la partida" };
         }
     } catch (error) {
@@ -119,10 +106,10 @@ module.exports.actualizarPartidaDBService = async (partidaData) => {
         const result = await partidaModel.updateOne({ nombre: partidaData.nombre }, partidaData);
 
         if (result.nModified > 0) {
-            console.log("Partida actualizada");
+            //console.log("Partida actualizada");
             return { status: true, msg: "Partida actualizada" };
         } else {
-            console.log("No se encontró la partida");
+            //console.log("No se encontró la partida");
             return { status: false, msg: "No se encontró la partida" };
         }
     } catch (error) {

@@ -42,7 +42,7 @@ const initializeSocket = (currentImage1, currentImage2, emit) => {
   socket.on('diceRolled', (data) => {
     currentImage1.value = images.value[data.dice1 - 1];
     currentImage2.value = images.value[data.dice2 - 1];
-    emit('diceRolled', data.dice1, data.dice2);
+    
   });
 };
 
@@ -73,9 +73,10 @@ export default {
     const rollDiceWithDeceleration = (timeElapsed = 0, intervalTime = 50) => {
       if (timeElapsed >= 5000) {
         rolling.value = false;
-        // Emitimos los valores finales cuando la animación termina
-        emitRollDice(finalDice1, finalDice2);
-        return; // Finalizamos la animación
+        emitRollDice(finalDice1, finalDice2);  // Emitimos los valores finales cuando la animación termina
+        //emit('diceRolled', finalDice1, finalDice2); 
+        emit('diceRolled', finalDice1+ finalDice2);
+        return;
       }
 
       // Cambiamos las imágenes de los dados

@@ -1,6 +1,6 @@
 <template>
   <body>
-
+    <Reconectar />
     <div class="botonReglas">
         <Reglas>
            
@@ -54,6 +54,7 @@
 import autenticadorSesion from '../mixins/AutenticadorSesion.js';
 import VistaInvitaciones from './VistaInvitaciones.vue';
 import Reglas from './Reglas.vue';
+import Reconectar from './Reconectar.vue';
 
 
 export default {
@@ -62,7 +63,8 @@ export default {
   mixins: [autenticadorSesion],
   components: {
     Reglas,
-    VistaInvitaciones
+    VistaInvitaciones,
+    Reconectar
   },
   data () {
     return {
@@ -74,6 +76,7 @@ export default {
     cerrarSesion () {
       localStorage.removeItem('user');
       sessionStorage.removeItem('user');
+      localStorage.removeItem('partida');
       this.$router.push('/');
     }
   },
