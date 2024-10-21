@@ -1,10 +1,9 @@
 <template>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Chelsea Market">
-<div class="monopoly-board">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Chelsea Market">
     <video src="../assets/view2.mp4" autoplay="true" muted="true" loop="true"></video>
+  <div class="monopoly-board">
 
-    <!-- Esquinas vacías -->
+    <!--- Esquinas -->
     <div class="corner top-left" id="21">
         <h1 class="carceletra1">Cárcel</h1>
         <img src="@/assets/encerradoC.webp" class="carcel" />
@@ -24,144 +23,91 @@
 
     <!-- Lado superior -->
     <div class="side top-side">
-        <div class="property-top" id="22">
-            <Casilla color="red" title="Carrer de la Marina" price="100" />
+      <div class="property-top" id="22"><Casilla color="red" title="AV. KENTUCKY" price="220" /></div>
+      <div class="property-top" id="23"><Casilla color="" title="XD" price="" /></div>
+      <div class="property-top" id="24"><Casilla color="red" title="AV. INDIANA" price="220" /></div>
+      <div class="property-top" id="25"><Casilla color="red" title="AV.ILLINOIS" price="240" /></div>
+      <div class="property-top" id="26"><Casilla color="" title="FERROCARRIL B. & O." price="200" /></div>
+      <div class="property-top" id="27"><Casilla color="yellow" title="AV. ATLÁNTICO" price="260" /></div>
+      <div class="property-top" id="28"><Casilla color="yellow" title="AV. VENTNOR" price="260" /></div>
+      <div class="property-top" id="29"><Casilla color="" title="COMPAÑÍA DE AGUA" price="150" /></div>
+      <div class="property-top" id="30"><Casilla color="yellow" title="JARDINES MARVIN" price="280" /></div>
+    </div> 
+
+    <!-- Lado derecho -->
+    <div class="side right-side">
+      <div class="property-rotate-right" id="32"><Casilla color="green" title="AV. PACÍFICO" price="300" /></div>
+      <div class="property-rotate-right" id="33"><Casilla color="green" title="AV. CAROLINA DEL NORTE" price="300" /></div>
+      <div class="property-rotate-right" id="34"><Casilla color="" title="XD" price="" /></div>
+      <div class="property-rotate-right" id="35"><Casilla color="green" title="AV. PENNSYLVANIA" price="320" /></div>
+      <div class="property-rotate-right" id="36"><Casilla color="" title="FERROCARRÍL VÍA RÁPIDA" price="200" /></div>
+      <div class="property-rotate-right" id="37"><Casilla color="" title="XD" price="" /></div>
+      <div class="property-rotate-right" id="38"><Casilla color="blue" title="PLAZA PARK" price="350" /></div>
+      <div class="property-rotate-right" id="39"><Casilla color="" title="IMPUESTO SOBRE POSESIONES DE LUJO - PÁGUESE $100" price="" /></div>
+      <div class="property-rotate-right" id="40"><Casilla color="blue" title="EL MUELLE" price="400" /></div>
+    </div>
+
+    <!-- Lado inferior -->
+    <div class="side bottom-side">
+      <div class="property-bottom" id="10"><Casilla color="lightblue" title="AV. CONNECTICUT" price="120" /></div>
+      <div class="property-bottom" id="9"><Casilla color="lightblue" title="AV. VERMONT" price="100" /></div>
+      <div class="property-bottom" id="8"><Casilla color="" title="XD" price="" /></div>
+      <div class="property-bottom" id="7"><Casilla color="lightblue" title="AV. ORIENTAL" price="100" /></div>
+      <div class="property-bottom" id="6"><Casilla color="" title="FERROCARRIL READING" price="200" /></div>
+      <div class="property-bottom" id="5"><Casilla color="" title="Impuesto sobre ingreso - Páguese $200" price="" /></div>
+      <div class="property-bottom" id="4"><Casilla color="brown" title="AV. BÁLTICA" price="60" /></div>
+      <div class="property-bottom" id="3"><Casilla color="" title="XD" price="" /></div>
+      <div class="property-bottom" id="2"><Casilla color="brown" title="AV. MEDITERRÁNEO" price="60" /></div>
+    </div>
+
+    <!-- Lado izquierdo -->
+    <div class="side left-side">
+      <div class="property-rotate-left" id="20"><Casilla color="orange" title="AV. NUEVA YORK" price="200" /></div>
+      <div class="property-rotate-left" id="18"><Casilla color="orange" title="AV. TENNESSEE" price="180" /></div>
+      <div class="property-rotate-left" id="19"><Casilla color="" title="XD" price="" /></div>
+      <div class="property-rotate-left" id="17"><Casilla color="orange" title="PLAZA ST. JAMES" price="180" /></div>
+      <div class="property-rotate-left" id="16"><Casilla color="" title="FERROCARRIL PENSSYLVANIA" price="" /></div>
+      <div class="property-rotate-left" id="15"><Casilla color="purple" title="AV. VIRGINIA" price="160" /></div>
+      <div class="property-rotate-left" id="14"><Casilla color="purple" title="AV. ESTADOS" price="140" /></div>
+      <div class="property-rotate-left" id="13"><Casilla color="" title="COMPAÑÍA DE ELECTRICIDAD" price="150" /></div>
+      <div class="property-rotate-left" id="12"><Casilla color="purple" title="PLAZA SAN CARLOS" price="140" /></div>
+    </div>
+
+    
+
+
+    <div class="center-container">
+        <div class="center-logo">
+            <img src="@/assets/monopolylogoM.png" alt="Monopoly Logo" />
+            <div class="pop-up" v-if="Popup" >
+                <FigurasMonopoly @close="togglePopup() " @select="toggleSelect"  />
+            </div>
         </div>
-        <div class="property-top" id="23" <Casilla color="" title="" price="" />
+        <div class="ruletaDado">
+            <dados @diceRolled="movePieceBasedOnDice" />
+        </div>
     </div>
-    <div class="property-top" id="24">
-        <Casilla color="red" title="Carrer de la Marina" price="100" />
-    </div>
-    <div class="property-top" id="25">
-        <Casilla color="red" title="Carrer de la Marina" price="100" />
-    </div>
-    <div class="property-top" id="26">
-        <Casilla color="" title="" price="" />
-    </div>
-    <div class="property-top" id="27">
-        <Casilla color="yellow" title="Carrer de la Marina" price="100" />
-    </div>
-    <div class="property-top" id="28">
-        <Casilla color="yellow" title="Carrer de la Marina" price="100" />
-    </div>
-    <div class="property-top" id="29">
-        <Casilla color="" title="" price="" />
-    </div>
-    <div class="property-top" id="30">
-        <Casilla color="yellow" title="Carrer de la Marina" price="100" />
-    </div>
-</div>
 
-<!-- Lado derecho -->
-<div class="side right-side">
-    <div class="property-rotate-right" id="32">
-        <Casilla color="green" title="Carrer de la Marina" price="100" />
-    </div>
-    <div class="property-rotate-right" id="33">
-        <Casilla color="green" title="Carrer de la Marina" price="100" />
-    </div>
-    <div class="property-rotate-right" id="34" <Casilla color="" title="" price="" />
-</div>
-<div class="property-rotate-right" id="35">
-    <Casilla color="green" title="Carrer de la Marina" price="100" />
-</div>
-<div class="property-rotate-right" id="36">
-    <Casilla color="" title="" price="" />
-</div>
-<div class="property-rotate-right" id="37">
-    <Casilla color="" title="" price="" />
-</div>
-<div class="property-rotate-right" id="38">
-    <Casilla color="blue" title="Carrer de la Marina" price="100" />
-</div>
-<div class="property-rotate-right" id="39">
-    <Casilla color="" title="" price="" />
-</div>
-<div class="property-rotate-right" id="40">
-    <Casilla color="blue" title="Carrer de la Marina" price="100" />
-</div>
+    <!-- Ficha -->
+   
+    <div ref="ficha" class="ficha" :style="pieces[0].style" @click="movePiece(0)">
+    
+ 
 
 
-<!-- Lado inferior -->
-<div class="side bottom-side">
-    <div class="property-bottom" id="10">
-        <Casilla color="lightblue" title="Carrer de la Marina" price="100" />
     </div>
-    <div class="property-bottom" id="9">
-        <Casilla color="lightblue" title="Carrer de la Marina" price="100" />
-    </div>
-    <div class="property-bottom" id="8">
-        <Casilla color="" title="" price="" />
-    </div>
-    <div class="property-bottom" id="7">
-        <Casilla color="lightblue" title="Carrer de la Marina" price="100" />
-    </div>
-    <div class="property-bottom" id="6">
-        <Casilla color="" title="" price="" />
-    </div>
-    <div class="property-bottom" id="5">
-        <Casilla color="" title="" price="" />
-    </div>
-    <div class="property-bottom" id="4">
-        <Casilla color="brown" title="Carrer de la Marina" price="100" />
-    </div>
-    <div class="property-bottom" id="3">
-        <Casilla color="" title="" price="" />
-    </div>
-    <div class="property-bottom" id="2">
-        <Casilla color="brown" title="Carrer de la Marina" price="100" />
-    </div>
+    <!-- Botón Figuras -->
+    <button class="figuras-button" @click="togglePopup">Seleccionar Figuras</button>
+    <div class="gray-background"></div>
+    <button @click="goToMonopolyView">Volver a MonopolyView</button>
+    <button @click="goToMonopolyView2">Ir a Monopoly View 2</button>
+
+  <h1></h1>
 </div>
+    
 
-<!-- Lado izquierdo -->
-<div class="side left-side">
-    <div class="property-rotate-left" id="20">
-        <Casilla color="orange" title="Carrer de la Marina" price="100" />
-    </div>
-    <div class="property-rotate-left" id="19">
-        <Casilla color="" title="" price="" />
-    </div>
-    <div class="property-rotate-left" id="18">
-        <Casilla color="orange" title="Carrer de la Marina" price="100" />
-    </div>
-    <div class="property-rotate-left" id="17">
-        <Casilla color="orange" title="Carrer de la Marina" price="100" />
-    </div>
-    <div class="property-rotate-left" id="16">
-        <Casilla color="" title="" price="" />
-    </div>
-    <div class="property-rotate-left" id="15">
-        <Casilla color="purple" title="Carrer de la Marina" price="100" />
-    </div>
-    <div class="property-rotate-left" id="14">
-        <Casilla color="purple" title="Carrer de la Marina" price="100" />
-    </div>
-    <div class="property-rotate-left" id="13">
-        <Casilla color="" title="" price="" />
-    </div>
-    <div class="property-rotate-left" id="12">
-        <Casilla color="purple" title="Carrer de la Marina" price="100" />
-    </div>
-</div>
-
-<!-- Logo centrado -->
-<div class="center-logo">
-    <img src="@/assets/monopolylogo.png" alt="Monopoly Logo" />
-</div>
-
-<!-- Ruleta y dado -->
-<div class="ruletaDado">
-    <dados @diceRolled="movePieceBasedOnDice" />
-</div>
-
-<!-- Ficha -->
-
-<div class="ficha" :style="pieces[0].style" @click="movePiece(0)"></div>
-<!-- Botón Figuras -->
-<button class="figuras-button" @click="irAFiguras">Seleccionar Figuras</button>
-<div class="gray-background"></div>
-<button @click="goToMonopolyView2">Ir a Monopoly View 2</button>
-
+    
+  
 </template>
 
 <script>
@@ -169,29 +115,35 @@ import dados from './dados.vue';
 import Casilla from '@/components/casillas.vue';
 
 export default {
-    name: "MonopolyView",
+    name: "MonopolyView3",
     components: {
         dados,
         Casilla
     },
     data() {
         return {
-
+         
             pieces: [{
                 currentPosition: 1, // Posición inicial de la ficha (esquina inferior derecha)
                 style: {
                     top: '1850px',
                     left: '1850px',
                     transform: 'translate(-50%, -50%)'
-
+                    
                 }
             }],
             step: 5, // Porcentaje de movimiento en cada dirección
-
+        
+         
+            
+            
+            
+            
         };
-
+        
     },
-
+   
+  
     methods: {
         // Mover la ficha según los pasos dados
         movePieceBasedOnDice(steps) {
@@ -221,6 +173,9 @@ export default {
                     left: `${rect.left + window.scrollX}px`, // Añadir scrollX para corregir si hay desplazamiento de la página
                     transform: 'translate(-50%, -50%)' // Mantener la ficha centrada
                 };
+                this.$nextTick(() => {
+                    this.$refs.ficha.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                });
             }
         },
 
@@ -229,24 +184,43 @@ export default {
             return position;
         },
 
-        // Método para navegar a la vista FigurasMonopoly
-        irAFiguras() {
-            this.$router.push({
-                name: 'FigurasMonopoly'
-            });
+
+         // Método para navegar a la vista FigurasMonopoly
+         irAFiguras() {
+            this.$router.push({ name: 'FigurasMonopoly' });
+        },
+        
+        goToMonopolyView() {
+            this.$router.push({ name: 'MonopolyView' });
         },
 
         goToMonopolyView2() {
-            this.$router.push({
-                name: 'MonopolyView2'
-            });
+            this.$router.push({ name: 'MonopolyView2' });
         }
+
 
     }
 };
 </script>
 
+
 <style scoped>
+
+.center-container {
+    display: flex;
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center; 
+    z-index: 2; 
+    position: relative; 
+    grid-column: 5 / span 3; 
+    grid-row: 4 / span 2; 
+    background-color: rgba(117, 9, 112, 0.332);
+    margin-block: 5%;
+    padding: 5vw; 
+    border-radius: 15px; 
+}
+
 .LetraInicio {
     font-family: 'Orbitron', sans-serif;
     /* Fuente cyberpunk */
@@ -261,18 +235,16 @@ export default {
 }
 
 .monopoly-board {
+    align-items: center;
     display: grid;
-    grid-template-columns: 230px repeat(9, 170px) 230px;
-    grid-template-rows: 230px repeat(9, 170px) 230px;
-    width: auto;
-    height: auto;
+    width: 100vw; 
+    height: 100vh; 
+    max-width: 100%; 
+    max-height: 100%; 
     padding: 0;
     margin: 0;
     gap: 0;
-    position: absolute;
-    /* Añade esta línea */
-    overflow: hidden;
-    /* Limita el contenido al tamaño del tablero */
+    box-sizing: border-box;
 }
 
 /* Esquinas cuadradas */
@@ -440,7 +412,7 @@ export default {
     background-color: #9b59b6;
     background-image: linear-gradient(#9b59b6, #84cdfa, #5ad1cd);
     transform-origin: center;
-    z-index: 0;
+    z-index: 200;
     transition: top 0.5s ease, left 0.5s ease, transform 0.5s ease;
     /* Añadido */
 }
@@ -492,18 +464,15 @@ export default {
 
 /* Estilo para el botón Figuras */
 .figuras-button {
-    position: absolute;
-    top: 600px;
-    left: 1000px;
-    transform: translateX(-50%);
-    padding: 10px 20px;
-    background-color: #cf34d7;
+    margin-bottom: 5%;
+    position: relative;
+    background-color: rgb(255, 0, 234);
     color: white;
     border: none;
+    z-index: 600;
     border-radius: 5px;
     cursor: pointer;
 }
-
 .figuras-button:hover {
     background-color: #ba18b7;
 }
@@ -583,21 +552,22 @@ img {
 }
 
 .gray-background {
-    background-color: rgba(93, 12, 92, 0.332);
+    background-color: rgba(74, 9, 73, 0.562);
     grid-column: 1 / span 11;
     grid-row: 1 / span 11;
     pointer-events: none;
     z-index: -1;
 }
 
-.video {
+video {
     position: fixed;
     top: 0;
     left: 0;
-    min-width: 100%;
-    min-height: 100%;
-    z-index: -100;
-    object-fit: cover;
-    pointer-events: none;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover; /* Asegura que el video cubra toda la pantalla */
+    z-index: -1; /* Envía el video detrás de los otros elementos */
 }
+
+
 </style>

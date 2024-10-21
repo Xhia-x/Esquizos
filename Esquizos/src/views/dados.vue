@@ -125,7 +125,7 @@ export default {
 
 button {
   padding: 10px 20px;
-  background-color: #007bff;
+  background-color: red;
   color: white;
   border: none;
   cursor: pointer;
@@ -133,7 +133,7 @@ button {
 }
 
 button:hover {
-  background-color: #0056b3;
+  background-color: rgb(218, 0, 0);
 }
 
 
