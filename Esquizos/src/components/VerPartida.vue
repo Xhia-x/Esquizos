@@ -7,6 +7,7 @@
         <li v-for="jugador in partida.jugadores" :key="jugador">{{ jugador }}</li>
       </ul>
       <button v-if="comprobarAdministrador()" type="button" class="finalizarPartidaBoton" @click="finalizarPartida">Finalizar Partida</button>
+      <button type="button" class="volverHomeBoton" @click="volverHome">Volver al inicio</button>
       <MonopolyView />
     </div>
 
@@ -17,9 +18,11 @@
   import MonopolyView from '@/views/MonopolyView.vue';
   import { io } from 'socket.io-client'
   import Swal from 'sweetalert2';
+  import autenticadorSesion from '../mixins/AutenticadorSesion.js';
 
   export default {
     name: 'VerPartida',
+    mixins: [autenticadorSesion],
     components: {
       MonopolyView,
     },
@@ -27,20 +30,13 @@
       return {
         partida: null,
         socket: null,
+        nombrePartida: this.$route.params.nombrePartida,
+        isPlayerLeft: false,
       };
     },
     created() {
-      const nombrePartida = this.$route.params.nombrePartida;
-      this.cargarPartida(nombrePartida);
-      this.socket = io('http://localhost:9992');
-      this.socket.on('partidaEliminada', (data) => {
-        if (data && data.message) {
-            alert(data.message);
-            this.$router.push({ name: 'Home' }); // Redirigir a la página principal
-        } else {
-            console.error('Error: No se recibió el mensaje esperado', data);
-        }
-    });
+      this.cargarPartida(this.nombrePartida);
+      this.iniciarSocket();
     },
     beforeUnmount() {
       if (this.socket) {
@@ -48,8 +44,7 @@
       }
     },
     mounted() {
-      const nombrePartida = this.$route.params.nombrePartida;
-      this.socket.emit('joinPartida', nombrePartida);  // Join the game room
+      this.socket.emit('joinPartida', this.nombrePartida);  // Join the game room
     },
     methods: {
       cargarPartida(nombrePartida) {
@@ -58,6 +53,11 @@
             this.partida = data;
             console.log(this.partida.jugadores);
             const usuario = localStorage.getItem('user') || sessionStorage.getItem('user');
+            if(!usuario){
+              alert("Debes iniciar sesión para unirte a la partida");
+              this.$router.push({ name: 'Home' });
+              return;
+            }
             if (this.partida != null && !this.partida.jugadores.includes(usuario)) {
               if(this.partida.jugadores.length >= this.partida.nJugadores){
                 alert("La partida está llena");
@@ -67,12 +67,41 @@
               this.alertaInvitacionPartida(usuario, nombrePartida);
               return;
             }
+            localStorage.setItem('partida',  JSON.stringify({nombre: nombrePartida, usuario: usuario}));
           })
           .catch(err => {
             console.error(err);
             alert("Partida no encontrada");
             this.$router.push({ name: 'Home' });
           });
+      },
+      iniciarSocket() {
+        this.socket = io('http://localhost:9992');
+
+        // Unirse a la partida al conectarse
+        this.socket.on('connect', () => {
+          this.socket.emit('joinPartida', this.nombrePartida);
+        });
+
+        this.socket.on('partidaEliminada', (data) => {
+          if (data && data.message) {
+            alert(data.message);
+            localStorage.removeItem('partida');
+            this.$router.push({ name: 'Home' }); 
+          } else {
+            console.error('Error: No se recibió el mensaje esperado', data);
+          }
+        });
+
+        this.socket.on('disconnect', () => {
+          console.log('Desconectado del servidor.');
+          this.isPlayerLeft = true; // Mark player as left
+        });
+
+        this.socket.on('reconnect', () => {
+          console.log('Reconectado al servidor.');
+          this.socket.emit('joinPartida', this.nombrePartida); // Rejoin the game room
+        });
       },
       comprobarAdministrador() {
         if (!this.partida) return false; // Ensure partida is loaded
@@ -122,7 +151,21 @@
               this.$router.push({ name: 'Home' });
             }
           });
-       }
+       },
+      volverHome() {        
+        this.$router.push({ name: 'Home' }); // Redirigir al inicio
+      },
+      rejoinGame() {
+        const usuario = localStorage.getItem('user') || sessionStorage.getItem('user');
+        if (usuario && this.partida.jugadores.length < this.partida.nJugadores) {
+          this.socket.emit('joinPartida', this.nombrePartida);
+          this.isPlayerLeft = false; // Mark player as back in the game
+          this.partida.jugadores.push(usuario); // Re-add the user to the player list
+          alert("Te has reunido a la partida!");
+        } else {
+          alert("No puedes unirte a la partida.");
+        }
+      },
 
     }
   };
@@ -133,6 +176,12 @@
     position: absolute;
     top: 10px;
     right: 10px;
+  }
+
+  .volverHomeBoton {
+    position: absolute;
+    top: 10px;
+    right: 20px;
   }
   </style>
 
