@@ -145,7 +145,7 @@ export default {
             }],
             step: 5, // Porcentaje de movimiento en cada dirección
             socket: null,
-            partidaActual: null
+            partidaActual: null,
             Popup: false,
             Figure: null //new URL('@/assets/hollow.png', import.meta.url).href
         
