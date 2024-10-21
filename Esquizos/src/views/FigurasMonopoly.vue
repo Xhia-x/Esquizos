@@ -1,4 +1,4 @@
-<template>
+<template class="pop-up">
     <Reglas></Reglas>
      <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
      <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
@@ -18,7 +18,7 @@
     
             <h2> Hollow</h2>
             <div class = "rectangulo">
-        <img src ="@/assets/hollow.png" alt="Hollow" class = "animada"  @click="seleccionarFigura('hollow')"/>
+        <img src ="@/assets/hollow.png" alt="Hollow" class = "animada"  @click='seleccionarFigura("hollow")'/>
             
         </div>
         <p class ="descripcion">El Caballero es silencioso, nunca habla, lo que añade un aire misterioso a su carácter. Está completamente envuelto en la atmósfera oscura y melancólica del reino subterráneo de Hallownest.</p>
@@ -28,7 +28,7 @@
     <div class = "contenedor">
         <h2> Gato</h2>
         <div class = "rectangulo">
-        <img src = "@/assets/cat.png" alt="Cat" class = "animada"/>
+        <img src = "@/assets/cat.png" alt="Cat" class = "animada" @click='seleccionarFigura("cat")'/>
         </div>
         <p class ="descripcion">Su cuerpo, ágil y flexible, se mueve con una elegancia casi sobrenatural, deslizándose por los espacios con una precisión que desafía las leyes físicas. Puede desaparecer entre las sombras sin dejar rastro, y cuando lo ves nuevamente, parece haberse materializado de la nada.</p>
     </div>
@@ -36,7 +36,7 @@
         <div class ="contenedor">
             <h2> Warhammer</h2>
          <div class = "rectangulo">
-       <img src = "@/assets/warhammer.png" alt="Warhammer" class="animada" />
+       <img src = "@/assets/warhammer.png" alt="Warhammer" class="animada" @click='seleccionarFigura("warhammer")' />
         </div>
        <p class ="descripcion">Puede ser un caballero, un paladín o incluso un guerrero del caos. Si es un caballero, su armadura reluciente y capa ondeante lo presentan como un símbolo de honor y justicia, siempre listo para defender a su reino de las hordas de orcos, bestias y criaturas oscuras.</p>
     </div>  
@@ -44,7 +44,9 @@
     <div class ="contenedor">
         <h2> Mago</h2>
         <div class = "rectangulo">
-       <img src = "@/assets/mago.png" alt="Mago" class="animada" />
+          <div class="maguito">
+       <img src = "@/assets/mago.png" alt="Mago" class="animada" @click='seleccionarFigura("mago")'>
+      </div>
         </div>
          <p class ="descripcion">Hechicero especializado en la magia ofensiva, utilizando poderosos hechizos elementales y destructivos para dañar a sus enemigos.</p>
     </div>
@@ -52,7 +54,7 @@
     <div class ="contenedor">
         <h2> Illidan</h2>   
         <div class = "rectangulo">
-       <img src = "@/assets/illidan.png" alt="Illidan" class="animada" />
+       <img src = "@/assets/illidan.png" alt="Illidan" class="animada" @click='seleccionarFigura("illidan")' />
         </div>
             <p class ="descripcion">Illidan es más famoso por convertirse en un Cazador de Demonios. Para combatir a la Legión Ardiente, absorbió la energía de los demonios y se transformó en algo más allá de un simple elfo de la noche.</p>
     </div>
@@ -61,7 +63,7 @@
     <div class ="contenedor">
         <h2> Oveja</h2>
         <div class = "rectangulo">
-       <img src = "@/assets/oveja.png" alt="Oveja" class="animada"/>
+       <img src = "@/assets/oveja.png" alt="Oveja" class="animada" @click='seleccionarFigura("oveja")'/>
         </div>
             <p class ="descripcion">Una criatura salida de los rincones más oscuros de la naturaleza, su figura inconfundible pero distorsionada por una presencia inquietante. Su lana, antaño blanca y suave, ahora parece oscura como el carbón. </p>
     </div>
@@ -76,7 +78,7 @@
 <button type="button" class="volverAtrasBoton" @click="volverAtras">volver atrás</button>
   </template>
   
-  <script>
+  <script >
   import Reglas from '../components/Reglas.vue';
   import PopUp from '../components/PopUp.vue';
   export default {
@@ -88,14 +90,11 @@
     methods: {
       seleccionarFigura(figuraName) {
       // Pasar el nombre de la figura en lugar de la ruta
-      this.$router.push({
-        name: 'MonopolyView',
-        params: { figuraSeleccionada: figuraName }
-      });
+      this.$emit('select', figuraName);
     },
 
       volverAtras () {
-        this.$router.push('/home');
+        this.$emit('close');
       }
     }
    
@@ -103,6 +102,9 @@
   </script>
   
  <style scoped >
+
+
+
 .page-container {
     display: flex;
   justify-content: center;
@@ -110,6 +112,7 @@
   min-height: 100vh; /* Asegura que el contenedor ocupe al menos el 100% de la altura de la ventana */
   width: 100vw; /* Asegura que el contenedor ocupe el 100% del ancho de la ventana */
   box-sizing: border-box; /* Incluye el padding y el border en el ancho y alto total del elemento */
+  
 }
 
 
@@ -145,6 +148,8 @@ text-shadow: 0 1px 0 #ddd, 0 2px 0 #ccc, 0 3px 0 #bbb, 0 4px 0 #aaa, 0 5px 0 #ac
   grid-template-columns: repeat(3, 1fr); /* Tres columnas */
   gap: 20px; /* Espacio entre las imágenes */
   margin-top: 20px;
+  max-height: 80vh; /* Ajusta la altura máxima del contenedor */
+  overflow-y: auto;
 }
 
 .rectangulo {
@@ -219,6 +224,8 @@ img {
 
 
 
+
+
 button {
     width: auto; /* Ajusta el ancho del botón según el contenido */
     padding: 10px;
@@ -231,6 +238,8 @@ button {
     top: 10px; /* Ajusta la distancia desde la parte superior */
     right: 10px; /* Ajusta la distancia desde la parte derecha */
 }
+
+
 
   </style>
   
