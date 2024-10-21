@@ -396,15 +396,18 @@ select {
 }
 
 .volverAtrasBoton {
-    background-color: #c70000c2;
-    color: white;
-    border: none;
+    background-color: #9c1616c2;
+    color: #F8E8A0;
+    border: 1px solid #FFFFFF;
     border-radius: 5px;
-    cursor: pointer;
+    padding: 10px 20px;
+    font-size: 14px;
     position: absolute;
     right: 20px;
-    top: 20px;
-    width: 200px;
+    top: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    max-width: 10%;
 }
 
 .enlaceGenerado {
@@ -662,4 +665,3 @@ button {
 }
 
 </style>
-
