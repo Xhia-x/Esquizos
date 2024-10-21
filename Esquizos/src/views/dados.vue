@@ -44,7 +44,7 @@ const initializeSocket = (currentImage1, currentImage2, emit) => {
     // Actualizar las imágenes de los dados con los valores recibidos del servidor
     currentImage1.value = images.value[data.dice1 - 1];
     currentImage2.value = images.value[data.dice2 - 1];
-    emit('diceRolled', data.dice1, data.dice2);
+    
   });
 };
 
@@ -77,6 +77,7 @@ export default {
         rolling.value = false;
         emitRollDice(finalDice1, finalDice2);  // Emitimos los valores finales cuando la animación termina
         //emit('diceRolled', finalDice1, finalDice2); 
+        emit('diceRolled', finalDice1+ finalDice2);
         return;
       }
 

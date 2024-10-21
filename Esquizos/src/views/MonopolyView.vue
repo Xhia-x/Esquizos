@@ -104,6 +104,7 @@
 <script>
 import dados from './dados.vue';
 import Casilla from '@/components/casillas.vue';
+import { io } from 'socket.io-client';
 
 export default {
     name: "MonopolyView",
@@ -124,7 +125,8 @@ export default {
                 }
             }],
             step: 5, // Porcentaje de movimiento en cada dirección
-        
+            socket: null,
+            partidaActual: null
          
             
             
@@ -132,6 +134,20 @@ export default {
             
         };
         
+    },
+    mounted() {
+        // Conectar al servidor de WebSocket
+        this.socket = io("http://localhost:9992");
+        this.partidaActual = window.location.pathname.split('/').pop();
+        // Unirse a la partida
+        this.socket.emit("joinPartida", this.partidaActual);
+
+        // Escuchar cuando otro usuario mueve una ficha
+        this.socket.on("movimientoGenerado", (data) => {
+        const { ficha, indice, usuario } = data;
+        this.pieces[indice] = ficha;
+        console.log(`Ficha ${indice} movida a la posición ${ficha.currentPosition} por el usuario ${usuario}`); 
+        });
     },
    
   
@@ -164,6 +180,8 @@ export default {
                     left: `${rect.left + window.scrollX}px`, // Añadir scrollX para corregir si hay desplazamiento de la página
                     transform: 'translate(-50%, -50%)' // Mantener la ficha centrada
                 };
+                const usuario = localStorage.getItem('user') || sessionStorage.getItem('user');
+                this.socket.emit("moverFicha", {ficha: this.pieces[0],indice: 0,usuario: usuario, partida: this.partidaActual});
             }
         },
 
