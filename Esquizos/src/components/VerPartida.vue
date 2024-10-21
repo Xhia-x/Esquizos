@@ -18,9 +18,11 @@
   import MonopolyView from '@/views/MonopolyView.vue';
   import { io } from 'socket.io-client'
   import Swal from 'sweetalert2';
+  import autenticadorSesion from '../mixins/AutenticadorSesion.js';
 
   export default {
     name: 'VerPartida',
+    mixins: [autenticadorSesion],
     components: {
       MonopolyView,
     },
@@ -51,6 +53,11 @@
             this.partida = data;
             console.log(this.partida.jugadores);
             const usuario = localStorage.getItem('user') || sessionStorage.getItem('user');
+            if(!usuario){
+              alert("Debes iniciar sesión para unirte a la partida");
+              this.$router.push({ name: 'Home' });
+              return;
+            }
             if (this.partida != null && !this.partida.jugadores.includes(usuario)) {
               if(this.partida.jugadores.length >= this.partida.nJugadores){
                 alert("La partida está llena");
