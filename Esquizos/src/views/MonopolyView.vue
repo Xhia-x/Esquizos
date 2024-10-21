@@ -19,6 +19,8 @@
         <img src="@/assets/Start.png" class="Start" />
     </div>
 
+    
+
     <!-- Lado superior -->
     <div class="side top-side">
       <div class="property-top"id="22"><Casilla color="red" title="Carrer de la Marina" price="100" /></div>
@@ -71,9 +73,15 @@
       <div class="property-rotate-left"id="12"><Casilla color="purple" title="Carrer de la Marina" price="100" /></div>
     </div>
 
+ 
+
     <!-- Logo centrado -->
     <div class="center-logo">
       <img src="@/assets/monopolylogo.png" alt="Monopoly Logo" />
+
+      <div class="pop-up" v-if="Popup" >
+        <FigurasMonopoly @close="togglePopup() " @select="toggleSelect"  />
+    </div>
     </div>
 
     <!-- Ruleta y dado -->
@@ -84,14 +92,22 @@
     <!-- Ficha -->
    
     <div class="ficha" :style="pieces[0].style" @click="movePiece(0)">
+        
+    <div class="figurin">
+    <div v-if="Figure != 'default'" >
+        <img :src="Figure" alt="ficha"lass="animada"/>
+    </div> <!-- Agregar variable de estado -->
     
- 
-
+    </div>
 
     </div>
   <!-- Botón Figuras -->
-  <button class="figuras-button" @click="irAFiguras">Seleccionar Figuras</button>
-  <div class="gray-background"></div>
+  <button class="figuras-button" @click="togglePopup">Seleccionar Figuras</button>
+  <div class="gray-background">
+    
+    
+  </div>
+  
   <button @click="goToMonopolyView2">Ir a Monopoly View 2</button>
   <button @click="goToMonopolyView3">Ir a Monopoly View 3</button>
 </div>
@@ -105,12 +121,15 @@
 import dados from './dados.vue';
 import Casilla from '@/components/casillas.vue';
 import { io } from 'socket.io-client';
+import FigurasMonopoly from './FigurasMonopoly.vue';
 
 export default {
     name: "MonopolyView",
     components: {
         dados,
-        Casilla
+        Casilla,
+        FigurasMonopoly,
+
     },
     data() {
         return {
@@ -127,10 +146,10 @@ export default {
             step: 5, // Porcentaje de movimiento en cada dirección
             socket: null,
             partidaActual: null
+            Popup: false,
+            Figure: null //new URL('@/assets/hollow.png', import.meta.url).href
+        
          
-            
-            
-            
             
         };
         
@@ -193,7 +212,7 @@ export default {
 
          // Método para navegar a la vista FigurasMonopoly
          irAFiguras() {
-            this.$router.push({ name: 'FigurasMonopoly' });
+            this.$router.push({ name: 'FigurasMonopoly' }); //cambiar a logica de popup
         },
         
         goToMonopolyView2() {
@@ -202,7 +221,33 @@ export default {
 
         goToMonopolyView3() {
             this.$router.push({ name: 'MonopolyView3' });
+        },
+        togglePopup() {
+        this.Popup = !this.Popup;
+        },
+
+        async toggleSelect(figurename) {
+            try {
+        // Verificación antes de construir la URL
+        if (!figurename) {
+          console.error("El nombre de la figura es inválido.");
+          return;
         }
+
+        // Importación dinámica de la imagen
+        const image = await import(`@/assets/${figurename}.png`);
+        this.Figure = image.default || image;
+        this.Popup = false;
+
+        // Consola para verificar valores
+        console.log("Figure URL: " + this.Figure); // Debería mostrar la URL correcta de la imagen
+        console.log("Figure name: " + figurename);
+        console.log("Figure name type: " + typeof(this.Figure));
+
+      } catch (error) {
+        console.error("Error cargando la imagen: ", error);
+      }
+    }
 
 
     }
@@ -210,6 +255,21 @@ export default {
 </script>
 
 <style scoped>
+
+
+.pop-up{
+    position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  padding: 32px 16px 120px;
+  height: 100vh;
+  width: 100%;
+  background-color: rgba(82, 160, 126, 0.5);
+  display: grid;
+  place-items: center;
+}
+
 .monopoly-board {
     display: grid;
     grid-template-columns: 230px repeat(9, 170px) 230px;
@@ -382,7 +442,7 @@ export default {
     border-radius: 50%;
     height: 96px;
     width: 96px;
-    animation: rotate_3922 1.2s linear infinite;
+    animation: rotate_3922 10s linear infinite;
     background-color: #9b59b6;
     background-image: linear-gradient(#9b59b6, #84cdfa, #5ad1cd);
     transform-origin: center;
@@ -532,5 +592,21 @@ img{
     grid-row: 1 / span 11;
     pointer-events: none;
     z-index: -1;
+}
+
+.figurin {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: -20px;
+    left: 0;
+    border-radius: 50%;
+ 
+}
+
+.mago {
+  width: 100px; /* Ajusta el ancho de la imagen del mago */
+  height: 100px; /* Ajusta la altura de la imagen del mago */
+  border-radius: 10px; /* Ajusta el radio de los bordes si es necesario */
 }
 </style>

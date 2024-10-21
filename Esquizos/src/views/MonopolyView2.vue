@@ -149,6 +149,9 @@
     <!-- Logo centrado -->
     <div class="center-logo">
         <img src="@/assets/monopolylogoM.png" alt="Monopoly Logo" />
+        <div class="pop-up" v-if="Popup" >
+        <FigurasMonopoly @close="togglePopup() " @select="toggleSelect"  />
+    </div>
     </div>
 
     <!-- Ruleta y dado -->
@@ -160,9 +163,16 @@
 
     <div class="ficha" :style="pieces[0].style" @click="movePiece(0)">
 
+    <div class="figurinn">
+    <div v-if="Figure != 'default'" >
+        <img :src="Figure" alt="ficha"lass="animada"/>
+    </div> <!-- Agregar variable de estado -->
+    
+    </div>
+
     </div>
     <!-- Botón Figuras -->
-    <button class="figuras-button" @click="irAFiguras">Seleccionar Figuras</button>
+    <button class="figuras-button" @click="togglePopup">Seleccionar Figuras</button>
     <div class="minecraftfondo">
         <img src="@/assets/minecraftfondo.webp" alt="Minecraft Fondo" />
     </div>
@@ -173,12 +183,14 @@
 <script>
 import dados from './dados.vue';
 import Casilla from '@/components/casillas.vue';
+import FigurasMonopoly from './FigurasMonopoly.vue';
 
 export default {
     name: "MonopolyView",
     components: {
         dados,
-        Casilla
+        Casilla,
+        FigurasMonopoly,
     },
     data() {
         return {
@@ -193,6 +205,8 @@ export default {
                 }
             }],
             step: 5, // Porcentaje de movimiento en cada dirección
+            Popup: false,
+            Figure: null
 
         };
 
@@ -236,11 +250,32 @@ export default {
         },
 
         // Método para navegar a la vista FigurasMonopoly
-        irAFiguras() {
-            this.$router.push({
-                name: 'FigurasMonopoly'
-            });
+        togglePopup() {
+        this.Popup = !this.Popup;
         },
+
+        async toggleSelect(figurename) {
+            try {
+        // Verificación antes de construir la URL
+        if (!figurename) {
+          console.error("El nombre de la figura es inválido.");
+          return;
+        }
+
+        // Importación dinámica de la imagen
+        const image = await import(`@/assets/${figurename}.png`);
+        this.Figure = image.default || image;
+        this.Popup = false;
+
+        // Consola para verificar valores
+        console.log("Figure URL: " + this.Figure); // Debería mostrar la URL correcta de la imagen
+        console.log("Figure name: " + figurename);
+        console.log("Figure name type: " + typeof(this.Figure));
+
+      } catch (error) {
+        console.error("Error cargando la imagen: ", error);
+      }
+    }
 
     }
 };
@@ -248,6 +283,22 @@ export default {
 
   
 <style scoped>
+
+
+
+.pop-up{
+    position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  padding: 32px 16px 120px;
+  height: 100vh;
+  width: 100%;
+  background-color: rgba(82, 160, 126, 0.5);
+  display: grid;
+  place-items: center;
+}
+
 .monopoly-board {
     display: grid;
     grid-template-columns: 230px repeat(9, 170px) 230px;
@@ -421,7 +472,7 @@ export default {
     border-radius: 50%;
     height: 96px;
     width: 96px;
-    animation: rotate_3922 1.2s linear infinite;
+    animation: rotate_3922 10s linear infinite;
     background-color: #9b59b6;
     background-image: linear-gradient(#9b59b6, #84cdfa, #5ad1cd);
     transform-origin: center;
@@ -578,4 +629,16 @@ export default {
     height: 90%;
     z-index: -1;
 }
+.figurinn {
+
+    width:1%; /* Ajusta el ancho de la figura */
+  height: 1%; /* Ajusta la altura de la figura */
+  position: absolute;
+  top: -100px;
+  left: -200px;
+  border-radius: 50%;
+ 
+}
+
+
 </style>
