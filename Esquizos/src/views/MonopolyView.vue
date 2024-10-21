@@ -533,7 +533,6 @@ export default {
     background-color: red;
     color: white;
     border: none;
-    z-index: 600;
     border-radius: 5px;
     cursor: pointer;
 }

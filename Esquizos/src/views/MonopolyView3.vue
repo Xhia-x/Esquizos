@@ -471,7 +471,6 @@ export default {
     background-color: rgb(255, 0, 234);
     color: white;
     border: none;
-    z-index: 600;
     border-radius: 5px;
     cursor: pointer;
 }
