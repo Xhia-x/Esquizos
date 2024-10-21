@@ -26,17 +26,16 @@ var buscarPartidaControllerFn = async (req, res) => {
     try {
 
         const nombrePartida = req.params.nombrePartida; // Obtén el nombre de la partida
-        console.log("Buscando partida:", nombrePartida);
+        //console.log("Buscando partida:", nombrePartida);
 
         var result = await partidaService.buscarPartidaDBService( {nombre: nombrePartida} );
-        console.log(result.status);
 
         if(result.status){
             res.json(result.partida);
-            console.log("Partida encontrada");
+            //console.log("Partida encontrada");
         } else {
             res.status(404).send('Partida no encontrada');
-            console.log("Partida no encontrada");
+            //console.log("Partida no encontrada");
         }
 
     } catch (err) {
@@ -49,17 +48,17 @@ var cargarPartidasUsusarioControllerFn = async (req, res) => {
     try {
 
         const nombreUsuario = req.params.nombreUsuario; // Obtén el nombre de la partida
-        console.log("Buscando partidas de:", nombreUsuario);
+        //console.log("Buscando partidas de:", nombreUsuario);
 
         var result = await partidaService.cargarPartidasUsuarioDBService( {username: nombreUsuario} );
-        console.log(result.status);
+        //console.log(result.status);
 
         if(result.status){
             res.json(result.partidas);
-            console.log("Partidas encontradas");
+            //console.log("Partidas encontradas");
         } else {
             res.status(404).send('Partidas no encontradas');
-            console.log("Partidas no encontradas");
+            //console.log("Partidas no encontradas");
         }
 
     } catch (err) {
@@ -72,17 +71,16 @@ var cargarPartidasInvitadoControllerFn = async (req, res) => {
     try {
 
         const nombreUsuario = req.params.nombreUsuario; // Obtén el nombre de la partida
-        console.log("Buscando partidas donde fue invitado:", nombreUsuario);
+        //console.log("Buscando partidas donde fue invitado:", nombreUsuario);
 
         var result = await partidaService.cargarPartidasInvitadoDBService( {username: nombreUsuario} );
-        console.log(result.status);
 
         if(result.status){
             res.json(result.partidas);
-            console.log("Partidas encontradas");
+            //console.log("Partidas encontradas");
         } else {
             res.status(404).send('Partidas no encontradas');
-            console.log("Partidas no encontradas");
+            //console.log("Partidas no encontradas");
         }
 
     } catch (err) {
@@ -108,7 +106,7 @@ const eliminarPartidaControllerFn = async (req, res) => {
             if (io) {
                 io.emit('partidaEliminada', { message: `La partida ${partidaNombre} ha sido eliminada.` });
             } else {
-                console.error("Socket.IO no está definido");
+                //console.error("Socket.IO no está definido");
             }
             res.status(200).send({ message: result.msg });
         } else {
@@ -137,7 +135,7 @@ const actualizarPartidaController = async (req, res) => {
             if (io) {
                 io.emit('partidaActualizada', { message: `La partida ${partidaNombre} ha sido actualizada.` });
             } else {
-                console.error("Socket.IO no está definido");
+                //console.error("Socket.IO no está definido");
             }
             res.status(200).send({ message: result.msg });
         } else {
