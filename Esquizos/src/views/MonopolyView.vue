@@ -75,6 +75,7 @@
 
 
     <div class="center-container">
+        <button class="figuras-button" @click="togglePopup">Seleccionar Figuras</button>
         <div class="center-logo">
             <img src="@/assets/monopolylogo.png" alt="Monopoly Logo" />
             <div class="pop-up" v-if="Popup" >
@@ -99,8 +100,6 @@
         </div>
 
     </div>
-    <!-- Botón Figuras -->
-    <button class="figuras-button" @click="togglePopup">Seleccionar Figuras</button>
     
     <div class="gray-background"></div>
     <button @click="goToMonopolyView2" class="style=margin-right: 5%">Ir a Monopoly View 2</button>

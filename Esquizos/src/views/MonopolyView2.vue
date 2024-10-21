@@ -82,6 +82,7 @@
 
 
     <div class="center-container">
+        <button class="figuras-button" @click="togglePopup">Seleccionar Figuras</button>
         <div class="center-logo">
             <img src="@/assets/monopolylogoM.png" alt="Monopoly Logo" />
             <div class="pop-up" v-if="Popup" >
@@ -105,8 +106,6 @@
 
     </div>
     
-    <!-- Botón Figuras -->
-    <button class="figuras-button" @click="togglePopup">Seleccionar Figuras</button>
 
     <div class="minecraftfondo">
         <img src="@/assets/minecraftfondo.webp" alt="Minecraft Fondo" />
