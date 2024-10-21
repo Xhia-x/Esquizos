@@ -3,6 +3,7 @@
     var userController = require('../src/user/userController');
     var partidaController = require('../src/partida/partidaController');
     var invitacionController = require('../src/invitacion/invitacionController');
+    var jugadorController = require('../src/jugador/jugadorController.js');
     const router = express.Router();
 
     router.route('/user/login').post(userController.loginUserControllerFn);
@@ -20,5 +21,8 @@
     router.route('/invitacion/:nombreUsuario').get(invitacionController.cargarInvitacionesUsusarioControllerFn);
     router.route('/invitacion/aceptar').post(invitacionController.aceptarInvitacionControllerFn);
     router.route('/invitacion/rechazar').post(invitacionController.rechazarInvitacionControllerFn);
+    
 
+   router.post('/api/jugador', jugadorController.subirJugadorControllerFn);
+    router.put('/api/jugador', jugadorController.actualizarJugadorControllerFn);
     module.exports = router; 

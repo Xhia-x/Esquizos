@@ -94,6 +94,14 @@
   <div class="gray-background"></div>
   <button @click="goToMonopolyView2">Ir a Monopoly View 2</button>
   <button @click="goToMonopolyView3">Ir a Monopoly View 3</button>
+  <div>
+    <button @click="enviarJugador">Enviar Jugador al Backend</button>
+    <p v-if="mensaje">{{ mensaje }}</p>
+  </div>
+  <div>
+    <button @click="actualizarJugador">Actualizar Jugador en el Backend</button>
+    <p v-if="mensaje">{{ mensaje }}</p>
+  </div>
 </div>
     
 
@@ -104,16 +112,23 @@
 <script>
 import dados from './dados.vue';
 import Casilla from '@/components/casillas.vue';
+import Jugador from '@/models/Jugador.js';
+import Tablero from '@/models/tablero.js';
+import axios from 'axios';
 
 export default {
+    
     name: "MonopolyView",
     components: {
         dados,
-        Casilla
+        Casilla,
+        Jugador,
+        Tablero
     },
     data() {
         return {
-         
+            Jugador: new Jugador('user2', 1, 1500, [], 'token2'),
+            Tablero: new Tablero(),
             pieces: [{
                 currentPosition: 1, // Posición inicial de la ficha (esquina inferior derecha)
                 style: {
@@ -150,10 +165,12 @@ export default {
                     this.movePieceToCasilla(casillaId);
                 }, i * 500); // 300ms de pausa entre cada movimiento, ajustable para la velocidad de la animación
             }
+            this.Jugador.CasillaID = position;
         },
 
         // Método adicional para mover la ficha a la casilla específica
         movePieceToCasilla(casillaId) {
+            
             const casillaElement = document.getElementById(casillaId);
             if (casillaElement) {
                 const rect = casillaElement.getBoundingClientRect();
@@ -169,9 +186,10 @@ export default {
 
         // Método para obtener el ID de la casilla basado en la posición de la ficha
         getCasillaIdFromPosition(position) {
+           this.Jugador.CasillaID = position;
             return position;
         },
-
+        
 
          // Método para navegar a la vista FigurasMonopoly
          irAFiguras() {
@@ -184,7 +202,58 @@ export default {
 
         goToMonopolyView3() {
             this.$router.push({ name: 'MonopolyView3' });
+        },
+
+        async enviarJugador() {
+            try {
+                console.log("Datos enviados al backend:", {
+                    
+                    userSchema: this.Jugador.user, // Asegúrate de que los datos sean correctos
+                    CasillaID: this.Jugador.CasillaID,
+                    dinero: this.Jugador.dinero,
+                    propiedades: this.Jugador.propiedades,
+                    tokenID: this.Jugador.tokenID
+                });
+
+                const respuesta = await axios.post('http://localhost:9992/api/jugador', {
+                    userSchema: this.Jugador.user,
+                    CasillaID: this.Jugador.CasillaID,
+                    dinero: this.Jugador.dinero,
+                    propiedades: this.Jugador.propiedades,
+                    tokenID: this.Jugador.tokenID
+                });
+                this.mensaje = respuesta.data.message;
+            } catch (error) {
+                console.error("Error en la solicitud al backend:", error);
+                this.mensaje = 'Error al enviar el jugador';
+            }
+        },
+        async actualizarJugador() {
+            try {
+                console.log("Datos enviados para actualizar:", {
+                    userSchema: this.Jugador.user,
+                    CasillaID: this.Jugador.CasillaID,
+                    dinero: this.Jugador.dinero,
+                    propiedades: this.Jugador.propiedades,
+                    tokenID: this.Jugador.tokenID
+                });
+
+                const respuesta = await axios.put('http://localhost:9992/api/jugador', {
+                    userSchema: this.Jugador.user,
+                    CasillaID: this.Jugador.CasillaID,
+                    dinero: this.Jugador.dinero,
+                    propiedades: this.Jugador.propiedades,
+                    tokenID: this.Jugador.tokenID
+                });
+
+                console.log("Respuesta del servidor:", respuesta.data);
+                this.mensaje = respuesta.data.message;
+            } catch (error) {
+                console.error("Error en la solicitud de actualización:", error);
+                this.mensaje = 'Error al actualizar el jugador';
+            }
         }
+
 
 
     }
