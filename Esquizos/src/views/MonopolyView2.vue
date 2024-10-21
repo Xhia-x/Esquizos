@@ -1,8 +1,7 @@
 <template>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Chelsea Market">
-
-
-  <div class="monopoly-board">
+    
+   <div class="monopoly-board">
 
     <div class="minecraftfondo">
         <img src="@/assets/minecraftfondo.webp" alt="Minecraft Fondo" />
@@ -101,11 +100,9 @@
 
     </div>
   <!-- Botón Figuras -->
-  <div class="gray-background"></div>
   <button @click="goToMonopolyView">Volver a MonopolyView</button>
   <button @click="goToMonopolyView3">Ir a Monopoly View 3</button>
-
-  <h1></h1>
+  <div class="gray-background"></div>
 </div>
     
 
@@ -493,6 +490,7 @@ export default {
     border-radius: 50%;
     z-index: -1; /* Colocar la imagen por encima de la ficha base */
 }
+
 img{
     width: 100%;
     height: 100%;
