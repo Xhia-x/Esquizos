@@ -442,7 +442,7 @@ export default {
     border-radius: 50%;
     height: 96px;
     width: 96px;
-    animation: rotate_3922 10s linear infinite;
+    animation: rotate_3922 20s linear infinite;
     background-color: #9b59b6;
     background-image: linear-gradient(#9b59b6, #84cdfa, #5ad1cd);
     transform-origin: center;
