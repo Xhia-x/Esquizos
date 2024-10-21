@@ -543,7 +543,7 @@ export default {
     background-color: #9b59b6;
     background-image: linear-gradient(#9b59b6, #84cdfa, #5ad1cd);
     transform-origin: center;
-    z-index: 500;
+    /*z-index: 500;*/
     transition: top 0.5s ease, left 0.5s ease, transform 0.5s ease;
     /* Añadido */
 }
