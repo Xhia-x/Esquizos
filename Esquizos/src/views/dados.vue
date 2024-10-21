@@ -10,7 +10,7 @@
   </div>
 </template>
 
-<<script>
+<script>
 import { ref, onMounted } from 'vue';
 import { io } from 'socket.io-client'
 import dice1 from '@/assets/dice1.png';
@@ -19,6 +19,7 @@ import dice3 from '@/assets/dice3.png';
 import dice4 from '@/assets/dice4.png';
 import dice5 from '@/assets/dice5.png';
 import dice6 from '@/assets/dice6.png';
+
 
 const images = ref([
   { id: 1, url: dice1, name: 'dado1' },
@@ -30,15 +31,14 @@ const images = ref([
 ]);
 
 const socket = io('http://localhost:9992');
-
 // Función para emitir el evento de lanzamiento de dados
 const emitRollDice = (dice1Value, dice2Value) => {
   const partidaActual = window.location.pathname.split('/').pop();
-  socket.emit('rollDice', { user: localStorage.getItem('user') || sessionStorage.getItem('user'), dice1: dice1Value+dice2Value, partida: partidaActual });
+  socket.emit('rollDice', { user: localStorage.getItem('user') || sessionStorage.getItem('user'), dice1: dice1Value, dice2: dice2Value, partida: partidaActual });
 };
 
 // Función para inicializar el socket
-const initializeSocket = (currentImage1, currentImage2, emit) => {
+const initializeSocket = (currentImage1, currentImage2) => {
   socket.on('diceRolled', (data) => {
     currentImage1.value = images.value[data.dice1 - 1];
     currentImage2.value = images.value[data.dice2 - 1];
@@ -59,7 +59,7 @@ export default {
     let finalDice2 = 1;
 
     onMounted(() => {
-      const partidaActual = window.location.pathname.split('/').pop();
+      const partidaActual = window.location.pathname.split('/').pop(); 
       socket.emit('joinPartida', partidaActual);
       initializeSocket(currentImage1, currentImage2, emit);
     });
@@ -83,8 +83,8 @@ export default {
       finalDice1 = changeImage(currentImage1); // Guardamos el valor final del dado 1
       finalDice2 = changeImage(currentImage2); // Guardamos el valor final del dado 2
 
-      // Incrementamos el tiempo entre cambios de imagen para simular deceleración
-      intervalTime = Math.min(1000, intervalTime + 50);
+      emitRollDice(finalDice1, finalDice2); // Emitir los valores de los dados
+      intervalTime = Math.min(1000, intervalTime + 50)
       currentTimeout = setTimeout(() => {
         rollDiceWithDeceleration(timeElapsed + intervalTime, intervalTime);
       }, intervalTime);
