@@ -106,6 +106,14 @@
     <button @click="goToMonopolyView3">Ir a Monopoly View 3</button>
 
   <h1></h1>
+  <div>
+    <button @click="enviarJugador">Enviar Jugador al Backend</button>
+    <p v-if="mensaje">{{ mensaje }}</p>
+  </div>
+    <div>
+        <button @click="actualizarJugador">Actualizar Jugador en el Backend</button>
+        <p v-if="mensaje">{{ mensaje }}</p>
+    </div>
 </div>
     
 
@@ -118,17 +126,27 @@ import dados from './dados.vue';
 import Casilla from '@/components/casillas.vue';
 import { io } from 'socket.io-client';
 import FigurasMonopoly from './FigurasMonopoly.vue';
-
+import axios from 'axios';
+import Jugador from '@/models/jugador.js';
 export default {
     name: "MonopolyView",
     components: {
         dados,
         Casilla,
         FigurasMonopoly,
+        Jugador
+
 
     },
     data() {
         return {
+            Jugador: new Jugador(   // Instancia de la clase Jugador
+                'user3', // user
+                '1', // CasillaID
+                1500, // dinero
+                [], // propiedades
+                'token1' // tokenID
+            ),
          
             pieces: [{
                 currentPosition: 1, // Posición inicial de la ficha (esquina inferior derecha)
@@ -205,6 +223,7 @@ export default {
 
         // Método para obtener el ID de la casilla basado en la posición de la ficha
         getCasillaIdFromPosition(position) {
+            this.Jugador.CasillaID = position;
             return position;
         },
 
@@ -246,7 +265,45 @@ export default {
       } catch (error) {
         console.error("Error cargando la imagen: ", error);
       }
+    },
+
+
+    async enviarJugador() {
+        try {
+             // Obtén el ID del usuario actual
+
+            const respuesta = await axios.post('http://localhost:9992/api/jugador', {
+                userSchema:this.Jugador.userSchema, // Incluye el ID del usuario en la solicitud
+                CasillaID: this.Jugador.CasillaID,
+                dinero: this.Jugador.dinero,
+                propiedades: this.Jugador.propiedades,
+                tokenID: this.Jugador.tokenID
+            });
+            this.mensaje = respuesta.data.message;
+        } catch (error) {
+            console.error("Error en la solicitud al backend:", error);
+            this.mensaje = 'Error al enviar el jugador';
+        }
+    },
+    async actualizarJugador() {
+        try {
+            
+
+            const respuesta = await axios.put('http://localhost:9992/api/jugador', {
+                userSchema: this.Jugador.userSchema, // Incluye el ID del usuario en la solicitud
+                CasillaID: this.Jugador.CasillaID,
+                dinero: this.Jugador.dinero,
+                propiedades: this.Jugador.propiedades,
+                tokenID: this.Jugador.tokenID
+            });
+            this.mensaje = respuesta.data.message;
+        } catch (error) {
+            console.error("Error en la solicitud de actualización:", error);
+            this.mensaje = 'Error al actualizar el jugador';
+        }
     }
+
+
 
 
     }
