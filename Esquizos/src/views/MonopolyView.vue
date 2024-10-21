@@ -159,9 +159,12 @@ export default {
 
         // Escuchar cuando otro usuario mueve una ficha
         this.socket.on("movimientoGenerado", (data) => {
-        const { ficha, indice, usuario } = data;
-        this.pieces[indice] = ficha;
-        console.log(`Ficha ${indice} movida a la posición ${ficha.currentPosition} por el usuario ${usuario}`); 
+            const { ficha, indice, usuario } = data;
+            this.pieces[indice] = ficha;
+            console.log(`Ficha ${indice} movida a la posición ${ficha.currentPosition} por el usuario ${usuario}`); 
+            this.$nextTick(() => {
+                this.$refs.ficha.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            });
         });
     },
    
@@ -197,9 +200,6 @@ export default {
                 };
                 const usuario = localStorage.getItem('user') || sessionStorage.getItem('user');
                 this.socket.emit("moverFicha", {ficha: this.pieces[0],indice: 0,usuario: usuario, partida: this.partidaActual});
-                this.$nextTick(() => {
-                    this.$refs.ficha.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                });
             }
         },
 
