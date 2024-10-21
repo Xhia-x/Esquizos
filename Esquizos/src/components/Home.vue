@@ -98,6 +98,7 @@ export default {
 .btn-group{
   align-self: flex-end;
   margin-bottom: 0;
+  
 }
 
 .a{
@@ -177,11 +178,13 @@ body {
 }
 
 .btn{
-  background-color: red;
+  background-color: #9c1616c2;
   position: absolute;
   top: 0;
   right: -1500px;
   margin: 10px;
+  color: #F8E8A0;
+  border: 1px solid #FFFFFF;
 }
 
 .botonReglas{
@@ -189,7 +192,7 @@ body {
   top: 10px;
   left: 10px; /* Cambiado de right a left */
   padding: 10px 20px;
-  color: white;
+  color: #F8E8A0;
   border: none;
   border-radius: 5px;
   cursor: pointer;

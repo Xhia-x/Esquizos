@@ -120,8 +120,8 @@ export default {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  background-color: red;
-  border: none;
+  background-color: #9c1616c2;
+  border: 1px solid #FFFFFF;
   border-radius: 10px;
   padding: 0px 15px;
   gap: 0px;
@@ -166,7 +166,7 @@ export default {
   justify-content: center;
   font-weight: 600;
   font-size: 15px;
-  color: rgb(255, 255, 255);
+  color: #F8E8A0;
 }
 
 

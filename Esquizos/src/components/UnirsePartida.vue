@@ -3,9 +3,14 @@
     <div class="partidas-container">
         <h1>Partidas Unidas</h1>
         <ul class="lista-partidas">
-            <li v-for="partida in partidas" :key="partida.nombre" class="partida-item">
-                <h2>{{ partida.nombre }}</h2>
-                <p>Número de jugadores: {{ partida.nJugadores }}</p>
+            <li v-for="partida in partidas" :key="partida.nombre" class="partida-item card">
+                <div class="card-border-top"></div>
+                <!-- Muestra la imagen aleatoria para cada tarjeta -->
+                <div class="img">
+                    <img :src="getRandomImage()" alt="Monopoly character" class="monopoly-image"/>
+                </div>
+                <span>{{ partida.nombre }}</span>
+                <p class="job">Número de jugadores: {{ partida.nJugadores }}</p>
                 <button class="button" @click="accederPartida(partida.nombre)">Acceder a la partida</button>
             </li>
         </ul>
@@ -14,6 +19,9 @@
 </template>
 
 <script>
+// Importa las imágenes directamente para asegurarte de que estén disponibles en el proyecto.
+import SorpresaImage from '@/assets/Sorpresa.png';
+import BilleteImage from '@/assets/Billete.png';
 
 import axios from "axios";
 import autenticadorSesion from '../mixins/AutenticadorSesion.js';
@@ -24,7 +32,12 @@ export default {
     mixins: [autenticadorSesion],
     data() {
         return {
-            partidas: []
+            partidas: [],
+            // Asigna las imágenes importadas a las variables
+            images: [
+                SorpresaImage,
+                BilleteImage
+            ]
         };
     },
     created() {
@@ -45,10 +58,14 @@ export default {
         accederPartida(nombrePartida) {
             this.$router.push({ name: 'VerPartida', params: { nombrePartida } });
         },
+        getRandomImage() {
+            // Selecciona una imagen aleatoria de la lista de imágenes
+            const randomIndex = Math.floor(Math.random() * this.images.length);
+            return this.images[randomIndex];
+        },
         volverAtras() {
             this.$router.push({ name: 'Home' });
-        }  
-        
+        },
     }
 };
 </script>
@@ -66,21 +83,67 @@ export default {
 .lista-partidas {
     list-style-type: none;
     padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
 }
 
 .partida-item {
-    background-color: #dbdbdb;
-    border: 1px solid #ddd;
-    padding: 20px;
+    background-color: #2a5934; 
+    border-radius: 15px;
+    width: 190px;
+    height: 254px;
     margin-bottom: 15px;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 1px 5px 60px 0px #100a;
     transition: transform 0.3s ease;
+    border: 1px solid #FFFFFF;
 }
+
 
 .partida-item:hover {
     transform: scale(1.02);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.card-border-top {
+    width: 60%;
+    height: 3%;
+    background: #88ac90;
+    margin: auto;
+    border-radius: 0px 0px 15px 15px;
+}
+
+.img {
+    width: 70px;
+    height: 80px;
+    background: #88ac90;
+    border-radius: 15px;
+    margin-top: 25px;
+}
+
+.monopoly-image {
+    width: 70px;
+    height: 80px;
+    object-fit: contain;
+}
+
+span {
+    font-weight: 600;
+    color: #F8E8A0;
+    text-align: center;
+    padding-top: 10px;
+    font-size: 16px;
+}
+
+.job {
+    font-weight: 400;
+    color: #F8E8A0;
+    text-align: center;
+    padding-top: 3px;
+    font-size: 12px;
 }
 
 h1 {
@@ -100,25 +163,29 @@ p {
 }
 
 button {
-    background-color: #3498db;
-    color: white;
+    padding: 5px 15px; 
+    display: block;
+    margin-top: 15px; 
+    border-radius: 8px;
     border: none;
-    border-radius: 5px;
-    padding: 10px 15px;
-    font-size: 14px;
+    background: #d96c6c;
+    color: white;
+    font-size: 12px; 
+    font-weight: 600;
     cursor: pointer;
+    width: auto; 
     transition: background-color 0.3s ease;
-    margin-right: 10px;
 }
 
 button:hover {
-    background-color: darksalmon;
+    background: #f5f5;
+    transform: scale(0.96);
 }
 
 .volverAtrasBoton {
-    background-color: #e74c3c;
-    color: white;
-    border: none;
+    background-color: #9c1616c2;
+    color: #F8E8A0;
+    border: 1px solid #FFFFFF;
     border-radius: 5px;
     padding: 10px 20px;
     font-size: 14px;
@@ -130,7 +197,7 @@ button:hover {
 }
 
 .volverAtrasBoton:hover {
-    background-color: #c0392b;
+    background-color: #9c1616c2;
 }
 
 @media (max-width: 768px) {
@@ -147,14 +214,15 @@ button:hover {
         width: auto;
     }
 }
+
 .button {
     position: relative;
     padding: 10px 22px;
     border-radius: 6px;
-    border: none;
-    color: #fff;
+    border: 1px solid #FFFFFF;
+    color: #F8E8A0;
     cursor: pointer;
-    background-color: #c70000c2;
+    background-color: #9c1616c2;
     transition: all 0.2s ease;
 }
 
