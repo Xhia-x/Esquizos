@@ -34,17 +34,15 @@ const socket = io('http://localhost:9992');
 // Función para emitir el evento de lanzamiento de dados
 const emitRollDice = (dice1Value, dice2Value) => {
   const partidaActual = window.location.pathname.split('/').pop();
-  console.log('Emitiendo evento rollDice usuario:', localStorage.getItem('user'));
   socket.emit('rollDice', { user: localStorage.getItem('user') || sessionStorage.getItem('user'), dice1: dice1Value, dice2: dice2Value, partida: partidaActual });
 };
 
 // Función para inicializar el socket
-const initializeSocket = (currentImage1, currentImage2, emit) => {
+const initializeSocket = (currentImage1, currentImage2) => {
   socket.on('diceRolled', (data) => {
-    // Actualizar las imágenes de los dados con los valores recibidos del servidor
     currentImage1.value = images.value[data.dice1 - 1];
     currentImage2.value = images.value[data.dice2 - 1];
-    emit('diceRolled', data.dice1, data.dice2);
+    
   });
 };
 
@@ -77,6 +75,7 @@ export default {
         rolling.value = false;
         emitRollDice(finalDice1, finalDice2);  // Emitimos los valores finales cuando la animación termina
         //emit('diceRolled', finalDice1, finalDice2); 
+        emit('diceRolled', finalDice1+ finalDice2);
         return;
       }
 

@@ -78,13 +78,16 @@
       <div class="property-rotate-left" id="12"><Casilla color="purple" title="PLAZA SAN CARLOS" price="140" /></div>
     </div>
 
-    
+
 
 
     <div class="center-container">
-        <button class="figuras-button" @click="irAFiguras">Seleccionar Figuras</button>
+        <button class="figuras-button" @click="togglePopup">Seleccionar Figuras</button>
         <div class="center-logo">
             <img src="@/assets/monopolylogoM.png" alt="Monopoly Logo" />
+            <div class="pop-up" v-if="Popup" >
+                <FigurasMonopoly @close="togglePopup() " @select="toggleSelect"  />
+            </div>
         </div>
         <div class="ruletaDado">
             <dados @diceRolled="movePieceBasedOnDice" />
@@ -95,14 +98,22 @@
    
     <div ref="ficha" class="ficha" :style="pieces[0].style" @click="movePiece(0)">
     
- 
-
+        <div class="figurinn">
+            <div v-if="Figure != 'default'" >
+                <img :src="Figure" alt="ficha" lass="animada"/>
+            </div> <!-- Agregar variable de estado -->
+        </div>
 
     </div>
-  <!-- Botón Figuras -->
-  <button @click="goToMonopolyView">Volver a MonopolyView</button>
-  <button @click="goToMonopolyView3">Ir a Monopoly View 3</button>
-  <div class="gray-background"></div>
+    
+
+    <div class="minecraftfondo">
+        <img src="@/assets/minecraftfondo.webp" alt="Minecraft Fondo" />
+    </div>
+
+    <button @click="goToMonopolyView">Volver a MonopolyView</button>
+    <button @click="goToMonopolyView3">Ir a Monopoly View 3</button>
+    <div class="gray-background"></div>
 </div>
     
 
@@ -113,12 +124,14 @@
 <script>
 import dados from './dados.vue';
 import Casilla from '@/components/casillas.vue';
+import FigurasMonopoly from './FigurasMonopoly.vue';
 
 export default {
     name: "MonopolyView2",
     components: {
         dados,
-        Casilla
+        Casilla,
+        FigurasMonopoly,
     },
     data() {
         return {
@@ -133,12 +146,9 @@ export default {
                 }
             }],
             step: 5, // Porcentaje de movimiento en cada dirección
-        
-         
-            
-            
-            
-            
+            Popup: false,
+            Figure: null
+
         };
         
     },
@@ -184,9 +194,13 @@ export default {
             return position;
         },
 
+        // Método para navegar a la vista FigurasMonopoly
+        togglePopup() {
+        this.Popup = !this.Popup;
+        },
 
          // Método para navegar a la vista FigurasMonopoly
-         irAFiguras() {
+        irAFiguras() {
             this.$router.push({ name: 'FigurasMonopoly' });
         },
         
@@ -196,14 +210,52 @@ export default {
 
         goToMonopolyView3() {
             this.$router.push({ name: 'MonopolyView3' });
+        },
+
+
+        async toggleSelect(figurename) {
+            try {
+        // Verificación antes de construir la URL
+        if (!figurename) {
+          console.error("El nombre de la figura es inválido.");
+          return;
         }
 
+        // Importación dinámica de la imagen
+        const image = await import(`@/assets/${figurename}.png`);
+        this.Figure = image.default || image;
+        this.Popup = false;
+
+        // Consola para verificar valores
+        console.log("Figure URL: " + this.Figure); // Debería mostrar la URL correcta de la imagen
+        console.log("Figure name: " + figurename);
+        console.log("Figure name type: " + typeof(this.Figure));
+
+      } catch (error) {
+        console.error("Error cargando la imagen: ", error);
+      }
+    }
 
     }
 };
 </script>
 
 <style scoped>
+
+
+
+.pop-up{
+    position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  padding: 32px 16px 120px;
+  height: 100vh;
+  width: 100%;
+  background-color: rgba(82, 160, 126, 0.5);
+  display: grid;
+  place-items: center;
+}
 
 .center-container {
     display: flex;
@@ -421,7 +473,7 @@ export default {
     border-radius: 50%;
     height: 96px;
     width: 96px;
-    animation: rotate_3922 1.2s linear infinite;
+    animation: rotate_3922 10s linear infinite;
     background-color: #9b59b6;
     background-image: linear-gradient(#9b59b6, #84cdfa, #5ad1cd);
     transform-origin: center;
@@ -472,7 +524,6 @@ export default {
     background-color: red;
     color: white;
     border: none;
-    z-index: 600;
     border-radius: 5px;
     cursor: pointer;
 }
@@ -559,7 +610,13 @@ img{
     font-weight: bold;
 }
 
-
+.gray-background {
+    background-color: lightgray;
+    grid-column: 1 / span 11;
+    grid-row: 1 / span 11;
+    pointer-events: none;
+    z-index: -1;
+}
 
 .minecraftfondo {
     background-color: lightgray;
@@ -568,5 +625,16 @@ img{
     pointer-events: none;
     z-index: -20;
 }
+.figurinn {
+
+    width:1%; /* Ajusta el ancho de la figura */
+  height: 1%; /* Ajusta la altura de la figura */
+  position: absolute;
+  top: -100px;
+  left: -200px;
+  border-radius: 50%;
+ 
+}
+
 
 </style>

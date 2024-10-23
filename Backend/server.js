@@ -85,9 +85,8 @@ io.on('connection', (socket) => {
     socket.on('moverFicha', (data) => {
         const { ficha, indice, usuario, partida } = data;
         console.log(`Usuario ${usuario} en la partida ${partida}, mueve ficha ${indice}`);
-        io.to(partida).emit('movimientoGenerado', { ficha, indice});
+        io.to(partida).emit('movimientoGenerado', { ficha, indice, usuario });
     });
-
     
 });
 

@@ -77,9 +77,12 @@
 
 
     <div class="center-container">
-        <button class="figuras-button" @click="irAFiguras">Seleccionar Figuras</button>
+        <button class="figuras-button" @click="togglePopup">Seleccionar Figuras</button>
         <div class="center-logo">
             <img src="@/assets/monopolylogo.png" alt="Monopoly Logo" />
+            <div class="pop-up" v-if="Popup" >
+                <FigurasMonopoly @close="togglePopup() " @select="toggleSelect"  />
+            </div>
         </div>
         <div class="ruletaDado">
             <dados @diceRolled="movePieceBasedOnDice" />
@@ -88,16 +91,17 @@
 
     <!-- Ficha -->
    
-    <div ref="ficha" class="ficha" :style="pieces[0].style" @click="movePiece(0)">
-    
- 
-
-
+    <div ref="ficha" class="ficha" :style="pieces[0].style" @click="movePiece(0)"> 
+        <div class="figurinn">
+            <div v-if="Figure != 'default'" >
+                <img :src="Figure" alt="ficha" lass="animada"/>
+            </div> <!-- Agregar variable de estado -->
+        </div>
     </div>
-  <!-- Botón Figuras -->
-  <div class="gray-background"></div>
-  <button @click="goToMonopolyView">Volver a MonopolyView</button>
-  <button @click="goToMonopolyView2">Ir a Monopoly View 2</button>
+
+    <div class="gray-background"></div>
+    <button @click="goToMonopolyView">Volver a MonopolyView</button>
+    <button @click="goToMonopolyView2">Ir a Monopoly View 2</button>
 
   <h1></h1>
 </div>
@@ -110,12 +114,15 @@
 <script>
 import dados from './dados.vue';
 import Casilla from '@/components/casillas.vue';
+import FigurasMonopoly from './FigurasMonopoly.vue';
+
 
 export default {
     name: "MonopolyView3",
     components: {
         dados,
-        Casilla
+        Casilla,
+        FigurasMonopoly
     },
     data() {
         return {
@@ -130,12 +137,9 @@ export default {
                 }
             }],
             step: 5, // Porcentaje de movimiento en cada dirección
-        
-         
-            
-            
-            
-            
+            Popup: false,
+            Figure: null
+      
         };
         
     },
@@ -180,10 +184,11 @@ export default {
         getCasillaIdFromPosition(position) {
             return position;
         },
-
-
-         // Método para navegar a la vista FigurasMonopoly
-         irAFiguras() {
+        togglePopup() {
+        this.Popup = !this.Popup;
+        },
+        // Método para navegar a la vista FigurasMonopoly
+        irAFiguras() {
             this.$router.push({ name: 'FigurasMonopoly' });
         },
         
@@ -466,7 +471,6 @@ export default {
     background-color: rgb(255, 0, 234);
     color: white;
     border: none;
-    z-index: 600;
     border-radius: 5px;
     cursor: pointer;
 }

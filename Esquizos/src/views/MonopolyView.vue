@@ -19,6 +19,8 @@
         <img src="@/assets/Start.png" class="Start" />
     </div>
 
+    
+
     <!-- Lado superior -->
     <div class="side top-side">
       <div class="property-top" id="22"><Casilla color="red" title="AV. KENTUCKY" price="220" /></div>
@@ -71,13 +73,14 @@
       <div class="property-rotate-left" id="12"><Casilla color="purple" title="PLAZA SAN CARLOS" price="140" /></div>
     </div>
 
-    
-
 
     <div class="center-container">
-        <button class="figuras-button" @click="irAFiguras">Seleccionar Figuras</button>
+        <button class="figuras-button" @click="togglePopup">Seleccionar Figuras</button>
         <div class="center-logo">
             <img src="@/assets/monopolylogo.png" alt="Monopoly Logo" />
+            <div class="pop-up" v-if="Popup" >
+                <FigurasMonopoly @close="togglePopup() " @select="toggleSelect"  />
+            </div>
         </div>
         <div class="ruletaDado">
             <dados @diceRolled="movePieceBasedOnDice" />
@@ -87,17 +90,30 @@
     <!-- Ficha -->
    
     <div ref="ficha" class="ficha" :style="pieces[0].style" @click="movePiece(0)">
-    
- 
-
+        
+        <div class="figurin">
+            <div v-if="Figure != 'default'" >
+                <img :src="Figure" alt="ficha" lass="animada"/>
+            </div> <!-- Agregar variable de estado -->
+        
+        
+        </div>
 
     </div>
-  <!-- Botón Figuras -->
-  <div class="gray-background"></div>
-  <button @click="goToMonopolyView2" class="style=margin-right: 5%">Ir a Monopoly View 2</button>
-  <button @click="goToMonopolyView3">Ir a Monopoly View 3</button>
+    
+    <div class="gray-background"></div>
+    <button @click="goToMonopolyView2" class="style=margin-right: 5%">Ir a Monopoly View 2</button>
+    <button @click="goToMonopolyView3">Ir a Monopoly View 3</button>
 
   <h1></h1>
+  <div>
+    <button @click="enviarJugador">Enviar Jugador al Backend</button>
+    <p v-if="mensaje">{{ mensaje }}</p>
+  </div>
+    <div>
+        <button @click="actualizarJugador">Actualizar Jugador en el Backend</button>
+        <p v-if="mensaje">{{ mensaje }}</p>
+    </div>
 </div>
     
 
@@ -108,15 +124,29 @@
 <script>
 import dados from './dados.vue';
 import Casilla from '@/components/casillas.vue';
-
+import { io } from 'socket.io-client';
+import FigurasMonopoly from './FigurasMonopoly.vue';
+import axios from 'axios';
+import Jugador from '@/models/jugador.js';
 export default {
     name: "MonopolyView",
     components: {
         dados,
-        Casilla
+        Casilla,
+        FigurasMonopoly,
+        Jugador
+
+
     },
     data() {
         return {
+            Jugador: new Jugador(   // Instancia de la clase Jugador
+                'user3', // user
+                '1', // CasillaID
+                1500, // dinero
+                [], // propiedades
+                'token1' // tokenID
+            ),
          
             pieces: [{
                 currentPosition: 1, // Posición inicial de la ficha (esquina inferior derecha)
@@ -128,14 +158,32 @@ export default {
                 }
             }],
             step: 5, // Porcentaje de movimiento en cada dirección
+            socket: null,
+            partidaActual: null,
+            Popup: false,
+            Figure: null //new URL('@/assets/hollow.png', import.meta.url).href
         
          
             
-            
-            
-            
         };
         
+    },
+    mounted() {
+        // Conectar al servidor de WebSocket
+        this.socket = io("http://localhost:9992");
+        this.partidaActual = window.location.pathname.split('/').pop();
+        // Unirse a la partida
+        this.socket.emit("joinPartida", this.partidaActual);
+
+        // Escuchar cuando otro usuario mueve una ficha
+        this.socket.on("movimientoGenerado", (data) => {
+            const { ficha, indice, usuario } = data;
+            this.pieces[indice] = ficha;
+            console.log(`Ficha ${indice} movida a la posición ${ficha.currentPosition} por el usuario ${usuario}`); 
+            this.$nextTick(() => {
+                this.$refs.ficha.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            });
+        });
     },
    
   
@@ -168,21 +216,21 @@ export default {
                     left: `${rect.left + window.scrollX}px`, // Añadir scrollX para corregir si hay desplazamiento de la página
                     transform: 'translate(-50%, -50%)' // Mantener la ficha centrada
                 };
-                this.$nextTick(() => {
-                    this.$refs.ficha.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                });
+                const usuario = localStorage.getItem('user') || sessionStorage.getItem('user');
+                this.socket.emit("moverFicha", {ficha: this.pieces[0],indice: 0,usuario: usuario, partida: this.partidaActual});
             }
         },
 
         // Método para obtener el ID de la casilla basado en la posición de la ficha
         getCasillaIdFromPosition(position) {
+            this.Jugador.CasillaID = position;
             return position;
         },
 
 
          // Método para navegar a la vista FigurasMonopoly
          irAFiguras() {
-            this.$router.push({ name: 'FigurasMonopoly' });
+            this.$router.push({ name: 'FigurasMonopoly' }); //cambiar a logica de popup
         },
         
         goToMonopolyView2() {
@@ -191,7 +239,71 @@ export default {
 
         goToMonopolyView3() {
             this.$router.push({ name: 'MonopolyView3' });
+        },
+        togglePopup() {
+        this.Popup = !this.Popup;
+        },
+
+        async toggleSelect(figurename) {
+            try {
+        // Verificación antes de construir la URL
+        if (!figurename) {
+          console.error("El nombre de la figura es inválido.");
+          return;
         }
+
+        // Importación dinámica de la imagen
+        const image = await import(`@/assets/${figurename}.png`);
+        this.Figure = image.default || image;
+        this.Popup = false;
+
+        // Consola para verificar valores
+        console.log("Figure URL: " + this.Figure); // Debería mostrar la URL correcta de la imagen
+        console.log("Figure name: " + figurename);
+        console.log("Figure name type: " + typeof(this.Figure));
+
+      } catch (error) {
+        console.error("Error cargando la imagen: ", error);
+      }
+    },
+
+
+    async enviarJugador() {
+        try {
+             // Obtén el ID del usuario actual
+
+            const respuesta = await axios.post('http://localhost:9992/api/jugador', {
+                userSchema:this.Jugador.userSchema, // Incluye el ID del usuario en la solicitud
+                CasillaID: this.Jugador.CasillaID,
+                dinero: this.Jugador.dinero,
+                propiedades: this.Jugador.propiedades,
+                tokenID: this.Jugador.tokenID
+            });
+            this.mensaje = respuesta.data.message;
+        } catch (error) {
+            console.error("Error en la solicitud al backend:", error);
+            this.mensaje = 'Error al enviar el jugador';
+        }
+    },
+    async actualizarJugador() {
+        try {
+            
+
+            const respuesta = await axios.put('http://localhost:9992/api/jugador', {
+                userSchema: this.Jugador.userSchema, // Incluye el ID del usuario en la solicitud
+                CasillaID: this.Jugador.CasillaID,
+                dinero: this.Jugador.dinero,
+                propiedades: this.Jugador.propiedades,
+                tokenID: this.Jugador.tokenID
+            });
+            this.mensaje = respuesta.data.message;
+        } catch (error) {
+            console.error("Error en la solicitud de actualización:", error);
+            this.mensaje = 'Error al actualizar el jugador';
+        }
+    }
+
+
 
 
     }
@@ -200,15 +312,33 @@ export default {
 
 <style scoped>
 
+
+.pop-up{
+    position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  padding: 32px 16px 120px;
+  height: 100vh;
+  width: 100%;
+  background-color: rgba(82, 160, 126, 0.5);
+  display: grid;
+  place-items: center;
+}
+
 .center-container {
     display: flex;
-    flex-direction: column; /* Para alinear verticalmente */
-    justify-content: center; /* Centrar verticalmente */
-    align-items: center; /* Centrar horizontalmente */
-    z-index: 2; /* Asegura que esté sobre otros elementos */
-    position: relative; /* Para que el z-index funcione correctamente */
-    grid-column: 5 / span 3; /* Asegúrate de que el contenedor ocupe las columnas deseadas */
-    grid-row: 4 / span 2; /* Ajusta la fila según sea necesario */
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center; 
+    z-index: 2; 
+    position: relative; 
+    grid-column: 5 / span 3; 
+    grid-row: 4 / span 2; 
+    background-color: rgba(255, 255, 255, 0.64);
+    margin-block: 5%;
+    padding: 5vw; 
+    border-radius: 15px; 
 }
 
 .monopoly-board {
@@ -409,11 +539,11 @@ export default {
     border-radius: 50%;
     height: 96px;
     width: 96px;
-    animation: rotate_3922 1.2s linear infinite;
+    animation: rotate_3922 20s linear infinite;
     background-color: #9b59b6;
     background-image: linear-gradient(#9b59b6, #84cdfa, #5ad1cd);
     transform-origin: center;
-    z-index: 500;
+    /*z-index: 500;*/
     transition: top 0.5s ease, left 0.5s ease, transform 0.5s ease;
     /* Añadido */
 }
@@ -460,7 +590,6 @@ export default {
     background-color: red;
     color: white;
     border: none;
-    z-index: 600;
     border-radius: 5px;
     cursor: pointer;
 }
@@ -549,5 +678,21 @@ img{
     grid-row: 1 / span 11;
     pointer-events: none;
     z-index: -1;
+}
+
+.figurin {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: -20px;
+    left: 0;
+    border-radius: 50%;
+ 
+}
+
+.mago {
+  width: 100px; /* Ajusta el ancho de la imagen del mago */
+  height: 100px; /* Ajusta la altura de la imagen del mago */
+  border-radius: 10px; /* Ajusta el radio de los bordes si es necesario */
 }
 </style>

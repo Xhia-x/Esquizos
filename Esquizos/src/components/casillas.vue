@@ -19,7 +19,7 @@
   --bg-color: #e0e0e0;
   width: 170px;
   height: 230px;
-  z-index: 3;
+  /*z-index: 3;*/
 
   background: var(--bg-color);
   display: flex;
