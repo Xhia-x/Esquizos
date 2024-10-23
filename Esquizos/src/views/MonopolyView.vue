@@ -23,54 +23,90 @@
 
     <!-- Lado superior -->
     <div class="side top-side">
-      <div class="property-top" id="22"><Casilla color="red" title="AV. KENTUCKY" price="220" /></div>
-      <div class="property-top" id="23"><Casilla color="" title="XD" price="" /></div>
-      <div class="property-top" id="24"><Casilla color="red" title="AV. INDIANA" price="220" /></div>
-      <div class="property-top" id="25"><Casilla color="red" title="AV.ILLINOIS" price="240" /></div>
-      <div class="property-top" id="26"><Casilla color="" title="FERROCARRIL B. & O." price="200" /></div>
-      <div class="property-top" id="27"><Casilla color="yellow" title="AV. ATLÁNTICO" price="260" /></div>
-      <div class="property-top" id="28"><Casilla color="yellow" title="AV. VENTNOR" price="260" /></div>
-      <div class="property-top" id="29"><Casilla color="" title="COMPAÑÍA DE AGUA" price="150" /></div>
-      <div class="property-top" id="30"><Casilla color="yellow" title="JARDINES MARVIN" price="280" /></div>
+      <div class="property-top" id="22"><Casilla color="red" title="AV. KENTUCKY" price="220" :isActive="activeCardIndex === 22"
+        @toggleActive="setActiveCard(22)" /></div>
+      <div class="property-top" id="23"><Casilla color="" title="XD" price="" :isActive="activeCardIndex === 23"
+        @toggleActive="setActiveCard(23)"/></div>
+      <div class="property-top" id="24"><Casilla color="red" title="AV. INDIANA" price="220" :isActive="activeCardIndex === 24"
+        @toggleActive="setActiveCard(24)"/></div>
+      <div class="property-top" id="25"><Casilla color="red" title="AV.ILLINOIS" price="240" :isActive="activeCardIndex === 25"
+        @toggleActive="setActiveCard(25)"/></div>
+      <div class="property-top" id="26"><Casilla color="" title="FERROCARRIL B. & O." price="200" :isActive="activeCardIndex === 26"
+        @toggleActive="setActiveCard(26)"/></div>
+      <div class="property-top" id="27"><Casilla color="yellow" title="AV. ATLÁNTICO" price="260" :isActive="activeCardIndex === 27"
+        @toggleActive="setActiveCard(27)" /></div>
+      <div class="property-top" id="28"><Casilla color="yellow" title="AV. VENTNOR" price="260" :isActive="activeCardIndex === 28"
+        @toggleActive="setActiveCard(28)"/></div>
+      <div class="property-top" id="29"><Casilla color="" title="COMPAÑÍA DE AGUA" price="150" :isActive="activeCardIndex === 29"
+        @toggleActive="setActiveCard(29)"/></div>
+      <div class="property-top" id="30"><Casilla color="yellow" title="JARDINES MARVIN" price="280" :isActive="activeCardIndex === 30"
+        @toggleActive="setActiveCard(30)"/></div>
     </div> 
 
     <!-- Lado derecho -->
     <div class="side right-side">
-      <div class="property-rotate-right" id="32"><Casilla color="green" title="AV. PACÍFICO" price="300" /></div>
-      <div class="property-rotate-right" id="33"><Casilla color="green" title="AV. CAROLINA DEL NORTE" price="300" /></div>
-      <div class="property-rotate-right" id="34"><Casilla color="" title="XD" price="" /></div>
-      <div class="property-rotate-right" id="35"><Casilla color="green" title="AV. PENNSYLVANIA" price="320" /></div>
-      <div class="property-rotate-right" id="36"><Casilla color="" title="FERROCARRÍL VÍA RÁPIDA" price="200" /></div>
-      <div class="property-rotate-right" id="37"><Casilla color="" title="XD" price="" /></div>
-      <div class="property-rotate-right" id="38"><Casilla color="blue" title="PLAZA PARK" price="350" /></div>
-      <div class="property-rotate-right" id="39"><Casilla color="" title="IMPUESTO SOBRE POSESIONES DE LUJO - PÁGUESE $100" price="" /></div>
-      <div class="property-rotate-right" id="40"><Casilla color="blue" title="EL MUELLE" price="400" /></div>
+      <div class="property-rotate-right" id="32"><Casilla color="green" title="AV. PACÍFICO" price="300" :isActive="activeCardIndex === 32"
+        @toggleActive="setActiveCard(32)"/></div>
+      <div class="property-rotate-right" id="33"><Casilla color="green" title="AV. CAROLINA DEL NORTE" price="300" :isActive="activeCardIndex === 33"
+        @toggleActive="setActiveCard(33)"/></div>
+      <div class="property-rotate-right" id="34"><Casilla color="" title="XD" price="" :isActive="activeCardIndex === 34"
+        @toggleActive="setActiveCard(34)"/></div>
+      <div class="property-rotate-right" id="35"><Casilla color="green" title="AV. PENNSYLVANIA" price="320" :isActive="activeCardIndex === 35"
+        @toggleActive="setActiveCard(35)"/></div>
+      <div class="property-rotate-right" id="36"><Casilla color="" title="FERROCARRÍL VÍA RÁPIDA" price="200" :isActive="activeCardIndex === 36"
+        @toggleActive="setActiveCard(36)"/></div>
+      <div class="property-rotate-right" id="37"><Casilla color="" title="XD" price="" :isActive="activeCardIndex === 37"
+        @toggleActive="setActiveCard(37)"/></div>
+      <div class="property-rotate-right" id="38"><Casilla color="blue" title="PLAZA PARK" price="350" :isActive="activeCardIndex === 38"
+        @toggleActive="setActiveCard(38)"/></div>
+      <div class="property-rotate-right" id="39"><Casilla color="" title="IMPUESTO SOBRE POSESIONES DE LUJO - PÁGUESE $100" price="" :isActive="activeCardIndex === 39"
+        @toggleActive="setActiveCard(39)"/></div>
+      <div class="property-rotate-right" id="40"><Casilla color="blue" title="EL MUELLE" price="400" :isActive="activeCardIndex === 40"
+        @toggleActive="setActiveCard(40)"/></div>
     </div>
 
     <!-- Lado inferior -->
     <div class="side bottom-side">
-      <div class="property-bottom" id="10"><Casilla color="lightblue" title="AV. CONNECTICUT" price="120" /></div>
-      <div class="property-bottom" id="9"><Casilla color="lightblue" title="AV. VERMONT" price="100" /></div>
-      <div class="property-bottom" id="8"><Casilla color="" title="XD" price="" /></div>
-      <div class="property-bottom" id="7"><Casilla color="lightblue" title="AV. ORIENTAL" price="100" /></div>
-      <div class="property-bottom" id="6"><Casilla color="" title="FERROCARRIL READING" price="200" /></div>
-      <div class="property-bottom" id="5"><Casilla color="" title="Impuesto sobre ingreso - Páguese $200" price="" /></div>
-      <div class="property-bottom" id="4"><Casilla color="brown" title="AV. BÁLTICA" price="60" /></div>
-      <div class="property-bottom" id="3"><Casilla color="" title="XD" price="" /></div>
-      <div class="property-bottom" id="2"><Casilla color="brown" title="AV. MEDITERRÁNEO" price="60" /></div>
+      <div class="property-bottom" id="10"><Casilla color="lightblue" title="AV. CONNECTICUT" price="120" :isActive="activeCardIndex === 10"
+        @toggleActive="setActiveCard(10)"/></div>
+      <div class="property-bottom" id="9"><Casilla color="lightblue" title="AV. VERMONT" price="100" :isActive="activeCardIndex === 9"
+        @toggleActive="setActiveCard(9)"/></div>
+      <div class="property-bottom" id="8"><Casilla color="" title="XD" price="" :isActive="activeCardIndex === 8"
+        @toggleActive="setActiveCard(8)"/></div>
+      <div class="property-bottom" id="7"><Casilla color="lightblue" title="AV. ORIENTAL" price="100" :isActive="activeCardIndex === 7"
+        @toggleActive="setActiveCard(7)"/></div>
+      <div class="property-bottom" id="6"><Casilla color="" title="FERROCARRIL READING" price="200" :isActive="activeCardIndex === 6"
+        @toggleActive="setActiveCard(6)"/></div>
+      <div class="property-bottom" id="5"><Casilla color="" title="Impuesto sobre ingreso - Páguese $200" price="" :isActive="activeCardIndex === 5"
+        @toggleActive="setActiveCard(5)"/></div>
+      <div class="property-bottom" id="4"><Casilla color="brown" title="AV. BÁLTICA" price="60" :isActive="activeCardIndex === 4"
+        @toggleActive="setActiveCard(4)"/></div>
+      <div class="property-bottom" id="3"><Casilla color="" title="XD" price="" :isActive="activeCardIndex === 3"
+        @toggleActive="setActiveCard(3)"/></div>
+      <div class="property-bottom" id="2"><Casilla color="brown" title="AV. MEDITERRÁNEO" price="60" :isActive="activeCardIndex === 2"
+        @toggleActive="setActiveCard(2)"/></div>
     </div>
 
     <!-- Lado izquierdo -->
     <div class="side left-side">
-      <div class="property-rotate-left" id="20"><Casilla color="orange" title="AV. NUEVA YORK" price="200" /></div>
-      <div class="property-rotate-left" id="18"><Casilla color="orange" title="AV. TENNESSEE" price="180" /></div>
-      <div class="property-rotate-left" id="19"><Casilla color="" title="XD" price="" /></div>
-      <div class="property-rotate-left" id="17"><Casilla color="orange" title="PLAZA ST. JAMES" price="180" /></div>
-      <div class="property-rotate-left" id="16"><Casilla color="" title="FERROCARRIL PENSSYLVANIA" price="" /></div>
-      <div class="property-rotate-left" id="15"><Casilla color="purple" title="AV. VIRGINIA" price="160" /></div>
-      <div class="property-rotate-left" id="14"><Casilla color="purple" title="AV. ESTADOS" price="140" /></div>
-      <div class="property-rotate-left" id="13"><Casilla color="" title="COMPAÑÍA DE ELECTRICIDAD" price="150" /></div>
-      <div class="property-rotate-left" id="12"><Casilla color="purple" title="PLAZA SAN CARLOS" price="140" /></div>
+      <div class="property-rotate-left" id="20"><Casilla color="orange" title="AV. NUEVA YORK" price="200" :isActive="activeCardIndex === 20" 
+        :extraRotation="90" :oriented="3" @toggleActive="setActiveCard(20)"/></div>
+      <div class="property-rotate-left" id="19"><Casilla color="orange" title="AV. TENNESSEE" price="180" :isActive="activeCardIndex === 19"
+        :extraRotation="90" :oriented="3" @toggleActive="setActiveCard(19)"/></div>
+      <div class="property-rotate-left" id="18"><Casilla color="" title="XD" price="" :isActive="activeCardIndex === 18"
+        :extraRotation="90" :oriented="3" @toggleActive="setActiveCard(18)"/></div>
+      <div class="property-rotate-left" id="17"><Casilla color="orange" title="PLAZA ST. JAMES" price="180" :isActive="activeCardIndex === 17"
+        :extraRotation="90" :oriented="3" @toggleActive="setActiveCard(17)"/></div>
+      <div class="property-rotate-left" id="16"><Casilla color="" title="FERROCARRIL PENSSYLVANIA" price="" :isActive="activeCardIndex === 16"
+        :extraRotation="90" :oriented="3" @toggleActive="setActiveCard(16)"/></div>
+      <div class="property-rotate-left" id="15"><Casilla color="purple" title="AV. VIRGINIA" price="160" :isActive="activeCardIndex === 15"
+        :extraRotation="90" :oriented="3" @toggleActive="setActiveCard(15)"/></div>
+      <div class="property-rotate-left" id="14"><Casilla color="purple" title="AV. ESTADOS" price="140" :isActive="activeCardIndex === 14"
+        :extraRotation="90" :oriented="3" @toggleActive="setActiveCard(14)"/></div>
+      <div class="property-rotate-left" id="13"><Casilla color="" title="COMPAÑÍA DE ELECTRICIDAD" price="150" :isActive="activeCardIndex === 13"
+        :extraRotation="90" :oriented="3" @toggleActive="setActiveCard(13)"/></div>
+      <div class="property-rotate-left" id="12"><Casilla color="purple" title="PLAZA SAN CARLOS" price="140" :isActive="activeCardIndex === 12"
+        :extraRotation="90" :oriented="3" @toggleActive="setActiveCard(12)"/></div>
     </div>
 
 
@@ -161,8 +197,9 @@ export default {
             socket: null,
             partidaActual: null,
             Popup: false,
-            Figure: null //new URL('@/assets/hollow.png', import.meta.url).href
-        
+            Figure: null, //new URL('@/assets/hollow.png', import.meta.url).href
+
+            activeCardIndex: null,  // Aquí se almacena el índice de la carta activa
          
             
         };
@@ -246,26 +283,35 @@ export default {
 
         async toggleSelect(figurename) {
             try {
-        // Verificación antes de construir la URL
-        if (!figurename) {
-          console.error("El nombre de la figura es inválido.");
-          return;
+            // Verificación antes de construir la URL
+            if (!figurename) {
+            console.error("El nombre de la figura es inválido.");
+            return;
+            }
+
+            // Importación dinámica de la imagen
+            const image = await import(`@/assets/${figurename}.png`);
+            this.Figure = image.default || image;
+            this.Popup = false;
+
+            // Consola para verificar valores
+            console.log("Figure URL: " + this.Figure); // Debería mostrar la URL correcta de la imagen
+            console.log("Figure name: " + figurename);
+            console.log("Figure name type: " + typeof(this.Figure));
+
+        } catch (error) {
+            console.error("Error cargando la imagen: ", error);
         }
+        },
 
-        // Importación dinámica de la imagen
-        const image = await import(`@/assets/${figurename}.png`);
-        this.Figure = image.default || image;
-        this.Popup = false;
-
-        // Consola para verificar valores
-        console.log("Figure URL: " + this.Figure); // Debería mostrar la URL correcta de la imagen
-        console.log("Figure name: " + figurename);
-        console.log("Figure name type: " + typeof(this.Figure));
-
-      } catch (error) {
-        console.error("Error cargando la imagen: ", error);
-      }
-    },
+        setActiveCard(index) {
+            // Si la carta clicada ya está activa, se desactiva
+            if (this.activeCardIndex === index) {
+                this.activeCardIndex = null;
+            } else {
+                this.activeCardIndex = index;
+            }
+        },
 
 
     async enviarJugador() {
