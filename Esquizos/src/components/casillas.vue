@@ -72,7 +72,7 @@
   top: 50%;
   left: 50%;
   transform-origin: center; 
-  transform: translate(-50%,-150%) rotate(90deg) rotateY(180deg);
+  transform: translate(-50%,-130%) rotate(90deg) rotateY(180deg);
   z-index: 9999;
   box-shadow: 0 15px 25px rgba(0, 0, 0, 0.5);
 }
@@ -120,7 +120,6 @@
   align-items: center;
   background-color: #f8f9fa;
   transform: rotateY(180deg);
-  z-index: 2;
 }
 
 .close-btn {
@@ -166,18 +165,17 @@
 }
 
 /* back card */
-@textColor: #444444;
 
 body {
   font-family: 'Montserrat', sans-serif;
-  color:@textColor;
+  color: white;
   font-size:1em;
   box-sizing:border-box;
 }
 hr {
     border: 0;
     height: 1px;
-    background: #ffffff;
+    background: white;
 }
 
 .wrapper {
@@ -191,7 +189,7 @@ hr {
   max-width:320px;
   min-height:500px;
   margin:60px auto;
-  border:1px solid #ffffff;
+  border:1px solid white;
   padding:10px;
   box-shadow:0 1px 1px 1px white;
   transition: 3s ease-in all;
