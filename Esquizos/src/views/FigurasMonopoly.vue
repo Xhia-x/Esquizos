@@ -112,6 +112,7 @@
   min-height: 100vh; /* Asegura que el contenedor ocupe al menos el 100% de la altura de la ventana */
   width: 100vw; /* Asegura que el contenedor ocupe el 100% del ancho de la ventana */
   box-sizing: border-box; /* Incluye el padding y el border en el ancho y alto total del elemento */
+  z-index: 999;
   
 }
 
@@ -125,6 +126,7 @@
   margin-bottom: 15px;
   box-sizing: border-box; /* Incluye el padding y el border en el ancho y alto total del elemento */
    overflow-y: auto; /* Agrega scroll vertical si el contenido excede la altura */
+   z-index: 999;
 }
  
 
@@ -177,6 +179,7 @@ text-shadow: 0 1px 0 #ddd, 0 2px 0 #ccc, 0 3px 0 #bbb, 0 4px 0 #aaa, 0 5px 0 #ac
   box-shadow: 0 4px 8px #8d1347 ; /* Sombra para dar efecto de tarjeta */
   transition: transform 0.3s ease;
   background-color: #F5E5E1; /* Fondo blanco de la tarjeta */
+  z-index: 999;
 }
 h2{
    
