@@ -182,6 +182,7 @@
     position: absolute;
     top: 10px;
     right: 20px;
+    border: 1px solid #FFFFFF;
   }
   </style>
 

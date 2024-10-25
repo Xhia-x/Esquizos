@@ -2,9 +2,9 @@
   <div class="card" :class="[cardTransform(), !isCardActive ? 'card--hover' : '']" @click="toggleActive">
     <!-- Cara frontal -->
     <div class="card__color-strip" :style="{ backgroundColor: color }"></div>
-    <img v-if="image" :src="image" alt="Imagen de la propiedad" class="card__image" />
     <div class="card__descr-wrapper">
       <p class="card__title">{{ title }}</p>
+      <img v-if="image" :src="image" alt="Imagen de la propiedad" class="card__image" />
       <p class="card__descr">{{ description }}</p>
       <div class="card__price">{{ price }}</div>
     </div>
@@ -160,8 +160,8 @@
   width: 100%;
   height: auto;
   max-height: 100px;
-  object-fit: cover;
-  margin-bottom: 10px;
+  object-fit: contain;
+  margin-bottom: 20px;
 }
 
 /* back card */
