@@ -23,93 +23,133 @@
 
     <!-- Lado superior -->
     <div class="side top-side">
-      <div class="property-top"id="22"><Casilla color="red" title="Carrer de la Marina" price="100" /></div>
-      <div class="property-top"id="23"><Casilla color="" title="" price="" /></div>
-      <div class="property-top"id="24"><Casilla color="red" title="Carrer de la Marina" price="100" /></div>
-      <div class="property-top"id="25"><Casilla color="red" title="Carrer de la Marina" price="100" /></div>
-      <div class="property-top"id="26"><Casilla color="" title="" price="" /></div>
-      <div class="property-top"id="27"><Casilla color="yellow" title="Carrer de la Marina" price="100" /></div>
-      <div class="property-top"id="28"><Casilla color="yellow" title="Carrer de la Marina" price="100" /></div>
-      <div class="property-top"id="29"><Casilla color="" title="" price="" /></div>
-      <div class="property-top"id="30"><Casilla color="yellow" title="Carrer de la Marina" price="100" /></div>
-    </div>
+      <div class="property-top" id="22"><Casilla color="red" title="AV. KENTUCKY" price="220" :isCardActive="activeCardIndex === 22"
+        :oriented="2" @toggleActive="setActiveCard(22)" /></div>
+      <div class="property-top" id="23"><Casilla color="" title="XD" price="" :isCardActive="activeCardIndex === 23"
+        :oriented="2" @toggleActive="setActiveCard(23)"/></div>
+      <div class="property-top" id="24"><Casilla color="red" title="AV. INDIANA" price="220" :isCardActive="activeCardIndex === 24"
+        :oriented="2" @toggleActive="setActiveCard(24)"/></div>
+      <div class="property-top" id="25"><Casilla color="red" title="AV.ILLINOIS" price="240" :isCardActive="activeCardIndex === 25"
+        :oriented="2" @toggleActive="setActiveCard(25)"/></div>
+      <div class="property-top" id="26"><Casilla color="" title="FERROCARRIL B. & O." price="200" :isCardActive="activeCardIndex === 26"
+        :oriented="2" @toggleActive="setActiveCard(26)"/></div>
+      <div class="property-top" id="27"><Casilla color="yellow" title="AV. ATLÁNTICO" price="260" :isCardActive="activeCardIndex === 27"
+        :oriented="2" @toggleActive="setActiveCard(27)" /></div>
+      <div class="property-top" id="28"><Casilla color="yellow" title="AV. VENTNOR" price="260" :isCardActive="activeCardIndex === 28"
+        :oriented="2" @toggleActive="setActiveCard(28)"/></div>
+      <div class="property-top" id="29"><Casilla color="" title="COMPAÑÍA DE AGUA" price="150" :isCardActive="activeCardIndex === 29"
+        :oriented="2" @toggleActive="setActiveCard(29)"/></div>
+      <div class="property-top" id="30"><Casilla color="yellow" title="JARDINES MARVIN" price="280" :isCardActive="activeCardIndex === 30"
+        :oriented="2" @toggleActive="setActiveCard(30)"/></div>
+    </div> 
 
     <!-- Lado derecho -->
     <div class="side right-side">
-      <div class="property-rotate-right"id="32"><Casilla color="green" title="Carrer de la Marina" price="100" /></div>
-      <div class="property-rotate-right"id="33"><Casilla color="green" title="Carrer de la Marina" price="100" /></div>
-      <div class="property-rotate-right"id="34"><Casilla color="" title="" price="" /></div>
-      <div class="property-rotate-right"id="35"><Casilla color="green" title="Carrer de la Marina" price="100" /></div>
-      <div class="property-rotate-right"id="36"><Casilla color="" title="" price="" /></div>
-      <div class="property-rotate-right"id="37"><Casilla color="" title="" price="" /></div>
-      <div class="property-rotate-right"id="38"><Casilla color="blue" title="Carrer de la Marina" price="100" /></div>
-      <div class="property-rotate-right"id="39"><Casilla color="" title="" price="" /></div>
-      <div class="property-rotate-right"id="40"><Casilla color="blue" title="Carrer de la Marina" price="100" /></div>
+      <div class="property-rotate-right" id="32"><Casilla color="green" title="AV. PACÍFICO" price="300" :isCardActive="activeCardIndex === 32"
+        :oriented="1" @toggleActive="setActiveCard(32)"/></div>
+      <div class="property-rotate-right" id="33"><Casilla color="green" title="AV. CAROLINA DEL NORTE" price="300" :isCardActive="activeCardIndex === 33"
+        :oriented="1" @toggleActive="setActiveCard(33)"/></div>
+      <div class="property-rotate-right" id="34"><Casilla color="" title="XD" price="" :isCardActive="activeCardIndex === 34"
+        :oriented="1" @toggleActive="setActiveCard(34)"/></div>
+      <div class="property-rotate-right" id="35"><Casilla color="green" title="AV. PENNSYLVANIA" price="320" :isCardActive="activeCardIndex === 35"
+        :oriented="1" @toggleActive="setActiveCard(35)"/></div>
+      <div class="property-rotate-right" id="36"><Casilla color="" title="FERROCARRÍL VÍA RÁPIDA" price="200" :isCardActive="activeCardIndex === 36"
+        :oriented="1" @toggleActive="setActiveCard(36)"/></div>
+      <div class="property-rotate-right" id="37"><Casilla color="" title="XD" price="" :isCardActive="activeCardIndex === 37"
+        :oriented="1" @toggleActive="setActiveCard(37)"/></div>
+      <div class="property-rotate-right" id="38"><Casilla color="blue" title="PLAZA PARK" price="350" :isCardActive="activeCardIndex === 38"
+        :oriented="1" @toggleActive="setActiveCard(38)"/></div>
+      <div class="property-rotate-right" id="39"><Casilla color="" title="IMPUESTO SOBRE POSESIONES DE LUJO - PÁGUESE $100" price="" :isCardActive="activeCardIndex === 39"
+        :oriented="1" @toggleActive="setActiveCard(39)"/></div>
+      <div class="property-rotate-right" id="40"><Casilla color="blue" title="EL MUELLE" price="400" :isCardActive="activeCardIndex === 40"
+        :oriented="1" @toggleActive="setActiveCard(40)"/></div>
     </div>
 
     <!-- Lado inferior -->
     <div class="side bottom-side">
-      <div class="property-bottom"id="10"><Casilla color="lightblue" title="Carrer de la Marina" price="100" /></div>
-      <div class="property-bottom"id="9"><Casilla color="lightblue" title="Carrer de la Marina" price="100" /></div>
-      <div class="property-bottom"id="8"><Casilla color="" title="" price="" /></div>
-      <div class="property-bottom"id="7"><Casilla color="lightblue" title="Carrer de la Marina" price="100" /></div>
-      <div class="property-bottom"id="6"><Casilla color="" title="" price="" /></div>
-      <div class="property-bottom"id="5"><Casilla color="" title="" price="" /></div>
-      <div class="property-bottom"id="4"><Casilla color="brown" title="Carrer de la Marina" price="100" /></div>
-      <div class="property-bottom"id="3"><Casilla color="" title="" price="" /></div>
-      <div class="property-bottom"id="2"><Casilla color="brown" title="Carrer de la Marina" price="100" /></div>
+      <div class="property-bottom" id="10"><Casilla color="lightblue" title="AV. CONNECTICUT" price="120" :isCardActive="activeCardIndex === 10"
+        @toggleActive="setActiveCard(10)"/></div>
+      <div class="property-bottom" id="9"><Casilla color="lightblue" title="AV. VERMONT" price="100" :isCardActive="activeCardIndex === 9"
+        @toggleActive="setActiveCard(9)"/></div>
+      <div class="property-bottom" id="8"><Casilla color="" title="XD" price="" :isCardActive="activeCardIndex === 8"
+        @toggleActive="setActiveCard(8)"/></div>
+      <div class="property-bottom" id="7"><Casilla color="lightblue" title="AV. ORIENTAL" price="100" :isCardActive="activeCardIndex === 7"
+        @toggleActive="setActiveCard(7)"/></div>
+      <div class="property-bottom" id="6"><Casilla color="" title="FERROCARRIL READING" price="200" :isCardActive="activeCardIndex === 6"
+        @toggleActive="setActiveCard(6)"/></div>
+      <div class="property-bottom" id="5"><Casilla color="" title="Impuesto sobre ingreso - Páguese $200" price="" :isCardActive="activeCardIndex === 5"
+        @toggleActive="setActiveCard(5)"/></div>
+      <div class="property-bottom" id="4"><Casilla color="brown" title="AV. BÁLTICA" price="60" :isCardActive="activeCardIndex === 4"
+        @toggleActive="setActiveCard(4)"/></div>
+      <div class="property-bottom" id="3"><Casilla color="" title="XD" price="" :isCardActive="activeCardIndex === 3"
+        @toggleActive="setActiveCard(3)"/></div>
+      <div class="property-bottom" id="2"><Casilla color="brown" title="AV. MEDITERRÁNEO" price="60" :isCardActive="activeCardIndex === 2"
+        @toggleActive="setActiveCard(2)"/></div>
     </div>
 
     <!-- Lado izquierdo -->
     <div class="side left-side">
-      <div class="property-rotate-left"id="20"><Casilla color="orange" title="Carrer de la Marina" price="100" /></div>
-      <div class="property-rotate-left"id="19"><Casilla color="" title="" price="" /></div>
-      <div class="property-rotate-left"id="18"><Casilla color="orange" title="Carrer de la Marina" price="100" /></div>
-      <div class="property-rotate-left"id="17"><Casilla color="orange" title="Carrer de la Marina" price="100" /></div>
-      <div class="property-rotate-left"id="16"><Casilla color="" title="" price="" /></div>
-      <div class="property-rotate-left"id="15"><Casilla color="purple" title="Carrer de la Marina" price="100" /></div>
-      <div class="property-rotate-left"id="14"><Casilla color="purple" title="Carrer de la Marina" price="100" /></div>
-      <div class="property-rotate-left"id="13"><Casilla color="" title="" price="" /></div>
-      <div class="property-rotate-left"id="12"><Casilla color="purple" title="Carrer de la Marina" price="100" /></div>
+      <div class="property-rotate-left" id="20"><Casilla color="orange" title="AV. NUEVA YORK" price="200" :isCardActive="activeCardIndex === 20" 
+        :oriented="3" @toggleActive="setActiveCard(20)"/></div>
+      <div class="property-rotate-left" id="19"><Casilla color="orange" title="AV. TENNESSEE" price="180" :isCardActive="activeCardIndex === 19"
+        :oriented="3" @toggleActive="setActiveCard(19)"/></div>
+      <div class="property-rotate-left" id="18"><Casilla color="" title="XD" price="" :isCardActive="activeCardIndex === 18"
+        :oriented="3" @toggleActive="setActiveCard(18)"/></div>
+      <div class="property-rotate-left" id="17"><Casilla color="orange" title="PLAZA ST. JAMES" price="180" :isCardActive="activeCardIndex === 17"
+        :oriented="3" @toggleActive="setActiveCard(17)"/></div>
+      <div class="property-rotate-left" id="16"><Casilla color="" title="FERROCARRIL PENSSYLVANIA" price="" :isCardActive="activeCardIndex === 16"
+        :oriented="3" @toggleActive="setActiveCard(16)"/></div>
+      <div class="property-rotate-left" id="15"><Casilla color="purple" title="AV. VIRGINIA" price="160" :isCardActive="activeCardIndex === 15"
+        :oriented="3" @toggleActive="setActiveCard(15)"/></div>
+      <div class="property-rotate-left" id="14"><Casilla color="purple" title="AV. ESTADOS" price="140" :isCardActive="activeCardIndex === 14"
+        :oriented="3" @toggleActive="setActiveCard(14)"/></div>
+      <div class="property-rotate-left" id="13"><Casilla color="" title="COMPAÑÍA DE ELECTRICIDAD" price="150" :isCardActive="activeCardIndex === 13"
+        :oriented="3" @toggleActive="setActiveCard(13)"/></div>
+      <div class="property-rotate-left" id="12"><Casilla color="purple" title="PLAZA SAN CARLOS" price="140" :isCardActive="activeCardIndex === 12"
+        :oriented="3" @toggleActive="setActiveCard(12)"/></div>
     </div>
 
- 
 
-    <!-- Logo centrado -->
-    <div class="center-logo">
-      <img src="@/assets/monopolylogo.png" alt="Monopoly Logo" />
-
-      <div class="pop-up" v-if="Popup" >
-        <FigurasMonopoly @close="togglePopup() " @select="toggleSelect"  />
-    </div>
-    </div>
-
-    <!-- Ruleta y dado -->
-    <div class="ruletaDado">
-      <dados @diceRolled="movePieceBasedOnDice" />
+    <div class="center-container">
+        <button class="figuras-button" @click="togglePopup">Seleccionar Figuras</button>
+        <div class="center-logo">
+            <img src="@/assets/monopolylogo.png" alt="Monopoly Logo" />
+            <div class="pop-up" v-if="Popup" >
+                <FigurasMonopoly @close="togglePopup() " @select="toggleSelect"  />
+            </div>
+        </div>
+        <div class="ruletaDado">
+            <dados @diceRolled="movePieceBasedOnDice" />
+        </div>
     </div>
 
     <!-- Ficha -->
    
-    <div class="ficha" :style="pieces[0].style" @click="movePiece(0)">
+    <div ref="ficha" class="ficha" :style="pieces[0].style" @click="movePiece(0)">
         
-    <div class="figurin">
-    <div v-if="Figure != 'default'" >
-        <img :src="Figure" alt="ficha"lass="animada"/>
-    </div> <!-- Agregar variable de estado -->
-    
-    </div>
+        <div class="figurin">
+            <div v-if="Figure != 'default'" >
+                <img :src="Figure" alt="ficha" lass="animada"/>
+            </div> <!-- Agregar variable de estado -->
+        
+        
+        </div>
 
     </div>
-  <!-- Botón Figuras -->
-  <button class="figuras-button" @click="togglePopup">Seleccionar Figuras</button>
-  <div class="gray-background">
     
-    
+    <div class="gray-background"></div>
+    <button @click="goToMonopolyView2" class="style=margin-right: 5%">Ir a Monopoly View 2</button>
+    <button @click="goToMonopolyView3">Ir a Monopoly View 3</button>
+
+  <h1></h1>
+  <div>
+    <button @click="enviarJugador">Enviar Jugador al Backend</button>
+    <p v-if="mensaje">{{ mensaje }}</p>
   </div>
-  
-  <button @click="goToMonopolyView2">Ir a Monopoly View 2</button>
-  <button @click="goToMonopolyView3">Ir a Monopoly View 3</button>
+    <div>
+        <button @click="actualizarJugador">Actualizar Jugador en el Backend</button>
+        <p v-if="mensaje">{{ mensaje }}</p>
+    </div>
 </div>
     
 
@@ -122,17 +162,25 @@ import dados from './dados.vue';
 import Casilla from '@/components/casillas.vue';
 import { io } from 'socket.io-client';
 import FigurasMonopoly from './FigurasMonopoly.vue';
-
+import axios from 'axios';
+import Jugador from '@/models/jugador.js';
 export default {
     name: "MonopolyView",
     components: {
         dados,
         Casilla,
         FigurasMonopoly,
-
+        Jugador
     },
     data() {
         return {
+            Jugador: new Jugador(   // Instancia de la clase Jugador
+                'user3', // user
+                '1', // CasillaID
+                1500, // dinero
+                [], // propiedades
+                'token1' // tokenID
+            ),
          
             pieces: [{
                 currentPosition: 1, // Posición inicial de la ficha (esquina inferior derecha)
@@ -147,8 +195,9 @@ export default {
             socket: null,
             partidaActual: null,
             Popup: false,
-            Figure: null //new URL('@/assets/hollow.png', import.meta.url).href
-        
+            Figure: null, //new URL('@/assets/hollow.png', import.meta.url).href
+
+            activeCardIndex: null,  // Aquí se almacena el índice de la carta activa
          
             
         };
@@ -163,9 +212,12 @@ export default {
 
         // Escuchar cuando otro usuario mueve una ficha
         this.socket.on("movimientoGenerado", (data) => {
-        const { ficha, indice, usuario } = data;
-        this.pieces[indice] = ficha;
-        console.log(`Ficha ${indice} movida a la posición ${ficha.currentPosition} por el usuario ${usuario}`); 
+            const { ficha, indice, usuario } = data;
+            this.pieces[indice] = ficha;
+            console.log(`Ficha ${indice} movida a la posición ${ficha.currentPosition} por el usuario ${usuario}`); 
+            this.$nextTick(() => {
+                this.$refs.ficha.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            });
         });
     },
    
@@ -206,6 +258,7 @@ export default {
 
         // Método para obtener el ID de la casilla basado en la posición de la ficha
         getCasillaIdFromPosition(position) {
+            this.Jugador.CasillaID = position;
             return position;
         },
 
@@ -228,26 +281,72 @@ export default {
 
         async toggleSelect(figurename) {
             try {
-        // Verificación antes de construir la URL
-        if (!figurename) {
-          console.error("El nombre de la figura es inválido.");
-          return;
+            // Verificación antes de construir la URL
+            if (!figurename) {
+            console.error("El nombre de la figura es inválido.");
+            return;
+            }
+
+            // Importación dinámica de la imagen
+            const image = await import(`@/assets/${figurename}.png`);
+            this.Figure = image.default || image;
+            this.Popup = false;
+
+            // Consola para verificar valores
+            console.log("Figure URL: " + this.Figure); // Debería mostrar la URL correcta de la imagen
+            console.log("Figure name: " + figurename);
+            console.log("Figure name type: " + typeof(this.Figure));
+
+        } catch (error) {
+            console.error("Error cargando la imagen: ", error);
         }
+        },
 
-        // Importación dinámica de la imagen
-        const image = await import(`@/assets/${figurename}.png`);
-        this.Figure = image.default || image;
-        this.Popup = false;
+        setActiveCard(index) {
+          if (this.activeCardIndex === index) {
+            this.activeCardIndex = null;
+          } else {
+            this.activeCardIndex = index;
+          }
+        },
 
-        // Consola para verificar valores
-        console.log("Figure URL: " + this.Figure); // Debería mostrar la URL correcta de la imagen
-        console.log("Figure name: " + figurename);
-        console.log("Figure name type: " + typeof(this.Figure));
 
-      } catch (error) {
-        console.error("Error cargando la imagen: ", error);
-      }
+    async enviarJugador() {
+        try {
+             // Obtén el ID del usuario actual
+
+            const respuesta = await axios.post('http://localhost:9992/api/jugador', {
+                userSchema:this.Jugador.userSchema, // Incluye el ID del usuario en la solicitud
+                CasillaID: this.Jugador.CasillaID,
+                dinero: this.Jugador.dinero,
+                propiedades: this.Jugador.propiedades,
+                tokenID: this.Jugador.tokenID
+            });
+            this.mensaje = respuesta.data.message;
+        } catch (error) {
+            console.error("Error en la solicitud al backend:", error);
+            this.mensaje = 'Error al enviar el jugador';
+        }
+    },
+    async actualizarJugador() {
+        try {
+            
+
+            const respuesta = await axios.put('http://localhost:9992/api/jugador', {
+                userSchema: this.Jugador.userSchema, // Incluye el ID del usuario en la solicitud
+                CasillaID: this.Jugador.CasillaID,
+                dinero: this.Jugador.dinero,
+                propiedades: this.Jugador.propiedades,
+                tokenID: this.Jugador.tokenID
+            });
+            this.mensaje = respuesta.data.message;
+        } catch (error) {
+            console.error("Error en la solicitud de actualización:", error);
+            this.mensaje = 'Error al actualizar el jugador';
+        }
     }
+
+
 
 
     }
@@ -270,17 +369,71 @@ export default {
   place-items: center;
 }
 
+.center-container {
+    display: flex;
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center; 
+    z-index: 2; 
+    position: relative; 
+    grid-column: 5 / span 3; 
+    grid-row: 4 / span 2; 
+    background-color: rgba(255, 255, 255, 0.64);
+    margin-block: 5%;
+    padding: 5vw; 
+    border-radius: 15px; 
+}
+
 .monopoly-board {
     display: grid;
-    grid-template-columns: 230px repeat(9, 170px) 230px;
-    grid-template-rows: 230px repeat(9, 170px) 230px;
-    width: auto;
-    height: auto;
-    border: 2px solid black;
+    width: 100vw; /* La anchura del tablero se ajusta al ancho de la ventana */
+    height: 100vh; /* La altura del tablero se ajusta a la altura de la ventana */
+    max-width: 100%; /* Limita el ancho para que no exceda la ventana */
+    max-height: 100%; /* Limita la altura para que no exceda la ventana */
     padding: 0;
     margin: 0;
     gap: 0;
+    box-sizing: border-box;
 }
+
+.corner, .property-top, .property-bottom, .property-rotate-right, .property-rotate-left {
+    width: 100%;
+    height: 100%;
+    background-color: lightgray;
+}
+
+/* Ajustes para que las casillas mantengan proporciones al redimensionar */
+/* Logo centrado */
+.center-logo {
+    grid-column: 5 / span 3;
+    grid-row: 4 / span 2; /* Coloca el logo un poco más arriba */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2; /* Asegura que el logo esté sobre otros elementos */
+}
+
+.center-logo img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+/* Ruleta y dado */
+.ruletaDado {
+    grid-column: 5 / span 3;
+    grid-row: 6 / span 2; /* Coloca los dados debajo del logo */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 20px;
+    z-index: 1; /* Coloca los dados debajo del logo */
+    margin-top: 20px; /* Ajusta el espacio entre logo y dados */
+}
+
+
+
 
 
 
@@ -350,11 +503,13 @@ export default {
     justify-items: stretch;
     align-items: center;
     /* Asegura que las casillas laterales estén alineadas con las esquinas */
+    z-index: 1;
 }
 
 .right-side {
     grid-column: 11;
     margin-left: 28px;
+    z-index: 1;
     /* Mueve hacia la derecha */
 }
 
@@ -369,8 +524,8 @@ export default {
 .property-rotate-left {
     width: 170px;
     height: 170px;
-    background-color: white;
-    border: 1px solid black;
+    background-color: lightgray;
+    border: 1px solid lightgray;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -386,8 +541,8 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: white;
-  border: 1px solid black;
+  background-color: lightgray;
+  border: 1px solid lightgray;
   box-sizing: border-box;
   padding: 0;
   margin: 0;
@@ -396,8 +551,8 @@ export default {
 .property-bottom {
   width: 170px;
   height: 170px;
-  background-color: white;
-  border: 1px solid black;
+  background-color: lightgray;
+  border: 1px solid lightgray;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -418,20 +573,7 @@ export default {
     /* Casillas laterales izquierdas mirando hacia la derecha */
 }
 
-/* Logo centrado */
-.center-logo {
-    grid-column: 5 / span 3;
-    grid-row: 5 / span 3;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 
-.center-logo img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-}
 
 /* Ficha */
 .ficha {
@@ -442,12 +584,12 @@ export default {
     border-radius: 50%;
     height: 96px;
     width: 96px;
-    animation: rotate_3922 10s linear infinite;
+    animation: rotate_3922 20s linear infinite;
     background-color: #9b59b6;
     background-image: linear-gradient(#9b59b6, #84cdfa, #5ad1cd);
     transform-origin: center;
-    z-index: 0;
     transition: top 0.5s ease, left 0.5s ease, transform 0.5s ease;
+    z-index: 1;
     /* Añadido */
 }
 
@@ -474,35 +616,23 @@ export default {
     }
 }
 
-.ruletaDado {
-    grid-column: 5 / span 3;
-    grid-row: 7; /* Cambia a una fila más baja para mover los dados hacia abajo */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-    gap: 20px;
-    margin-top: 100px; /* Agrega un margen superior para ajustar la posición si es necesario */
-  }
+
 
 .contendor {
     display: flex;
     justify-content: center;
     align-items: center;
     /* tamaño del tablero */
-    width: 100%;
+    width: 100vw;
     height: 100%;
 }
 
 
 /* Estilo para el botón Figuras */
 .figuras-button {
-    position: absolute;
-    top: 600px;
-    left: 1000px;
-    transform: translateX(-50%);
-    padding: 10px 20px;
-    background-color: #3498db;
+    margin-bottom: 5%;
+    position: relative;
+    background-color: red;
     color: white;
     border: none;
     border-radius: 5px;
@@ -510,8 +640,9 @@ export default {
 }
 
 .figuras-button:hover {
-    background-color: #2980b9;
+    background-color: rgb(201, 6, 6);
 }
+
 .ficha-imagen {
     width: 100%;
     height: 100%;
