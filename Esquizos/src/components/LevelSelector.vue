@@ -2,7 +2,7 @@
 <div class="level-selector-wrapper">
     <div class="level-selector">
         <div class="level" v-for="level in levels" :key="level.id">
-            <img :src="require(`@/assets/${level.image}`)" :alt="level.name" class="level-image" />
+            <img :src="`@/assets/${level.image}`" :alt="level.name" class="level-image" />
             <h3>{{ level.name }}</h3>
             <button class="button" @click="selectLevel(level.id)">Seleccionar</button>
         </div>
@@ -11,37 +11,34 @@
 </template>
 
 <script>
+import { io } from 'socket.io-client';
+
 export default {
-    data() {
-        return {
-            levels: [{
-                    id: 1,
-                    name: "Tablero 1",
-                    image: "tablero1.png"
-                },
-                {
-                    id: 2,
-                    name: "Tablero 2",
-                    image: "tablero2.png"
-                },
-                {
-                    id: 3,
-                    name: "Tablero 3",
-                    image: "tablero3.png"
-                },
-                {
-                    id: 4,
-                    name: "Tablero 4",
-                    image: "tablero4.png"
-                },
-            ],
-        };
+  data() {
+    return {
+      levels: [
+        { id: 1, name: 'Tablero 1', image: 'tablero1.png' },
+        { id: 2, name: 'Tablero 2', image: 'tablero2.png' },
+        { id: 3, name: 'Tablero 3', image: 'tablero3.png' },
+      ],
+      socket: null,
+    };
+  },
+  methods: {
+    selectLevel(id) {
+      this.socket.emit('level-selected', { levelId: id });
+      this.$router.push(`/tablero${id}`);
     },
-    methods: {
-        selectLevel(id) {
-            alert(`Nivel ${id} seleccionado`);
-        },
-    },
+  },
+  mounted() {
+    this.socket = io('http://localhost:3000');
+    this.socket.on('level-selected', (data) => {
+      this.$router.push(`/tablero${data.levelId}`);
+    });
+  },
+  beforeDestroy() {
+    if (this.socket) this.socket.disconnect();
+  },
 };
 </script>
 
@@ -57,7 +54,7 @@ export default {
 
 .level-selector {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 20px;
     padding: 20px;
     background-color: rgba(255, 255, 255, 0.8);
