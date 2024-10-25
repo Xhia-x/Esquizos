@@ -1,14 +1,25 @@
 <template>
-<div class="level-selector-wrapper">
-    <div class="level-selector">
-        <div class="level" v-for="level in levels" :key="level.id">
-            <img :src="`@/assets/${level.image}`" :alt="level.name" class="level-image" />
-            <h3>{{ level.name }}</h3>
-            <button class="button" @click="selectLevel(level.id)">Seleccionar</button>
+    <video src="../assets/video.mp4" autoplay="true" muted="true" loop="true"></video>
+    <div class="level-selector-wrapper">
+      <div class="level-selector">
+        <div class="level" :key="1">
+          <img src="@/assets/tablero1.png" alt="Tablero 1" class="level-image" />
+          <h3>Tablero 1</h3>
+          <button class="button" @click="selectLevel(1)">Seleccionar</button>
         </div>
+        <div class="level" :key="2">
+          <img src="@/assets/tablero2.png" alt="Tablero 2" class="level-image" />
+          <h3>Tablero 2</h3>
+          <button class="button" @click="selectLevel(2)">Seleccionar</button>
+        </div>
+        <div class="level" :key="3">
+          <img src="@/assets/tablero3.png" alt="Tablero 3" class="level-image" />
+          <h3>Tablero 3</h3>
+          <button class="button" @click="selectLevel(3)">Seleccionar</button>
+        </div>
+      </div>
     </div>
-</div>
-</template>
+  </template>
 
 <script>
 import { io } from 'socket.io-client';
@@ -78,7 +89,7 @@ export default {
 
 .level-image {
     width: 100%;
-    height: 200px;
+    height: 500px;
     object-fit: cover;
     border-bottom: 1px solid #ccc;
     margin-bottom: 10px;
