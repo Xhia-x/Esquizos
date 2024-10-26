@@ -177,7 +177,7 @@
             <InvitarJugador v-if="partida.nombre === partidaInvitacion" :partida="partida" :partidaInvitacion="partidaInvitacion" />
 
             <div>
-                <button type="button" @click="redirigirUsuario">ir al seleccionar tablero</button>
+                <button class="button2" type="button" @click="redirigirUsuario">ir al seleccionar tablero</button>
             </div>
         </div>
 
@@ -195,6 +195,7 @@ import axios from 'axios';
 import autenticadorSesion from '../mixins/AutenticadorSesion.js';
 import InvitarJugador from './InvitarJugador.vue';
 import Swal from 'sweetalert2'; // Importa SweetAlert2
+import { io } from 'socket.io-client'; // Importa socket.io-client
 
 export default {
     name: 'CrearPartida',
@@ -213,10 +214,11 @@ export default {
             tiempoPorTurno: -1,
             partidaCreada: false,
             partidaInvitacion: null,
-            socket: null
+            socket: null // Socket para conexión en tiempo real
         };
     },
     mounted() {
+        // Inicializa el socket al montar el componente
         this.socket = io('http://localhost:3000');
     },
     methods: {
@@ -245,9 +247,7 @@ export default {
             console.log(this.partida.tiempoPorTurno);
             console.log(this.partida.nombre);
             axios.post("http://localhost:9992/partida", this.partida)
-                .then(({
-                    data
-                }) => {
+                .then(({ data }) => {
                     if (data.status === true) {
                         this.partidaCreada = true;
 
@@ -283,9 +283,7 @@ export default {
             this.partida.link = '/partida/' + this.partida.nombre;
         },
         volverAtras() {
-            this.$router.push({
-                name: 'Home'
-            });
+            this.$router.push({ name: 'Home' });
         },
         comprobacionesDinero() {
             if (isNaN(this.dineroInicial)) {
@@ -317,9 +315,7 @@ export default {
         accederPartida() {
             this.$router.push({
                 name: 'VerPartida',
-                params: {
-                    nombrePartida: this.partida.nombre
-                }
+                params: { nombrePartida: this.partida.nombre }
             });
         },
         copiarAlPortapapeles(texto) {
@@ -330,32 +326,26 @@ export default {
         },
         redirigirUsuario() {
             if (this.partida.administrador) {
-                // Emitir el evento para indicar que el creador está listo para elegir tablero
-                this.socket.emit('start-game', {
-                    nombrePartida: this.partida.nombre
-                });
+                // Emite un evento de inicio para notificar que el creador va a elegir el tablero
+                this.socket.emit('start-game', { nombrePartida: this.partida.nombre });
                 this.$router.push({
                     name: 'LevelSelector',
-                    params: {
-                        nombrePartida: this.partida.nombre
-                    }
+                    params: { nombrePartida: this.partida.nombre }
                 });
             } else {
                 this.$router.push({
                     name: 'Waitingroom',
-                    params: {
-                        nombrePartida: this.partida.nombre
-                    }
+                    params: { nombrePartida: this.partida.nombre }
                 });
             }
-        },
-        beforeDestroy() {
-            if (this.socket) this.socket.disconnect();
         }
-
-    }
+    },
+    beforeDestroy() {
+        if (this.socket) this.socket.disconnect();
+    },
 };
 </script>
+
 
 <style scoped>
 .mainContainer {
