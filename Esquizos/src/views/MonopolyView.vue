@@ -138,16 +138,16 @@
     </div>
     
     <div class="gray-background"></div>
-    <button @click="goToMonopolyView2" class="style=margin-right: 5%">Ir a Monopoly View 2</button>
-    <button @click="goToMonopolyView3">Ir a Monopoly View 3</button>
+    <button class="botones" @click="goToMonopolyView2" >Ir a Monopoly View 2</button>
+    <button class="botones" @click="goToMonopolyView3">Ir a Monopoly View 3</button>
 
   <h1></h1>
   <div>
-    <button @click="enviarJugador">Enviar Jugador al Backend</button>
+    <button class="botones" @click="enviarJugador">Enviar Jugador al Backend</button>
     <p v-if="mensaje">{{ mensaje }}</p>
   </div>
     <div>
-        <button @click="actualizarJugador">Actualizar Jugador en el Backend</button>
+        <button class="botones" @click="actualizarJugador">Actualizar Jugador en el Backend</button>
         <p v-if="mensaje">{{ mensaje }}</p>
     </div>
 </div>
@@ -688,8 +688,9 @@ export default {
     position: relative;
     background-color: #9c1616c2;
     color: white;
-    border: 1px solid #FFFFFF;
-    border-radius: 5px;
+    border: 1px solid #F8E8A0;
+    border-radius: 10px;
+    color: #F8E8A0;
     cursor: pointer;
 }
 
@@ -793,5 +794,11 @@ img{
   width: 100px; /* Ajusta el ancho de la imagen del mago */
   height: 100px; /* Ajusta la altura de la imagen del mago */
   border-radius: 10px; /* Ajusta el radio de los bordes si es necesario */
+}
+
+.botones{
+  border: 1px solid #F8E8A0;
+  border-radius: 10px;
+  color: #F8E8A0;
 }
 </style>

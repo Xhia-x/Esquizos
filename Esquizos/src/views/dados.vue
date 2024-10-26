@@ -127,9 +127,10 @@ button {
   padding: 10px 20px;
   background-color: #9c1616c2;
   color: white;
-  border: 1px solid #FFFFFF;
+  border: 1px solid #F8E8A0;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 10px;
+  color: #F8E8A0;
 }
 
 button:hover {
