@@ -212,8 +212,12 @@ export default {
             tiempoMaximo: -1,
             tiempoPorTurno: -1,
             partidaCreada: false,
-            partidaInvitacion: null
+            partidaInvitacion: null,
+            socket: null
         };
+    },
+    mounted() {
+        this.socket = io('http://localhost:3000');
     },
     methods: {
         crearPartida() {
@@ -325,8 +329,11 @@ export default {
             this.partidaInvitacion = this.partidaInvitacion === partida.nombre ? null : partida.nombre;
         },
         redirigirUsuario() {
-
             if (this.partida.administrador) {
+                // Emitir el evento para indicar que el creador está listo para elegir tablero
+                this.socket.emit('start-game', {
+                    nombrePartida: this.partida.nombre
+                });
                 this.$router.push({
                     name: 'LevelSelector',
                     params: {
@@ -341,6 +348,9 @@ export default {
                     }
                 });
             }
+        },
+        beforeDestroy() {
+            if (this.socket) this.socket.disconnect();
         }
 
     }
