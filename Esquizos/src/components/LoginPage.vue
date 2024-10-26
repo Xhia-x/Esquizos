@@ -7,7 +7,7 @@
         </Reglas>
         </div>
  
-          
+        <video src="../assets/video.mp4" autoplay="true" muted="true" loop="true"></video>   
         <div class="mainContainer">
             <div class="text">
                 <h1>MONOPOLY</h1>
@@ -63,71 +63,84 @@
     </template>
     
     <script>
-    import User from '../models/User.js';
-    import axios from 'axios';
-    import Reglas from './Reglas.vue';
-    
-    export default {
-        name: 'LoginPage',
-        components: {
-            Reglas
-        },
-        data() {
-            return {
-                user: new User('', '', false)
-            };
-        },
-        mounted() {
-            const storedUser = localStorage.getItem('user') || sessionStorage.getItem('user');
-            
-            if (storedUser) {
-                axios.get(`http://localhost:9992/user/${storedUser}`)
-                    .then(({ data }) => {
-                        if (data) {
-                            this.user = data; 
-                        }
-                        this.$router.push({ name: 'Home' });
-                    })
-                    .catch(err => {
-                        console.error(err);
-                    });
-            }
+import User from '../models/User.js';
+import axios from 'axios';
+import Reglas from './Reglas.vue';
+import Swal from 'sweetalert2'; // Importa SweetAlert2
 
-        },
-        methods: {
-            login() {
-                axios.post("http://localhost:9992/user/login", this.user)
-                .then(({data}) => {
-                    if (data.status === true) {
-                        alert("Logged Successfully");
-                        if (this.user.rememberMe) {
-                            localStorage.setItem('email', this.user.email);
-                            localStorage.setItem('user', data.username);
-                        } else {
-                            sessionStorage.setItem('email', this.user.email);
-                            sessionStorage.setItem('user', data.username);
-                        }
-                        console.log(data.username);
-                        console.log(localStorage.getItem('user'));
-                        this.$router.push({ name: 'Home' });
-                    } else {
-                        alert("Login FAILED");
+export default {
+    name: 'LoginPage',
+    components: {
+        Reglas
+    },
+    data() {
+        return {
+            user: new User('', '', false)
+        };
+    },
+    mounted() {
+        const storedUser = localStorage.getItem('user') || sessionStorage.getItem('user');
+        
+        if (storedUser) {
+            axios.get(`http://localhost:9992/user/${storedUser}`)
+                .then(({ data }) => {
+                    if (data) {
+                        this.user = data; 
                     }
+                    this.$router.push({ name: 'Home' });
                 })
                 .catch(err => {
                     console.error(err);
-                    alert("Error, Try Again");
                 });
-            }
         }
-    };
-    </script>
-    
-    
-    
-    
-    
-    <style scoped>
+
+    },
+    methods: {
+        login() {
+            axios.post("http://localhost:9992/user/login", this.user)
+            .then(({data}) => {
+                if (data.status === true) {
+                    // SweetAlert2 en lugar de alert
+                    Swal.fire({
+                        title: "Sesión iniciada",
+                        text: "Has iniciado sesión de forma exitosa",
+                        icon: "success"
+                    });
+
+                    if (this.user.rememberMe) {
+                        localStorage.setItem('email', this.user.email);
+                        localStorage.setItem('user', data.username);
+                    } else {
+                        sessionStorage.setItem('email', this.user.email);
+                        sessionStorage.setItem('user', data.username);
+                    }
+                    console.log(data.username);
+                    console.log(localStorage.getItem('user'));
+                    this.$router.push({ name: 'Home' });
+                } else {
+                    // Muestra error si el login falla
+                    Swal.fire({
+                        title: "Error al iniciar sesión",
+                        text: "Comprueba el correo o la contraseña",
+                        icon: "error"
+                    });
+                }
+            })
+            .catch(err => {
+                console.error(err);
+                Swal.fire({
+                    title: "Error",
+                    text: "An error occurred. Try again.",
+                    icon: "error"
+                });
+            });
+        }
+    }
+};
+</script>
+
+
+<style scoped>
     
     .mainContainer {
         width: 90%;
