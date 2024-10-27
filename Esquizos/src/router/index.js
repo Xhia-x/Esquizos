@@ -11,14 +11,13 @@ import MonopolyView3 from '@/views/MonopolyView3.vue';
 import PartidasCreadas from '@/components/PartidasCreadas.vue';
 import FigurasMonopoly from '@/views/FigurasMonopoly.vue';
 import UnirsePartida from '@/components/UnirsePartida.vue';
-import WaitingRoom from '@/components/WaitingRoom.vue';
+import WaitingRoom from '@/components/Waitingroom.vue';
 
 const routes = [
   { path: '/', name: 'Login', component: Login },
   {path: '/crearPartida', name: 'CrearPartida', component: CrearPartida},
   {path: '/partida/:nombrePartida', name: 'VerPartida', component: VerPartida},
   {path: '/level-selector', name: 'LevelSelector', component: LevelSelector },
-  {path: '/fichas', name: 'Ficha', component: Ficha},
   {path: '/home', name: 'Home', component: Home},
   {path: '/tablero1', name: 'Tablero', component: MonopolyView},
   {path: '/tablero2', name: 'Tablero2', component: MonopolyView2},

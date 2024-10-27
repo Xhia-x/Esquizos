@@ -8,6 +8,9 @@
       <p class="card__descr">{{ description }}</p>
       <div class="card__price">{{ price }}</div>
     </div>
+    <div v-if="dueno" class="duenoInfo">
+      Dueño: {{ dueno }}
+    </div>
     <!-- Cara trasera -->
     <div class="card__back">
       <div class="box">
@@ -194,22 +197,24 @@ hr {
   box-shadow:0 1px 1px 1px white;
   transition: 3s ease-in all;
   z-index: 9999;
-  h2 {
-    text-align:center;
-    color:black;
-    padding:20px;
-    margin:0;
-    border:2px solid black;
-    small {
-      text-transform:uppercase;
-      font-size:12px;
-      letter-spacing:2px;
-    }
-  }
-  .align-center {
-    text-align:center;
-  }
 }
+h2 {
+  text-align:center;
+  color:black;
+  padding:20px;
+  margin:0;
+  border:2px solid black;
+}
+  small {
+    text-transform:uppercase;
+    font-size:12px;
+    letter-spacing:2px;
+  }
+
+.align-center {
+  text-align:center;
+}
+
 
 .float-left {
   float:left;
@@ -224,6 +229,18 @@ hr {
   padding-bottom:10px;
 }
 
+.duenoInfo {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  padding: 5px;
+  font-size: 12px;
+  text-align: center;
+}
+
 </style>
 
 <script>
@@ -231,6 +248,10 @@ export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: "Casilla",
   props: {
+    dueno: {
+      type: String,
+      default: ""
+    },
     color: {
       type: String,
       default: "blueviolet"
