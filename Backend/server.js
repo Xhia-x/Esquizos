@@ -87,6 +87,25 @@ io.on('connection', (socket) => {
         console.log(`Usuario ${usuario} en la partida ${partida}, mueve ficha ${indice}`);
         io.to(partida).emit('movimientoGenerado', { ficha, indice, usuario });
     });
+
+    socket.on('seleccionarFigura', (data) => {
+        const { figura, usuario, partida } = data;
+        console.log(`Evento seleccionarFigura recibido: ${figura} por ${usuario} en la partida ${partida}`); // Verificación de recepción
+        io.to(partida).emit('figuraSeleccionada', { figura, usuario });
+    });
+
+    socket.on('seleccionarColor', (data) => {
+        const { color, usuario, partida } = data;
+        console.log(`Evento seleccionarColor recibido: ${color} por ${usuario} en la partida ${partida}`);
+        io.to(partida).emit('colorSeleccionado', { color, usuario });
+    });
+
+    socket.on('seleccionarNombre', (data) => {
+        const { nombre, usuario, partida } = data;
+        console.log(`Evento seleccionarNombre recibido: ${nombre} por ${usuario} en la partida ${partida}`);
+        io.to(partida).emit('nombreSeleccionado', { nombre, usuario });
+    });
+
     
 });
 

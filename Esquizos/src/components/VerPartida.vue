@@ -209,14 +209,20 @@
   <style scoped>
   .finalizarPartidaBoton {
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 0.5%;
+    right: 1%;
+    border: 1px solid #F8E8A0;
+    border-radius: 10px;
+    color: #F8E8A0;
   }
 
   .volverHomeBoton {
     position: absolute;
-    top: 10px;
-    right: 20px;
+    top: 0.5%;
+    right: 12%;
+    border: 1px solid #F8E8A0;
+    border-radius: 10px;
+    color: #F8E8A0;
   }
   </style>
 
