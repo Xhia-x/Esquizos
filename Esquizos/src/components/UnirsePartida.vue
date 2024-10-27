@@ -1,4 +1,5 @@
 <template>
+        <Reglas />
     <video src="../assets/video.mp4" autoplay="true" muted="true" loop="true"></video>
     <div class="partidas-container">
         <h1>Partidas Unidas</h1>
@@ -16,6 +17,7 @@
         </ul>
     </div>
     <button type="button" class="volverAtrasBoton" @click="volverAtras">volver atrás</button>
+
 </template>
 
 <script>
@@ -26,10 +28,16 @@ import BilleteImage from '@/assets/Billete.png';
 import axios from "axios";
 import autenticadorSesion from '../mixins/AutenticadorSesion.js';
 import Partida from '../models/Partida.js';
+import Reglas from './Reglas.vue';
+import PopUp from './PopUp.vue';
 
 export default {
     name: "UnirsePartida",
     mixins: [autenticadorSesion],
+    components: {
+        Reglas,
+        PopUp
+    },
     data() {
         return {
             partidas: [],

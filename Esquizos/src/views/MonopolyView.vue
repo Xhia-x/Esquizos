@@ -113,11 +113,33 @@
     <div class="center-container">
         <button class="figuras-button" @click="togglePopup">Seleccionar Figuras</button>
         <button class="colores-button" @click="toggleColorPopup">Seleccionar Colores</button>
+        <button class=" casitas-button" @click="togglePopupCasitas">ver Casitas</button>
+
         <div class="center-logo">
             <img src="@/assets/monopolylogo.png" alt="Monopoly Logo" />
             <div class="pop-up" v-if="Popup" >
                 <FigurasMonopoly @close="togglePopup() " @select="toggleSelect"  />
             </div>
+
+
+            <div class="popup-casitas" v-if="mostrarPopupCasitas">
+            <div class="popup-content">
+                <span class="close" @click="togglePopupCasitas">&times;</span>
+                <h1>Casitas</h1>
+                <div class="casita-container">
+                    <div class="casita-box">
+                        <img class="casita" src="@/assets/casaRoja.png" alt="Casita roja" />
+                        <p>Se agrega cuando el jugador posee 4 casitas verdes. Aumenta el impuesto según la propiedad (Max: 1). </p>
+                    </div>
+                    <div class="casita-box">
+                        <img class="casita" src="@/assets/casaVerde.png" alt="Casita verde" />
+                        <p>Se agrega cuando el jugador posee todas las propiedades de un cierto color. Aumenta el Impuesto según la propiedad (Max: 4).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+            
             <div class="color-popup" v-if="colorPopup">
           <div class="color-picker">
             <div v-for="color in colors" :key="color" :style="{ backgroundColor: color }" class="color-swatch" @click="selectColor(color)"></div>
@@ -185,13 +207,15 @@ import FigurasMonopoly from './FigurasMonopoly.vue';
 import axios from 'axios';
 import Jugador from '@/models/jugador.js';
 
+
 export default {
     name: "MonopolyView",
     components: {
         dados,
         Casilla,
         FigurasMonopoly,
-        Jugador
+        Jugador,
+        
     },
     data() {
         return {
@@ -214,7 +238,8 @@ export default {
             colorPopup: false,
             selectedColor: '#ffffff', // Color predeterminado
           colors: ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'], // Lista de colores disponibles
-          userName: localStorage.getItem('user') || sessionStorage.getItem('user') || 'Usuario' // Nombre del usuario
+          userName: localStorage.getItem('user') || sessionStorage.getItem('user') || 'Usuario', // Nombre del usuario
+          mostrarPopupCasitas: false
             
         };
         
@@ -329,6 +354,10 @@ export default {
                     console.error("Error al cargar los jugadores:", error);
                 });
         },
+
+        togglePopupCasitas() {
+        this.mostrarPopupCasitas = !this.mostrarPopupCasitas;
+    },
         // Metodo para añadir jugador a la lista
         asignarFicha(player) {
             // Crear una ficha para el jugador
@@ -1010,5 +1039,60 @@ img{
   color: #000;
 }
 
+.popup-casitas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 20;
+}
+
+.popup-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    position: relative;
+    width: 80%;
+    max-width: 600px;
+    max-height: 80%;
+    overflow-y: auto;
+    text-align: center;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.casita-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.casita-box {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+    width: 100%;
+    max-width: 300px;
+    text-align: center;
+}
+
+.casita {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 10px;
+}
 
 </style>

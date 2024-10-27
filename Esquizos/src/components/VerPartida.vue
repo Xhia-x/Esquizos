@@ -1,13 +1,17 @@
 <template>
     <div v-if="partida">
+      <Reglas></Reglas>
       <h1>Partida: {{ partida.nombre }}</h1>
       <p>Número de jugadores: {{ partida.nJugadores }}</p>
       <p>Administrador: {{ partida.administrador }}</p>
       <ul>
         <li v-for="jugador in partida.jugadores" :key="jugador">{{ jugador }}</li>
       </ul>
+       
       <button v-if="comprobarAdministrador()" type="button" class="finalizarPartidaBoton" @click="finalizarPartida">Finalizar Partida</button>
       <button type="button" class="volverHomeBoton" @click="volverHome">Volver al inicio</button>
+     
+     
       <MonopolyView />
     </div>
     
@@ -21,13 +25,17 @@
   import Swal from 'sweetalert2';
   import autenticadorSesion from '../mixins/AutenticadorSesion.js';
   import Jugador from '@/models/jugador.js';
+  import Reglas from './Reglas.vue';
+  import PopUp from './PopUp.vue';
 
   export default {
     name: 'VerPartida',
     mixins: [autenticadorSesion],
     components: {
       MonopolyView,
-      Jugador
+      Jugador,
+      Reglas,
+      PopUp
     },
     data() {
       return {
@@ -224,6 +232,10 @@
     border-radius: 10px;
     color: #F8E8A0;
   }
+
+  
+
+  
   </style>
 
   

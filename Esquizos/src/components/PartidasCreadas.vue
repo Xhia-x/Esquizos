@@ -1,4 +1,5 @@
 <template>
+    <Reglas />
     <video src="../assets/video.mp4" autoplay="true" muted="true" loop="true"></video>
     <div class="partidas-container">
         <h1>Partidas Creadas</h1>
@@ -31,6 +32,8 @@ import axios from "axios";
 import autenticadorSesion from '../mixins/AutenticadorSesion.js';
 import Partida from '../models/Partida.js';
 import InvitarJugador from './InvitarJugador.vue';
+import Reglas from './Reglas.vue';
+import PopUp from './PopUp.vue';
 
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
@@ -41,7 +44,9 @@ export default {
     name: "PartidasCreadas",
     mixins: [autenticadorSesion],
     components: {
-        InvitarJugador
+        InvitarJugador,
+        Reglas,
+        PopUp
     },
     data() {
         return {
