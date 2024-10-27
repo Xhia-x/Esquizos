@@ -112,11 +112,17 @@
 
     <div class="center-container">
         <button class="figuras-button" @click="togglePopup">Seleccionar Figuras</button>
+        <button class="colores-button" @click="toggleColorPopup">Seleccionar Colores</button>
         <div class="center-logo">
             <img src="@/assets/monopolylogo.png" alt="Monopoly Logo" />
             <div class="pop-up" v-if="Popup" >
                 <FigurasMonopoly @close="togglePopup() " @select="toggleSelect"  />
             </div>
+            <div class="color-popup" v-if="colorPopup">
+          <div class="color-picker">
+            <div v-for="color in colors" :key="color" :style="{ backgroundColor: color }" class="color-swatch" @click="selectColor(color)"></div>
+          </div>
+        </div>
         </div>
         <div class="ruletaDado">
             <dados @diceRolled="movePieceBasedOnDice" />
@@ -128,12 +134,14 @@
     <div ref="ficha" class="ficha" :style="pieces[0].style" @click="movePiece(0)">
         
         <div class="figurin">
-            <div v-if="Figure != 'default'" >
+            <div v-if="Figure " >
                 <img :src="Figure" alt="ficha" lass="animada"/>
             </div> <!-- Agregar variable de estado -->
+          </div>
+            <div class="color-circle" :style="{ backgroundColor: selectedColor }"></div>
+      
         
-        
-        </div>
+       
 
     </div>
     
@@ -196,9 +204,10 @@ export default {
             partidaActual: null,
             Popup: false,
             Figure: null, //new URL('@/assets/hollow.png', import.meta.url).href
-
             activeCardIndex: null,  // Aquí se almacena el índice de la carta activa
-         
+            colorPopup: false,
+            selectedColor: '#ffffff', // Color predeterminado
+          colors: ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'], // Lista de colores disponibles
             
         };
         
@@ -278,6 +287,9 @@ export default {
         togglePopup() {
         this.Popup = !this.Popup;
         },
+        toggleColorPopup() {
+      this.colorPopup = !this.colorPopup;
+    },
 
         async toggleSelect(figurename) {
             try {
@@ -309,7 +321,10 @@ export default {
             this.activeCardIndex = index;
           }
         },
-
+        selectColor(color) {
+      this.selectedColor = color;
+      this.colorPopup = false;
+    },
 
     async enviarJugador() {
         try {
@@ -732,6 +747,7 @@ img{
     top: -20px;
     left: 0;
     border-radius: 50%;
+    z-index: 10;
  
 }
 
@@ -740,4 +756,47 @@ img{
   height: 100px; /* Ajusta la altura de la imagen del mago */
   border-radius: 10px; /* Ajusta el radio de los bordes si es necesario */
 }
+
+
+.color-picker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 10px;
+  
+}
+.color-swatch {
+  width: 30px;
+  height: 30px;
+  border: 1px solid #000;
+  cursor: pointer;
+  
+}
+.color-popup {
+  position: absolute;
+  top: -100px; /* Ajusta según sea necesario */
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 10px;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  z-index: 20;
+}
+.color-circle {
+  position: absolute;
+  top: 10px; /* Ajusta según sea necesario */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  border: 2px solid #000;
+  z-index: 1; /* Asegúrate de que el círculo de color esté por encima de la ficha */
+}
+
+
 </style>
