@@ -125,15 +125,16 @@ export default {
 
 button {
   padding: 10px 20px;
-  background-color: red;
+  background-color: #9c1616c2;
   color: white;
-  border: none;
+  border: 1px solid #F8E8A0;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 10px;
+  color: #F8E8A0;
 }
 
 button:hover {
-  background-color: rgb(218, 0, 0);
+  background-color: #8a1616c2;
 }
 
 
