@@ -139,6 +139,7 @@
             </div> <!-- Agregar variable de estado -->
           </div>
             <div class="color-circle" :style="{ backgroundColor: selectedColor }"></div>
+            <div class="user-name">{{ userName }}</div>
       
         
        
@@ -208,6 +209,7 @@ export default {
             colorPopup: false,
             selectedColor: '#ffffff', // Color predeterminado
           colors: ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'], // Lista de colores disponibles
+          userName: localStorage.getItem('user') || sessionStorage.getItem('user') || 'Usuario' // Nombre del usuario
             
         };
         
@@ -228,6 +230,27 @@ export default {
                 this.$refs.ficha.scrollIntoView({ behavior: 'smooth', block: 'center' });
             });
         });
+         // Escuchar cuando otro usuario selecciona una figura
+         this.socket.on("figuraSeleccionada", (data) => {
+            const { figura, usuario } = data;
+            this.Figure = figura;
+            console.log(`Figura seleccionada por el usuario ${usuario}: ${figura}`);
+        });
+      
+        // Escuchar cuando otro usuario selecciona un color
+    this.socket.on("colorSeleccionado", (data) => {
+      const { color, usuario } = data;
+      this.selectedColor = color;
+      console.log(`Color seleccionado por el usuario ${usuario}: ${color}`);
+    });
+      // Escuchar cuando otro usuario selecciona un nombre
+      this.socket.on("nombreSeleccionado", (data) => {
+      const { nombre, usuario } = data;
+      this.userName = nombre;
+      console.log(`Nombre seleccionado por el usuario ${usuario}: ${nombre}`);
+    });
+
+
     },
    
   
@@ -304,6 +327,11 @@ export default {
             this.Figure = image.default || image;
             this.Popup = false;
 
+              // Emitir evento de WebSocket
+              const usuario = localStorage.getItem('user') || sessionStorage.getItem('user');
+                this.socket.emit("seleccionarFigura", { figura: this.Figure, usuario: usuario, partida: this.partidaActual });
+                console.log("Evento seleccionarFigura emitido", { figura: this.Figure, usuario: usuario, partida: this.partidaActual }); // Verificación de emisión
+
             // Consola para verificar valores
             console.log("Figure URL: " + this.Figure); // Debería mostrar la URL correcta de la imagen
             console.log("Figure name: " + figurename);
@@ -312,6 +340,8 @@ export default {
         } catch (error) {
             console.error("Error cargando la imagen: ", error);
         }
+
+        
         },
 
         setActiveCard(index) {
@@ -324,6 +354,11 @@ export default {
         selectColor(color) {
       this.selectedColor = color;
       this.colorPopup = false;
+
+      
+      const usuario = localStorage.getItem('user') || sessionStorage.getItem('user');
+      this.socket.emit("seleccionarColor", { color: this.selectedColor, usuario: usuario, partida: this.partidaActual });
+      console.log("Evento seleccionarColor emitido", { color: this.selectedColor, usuario: usuario, partida: this.partidaActual });
     },
 
     async enviarJugador() {
@@ -796,6 +831,11 @@ img{
   border-radius: 50%;
   border: 2px solid #000;
   z-index: 1; /* Asegúrate de que el círculo de color esté por encima de la ficha */
+}
+.user-name {
+  margin-top: 100px;
+  font-size: 20px;
+  color: #000;
 }
 
 
