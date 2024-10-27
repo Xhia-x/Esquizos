@@ -112,11 +112,17 @@
 
     <div class="center-container">
         <button class="figuras-button" @click="togglePopup">Seleccionar Figuras</button>
+        <button class="colores-button" @click="toggleColorPopup">Seleccionar Colores</button>
         <div class="center-logo">
             <img src="@/assets/monopolylogo.png" alt="Monopoly Logo" />
             <div class="pop-up" v-if="Popup" >
                 <FigurasMonopoly @close="togglePopup() " @select="toggleSelect"  />
             </div>
+            <div class="color-popup" v-if="colorPopup">
+          <div class="color-picker">
+            <div v-for="color in colors" :key="color" :style="{ backgroundColor: color }" class="color-swatch" @click="selectColor(color)"></div>
+          </div>
+        </div>
         </div>
         <div class="ruletaDado">
             <dados @diceRolled="movePieceBasedOnDice" />
@@ -133,10 +139,16 @@
         @click="movePiece(index)"
     >
         <div class="figurin">
-        <div v-if="Figure" >
-            <img :src="Figure" alt="ficha" class="animada"/>
-        </div>
-        </div>
+            <div v-if="Figure " >
+                <img :src="Figure" alt="ficha" lass="animada"/>
+            </div> <!-- Agregar variable de estado -->
+          </div>
+            <div class="color-circle" :style="{ backgroundColor: selectedColor }"></div>
+            <div class="user-name">{{ userName }}</div>
+      
+        
+       
+
     </div>
     
     <div class="gray-background"></div>
@@ -197,9 +209,12 @@ export default {
             partidaActual: null,
             Popup: false,
             Figure: null, //new URL('@/assets/hollow.png', import.meta.url).href
-
             activeCardIndex: null,  // Aquí se almacena el índice de la carta activa
             duenos: {}, // Aquí se almacenan los dueños de las propiedades
+            colorPopup: false,
+            selectedColor: '#ffffff', // Color predeterminado
+          colors: ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'], // Lista de colores disponibles
+          userName: localStorage.getItem('user') || sessionStorage.getItem('user') || 'Usuario' // Nombre del usuario
             
         };
         
@@ -267,6 +282,27 @@ export default {
         .catch((err) => {
           console.error("Error al cargar la imagen: ", err);
         });
+         // Escuchar cuando otro usuario selecciona una figura
+         this.socket.on("figuraSeleccionada", (data) => {
+            const { figura, usuario } = data;
+            this.Figure = figura;
+            console.log(`Figura seleccionada por el usuario ${usuario}: ${figura}`);
+        });
+      
+        // Escuchar cuando otro usuario selecciona un color
+    this.socket.on("colorSeleccionado", (data) => {
+      const { color, usuario } = data;
+      this.selectedColor = color;
+      console.log(`Color seleccionado por el usuario ${usuario}: ${color}`);
+    });
+      // Escuchar cuando otro usuario selecciona un nombre
+      this.socket.on("nombreSeleccionado", (data) => {
+      const { nombre, usuario } = data;
+      this.userName = nombre;
+      console.log(`Nombre seleccionado por el usuario ${usuario}: ${nombre}`);
+    });
+
+
     },
    
 // Método para obtener el índice del jugador actual
@@ -413,6 +449,9 @@ export default {
         togglePopup() {
         this.Popup = !this.Popup;
         },
+        toggleColorPopup() {
+      this.colorPopup = !this.colorPopup;
+    },
 
         async toggleSelect(figurename) {
             try {
@@ -427,6 +466,11 @@ export default {
             this.Figure = image.default || image;
             this.Popup = false;
 
+              // Emitir evento de WebSocket
+              const usuario = localStorage.getItem('user') || sessionStorage.getItem('user');
+                this.socket.emit("seleccionarFigura", { figura: this.Figure, usuario: usuario, partida: this.partidaActual });
+                console.log("Evento seleccionarFigura emitido", { figura: this.Figure, usuario: usuario, partida: this.partidaActual }); // Verificación de emisión
+
             // Consola para verificar valores
             console.log("Figure URL: " + this.Figure); // Debería mostrar la URL correcta de la imagen
             console.log("Figure name: " + figurename);
@@ -435,6 +479,8 @@ export default {
         } catch (error) {
             console.error("Error cargando la imagen: ", error);
         }
+
+        
         },
 
         setActiveCard(index) {
@@ -455,7 +501,15 @@ export default {
           console.log(`Propiedad ${selectedId} comprada por ${usuario}`);
           this.mostrarComprar = false;
         },
+        selectColor(color) {
+      this.selectedColor = color;
+      this.colorPopup = false;
 
+      
+      const usuario = localStorage.getItem('user') || sessionStorage.getItem('user');
+      this.socket.emit("seleccionarColor", { color: this.selectedColor, usuario: usuario, partida: this.partidaActual });
+      console.log("Evento seleccionarColor emitido", { color: this.selectedColor, usuario: usuario, partida: this.partidaActual });
+    },
 
     async actualizarJugador() {
         try {
@@ -864,6 +918,7 @@ img{
     top: -20px;
     left: 0;
     border-radius: 50%;
+    z-index: 10;
  
 }
 
@@ -908,4 +963,52 @@ img{
     padding: 10px;
     margin-left: 10px;
 }
+
+
+.color-picker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 10px;
+  
+}
+.color-swatch {
+  width: 30px;
+  height: 30px;
+  border: 1px solid #000;
+  cursor: pointer;
+  
+}
+.color-popup {
+  position: absolute;
+  top: -100px; /* Ajusta según sea necesario */
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 10px;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  z-index: 20;
+}
+.color-circle {
+  position: absolute;
+  top: 10px; /* Ajusta según sea necesario */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  border: 2px solid #000;
+  z-index: 1; /* Asegúrate de que el círculo de color esté por encima de la ficha */
+}
+.user-name {
+  margin-top: 100px;
+  font-size: 20px;
+  color: #000;
+}
+
+
 </style>
