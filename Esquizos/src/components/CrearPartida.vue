@@ -187,25 +187,24 @@
     </div>
 
     <div v-if="mostrarLevelSelector" class="level-selector-wrapper">
-      <div class="level-selector">
-        <div class="level" :key="1">
-          <img src="@/assets/tablero1.png" alt="Tablero 1" class="level-image" />
-          <h3>Tablero 1</h3>
-          <button class="button" @click="selectBoard(1)">Seleccionar</button>
+        <div class="level-selector">
+            <div class="level" :key="1">
+                <img src="@/assets/tablero1.png" alt="Tablero 1" class="level-image" />
+                <h3>Tablero 1</h3>
+                <button class="button" @click="selectBoard(1)">Seleccionar</button>
+            </div>
+            <div class="level" :key="2">
+                <img src="@/assets/tablero2.png" alt="Tablero 2" class="level-image" />
+                <h3>Tablero 2</h3>
+                <button class="button" @click="selectBoard(2)">Seleccionar</button>
+            </div>
+            <div class="level" :key="3">
+                <img src="@/assets/tablero3.png" alt="Tablero 3" class="level-image" />
+                <h3>Tablero 3</h3>
+                <button class="button" @click="selectBoard(3)">Seleccionar</button>
+            </div>
         </div>
-        <div class="level" :key="2">
-          <img src="@/assets/tablero2.png" alt="Tablero 2" class="level-image" />
-          <h3>Tablero 2</h3>
-          <button class="button" @click="selectBoard(2)">Seleccionar</button>
-        </div>
-        <div class="level" :key="3">
-          <img src="@/assets/tablero3.png" alt="Tablero 3" class="level-image" />
-          <h3>Tablero 3</h3>
-          <button class="button" @click="selectBoard(3)">Seleccionar</button>
-        </div>
-      </div>
     </div>
-    
 
 </body>
 </template>
@@ -256,6 +255,7 @@ export default {
             tiempoPorTurno: -1,
             partidaCreada: false,
             partidaInvitacion: null,
+            tableroSeleccionado: null,
             socket: null // Socket para conexión en tiempo real
         };
     },
@@ -267,6 +267,15 @@ export default {
         crearPartida() {
             if (!this.comprobacionesDinero()) return;
 
+            if (!this.tableroSeleccionado) { // Verifica que el tablero esté seleccionado
+                Swal.fire({
+                    icon: "error",
+                    title: "Error",
+                    text: "Debes seleccionar un tablero antes de crear la partida"
+                });
+                return;
+            }
+
             this.partida.nombre = this.nombre;
             this.partida.nJugadores = this.jugadores;
             this.partida.dineroInicial = this.dineroInicial;
@@ -274,7 +283,7 @@ export default {
             this.partida.tiempoPorTurno = parseInt(this.tiempoPorTurno);
             this.partida.administrador = localStorage.getItem('user') || sessionStorage.getItem('user');
             this.partida.jugadores = [this.partida.administrador];
-            this.partida.tablero = this.tablero;
+            this.partida.tablero = this.tableroSeleccionado; // Asigna el tablero seleccionado aquí
             this.generarLink();
 
             axios.post("http://localhost:9992/partida", this.partida)
@@ -322,11 +331,10 @@ export default {
             this.showCrearPartida = !this.showCrearPartida;
             this.mostrarLevelSelector = !this.mostrarLevelSelector;
         },
-        selectBoard(board) {
-            console.log("Tablero seleccionado:", board);
-            this.showCrearPartida = true; // Volver a mostrar la interfaz de "Crear Partida"
-            this.mostrarLevelSelector = false; // Ocultar el selector de nivel
-
+        selectBoard(tablero) {
+            this.tableroSeleccionado = tablero; // Actualiza el tablero seleccionado
+            this.showCrearPartida = true; // Vuelve a mostrar la interfaz de "Crear Partida"
+            this.mostrarLevelSelector = false; // Oculta el selector de nivel
         },
         comprobacionesDinero() {
             if (isNaN(this.dineroInicial)) {
@@ -382,7 +390,7 @@ export default {
     width: 90%;
     max-width: 50%;
     height: 90%;
-    
+
     margin-top: 15px;
     margin-bottom: 15px;
 }
