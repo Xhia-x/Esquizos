@@ -84,7 +84,7 @@
       <div class="property-bottom" id="3"><Casilla color="" title="" price="" :image="chestImage" :isCardActive="activeCardIndex === 3"
         @toggleActive="setActiveCard(3)" /></div>
       <div class="property-bottom" id="2"><Casilla color="brown" title="AV. MEDITERRÁNEO" price="60" :isCardActive="activeCardIndex === 2"
-        @toggleActive="setActiveCard(2)" :dueno="duenos[2]"/></div>
+        @toggleActive="setActiveCard(2)" :dueno="duenos[2]" :propiedades="propiedades[2]"/></div>
     </div>
 
     <!-- Lado izquierdo -->
@@ -158,6 +158,13 @@
         <button class="botonComprarTerreno"  @click="comprarTerreno()">Comprar Terreno</button>
 
     </div>
+    
+    <div v-if="mostrarComprarCasa" class="comprarCasaDiv">
+        <h1>¿Desea comprar una casa?</h1>
+        <h2>Costo: </h2>
+        <button class="botonCancelar" @click="cancelarCompraCasa()">Cancelar</button>
+        <button class="botonComprarCasa" @click="comprarCasa()">Comprar Casa</button>
+    </div>  
 
 </div>
     
@@ -191,6 +198,7 @@ export default {
             luzImage: null,
             mostrarComprar: false,
             terrenoAComprar: null,
+            mostrarComprarCasa: false,
 
             Jugador: new Jugador(   // Instancia de la clase Jugador
                 'user3', // user
@@ -218,6 +226,7 @@ export default {
 
             activeCardIndex: null,  // Aquí se almacena el índice de la carta activa
             duenos: {}, // Aquí se almacenan los dueños de las propiedades
+            propiedades: {}, // Aquí se almacenan las propiedades de los jugadores
             
         };
         
@@ -310,9 +319,18 @@ export default {
                 || posicionFicha == 23 || posicionFicha == 31 || posicionFicha == 34 || posicionFicha == 37 || posicionFicha == 39){
                 return;
               }
-                this.terrenoAComprar = posicionFicha;
+              const usuario = localStorage.getItem('user') || sessionStorage.getItem('user');
+              this.terrenoAComprar = posicionFicha;
+              if(this.duenos[posicionFicha] == null){
                 this.mostrarComprar = true;
                 console.log(`Ficha movida ${this.terrenoAComprar}`);
+              }
+              else if(this.duenos[posicionFicha] == usuario){
+                this.mostrarComprarCasa = true;
+              }
+              else if(this.duenos[posicionFicha] != usuario){
+                console.log(`Debe pagar al dueño de la propiedad`);
+              }
             });
         },
 
@@ -384,7 +402,6 @@ export default {
             this.activeCardIndex = null;
           } else {
             this.activeCardIndex = index;
-            this.mostrarComprar = true;
           }
         },
         cancelarCompra() {
@@ -393,9 +410,20 @@ export default {
         comprarTerreno() {
           const selectedId = this.terrenoAComprar;
           const usuario = localStorage.getItem('user') || sessionStorage.getItem('user');
-          this.duenos[selectedId] = usuario; // Replace "player1" with dynamic player identifier
+          this.duenos[selectedId] = usuario;
           console.log(`Propiedad ${selectedId} comprada por ${usuario}`);
+          this.propiedades[selectedId] = [];
           this.mostrarComprar = false;
+        },
+        cancelarCompraCasa() {
+          this.mostrarComprarCasa = false;
+        },
+        comprarCasa() {
+          const selectedId = this.terrenoAComprar;
+          const usuario = localStorage.getItem('user') || sessionStorage.getItem('user');
+          this.propiedades[selectedId].push("casa");
+          console.log(`Casa comprada en ${selectedId} por ${usuario}`);
+          this.mostrarComprarCasa = false;
         },
 
 
@@ -860,6 +888,36 @@ img{
 }
 
 .botonComprarTerreno{
+    background-color: #9c1616c2;
+    color: white;
+    border: 1px solid #F8E8A0;
+    border-radius: 10px;
+    padding: 10px;
+    margin-left: 10px;
+}
+
+.comprarCasaDiv{
+    position: absolute;
+    top: 1400px;
+    left: 700px;
+    background-color: #9c1616c2;
+    color: white;
+    border: 1px solid #F8E8A0;
+    border-radius: 10px;
+    padding: 20px;
+    z-index: 10;
+}
+
+.botonCancelar{
+    background-color: #9c1616c2;
+    color: white;
+    border: 1px solid #F8E8A0;
+    border-radius: 10px;
+    padding: 10px;
+    margin-right: 10px;
+}
+
+.botonComprarCasa{
     background-color: #9c1616c2;
     color: white;
     border: 1px solid #F8E8A0;
