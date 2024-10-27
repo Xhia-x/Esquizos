@@ -24,89 +24,89 @@
     <!-- Lado superior -->
     <div class="side top-side">
       <div class="property-top" id="22"><Casilla color="red" title="AV. KENTUCKY" price="220" :isCardActive="activeCardIndex === 22"
-        :oriented="2" @toggleActive="setActiveCard(22)" /></div>
-      <div class="property-top" id="23"><Casilla color="" title="XD" price="" :isCardActive="activeCardIndex === 23"
+        :oriented="2" @toggleActive="setActiveCard(22)" :dueno="duenos[22]"/></div>
+      <div class="property-top" id="23"><Casilla color="" title="" price="" :image="signoImage" :isCardActive="activeCardIndex === 23"
         :oriented="2" @toggleActive="setActiveCard(23)"/></div>
       <div class="property-top" id="24"><Casilla color="red" title="AV. INDIANA" price="220" :isCardActive="activeCardIndex === 24"
-        :oriented="2" @toggleActive="setActiveCard(24)"/></div>
+        :oriented="2" @toggleActive="setActiveCard(24)" :dueno="duenos[24]"/></div>
       <div class="property-top" id="25"><Casilla color="red" title="AV.ILLINOIS" price="240" :isCardActive="activeCardIndex === 25"
-        :oriented="2" @toggleActive="setActiveCard(25)"/></div>
-      <div class="property-top" id="26"><Casilla color="" title="FERROCARRIL B. & O." price="200" :isCardActive="activeCardIndex === 26"
-        :oriented="2" @toggleActive="setActiveCard(26)"/></div>
+        :oriented="2" @toggleActive="setActiveCard(25)" :dueno="duenos[25]"/></div>
+      <div class="property-top" id="26"><Casilla color="" title="FERROCARRIL B. & O." price="200" :image="trenImage" :isCardActive="activeCardIndex === 26"
+        :oriented="2" @toggleActive="setActiveCard(26)" :dueno="duenos[26]"/></div>
       <div class="property-top" id="27"><Casilla color="yellow" title="AV. ATLÁNTICO" price="260" :isCardActive="activeCardIndex === 27"
-        :oriented="2" @toggleActive="setActiveCard(27)" /></div>
+        :oriented="2" @toggleActive="setActiveCard(27)" :dueno="duenos[27]"/></div>
       <div class="property-top" id="28"><Casilla color="yellow" title="AV. VENTNOR" price="260" :isCardActive="activeCardIndex === 28"
-        :oriented="2" @toggleActive="setActiveCard(28)"/></div>
-      <div class="property-top" id="29"><Casilla color="" title="COMPAÑÍA DE AGUA" price="150" :isCardActive="activeCardIndex === 29"
-        :oriented="2" @toggleActive="setActiveCard(29)"/></div>
+        :oriented="2" @toggleActive="setActiveCard(28)" :dueno="duenos[28]"/></div>
+      <div class="property-top" id="29"><Casilla color="" title="COMPAÑÍA DE AGUA" price="150" :image="grifoImage" :isCardActive="activeCardIndex === 29"
+        :oriented="2" @toggleActive="setActiveCard(29)" :dueno="duenos[29]"/></div>
       <div class="property-top" id="30"><Casilla color="yellow" title="JARDINES MARVIN" price="280" :isCardActive="activeCardIndex === 30"
-        :oriented="2" @toggleActive="setActiveCard(30)"/></div>
+        :oriented="2" @toggleActive="setActiveCard(30)" :dueno="duenos[30]"/></div>
     </div> 
 
     <!-- Lado derecho -->
     <div class="side right-side">
       <div class="property-rotate-right" id="32"><Casilla color="green" title="AV. PACÍFICO" price="300" :isCardActive="activeCardIndex === 32"
-        :oriented="1" @toggleActive="setActiveCard(32)"/></div>
+        :oriented="1" @toggleActive="setActiveCard(32)" :dueno="duenos[32]"/></div>
       <div class="property-rotate-right" id="33"><Casilla color="green" title="AV. CAROLINA DEL NORTE" price="300" :isCardActive="activeCardIndex === 33"
-        :oriented="1" @toggleActive="setActiveCard(33)"/></div>
-      <div class="property-rotate-right" id="34"><Casilla color="" title="XD" price="" :isCardActive="activeCardIndex === 34"
-        :oriented="1" @toggleActive="setActiveCard(34)"/></div>
+        :oriented="1" @toggleActive="setActiveCard(33)" :dueno="duenos[33]"/></div>
+      <div class="property-rotate-right" id="34"><Casilla color="" title="" price="" :image="chestImage" :isCardActive="activeCardIndex === 34"
+        :oriented="1" @toggleActive="setActiveCard(34)" /></div>
       <div class="property-rotate-right" id="35"><Casilla color="green" title="AV. PENNSYLVANIA" price="320" :isCardActive="activeCardIndex === 35"
-        :oriented="1" @toggleActive="setActiveCard(35)"/></div>
-      <div class="property-rotate-right" id="36"><Casilla color="" title="FERROCARRÍL VÍA RÁPIDA" price="200" :isCardActive="activeCardIndex === 36"
-        :oriented="1" @toggleActive="setActiveCard(36)"/></div>
-      <div class="property-rotate-right" id="37"><Casilla color="" title="XD" price="" :isCardActive="activeCardIndex === 37"
+        :oriented="1" @toggleActive="setActiveCard(35)" :dueno="duenos[35]"/></div>
+      <div class="property-rotate-right" id="36"><Casilla color="" title="FERROCARRÍL VÍA RÁPIDA" price="200" :image="trenImage" :isCardActive="activeCardIndex === 36"
+        :oriented="1" @toggleActive="setActiveCard(36)" :dueno="duenos[36]"/></div>
+      <div class="property-rotate-right" id="37"><Casilla color="" title="" price="" :image="signoImage" :isCardActive="activeCardIndex === 37"
         :oriented="1" @toggleActive="setActiveCard(37)"/></div>
       <div class="property-rotate-right" id="38"><Casilla color="blue" title="PLAZA PARK" price="350" :isCardActive="activeCardIndex === 38"
-        :oriented="1" @toggleActive="setActiveCard(38)"/></div>
+        :oriented="1" @toggleActive="setActiveCard(38)" :dueno="duenos[38]"/></div>
       <div class="property-rotate-right" id="39"><Casilla color="" title="IMPUESTO SOBRE POSESIONES DE LUJO - PÁGUESE $100" price="" :isCardActive="activeCardIndex === 39"
         :oriented="1" @toggleActive="setActiveCard(39)"/></div>
       <div class="property-rotate-right" id="40"><Casilla color="blue" title="EL MUELLE" price="400" :isCardActive="activeCardIndex === 40"
-        :oriented="1" @toggleActive="setActiveCard(40)"/></div>
+        :oriented="1" @toggleActive="setActiveCard(40)" :dueno="duenos[40]"/></div>
     </div>
 
     <!-- Lado inferior -->
     <div class="side bottom-side">
       <div class="property-bottom" id="10"><Casilla color="lightblue" title="AV. CONNECTICUT" price="120" :isCardActive="activeCardIndex === 10"
-        @toggleActive="setActiveCard(10)"/></div>
+        @toggleActive="setActiveCard(10)" :dueno="duenos[10]"/></div>
       <div class="property-bottom" id="9"><Casilla color="lightblue" title="AV. VERMONT" price="100" :isCardActive="activeCardIndex === 9"
-        @toggleActive="setActiveCard(9)"/></div>
-      <div class="property-bottom" id="8"><Casilla color="" title="XD" price="" :isCardActive="activeCardIndex === 8"
+        @toggleActive="setActiveCard(9)" :dueno="duenos[9]"/></div>
+      <div class="property-bottom" id="8"><Casilla color="" title="" price="" :image="signoImage" :isCardActive="activeCardIndex === 8"
         @toggleActive="setActiveCard(8)"/></div>
       <div class="property-bottom" id="7"><Casilla color="lightblue" title="AV. ORIENTAL" price="100" :isCardActive="activeCardIndex === 7"
-        @toggleActive="setActiveCard(7)"/></div>
-      <div class="property-bottom" id="6"><Casilla color="" title="FERROCARRIL READING" price="200" :isCardActive="activeCardIndex === 6"
-        @toggleActive="setActiveCard(6)"/></div>
+        @toggleActive="setActiveCard(7)" :dueno="duenos[7]"/></div>
+      <div class="property-bottom" id="6"><Casilla color="" title="FERROCARRIL READING" price="200" :image="trenImage" :isCardActive="activeCardIndex === 6"
+        @toggleActive="setActiveCard(6)" :dueno="duenos[6]"/></div>
       <div class="property-bottom" id="5"><Casilla color="" title="Impuesto sobre ingreso - Páguese $200" price="" :isCardActive="activeCardIndex === 5"
         @toggleActive="setActiveCard(5)"/></div>
       <div class="property-bottom" id="4"><Casilla color="brown" title="AV. BÁLTICA" price="60" :isCardActive="activeCardIndex === 4"
-        @toggleActive="setActiveCard(4)"/></div>
-      <div class="property-bottom" id="3"><Casilla color="" title="XD" price="" :isCardActive="activeCardIndex === 3"
-        @toggleActive="setActiveCard(3)"/></div>
+        @toggleActive="setActiveCard(4)" :dueno="duenos[4]"/></div>
+      <div class="property-bottom" id="3"><Casilla color="" title="" price="" :image="chestImage" :isCardActive="activeCardIndex === 3"
+        @toggleActive="setActiveCard(3)" /></div>
       <div class="property-bottom" id="2"><Casilla color="brown" title="AV. MEDITERRÁNEO" price="60" :isCardActive="activeCardIndex === 2"
-        @toggleActive="setActiveCard(2)"/></div>
+        @toggleActive="setActiveCard(2)" :dueno="duenos[2]"/></div>
     </div>
 
     <!-- Lado izquierdo -->
     <div class="side left-side">
       <div class="property-rotate-left" id="20"><Casilla color="orange" title="AV. NUEVA YORK" price="200" :isCardActive="activeCardIndex === 20" 
-        :oriented="3" @toggleActive="setActiveCard(20)"/></div>
+        :oriented="3" @toggleActive="setActiveCard(20)" :dueno="duenos[20]"/></div>
       <div class="property-rotate-left" id="19"><Casilla color="orange" title="AV. TENNESSEE" price="180" :isCardActive="activeCardIndex === 19"
-        :oriented="3" @toggleActive="setActiveCard(19)"/></div>
-      <div class="property-rotate-left" id="18"><Casilla color="" title="XD" price="" :isCardActive="activeCardIndex === 18"
+        :oriented="3" @toggleActive="setActiveCard(19)" :dueno="duenos[19]"/></div>
+      <div class="property-rotate-left" id="18"><Casilla color="" title="" price="" :image="chestImage" :isCardActive="activeCardIndex === 18"
         :oriented="3" @toggleActive="setActiveCard(18)"/></div>
       <div class="property-rotate-left" id="17"><Casilla color="orange" title="PLAZA ST. JAMES" price="180" :isCardActive="activeCardIndex === 17"
-        :oriented="3" @toggleActive="setActiveCard(17)"/></div>
-      <div class="property-rotate-left" id="16"><Casilla color="" title="FERROCARRIL PENSSYLVANIA" price="" :isCardActive="activeCardIndex === 16"
-        :oriented="3" @toggleActive="setActiveCard(16)"/></div>
-      <div class="property-rotate-left" id="15"><Casilla color="purple" title="AV. VIRGINIA" price="160" :isCardActive="activeCardIndex === 15"
-        :oriented="3" @toggleActive="setActiveCard(15)"/></div>
+        :oriented="3" @toggleActive="setActiveCard(17)" :dueno="duenos[17]"/></div>
+      <div class="property-rotate-left" id="16"><Casilla color="" title="FERROCARRIL PENSSYLVANIA" price="" :image="trenImage" :isCardActive="activeCardIndex === 16"
+        :oriented="3" @toggleActive="setActiveCard(16)" :dueno="duenos[16]"/></div>
+      <div class="property-rotate-left" id="15"><Casilla color="purple" title="AV. VIRGINIA" price="160" :isCardActive="activeCardIndex === 15 "
+        :oriented="3" @toggleActive="setActiveCard(15)" :dueno="duenos[15]"/></div>
       <div class="property-rotate-left" id="14"><Casilla color="purple" title="AV. ESTADOS" price="140" :isCardActive="activeCardIndex === 14"
-        :oriented="3" @toggleActive="setActiveCard(14)"/></div>
-      <div class="property-rotate-left" id="13"><Casilla color="" title="COMPAÑÍA DE ELECTRICIDAD" price="150" :isCardActive="activeCardIndex === 13"
-        :oriented="3" @toggleActive="setActiveCard(13)"/></div>
+        :oriented="3" @toggleActive="setActiveCard(14)" :dueno="duenos[14]"/></div>
+      <div class="property-rotate-left" id="13"><Casilla color="" title="COMPAÑÍA DE ELECTRICIDAD" price="150" :image="luzImage" :isCardActive="activeCardIndex === 13"
+        :oriented="3" @toggleActive="setActiveCard(13)" :dueno="duenos[13]"/></div>
       <div class="property-rotate-left" id="12"><Casilla color="purple" title="PLAZA SAN CARLOS" price="140" :isCardActive="activeCardIndex === 12"
-        :oriented="3" @toggleActive="setActiveCard(12)"/></div>
+        :oriented="3" @toggleActive="setActiveCard(12)" :dueno="duenos[12]"/></div>
     </div>
 
 
@@ -131,8 +131,13 @@
 
     <!-- Ficha -->
    
-    <div ref="ficha" class="ficha" :style="pieces[0].style" @click="movePiece(0)">
-        
+        <div 
+        v-for="(piece, index) in pieces" 
+        :key="index" 
+        class="ficha" 
+        :style="piece.style" 
+        @click="movePiece(index)"
+    >
         <div class="figurin">
             <div v-if="Figure " >
                 <img :src="Figure" alt="ficha" lass="animada"/>
@@ -147,18 +152,24 @@
     </div>
     
     <div class="gray-background"></div>
-    <button @click="goToMonopolyView2" class="style=margin-right: 5%">Ir a Monopoly View 2</button>
-    <button @click="goToMonopolyView3">Ir a Monopoly View 3</button>
+    <button class="botones" @click="goToMonopolyView2" >Ir a Monopoly View 2</button>
+    <button class="botones" @click="goToMonopolyView3">Ir a Monopoly View 3</button>
 
   <h1></h1>
-  <div>
-    <button @click="enviarJugador">Enviar Jugador al Backend</button>
-    <p v-if="mensaje">{{ mensaje }}</p>
-  </div>
+
     <div>
-        <button @click="actualizarJugador">Actualizar Jugador en el Backend</button>
+        <button class="botones" @click="actualizarJugador">Actualizar Jugador en el Backend</button>
         <p v-if="mensaje">{{ mensaje }}</p>
     </div>
+
+    <div v-if="mostrarComprar" class= "comprarTerrenoDiv">
+        <h1>¿Desea comprar este terreno?</h1>
+        <h2>Costo: </h2>
+        <button class="botonCancelar" @click="cancelarCompra()">Cancelar</button>
+        <button class="botonComprarTerreno"  @click="comprarTerreno()">Comprar Terreno</button>
+
+    </div>
+
 </div>
     
 
@@ -173,6 +184,7 @@ import { io } from 'socket.io-client';
 import FigurasMonopoly from './FigurasMonopoly.vue';
 import axios from 'axios';
 import Jugador from '@/models/jugador.js';
+
 export default {
     name: "MonopolyView",
     components: {
@@ -183,35 +195,29 @@ export default {
     },
     data() {
         return {
-            Jugador: new Jugador(   // Instancia de la clase Jugador
-                'user3', // user
-                '1', // CasillaID
-                1500, // dinero
-                [], // propiedades
-                'token1' // tokenID
-            ),
-         
-            pieces: [{
-                currentPosition: 1, // Posición inicial de la ficha (esquina inferior derecha)
-                style: {
-                    top: '1850px',
-                    left: '1850px',
-                    transform: 'translate(-50%, -50%)'
-                    
-                }
-            }],
+            
+            pieces: [],
+            chestImage: null,
+            grifoImage: null,
+            trenImage: null,
+            signoImage: null,
+            luzImage: null,
+            mostrarComprar: false,
+            terrenoAComprar: null,
             step: 5, // Porcentaje de movimiento en cada dirección
             socket: null,
             partidaActual: null,
             Popup: false,
             Figure: null, //new URL('@/assets/hollow.png', import.meta.url).href
             activeCardIndex: null,  // Aquí se almacena el índice de la carta activa
+            duenos: {}, // Aquí se almacenan los dueños de las propiedades
             colorPopup: false,
             selectedColor: '#ffffff', // Color predeterminado
           colors: ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'], // Lista de colores disponibles
           userName: localStorage.getItem('user') || sessionStorage.getItem('user') || 'Usuario' // Nombre del usuario
             
         };
+        
         
     },
     mounted() {
@@ -220,15 +226,61 @@ export default {
         this.partidaActual = window.location.pathname.split('/').pop();
         // Unirse a la partida
         this.socket.emit("joinPartida", this.partidaActual);
-
+        console.log("Partida actual: " + this.partidaActual);
+        this.cargarJugadores(this.partidaActual);
         // Escuchar cuando otro usuario mueve una ficha
         this.socket.on("movimientoGenerado", (data) => {
             const { ficha, indice, usuario } = data;
             this.pieces[indice] = ficha;
             console.log(`Ficha ${indice} movida a la posición ${ficha.currentPosition} por el usuario ${usuario}`); 
+            this.actualizarJugador();
+            
             this.$nextTick(() => {
                 this.$refs.ficha.scrollIntoView({ behavior: 'smooth', block: 'center' });
             });
+        });
+
+        import('@/assets/Chest.png')
+        .then((module) => {
+          this.chestImage = module.default; // Asigna la imagen a la variable
+          this.signoImage = module.default;
+          this.trenImage = module.default;
+          this.grifoImage = module.default;
+        })
+        .catch((err) => {
+          console.error("Error al cargar la imagen: ", err);
+        });
+
+        import('@/assets/signo.png')
+        .then((module) => {
+          this.signoImage = module.default;
+        })
+        .catch((err) => {
+          console.error("Error al cargar la imagen: ", err);
+        });
+
+        import('@/assets/tren.png')
+        .then((module) => {
+          this.trenImage = module.default;
+        })
+        .catch((err) => {
+          console.error("Error al cargar la imagen: ", err);
+        });
+
+        import('@/assets/grifo.png')
+        .then((module) => {
+          this.grifoImage = module.default;
+        })
+        .catch((err) => {
+          console.error("Error al cargar la imagen: ", err);
+        });
+
+        import('@/assets/Luz.gif')
+        .then((module) => {
+          this.luzImage = module.default;
+        })
+        .catch((err) => {
+          console.error("Error al cargar la imagen: ", err);
         });
          // Escuchar cuando otro usuario selecciona una figura
          this.socket.on("figuraSeleccionada", (data) => {
@@ -253,44 +305,131 @@ export default {
 
     },
    
-  
+// Método para obtener el índice del jugador actual
+
     methods: {
+        cargarJugadores(nombrePartida) {
+            axios.get(`http://localhost:9992/partida/${nombrePartida}`)
+                .then(({ data }) => {
+                    this.partida = data;
+                    console.log(this.partida.jugadores);
+                    
+                    
+                    for (let i = 0; i < this.partida.jugadores.length; i++) {
+                        this.asignarFicha(this.partida.jugadores[i]);
+                    }
+                    const usuario = localStorage.getItem('user') || sessionStorage.getItem('user');
+                    console.log("Usuario: " + usuario);
+                    this.piezajugador = this.partida.jugadores.indexOf(usuario);
+                    
+                       
+                    
+                })
+                .catch((error) => {
+                    console.error("Error al cargar los jugadores:", error);
+                });
+        },
+        // Metodo para añadir jugador a la lista
+        asignarFicha(player) {
+            // Crear una ficha para el jugador
+            const ficha = {
+                currentPosition: 1, 
+                style: {
+                    top: '1850px',
+                    left: '1850px',
+                    transform: 'translate(-50%, -50%)'
+                },
+                Figure: player.tokenID
+            };
+            this.pieces.push(ficha);
+        },
+
+        movePiece(index) {
+            const usuario = localStorage.getItem('user') || sessionStorage.getItem('user');
+            const playerIndex = this.partida.jugadores.indexOf(usuario);
+            if (index === playerIndex) {
+                // Lógica para mover la ficha del jugador actual
+                this.movePieceBasedOnDice(this.step);
+            }
+        },
+        asignarFicha(player) {
+        // Crear una ficha para el jugador
+            const ficha = {
+                currentPosition: 1, 
+                style: {
+                top: '1850px',
+                left: '1850px',
+                transform: 'translate(-50%, -50%)'
+                },
+                Figure: player.tokenID
+            };
+            this.pieces.push(ficha);
+            },
+            
+        
+        
+
+        
+        
+
+        
+        
+
+
         // Mover la ficha según los pasos dados
         movePieceBasedOnDice(steps) {
-            let position = this.pieces[0].currentPosition || 0; // Posición actual de la ficha
+            console.log("Aqui esta jugadores: " + this.piezajugador);      
+            const usuario= localStorage.getItem('user') || sessionStorage.getItem('user');
+            const promises = [];
+            const indice = this.piezajugador; // Jugador actual
+            let position = this.pieces[indice].currentPosition || 0; // Posición actual de la ficha
 
             for (let i = 1; i <= steps; i++) {
+              promises.push(new Promise((resolve) => {
                 setTimeout(() => {
                     position = (position + 1) % 40; // Asegurarse de que no se pase de las 40 casillas
-                    this.pieces[0].currentPosition = position;
+                    this.pieces[indice].currentPosition = position;
 
-                    // Determinar la nueva casilla
-                    const casillaId = this.getCasillaIdFromPosition(position);
-                    this.movePieceToCasilla(casillaId);
-                }, i * 500); // 300ms de pausa entre cada movimiento, ajustable para la velocidad de la animación
+                      // Determinar la nueva casilla
+                      const casillaId = this.getCasillaIdFromPosition(position);
+                      this.movePieceToCasilla(casillaId);
+                      resolve();
+                  }, i * 500); // 300ms de pausa entre cada movimiento, ajustable para la velocidad de la animación
+              }));
             }
+            Promise.all(promises).then(() => {
+              const posicionFicha = this.pieces[0].currentPosition;
+              if(posicionFicha == 3 || posicionFicha == 5 || posicionFicha == 8 || posicionFicha == 11 || posicionFicha == 18 || posicionFicha == 21 
+                || posicionFicha == 23 || posicionFicha == 31 || posicionFicha == 34 || posicionFicha == 37 || posicionFicha == 39){
+                return;
+              }
+                this.terrenoAComprar = posicionFicha;
+                this.mostrarComprar = true;
+                console.log(`Ficha movida ${this.terrenoAComprar}`);
+            });
         },
 
         // Método adicional para mover la ficha a la casilla específica
         movePieceToCasilla(casillaId) {
+            const indice = this.piezajugador;
             const casillaElement = document.getElementById(casillaId);
             if (casillaElement) {
                 const rect = casillaElement.getBoundingClientRect();
 
                 // Ajustar las coordenadas de la ficha
-                this.pieces[0].style = {
+                this.pieces[indice].style = {
                     top: `${rect.top + window.scrollY}px`, // Añadir scrollY para corregir si hay desplazamiento de la página
                     left: `${rect.left + window.scrollX}px`, // Añadir scrollX para corregir si hay desplazamiento de la página
                     transform: 'translate(-50%, -50%)' // Mantener la ficha centrada
                 };
                 const usuario = localStorage.getItem('user') || sessionStorage.getItem('user');
-                this.socket.emit("moverFicha", {ficha: this.pieces[0],indice: 0,usuario: usuario, partida: this.partidaActual});
+                this.socket.emit("moverFicha", {ficha: this.pieces[indice],indice: indice,usuario: usuario, partida: this.partidaActual});
             }
         },
 
         // Método para obtener el ID de la casilla basado en la posición de la ficha
         getCasillaIdFromPosition(position) {
-            this.Jugador.CasillaID = position;
+            
             return position;
         },
 
@@ -349,7 +488,18 @@ export default {
             this.activeCardIndex = null;
           } else {
             this.activeCardIndex = index;
+            this.mostrarComprar = true;
           }
+        },
+        cancelarCompra() {
+          this.mostrarComprar = false;
+        },
+        comprarTerreno() {
+          const selectedId = this.terrenoAComprar;
+          const usuario = localStorage.getItem('user') || sessionStorage.getItem('user');
+          this.duenos[selectedId] = usuario; // Replace "player1" with dynamic player identifier
+          console.log(`Propiedad ${selectedId} comprada por ${usuario}`);
+          this.mostrarComprar = false;
         },
         selectColor(color) {
       this.selectedColor = color;
@@ -361,29 +511,12 @@ export default {
       console.log("Evento seleccionarColor emitido", { color: this.selectedColor, usuario: usuario, partida: this.partidaActual });
     },
 
-    async enviarJugador() {
-        try {
-             // Obtén el ID del usuario actual
-
-            const respuesta = await axios.post('http://localhost:9992/api/jugador', {
-                userSchema:this.Jugador.userSchema, // Incluye el ID del usuario en la solicitud
-                CasillaID: this.Jugador.CasillaID,
-                dinero: this.Jugador.dinero,
-                propiedades: this.Jugador.propiedades,
-                tokenID: this.Jugador.tokenID
-            });
-            this.mensaje = respuesta.data.message;
-        } catch (error) {
-            console.error("Error en la solicitud al backend:", error);
-            this.mensaje = 'Error al enviar el jugador';
-        }
-    },
     async actualizarJugador() {
         try {
             
 
             const respuesta = await axios.put('http://localhost:9992/api/jugador', {
-                userSchema: this.Jugador.userSchema, // Incluye el ID del usuario en la solicitud
+                userSchema: localStorage.getItem('user') || sessionStorage.getItem('user'), // Incluye el ID del usuario en la solicitud
                 CasillaID: this.Jugador.CasillaID,
                 dinero: this.Jugador.dinero,
                 propiedades: this.Jugador.propiedades,
@@ -436,10 +569,12 @@ export default {
 
 .monopoly-board {
     display: grid;
-    width: 100vw; /* La anchura del tablero se ajusta al ancho de la ventana */
-    height: 100vh; /* La altura del tablero se ajusta a la altura de la ventana */
-    max-width: 100%; /* Limita el ancho para que no exceda la ventana */
-    max-height: 100%; /* Limita la altura para que no exceda la ventana */
+    grid-template-columns: 230px repeat(9, 170px) 230px;
+    grid-template-rows: 230px repeat(9, 170px) 230px;
+    width: auto;
+    height: auto;
+    border: 2px solid black;
+
     padding: 0;
     margin: 0;
     gap: 0;
@@ -682,15 +817,16 @@ export default {
 .figuras-button {
     margin-bottom: 5%;
     position: relative;
-    background-color: red;
+    background-color: #9c1616c2;
     color: white;
-    border: none;
-    border-radius: 5px;
+    border: 1px solid #F8E8A0;
+    border-radius: 10px;
+    color: #F8E8A0;
     cursor: pointer;
 }
 
 .figuras-button:hover {
-    background-color: rgb(201, 6, 6);
+    background-color: #8a1616c2;
 }
 
 .ficha-imagen {
@@ -790,6 +926,42 @@ img{
   width: 100px; /* Ajusta el ancho de la imagen del mago */
   height: 100px; /* Ajusta la altura de la imagen del mago */
   border-radius: 10px; /* Ajusta el radio de los bordes si es necesario */
+}
+
+.botones{
+  border: 1px solid #F8E8A0;
+  border-radius: 10px;
+  color: #F8E8A0;
+}
+
+.comprarTerrenoDiv{
+    position: absolute;
+    top: 1400px;
+    left: 700px;
+    background-color: #9c1616c2;
+    color: white;
+    border: 1px solid #F8E8A0;
+    border-radius: 10px;
+    padding: 20px;
+    z-index: 10;
+}
+
+.botonCancelar{
+    background-color: #9c1616c2;
+    color: white;
+    border: 1px solid #F8E8A0;
+    border-radius: 10px;
+    padding: 10px;
+    margin-right: 10px;
+}
+
+.botonComprarTerreno{
+    background-color: #9c1616c2;
+    color: white;
+    border: 1px solid #F8E8A0;
+    border-radius: 10px;
+    padding: 10px;
+    margin-left: 10px;
 }
 
 

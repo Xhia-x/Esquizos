@@ -10,6 +10,7 @@
       <button type="button" class="volverHomeBoton" @click="volverHome">Volver al inicio</button>
       <MonopolyView />
     </div>
+    
 
   </template>
   
@@ -19,12 +20,14 @@
   import { io } from 'socket.io-client'
   import Swal from 'sweetalert2';
   import autenticadorSesion from '../mixins/AutenticadorSesion.js';
+  import Jugador from '@/models/jugador.js';
 
   export default {
     name: 'VerPartida',
     mixins: [autenticadorSesion],
     components: {
       MonopolyView,
+      Jugador
     },
     data() {
       return {
@@ -32,6 +35,14 @@
         socket: null,
         nombrePartida: this.$route.params.nombrePartida,
         isPlayerLeft: false,
+
+        Jugador: new Jugador(   // Instancia de la clase Jugador
+                sessionStorage.getItem('user'), // user
+                '1', // CasillaID
+                1500, // dinero
+                [], // propiedades
+                'token1' // tokenID
+            ),
       };
     },
     created() {
@@ -81,6 +92,7 @@
         // Unirse a la partida al conectarse
         this.socket.on('connect', () => {
           this.socket.emit('joinPartida', this.nombrePartida);
+          this.enviarJugador();
         });
 
         this.socket.on('partidaEliminada', (data) => {
@@ -138,6 +150,7 @@
                 icon: "success"
               });
               this.partida.jugadores.push(usuario);
+              
               axios.put(`http://localhost:9992/partida/${nombrePartida}`, this.partida)
                 .then(() => {
                   console.log("Jugador añadido a la partida");
@@ -167,21 +180,49 @@
         }
       },
 
+
+      
+      async enviarJugador() {
+        try {
+             // Obtén el ID del usuario actual
+
+            const respuesta = await axios.post('http://localhost:9992/api/jugador', {
+                userSchema: localStorage.getItem('user') || sessionStorage.getItem('user'), // Incluye el ID del usuario en la solicitud
+                CasillaID: this.Jugador.CasillaID,
+                dinero: this.Jugador.dinero,
+                propiedades: this.Jugador.propiedades,
+                tokenID: this.Jugador.tokenID
+            });
+            this.mensaje = respuesta.data.message;
+        } catch (error) {
+            console.error("Error en la solicitud al backend:", error);
+            this.mensaje = 'Error al enviar el jugador';
+        }
+      },
+     
     }
   };
+
+
   </script>
 
   <style scoped>
   .finalizarPartidaBoton {
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 0.5%;
+    right: 1%;
+    border: 1px solid #F8E8A0;
+    border-radius: 10px;
+    color: #F8E8A0;
   }
 
   .volverHomeBoton {
     position: absolute;
-    top: 10px;
-    right: 20px;
+    top: 0.5%;
+    right: 12%;
+    border: 1px solid #F8E8A0;
+    border-radius: 10px;
+    color: #F8E8A0;
   }
   </style>
 
