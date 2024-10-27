@@ -125,16 +125,18 @@
 
     <!-- Ficha -->
    
-    <div ref="ficha" class="ficha" :style="pieces[0].style" @click="movePiece(0)">
-        
+        <div 
+        v-for="(piece, index) in pieces" 
+        :key="index" 
+        class="ficha" 
+        :style="piece.style" 
+        @click="movePiece(index)"
+    >
         <div class="figurin">
-            <div v-if="Figure != 'default'" >
-                <img :src="Figure" alt="ficha" lass="animada"/>
-            </div> <!-- Agregar variable de estado -->
-        
-        
+        <div v-if="Figure" >
+            <img :src="Figure" alt="ficha" class="animada"/>
         </div>
-
+        </div>
     </div>
     
     <div class="gray-background"></div>
@@ -142,10 +144,7 @@
     <button class="botones" @click="goToMonopolyView3">Ir a Monopoly View 3</button>
 
   <h1></h1>
-  <div>
-    <button class="botones" @click="enviarJugador">Enviar Jugador al Backend</button>
-    <p v-if="mensaje">{{ mensaje }}</p>
-  </div>
+
     <div>
         <button class="botones" @click="actualizarJugador">Actualizar Jugador en el Backend</button>
         <p v-if="mensaje">{{ mensaje }}</p>
@@ -173,6 +172,7 @@ import { io } from 'socket.io-client';
 import FigurasMonopoly from './FigurasMonopoly.vue';
 import axios from 'axios';
 import Jugador from '@/models/jugador.js';
+
 export default {
     name: "MonopolyView",
     components: {
@@ -183,7 +183,8 @@ export default {
     },
     data() {
         return {
-
+            
+            pieces: [],
             chestImage: null,
             grifoImage: null,
             trenImage: null,
@@ -191,25 +192,6 @@ export default {
             luzImage: null,
             mostrarComprar: false,
             terrenoAComprar: null,
-
-            Jugador: new Jugador(   // Instancia de la clase Jugador
-                'user3', // user
-                '1', // CasillaID
-                1500, // dinero
-                [], // propiedades
-                'token1' // tokenID
-            ),
-            
-         
-            pieces: [{
-                currentPosition: 1, // Posición inicial de la ficha (esquina inferior derecha)
-                style: {
-                    top: '1850px',
-                    left: '1850px',
-                    transform: 'translate(-50%, -50%)'
-                    
-                }
-            }],
             step: 5, // Porcentaje de movimiento en cada dirección
             socket: null,
             partidaActual: null,
@@ -229,12 +211,15 @@ export default {
         this.partidaActual = window.location.pathname.split('/').pop();
         // Unirse a la partida
         this.socket.emit("joinPartida", this.partidaActual);
-
+        console.log("Partida actual: " + this.partidaActual);
+        this.cargarJugadores(this.partidaActual);
         // Escuchar cuando otro usuario mueve una ficha
         this.socket.on("movimientoGenerado", (data) => {
             const { ficha, indice, usuario } = data;
             this.pieces[indice] = ficha;
             console.log(`Ficha ${indice} movida a la posición ${ficha.currentPosition} por el usuario ${usuario}`); 
+            this.actualizarJugador();
+            
             this.$nextTick(() => {
                 this.$refs.ficha.scrollIntoView({ behavior: 'smooth', block: 'center' });
             });
@@ -284,18 +269,90 @@ export default {
         });
     },
    
-  
+// Método para obtener el índice del jugador actual
+
     methods: {
+        cargarJugadores(nombrePartida) {
+            axios.get(`http://localhost:9992/partida/${nombrePartida}`)
+                .then(({ data }) => {
+                    this.partida = data;
+                    console.log(this.partida.jugadores);
+                    
+                    
+                    for (let i = 0; i < this.partida.jugadores.length; i++) {
+                        this.asignarFicha(this.partida.jugadores[i]);
+                    }
+                    const usuario = localStorage.getItem('user') || sessionStorage.getItem('user');
+                    console.log("Usuario: " + usuario);
+                    this.piezajugador = this.partida.jugadores.indexOf(usuario);
+                    
+                       
+                    
+                })
+                .catch((error) => {
+                    console.error("Error al cargar los jugadores:", error);
+                });
+        },
+        // Metodo para añadir jugador a la lista
+        asignarFicha(player) {
+            // Crear una ficha para el jugador
+            const ficha = {
+                currentPosition: 1, 
+                style: {
+                    top: '1850px',
+                    left: '1850px',
+                    transform: 'translate(-50%, -50%)'
+                },
+                Figure: player.tokenID
+            };
+            this.pieces.push(ficha);
+        },
+
+        movePiece(index) {
+            const usuario = localStorage.getItem('user') || sessionStorage.getItem('user');
+            const playerIndex = this.partida.jugadores.indexOf(usuario);
+            if (index === playerIndex) {
+                // Lógica para mover la ficha del jugador actual
+                this.movePieceBasedOnDice(this.step);
+            }
+        },
+        asignarFicha(player) {
+        // Crear una ficha para el jugador
+            const ficha = {
+                currentPosition: 1, 
+                style: {
+                top: '1850px',
+                left: '1850px',
+                transform: 'translate(-50%, -50%)'
+                },
+                Figure: player.tokenID
+            };
+            this.pieces.push(ficha);
+            },
+            
+        
+        
+
+        
+        
+
+        
+        
+
+
         // Mover la ficha según los pasos dados
         movePieceBasedOnDice(steps) {
-            let position = this.pieces[0].currentPosition || 0; // Posición actual de la ficha
+            console.log("Aqui esta jugadores: " + this.piezajugador);      
+            const usuario= localStorage.getItem('user') || sessionStorage.getItem('user');
             const promises = [];
+            const indice = this.piezajugador; // Jugador actual
+            let position = this.pieces[indice].currentPosition || 0; // Posición actual de la ficha
 
             for (let i = 1; i <= steps; i++) {
               promises.push(new Promise((resolve) => {
-                  setTimeout(() => {
-                      position = (position + 1) % 40; // Asegurarse de que no se pase de las 40 casillas
-                      this.pieces[0].currentPosition = position;
+                setTimeout(() => {
+                    position = (position + 1) % 40; // Asegurarse de que no se pase de las 40 casillas
+                    this.pieces[indice].currentPosition = position;
 
                       // Determinar la nueva casilla
                       const casillaId = this.getCasillaIdFromPosition(position);
@@ -318,24 +375,25 @@ export default {
 
         // Método adicional para mover la ficha a la casilla específica
         movePieceToCasilla(casillaId) {
+            const indice = this.piezajugador;
             const casillaElement = document.getElementById(casillaId);
             if (casillaElement) {
                 const rect = casillaElement.getBoundingClientRect();
 
                 // Ajustar las coordenadas de la ficha
-                this.pieces[0].style = {
+                this.pieces[indice].style = {
                     top: `${rect.top + window.scrollY}px`, // Añadir scrollY para corregir si hay desplazamiento de la página
                     left: `${rect.left + window.scrollX}px`, // Añadir scrollX para corregir si hay desplazamiento de la página
                     transform: 'translate(-50%, -50%)' // Mantener la ficha centrada
                 };
                 const usuario = localStorage.getItem('user') || sessionStorage.getItem('user');
-                this.socket.emit("moverFicha", {ficha: this.pieces[0],indice: 0,usuario: usuario, partida: this.partidaActual});
+                this.socket.emit("moverFicha", {ficha: this.pieces[indice],indice: indice,usuario: usuario, partida: this.partidaActual});
             }
         },
 
         // Método para obtener el ID de la casilla basado en la posición de la ficha
         getCasillaIdFromPosition(position) {
-            this.Jugador.CasillaID = position;
+            
             return position;
         },
 
@@ -399,29 +457,12 @@ export default {
         },
 
 
-    async enviarJugador() {
-        try {
-             // Obtén el ID del usuario actual
-
-            const respuesta = await axios.post('http://localhost:9992/api/jugador', {
-                userSchema:this.Jugador.userSchema, // Incluye el ID del usuario en la solicitud
-                CasillaID: this.Jugador.CasillaID,
-                dinero: this.Jugador.dinero,
-                propiedades: this.Jugador.propiedades,
-                tokenID: this.Jugador.tokenID
-            });
-            this.mensaje = respuesta.data.message;
-        } catch (error) {
-            console.error("Error en la solicitud al backend:", error);
-            this.mensaje = 'Error al enviar el jugador';
-        }
-    },
     async actualizarJugador() {
         try {
             
 
             const respuesta = await axios.put('http://localhost:9992/api/jugador', {
-                userSchema: this.Jugador.userSchema, // Incluye el ID del usuario en la solicitud
+                userSchema: localStorage.getItem('user') || sessionStorage.getItem('user'), // Incluye el ID del usuario en la solicitud
                 CasillaID: this.Jugador.CasillaID,
                 dinero: this.Jugador.dinero,
                 propiedades: this.Jugador.propiedades,
