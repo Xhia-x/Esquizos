@@ -29,7 +29,7 @@
                 <div class="reglas-group">
                     <h1>Reglas de la Partida</h1>
                     <div class="reglas-container">
-                        
+
                         <!-- Mover la cantidad de jugadores dentro de este contenedor -->
                         <div class="jugadores-group">
                             <label for="nombre">Cantidad de jugadores:</label>
@@ -154,9 +154,6 @@
                     </div>
                 </div>
 
-
-                
-
                 <button class="button2" type="submit">
                     Crear partida
                 </button>
@@ -178,6 +175,10 @@
                 Invitar jugador
             </button>
             <InvitarJugador v-if="partida.nombre === partidaInvitacion" :partida="partida" :partidaInvitacion="partidaInvitacion" />
+
+            <div>
+                <button type="button" @click="redirigirUsuario">ir al seleccionar tablero</button>
+            </div>
         </div>
 
         <button type="button" class="volverAtrasBoton" @click="volverAtras">volver atrás</button>
@@ -245,7 +246,7 @@ export default {
                 }) => {
                     if (data.status === true) {
                         this.partidaCreada = true;
-                        
+
                         // SweetAlert2 para mostrar que la partida fue creada correctamente
                         Swal.fire({
                             position: "top-end",
@@ -322,12 +323,29 @@ export default {
         },
         mostrarCampoInvitar(partida) {
             this.partidaInvitacion = this.partidaInvitacion === partida.nombre ? null : partida.nombre;
+        },
+        redirigirUsuario() {
+
+            if (this.partida.administrador) {
+                this.$router.push({
+                    name: 'LevelSelector',
+                    params: {
+                        nombrePartida: this.partida.nombre
+                    }
+                });
+            } else {
+                this.$router.push({
+                    name: 'Waitingroom',
+                    params: {
+                        nombrePartida: this.partida.nombre
+                    }
+                });
+            }
         }
 
     }
 };
 </script>
-
 
 <style scoped>
 .mainContainer {
@@ -340,9 +358,9 @@ export default {
 }
 
 h1 {
-  font-size: 1.8rem;
-  color: #333;
-  margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+    color: #333;
+    margin-bottom: 1.5rem;
 }
 
 body {
@@ -354,17 +372,15 @@ body {
     height: 100vh;
 }
 
-
 .crear-partida {
-    max-width: 900px; 
+    max-width: 900px;
     margin: 0 auto;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 8px;
     background-color: #f9f9f9;
-    min-height: 520px; 
+    min-height: 520px;
 }
-
 
 .form-group {
     margin-bottom: 5px;
@@ -392,7 +408,8 @@ select {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    z-index: 1000; /* Asegúrate de que este elemento esté por encima */
+    z-index: 1000;
+    /* Asegúrate de que este elemento esté por encima */
 }
 
 .volverAtrasBoton {
@@ -411,13 +428,13 @@ select {
 }
 
 .enlaceGenerado {
-  text-align: center;
-  background-color: #f0f8ff;
-  padding: 2rem;
-  border-radius: 1.5rem;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-  margin: 2rem auto;
-  max-width: 600px;
+    text-align: center;
+    background-color: #f0f8ff;
+    padding: 2rem;
+    border-radius: 1.5rem;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    margin: 2rem auto;
+    max-width: 600px;
 }
 
 .accederAPartidaBoton {
@@ -430,9 +447,9 @@ select {
 }
 
 .textoLink {
-  font-size: 1rem;
-  color: #555;
-  word-break: break-all;
+    font-size: 1rem;
+    color: #555;
+    word-break: break-all;
 }
 
 .copiarLinkBoton {
@@ -533,7 +550,7 @@ button {
     width: 100%;
     padding: 10px;
     background-color: #007bff;
-    margin-top: 20px; 
+    margin-top: 20px;
 }
 
 .button2 {
@@ -613,19 +630,19 @@ button {
 .opciones-container {
     display: flex;
     justify-content: space-between;
-    gap: 40px; 
+    gap: 40px;
     margin-top: 20px;
 }
 
 .jugadores-group {
-    flex: 0.5; 
+    flex: 0.5;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start; 
+    justify-content: flex-start;
 }
 
 .reglas-group {
-    flex: 1.5; 
+    flex: 1.5;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -635,17 +652,17 @@ button {
     display: flex;
     gap: 40px;
     width: 100%;
-    align-items: stretch; 
+    align-items: stretch;
 }
 
 .jugadores-group,
 .tiempo-partida,
 .tiempo-turno {
-    flex: 1; 
+    flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    height: 100%; 
+    height: 100%;
 }
 
 .opciones-jugadores-reglas {
@@ -654,14 +671,13 @@ button {
     gap: 40px;
     margin-top: 20px;
     width: 100%;
-    align-items: stretch; 
+    align-items: stretch;
 }
 
 .reglas-group h1 {
     text-align: center;
     width: 100%;
-    margin-bottom: 20px; 
+    margin-bottom: 20px;
 
 }
-
 </style>
