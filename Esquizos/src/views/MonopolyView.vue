@@ -24,63 +24,63 @@
     <!-- Lado superior -->
     <div class="side top-side">
       <div class="property-top" id="22"><Casilla color="red" title="AV. KENTUCKY" :price="preciosTerrenos[22]" :isCardActive="activeCardIndex === 22"
-        :oriented="2" @toggleActive="setActiveCard(22)" :dueno="duenos[22]"/></div>
+        :oriented="2" @toggleActive="setActiveCard(22)" :dueno="duenos[22]" :propiedades="propiedades[22]"/></div>
       <div class="property-top" id="23"><Casilla color="" title="" price="" :image="signoImage" :isCardActive="activeCardIndex === 23"
         :oriented="2" @toggleActive="setActiveCard(23)"/></div>
       <div class="property-top" id="24"><Casilla color="red" title="AV. INDIANA" :price="preciosTerrenos[24]"  :isCardActive="activeCardIndex === 24"
-        :oriented="2" @toggleActive="setActiveCard(24)" :dueno="duenos[24]"/></div>
+        :oriented="2" @toggleActive="setActiveCard(24)" :dueno="duenos[24]" :propiedades="propiedades[24]"/></div>
       <div class="property-top" id="25"><Casilla color="red" title="AV.ILLINOIS" :price="preciosTerrenos[25]" :isCardActive="activeCardIndex === 25"
-        :oriented="2" @toggleActive="setActiveCard(25)" :dueno="duenos[25]"/></div>
+        :oriented="2" @toggleActive="setActiveCard(25)" :dueno="duenos[25]" :propiedades="propiedades[25]"/></div>
       <div class="property-top" id="26"><Casilla color="" title="FERROCARRIL B. & O." :price="preciosTerrenos[26]" :image="trenImage" :isCardActive="activeCardIndex === 26"
-        :oriented="2" @toggleActive="setActiveCard(26)" :dueno="duenos[26]"/></div>
+        :oriented="2" @toggleActive="setActiveCard(26)" :dueno="duenos[26]" :propiedades="propiedades[26]"/></div>
       <div class="property-top" id="27"><Casilla color="yellow" title="AV. ATLÁNTICO" :price="preciosTerrenos[27]" :isCardActive="activeCardIndex === 27"
-        :oriented="2" @toggleActive="setActiveCard(27)" :dueno="duenos[27]"/></div>
+        :oriented="2" @toggleActive="setActiveCard(27)" :dueno="duenos[27]" :propiedades="propiedades[27]"/></div>
       <div class="property-top" id="28"><Casilla color="yellow" title="AV. VENTNOR" :price="preciosTerrenos[28]" :isCardActive="activeCardIndex === 28"
-        :oriented="2" @toggleActive="setActiveCard(28)" :dueno="duenos[28]"/></div>
+        :oriented="2" @toggleActive="setActiveCard(28)" :dueno="duenos[28]" :propiedades="propiedades[28]"/></div>
       <div class="property-top" id="29"><Casilla color="" title="COMPAÑÍA DE AGUA" :price="preciosTerrenos[29]" :image="grifoImage" :isCardActive="activeCardIndex === 29"
-        :oriented="2" @toggleActive="setActiveCard(29)" :dueno="duenos[29]"/></div>
+        :oriented="2" @toggleActive="setActiveCard(29)" :dueno="duenos[29]" :propiedades="propiedades[29]"/></div>
       <div class="property-top" id="30"><Casilla color="yellow" title="JARDINES MARVIN" :price="preciosTerrenos[30]" :isCardActive="activeCardIndex === 30"
-        :oriented="2" @toggleActive="setActiveCard(30)" :dueno="duenos[30]"/></div>
+        :oriented="2" @toggleActive="setActiveCard(30)" :dueno="duenos[30]" :propiedades="propiedades[30]"/></div>
     </div> 
 
     <!-- Lado derecho -->
     <div class="side right-side">
       <div class="property-rotate-right" id="32"><Casilla color="green" title="AV. PACÍFICO" :price="preciosTerrenos[32]" :isCardActive="activeCardIndex === 32"
-        :oriented="1" @toggleActive="setActiveCard(32)" :dueno="duenos[32]"/></div>
+        :oriented="1" @toggleActive="setActiveCard(32)" :dueno="duenos[32]" :propiedades="propiedades[32]"/></div>
       <div class="property-rotate-right" id="33"><Casilla color="green" title="AV. CAROLINA DEL NORTE" :price="preciosTerrenos[33]" :isCardActive="activeCardIndex === 33"
-        :oriented="1" @toggleActive="setActiveCard(33)" :dueno="duenos[33]"/></div>
+        :oriented="1" @toggleActive="setActiveCard(33)" :dueno="duenos[33]" :propiedades="propiedades[33]"/></div>
       <div class="property-rotate-right" id="34"><Casilla color="" title="" price="" :image="chestImage" :isCardActive="activeCardIndex === 34"
         :oriented="1" @toggleActive="setActiveCard(34)" /></div>
       <div class="property-rotate-right" id="35"><Casilla color="green" title="AV. PENNSYLVANIA" :price="preciosTerrenos[35]" :isCardActive="activeCardIndex === 35"
-        :oriented="1" @toggleActive="setActiveCard(35)" :dueno="duenos[35]"/></div>
+        :oriented="1" @toggleActive="setActiveCard(35)" :dueno="duenos[35]" :propiedades="propiedades[35]"/></div>
       <div class="property-rotate-right" id="36"><Casilla color="" title="FERROCARRÍL VÍA RÁPIDA" :price="preciosTerrenos[36]" :image="trenImage" :isCardActive="activeCardIndex === 36"
-        :oriented="1" @toggleActive="setActiveCard(36)" :dueno="duenos[36]"/></div>
+        :oriented="1" @toggleActive="setActiveCard(36)" :dueno="duenos[36]" :propiedades="propiedades[36]"/></div>
       <div class="property-rotate-right" id="37"><Casilla color="" title="" price="" :image="signoImage" :isCardActive="activeCardIndex === 37"
         :oriented="1" @toggleActive="setActiveCard(37)"/></div>
       <div class="property-rotate-right" id="38"><Casilla color="blue" title="PLAZA PARK" :price="preciosTerrenos[38]" :isCardActive="activeCardIndex === 38"
-        :oriented="1" @toggleActive="setActiveCard(38)" :dueno="duenos[38]"/></div>
+        :oriented="1" @toggleActive="setActiveCard(38)" :dueno="duenos[38]" :propiedades="propiedades[38]"/></div>
       <div class="property-rotate-right" id="39"><Casilla color="" title="IMPUESTO SOBRE POSESIONES DE LUJO - PÁGUESE $100" :price="preciosTerrenos[39]" :isCardActive="activeCardIndex === 39"
         :oriented="1" @toggleActive="setActiveCard(39)" dueno="impuesto"/></div>
       <div class="property-rotate-right" id="40"><Casilla color="blue" title="EL MUELLE" :price="preciosTerrenos[40]" :isCardActive="activeCardIndex === 40"
-        :oriented="1" @toggleActive="setActiveCard(40)" :dueno="duenos[40]"/></div>
+        :oriented="1" @toggleActive="setActiveCard(40)" :dueno="duenos[40]" :propiedades="propiedades[40]"/></div>
     </div>
 
     <!-- Lado inferior -->
     <div class="side bottom-side">
       <div class="property-bottom" id="10"><Casilla color="lightblue" title="AV. CONNECTICUT" :price="preciosTerrenos[10]" :isCardActive="activeCardIndex === 10"
-        @toggleActive="setActiveCard(10)" :dueno="duenos[10]"/></div>
+        @toggleActive="setActiveCard(10)" :dueno="duenos[10]" :propiedades="propiedades[10]"/></div>
       <div class="property-bottom" id="9"><Casilla color="lightblue" title="AV. VERMONT" :price="preciosTerrenos[9]" :isCardActive="activeCardIndex === 9"
-        @toggleActive="setActiveCard(9)" :dueno="duenos[9]"/></div>
+        @toggleActive="setActiveCard(9)" :dueno="duenos[9]" :propiedades="propiedades[9]"/></div>
       <div class="property-bottom" id="8"><Casilla color="" title="" price="" :image="signoImage" :isCardActive="activeCardIndex === 8"
         @toggleActive="setActiveCard(8)"/></div>
       <div class="property-bottom" id="7"><Casilla color="lightblue" title="AV. ORIENTAL" :price="preciosTerrenos[7]" :isCardActive="activeCardIndex === 7"
-        @toggleActive="setActiveCard(7)" :dueno="duenos[7]"/></div>
+        @toggleActive="setActiveCard(7)" :dueno="duenos[7]" :propiedades="propiedades[7]"/></div>
       <div class="property-bottom" id="6"><Casilla color="" title="FERROCARRIL READING" :price="preciosTerrenos[6]" :image="trenImage" :isCardActive="activeCardIndex === 6"
-        @toggleActive="setActiveCard(6)" :dueno="duenos[6]"/></div>
+        @toggleActive="setActiveCard(6)" :dueno="duenos[6]" :propiedades="propiedades[6]"/></div>
       <div class="property-bottom" id="5"><Casilla color="" title="Impuesto sobre ingreso - Páguese $200" :price="preciosTerrenos[5]" :isCardActive="activeCardIndex === 5"
         @toggleActive="setActiveCard(5)" dueno="impuesto"/></div>
       <div class="property-bottom" id="4"><Casilla color="brown" title="AV. BÁLTICA" :price="preciosTerrenos[4]" :isCardActive="activeCardIndex === 4"
-        @toggleActive="setActiveCard(4)" :dueno="duenos[4]"/></div>
+        @toggleActive="setActiveCard(4)" :dueno="duenos[4]" :propiedades="propiedades[4]"/></div>
       <div class="property-bottom" id="3"><Casilla color="" title="" price="" :image="chestImage" :isCardActive="activeCardIndex === 3"
         @toggleActive="setActiveCard(3)" /></div>
       <div class="property-bottom" id="2"><Casilla color="brown" title="AV. MEDITERRÁNEO" :price="preciosTerrenos[2]" :isCardActive="activeCardIndex === 2"
@@ -90,23 +90,23 @@
     <!-- Lado izquierdo -->
     <div class="side left-side">
       <div class="property-rotate-left" id="20"><Casilla color="orange" title="AV. NUEVA YORK" :price="preciosTerrenos[20]" :isCardActive="activeCardIndex === 20" 
-        :oriented="3" @toggleActive="setActiveCard(20)" :dueno="duenos[20]"/></div>
+        :oriented="3" @toggleActive="setActiveCard(20)" :dueno="duenos[20]" :propiedades="propiedades[20]"/></div>
       <div class="property-rotate-left" id="19"><Casilla color="orange" title="AV. TENNESSEE" :price="preciosTerrenos[19]" :isCardActive="activeCardIndex === 19"
-        :oriented="3" @toggleActive="setActiveCard(19)" :dueno="duenos[19]"/></div>
+        :oriented="3" @toggleActive="setActiveCard(19)" :dueno="duenos[19]" :propiedades="propiedades[19]"/></div>
       <div class="property-rotate-left" id="18"><Casilla color="" title="" price="" :image="chestImage" :isCardActive="activeCardIndex === 18"
         :oriented="3" @toggleActive="setActiveCard(18)"/></div>
       <div class="property-rotate-left" id="17"><Casilla color="orange" title="PLAZA ST. JAMES" :price="preciosTerrenos[17]" :isCardActive="activeCardIndex === 17"
-        :oriented="3" @toggleActive="setActiveCard(17)" :dueno="duenos[17]"/></div>
+        :oriented="3" @toggleActive="setActiveCard(17)" :dueno="duenos[17]" :propiedades="propiedades[17]"/></div>
       <div class="property-rotate-left" id="16"><Casilla color="" title="FERROCARRIL PENSSYLVANIA" price="" :image="trenImage" :isCardActive="activeCardIndex === 16"
-        :oriented="3" @toggleActive="setActiveCard(16)" :dueno="duenos[16]"/></div>
+        :oriented="3" @toggleActive="setActiveCard(16)" :dueno="duenos[16]" :propiedades="propiedades[17]"/></div>
       <div class="property-rotate-left" id="15"><Casilla color="purple" title="AV. VIRGINIA" :price="preciosTerrenos[15]" :isCardActive="activeCardIndex === 15 "
-        :oriented="3" @toggleActive="setActiveCard(15)" :dueno="duenos[15]"/></div>
+        :oriented="3" @toggleActive="setActiveCard(15)" :dueno="duenos[15]" :propiedades="propiedades[15]"/></div>
       <div class="property-rotate-left" id="14"><Casilla color="purple" title="AV. ESTADOS" :price="preciosTerrenos[14]" :isCardActive="activeCardIndex === 14"
-        :oriented="3" @toggleActive="setActiveCard(14)" :dueno="duenos[14]"/></div>
+        :oriented="3" @toggleActive="setActiveCard(14)" :dueno="duenos[14]" :propiedades="propiedades[14]"/></div>
       <div class="property-rotate-left" id="13"><Casilla color="" title="COMPAÑÍA DE ELECTRICIDAD" :price="preciosTerrenos[13]" :image="luzImage" :isCardActive="activeCardIndex === 13"
-        :oriented="3" @toggleActive="setActiveCard(13)" :dueno="duenos[13]"/></div>
+        :oriented="3" @toggleActive="setActiveCard(13)" :dueno="duenos[13]" :propiedades="propiedades[13]"/></div>
       <div class="property-rotate-left" id="12"><Casilla color="purple" title="PLAZA SAN CARLOS" :price="preciosTerrenos[12]" :isCardActive="activeCardIndex === 12"
-        :oriented="3" @toggleActive="setActiveCard(12)" :dueno="duenos[12]"/></div>
+        :oriented="3" @toggleActive="setActiveCard(12)" :dueno="duenos[12]" :propiedades="propiedades[12]"/></div>
     </div>
 
 
@@ -389,13 +389,15 @@ export default {
         this.socket.on("terrenoComprado", (data) => {
             const { terreno, usuario } = data;
             this.duenos[terreno] = usuario;
-            this.propiedades[terreno] = this.propiedades[terreno] || [];
+            this.propiedades[terreno] = [];
             console.log(`Terreno ${terreno} comprado por el usuario ${usuario}`);
         });
         
         this.socket.on("casaComprada", (data) => {
             const { terreno, usuario } = data;
-            this.propiedades[terreno].push(usuario);
+            if(usuario != this.userName){
+                this.propiedades[terreno].push(usuario);
+            }
             console.log(`Casa comprada en el terreno ${terreno} por el usuario ${usuario}`);
         });
     },
@@ -462,7 +464,6 @@ export default {
 
         // Mover la ficha según los pasos dados
         movePieceBasedOnDice(steps) {
-          steps = 25;
             console.log("Aqui esta jugadores: " + this.piezajugador);      
             const promises = [];
             const indice = this.piezajugador; // Jugador actual
@@ -483,7 +484,7 @@ export default {
                       const casillaId = this.getCasillaIdFromPosition(position);
                       this.movePieceToCasilla(casillaId);
                       resolve();
-                  }, i * 100); // 300ms de pausa entre cada movimiento, ajustable para la velocidad de la animación
+                  }, i * 10); // 300ms de pausa entre cada movimiento, ajustable para la velocidad de la animación
               }));
             }
             if(dineroPorInicio){
@@ -507,6 +508,7 @@ export default {
               }
               else if(this.duenos[posicionFicha] == usuario){
                 this.mostrarComprarCasa = true;
+                console.log(`Ficha movida ${this.terrenoAComprar}`);
               }
               else if(this.duenos[posicionFicha] != usuario){
                 console.log(`Debe pagar al dueño de la propiedad`);
@@ -606,6 +608,16 @@ export default {
             this.activeCardIndex = null;
           } else {
             this.activeCardIndex = index;
+            if(this.duenos[index] == null){
+              this.terrenoAComprar = index;
+              this.mostrarComprar = true;
+            }
+            else{
+              this.terrenoAComprar = index;
+              this.mostrarComprarCasa = true;
+
+            }
+           
           }
         },
         cancelarCompra() {
