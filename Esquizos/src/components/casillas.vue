@@ -11,6 +11,12 @@
     <div v-if="dueno" class="duenoInfo">
       Dueño: {{ dueno }}
     </div>
+    <div v-if="propiedades.length > 0">
+      <p>Propiedades:</p>
+      <ul>
+        <li v-for="propiedad in propiedades" :key="propiedad">{{ propiedad }}</li>
+      </ul>
+    </div>
     <!-- Cara trasera -->
     <div class="card__back">
       <div class="box">
@@ -251,6 +257,10 @@ export default {
     dueno: {
       type: String,
       default: ""
+    },
+    propiedades: {
+      type: Array,
+      default: () => []
     },
     color: {
       type: String,

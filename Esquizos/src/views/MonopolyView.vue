@@ -23,89 +23,89 @@
 
     <!-- Lado superior -->
     <div class="side top-side">
-      <div class="property-top" id="22"><Casilla color="red" title="AV. KENTUCKY" price="220" :isCardActive="activeCardIndex === 22"
+      <div class="property-top" id="22"><Casilla color="red" title="AV. KENTUCKY" :price="preciosTerrenos[22]" :isCardActive="activeCardIndex === 22"
         :oriented="2" @toggleActive="setActiveCard(22)" :dueno="duenos[22]"/></div>
       <div class="property-top" id="23"><Casilla color="" title="" price="" :image="signoImage" :isCardActive="activeCardIndex === 23"
         :oriented="2" @toggleActive="setActiveCard(23)"/></div>
-      <div class="property-top" id="24"><Casilla color="red" title="AV. INDIANA" price="220" :isCardActive="activeCardIndex === 24"
+      <div class="property-top" id="24"><Casilla color="red" title="AV. INDIANA" :price="preciosTerrenos[24]"  :isCardActive="activeCardIndex === 24"
         :oriented="2" @toggleActive="setActiveCard(24)" :dueno="duenos[24]"/></div>
-      <div class="property-top" id="25"><Casilla color="red" title="AV.ILLINOIS" price="240" :isCardActive="activeCardIndex === 25"
+      <div class="property-top" id="25"><Casilla color="red" title="AV.ILLINOIS" :price="preciosTerrenos[25]" :isCardActive="activeCardIndex === 25"
         :oriented="2" @toggleActive="setActiveCard(25)" :dueno="duenos[25]"/></div>
-      <div class="property-top" id="26"><Casilla color="" title="FERROCARRIL B. & O." price="200" :image="trenImage" :isCardActive="activeCardIndex === 26"
+      <div class="property-top" id="26"><Casilla color="" title="FERROCARRIL B. & O." :price="preciosTerrenos[26]" :image="trenImage" :isCardActive="activeCardIndex === 26"
         :oriented="2" @toggleActive="setActiveCard(26)" :dueno="duenos[26]"/></div>
-      <div class="property-top" id="27"><Casilla color="yellow" title="AV. ATLÁNTICO" price="260" :isCardActive="activeCardIndex === 27"
+      <div class="property-top" id="27"><Casilla color="yellow" title="AV. ATLÁNTICO" :price="preciosTerrenos[27]" :isCardActive="activeCardIndex === 27"
         :oriented="2" @toggleActive="setActiveCard(27)" :dueno="duenos[27]"/></div>
-      <div class="property-top" id="28"><Casilla color="yellow" title="AV. VENTNOR" price="260" :isCardActive="activeCardIndex === 28"
+      <div class="property-top" id="28"><Casilla color="yellow" title="AV. VENTNOR" :price="preciosTerrenos[28]" :isCardActive="activeCardIndex === 28"
         :oriented="2" @toggleActive="setActiveCard(28)" :dueno="duenos[28]"/></div>
-      <div class="property-top" id="29"><Casilla color="" title="COMPAÑÍA DE AGUA" price="150" :image="grifoImage" :isCardActive="activeCardIndex === 29"
+      <div class="property-top" id="29"><Casilla color="" title="COMPAÑÍA DE AGUA" :price="preciosTerrenos[29]" :image="grifoImage" :isCardActive="activeCardIndex === 29"
         :oriented="2" @toggleActive="setActiveCard(29)" :dueno="duenos[29]"/></div>
-      <div class="property-top" id="30"><Casilla color="yellow" title="JARDINES MARVIN" price="280" :isCardActive="activeCardIndex === 30"
+      <div class="property-top" id="30"><Casilla color="yellow" title="JARDINES MARVIN" :price="preciosTerrenos[30]" :isCardActive="activeCardIndex === 30"
         :oriented="2" @toggleActive="setActiveCard(30)" :dueno="duenos[30]"/></div>
     </div> 
 
     <!-- Lado derecho -->
     <div class="side right-side">
-      <div class="property-rotate-right" id="32"><Casilla color="green" title="AV. PACÍFICO" price="300" :isCardActive="activeCardIndex === 32"
+      <div class="property-rotate-right" id="32"><Casilla color="green" title="AV. PACÍFICO" :price="preciosTerrenos[32]" :isCardActive="activeCardIndex === 32"
         :oriented="1" @toggleActive="setActiveCard(32)" :dueno="duenos[32]"/></div>
-      <div class="property-rotate-right" id="33"><Casilla color="green" title="AV. CAROLINA DEL NORTE" price="300" :isCardActive="activeCardIndex === 33"
+      <div class="property-rotate-right" id="33"><Casilla color="green" title="AV. CAROLINA DEL NORTE" :price="preciosTerrenos[33]" :isCardActive="activeCardIndex === 33"
         :oriented="1" @toggleActive="setActiveCard(33)" :dueno="duenos[33]"/></div>
       <div class="property-rotate-right" id="34"><Casilla color="" title="" price="" :image="chestImage" :isCardActive="activeCardIndex === 34"
         :oriented="1" @toggleActive="setActiveCard(34)" /></div>
-      <div class="property-rotate-right" id="35"><Casilla color="green" title="AV. PENNSYLVANIA" price="320" :isCardActive="activeCardIndex === 35"
+      <div class="property-rotate-right" id="35"><Casilla color="green" title="AV. PENNSYLVANIA" :price="preciosTerrenos[35]" :isCardActive="activeCardIndex === 35"
         :oriented="1" @toggleActive="setActiveCard(35)" :dueno="duenos[35]"/></div>
-      <div class="property-rotate-right" id="36"><Casilla color="" title="FERROCARRÍL VÍA RÁPIDA" price="200" :image="trenImage" :isCardActive="activeCardIndex === 36"
+      <div class="property-rotate-right" id="36"><Casilla color="" title="FERROCARRÍL VÍA RÁPIDA" :price="preciosTerrenos[36]" :image="trenImage" :isCardActive="activeCardIndex === 36"
         :oriented="1" @toggleActive="setActiveCard(36)" :dueno="duenos[36]"/></div>
       <div class="property-rotate-right" id="37"><Casilla color="" title="" price="" :image="signoImage" :isCardActive="activeCardIndex === 37"
         :oriented="1" @toggleActive="setActiveCard(37)"/></div>
-      <div class="property-rotate-right" id="38"><Casilla color="blue" title="PLAZA PARK" price="350" :isCardActive="activeCardIndex === 38"
+      <div class="property-rotate-right" id="38"><Casilla color="blue" title="PLAZA PARK" :price="preciosTerrenos[38]" :isCardActive="activeCardIndex === 38"
         :oriented="1" @toggleActive="setActiveCard(38)" :dueno="duenos[38]"/></div>
-      <div class="property-rotate-right" id="39"><Casilla color="" title="IMPUESTO SOBRE POSESIONES DE LUJO - PÁGUESE $100" price="" :isCardActive="activeCardIndex === 39"
-        :oriented="1" @toggleActive="setActiveCard(39)"/></div>
-      <div class="property-rotate-right" id="40"><Casilla color="blue" title="EL MUELLE" price="400" :isCardActive="activeCardIndex === 40"
+      <div class="property-rotate-right" id="39"><Casilla color="" title="IMPUESTO SOBRE POSESIONES DE LUJO - PÁGUESE $100" :price="preciosTerrenos[39]" :isCardActive="activeCardIndex === 39"
+        :oriented="1" @toggleActive="setActiveCard(39)" dueno="impuesto"/></div>
+      <div class="property-rotate-right" id="40"><Casilla color="blue" title="EL MUELLE" :price="preciosTerrenos[40]" :isCardActive="activeCardIndex === 40"
         :oriented="1" @toggleActive="setActiveCard(40)" :dueno="duenos[40]"/></div>
     </div>
 
     <!-- Lado inferior -->
     <div class="side bottom-side">
-      <div class="property-bottom" id="10"><Casilla color="lightblue" title="AV. CONNECTICUT" price="120" :isCardActive="activeCardIndex === 10"
+      <div class="property-bottom" id="10"><Casilla color="lightblue" title="AV. CONNECTICUT" :price="preciosTerrenos[10]" :isCardActive="activeCardIndex === 10"
         @toggleActive="setActiveCard(10)" :dueno="duenos[10]"/></div>
-      <div class="property-bottom" id="9"><Casilla color="lightblue" title="AV. VERMONT" price="100" :isCardActive="activeCardIndex === 9"
+      <div class="property-bottom" id="9"><Casilla color="lightblue" title="AV. VERMONT" :price="preciosTerrenos[9]" :isCardActive="activeCardIndex === 9"
         @toggleActive="setActiveCard(9)" :dueno="duenos[9]"/></div>
       <div class="property-bottom" id="8"><Casilla color="" title="" price="" :image="signoImage" :isCardActive="activeCardIndex === 8"
         @toggleActive="setActiveCard(8)"/></div>
-      <div class="property-bottom" id="7"><Casilla color="lightblue" title="AV. ORIENTAL" price="100" :isCardActive="activeCardIndex === 7"
+      <div class="property-bottom" id="7"><Casilla color="lightblue" title="AV. ORIENTAL" :price="preciosTerrenos[7]" :isCardActive="activeCardIndex === 7"
         @toggleActive="setActiveCard(7)" :dueno="duenos[7]"/></div>
-      <div class="property-bottom" id="6"><Casilla color="" title="FERROCARRIL READING" price="200" :image="trenImage" :isCardActive="activeCardIndex === 6"
+      <div class="property-bottom" id="6"><Casilla color="" title="FERROCARRIL READING" :price="preciosTerrenos[6]" :image="trenImage" :isCardActive="activeCardIndex === 6"
         @toggleActive="setActiveCard(6)" :dueno="duenos[6]"/></div>
-      <div class="property-bottom" id="5"><Casilla color="" title="Impuesto sobre ingreso - Páguese $200" price="" :isCardActive="activeCardIndex === 5"
-        @toggleActive="setActiveCard(5)"/></div>
-      <div class="property-bottom" id="4"><Casilla color="brown" title="AV. BÁLTICA" price="60" :isCardActive="activeCardIndex === 4"
+      <div class="property-bottom" id="5"><Casilla color="" title="Impuesto sobre ingreso - Páguese $200" :price="preciosTerrenos[5]" :isCardActive="activeCardIndex === 5"
+        @toggleActive="setActiveCard(5)" dueno="impuesto"/></div>
+      <div class="property-bottom" id="4"><Casilla color="brown" title="AV. BÁLTICA" :price="preciosTerrenos[4]" :isCardActive="activeCardIndex === 4"
         @toggleActive="setActiveCard(4)" :dueno="duenos[4]"/></div>
       <div class="property-bottom" id="3"><Casilla color="" title="" price="" :image="chestImage" :isCardActive="activeCardIndex === 3"
         @toggleActive="setActiveCard(3)" /></div>
-      <div class="property-bottom" id="2"><Casilla color="brown" title="AV. MEDITERRÁNEO" price="60" :isCardActive="activeCardIndex === 2"
-        @toggleActive="setActiveCard(2)" :dueno="duenos[2]"/></div>
+      <div class="property-bottom" id="2"><Casilla color="brown" title="AV. MEDITERRÁNEO" :price="preciosTerrenos[2]" :isCardActive="activeCardIndex === 2"
+        @toggleActive="setActiveCard(2)" :dueno="duenos[2]" :propiedades="propiedades[2]"/></div>
     </div>
 
     <!-- Lado izquierdo -->
     <div class="side left-side">
-      <div class="property-rotate-left" id="20"><Casilla color="orange" title="AV. NUEVA YORK" price="200" :isCardActive="activeCardIndex === 20" 
+      <div class="property-rotate-left" id="20"><Casilla color="orange" title="AV. NUEVA YORK" :price="preciosTerrenos[20]" :isCardActive="activeCardIndex === 20" 
         :oriented="3" @toggleActive="setActiveCard(20)" :dueno="duenos[20]"/></div>
-      <div class="property-rotate-left" id="19"><Casilla color="orange" title="AV. TENNESSEE" price="180" :isCardActive="activeCardIndex === 19"
+      <div class="property-rotate-left" id="19"><Casilla color="orange" title="AV. TENNESSEE" :price="preciosTerrenos[19]" :isCardActive="activeCardIndex === 19"
         :oriented="3" @toggleActive="setActiveCard(19)" :dueno="duenos[19]"/></div>
       <div class="property-rotate-left" id="18"><Casilla color="" title="" price="" :image="chestImage" :isCardActive="activeCardIndex === 18"
         :oriented="3" @toggleActive="setActiveCard(18)"/></div>
-      <div class="property-rotate-left" id="17"><Casilla color="orange" title="PLAZA ST. JAMES" price="180" :isCardActive="activeCardIndex === 17"
+      <div class="property-rotate-left" id="17"><Casilla color="orange" title="PLAZA ST. JAMES" :price="preciosTerrenos[17]" :isCardActive="activeCardIndex === 17"
         :oriented="3" @toggleActive="setActiveCard(17)" :dueno="duenos[17]"/></div>
       <div class="property-rotate-left" id="16"><Casilla color="" title="FERROCARRIL PENSSYLVANIA" price="" :image="trenImage" :isCardActive="activeCardIndex === 16"
         :oriented="3" @toggleActive="setActiveCard(16)" :dueno="duenos[16]"/></div>
-      <div class="property-rotate-left" id="15"><Casilla color="purple" title="AV. VIRGINIA" price="160" :isCardActive="activeCardIndex === 15 "
+      <div class="property-rotate-left" id="15"><Casilla color="purple" title="AV. VIRGINIA" :price="preciosTerrenos[15]" :isCardActive="activeCardIndex === 15 "
         :oriented="3" @toggleActive="setActiveCard(15)" :dueno="duenos[15]"/></div>
-      <div class="property-rotate-left" id="14"><Casilla color="purple" title="AV. ESTADOS" price="140" :isCardActive="activeCardIndex === 14"
+      <div class="property-rotate-left" id="14"><Casilla color="purple" title="AV. ESTADOS" :price="preciosTerrenos[14]" :isCardActive="activeCardIndex === 14"
         :oriented="3" @toggleActive="setActiveCard(14)" :dueno="duenos[14]"/></div>
-      <div class="property-rotate-left" id="13"><Casilla color="" title="COMPAÑÍA DE ELECTRICIDAD" price="150" :image="luzImage" :isCardActive="activeCardIndex === 13"
+      <div class="property-rotate-left" id="13"><Casilla color="" title="COMPAÑÍA DE ELECTRICIDAD" :price="preciosTerrenos[13]" :image="luzImage" :isCardActive="activeCardIndex === 13"
         :oriented="3" @toggleActive="setActiveCard(13)" :dueno="duenos[13]"/></div>
-      <div class="property-rotate-left" id="12"><Casilla color="purple" title="PLAZA SAN CARLOS" price="140" :isCardActive="activeCardIndex === 12"
+      <div class="property-rotate-left" id="12"><Casilla color="purple" title="PLAZA SAN CARLOS" :price="preciosTerrenos[12]" :isCardActive="activeCardIndex === 12"
         :oriented="3" @toggleActive="setActiveCard(12)" :dueno="duenos[12]"/></div>
     </div>
 
@@ -137,7 +137,7 @@
                         <p>Se agrega cuando el jugador posee todas las propiedades de un cierto color. Aumenta el Impuesto según la propiedad (Max: 4).</p>
                     </div>
                 </div>
-            </div>
+            </div>              
         </div>
 
             
@@ -150,6 +150,11 @@
         <div class="ruletaDado">
             <dados @diceRolled="movePieceBasedOnDice" />
         </div>
+
+        <div v-if="partida" class="dinero-container">
+                <h1>Dinero del jugador</h1>
+                <p>El jugador tiene ${{ partida.jugadores[partida.jugadores.indexOf(userName)].dinero}}</p>
+            </div>
     </div>
 
     <!-- Ficha -->
@@ -187,11 +192,19 @@
 
     <div v-if="mostrarComprar" class= "comprarTerrenoDiv">
         <h1>¿Desea comprar este terreno?</h1>
-        <h2>Costo: </h2>
+        <h2>Costo: {{ preciosTerrenos[terrenoAComprar] }}</h2>
+        
         <button class="botonCancelar" @click="cancelarCompra()">Cancelar</button>
         <button class="botonComprarTerreno"  @click="comprarTerreno()">Comprar Terreno</button>
 
     </div>
+    
+    <div v-if="mostrarComprarCasa" class="comprarCasaDiv">
+        <h1>¿Desea comprar una casa?</h1>
+        <h2>Costo: </h2>
+        <button class="botonCancelar" @click="cancelarCompraCasa()">Cancelar</button>
+        <button class="botonComprarCasa" @click="comprarCasa()">Comprar Casa</button>
+    </div>  
 
 </div>
     
@@ -214,8 +227,7 @@ export default {
     components: {
         dados,
         Casilla,
-        FigurasMonopoly,
-        Jugador,
+        FigurasMonopoly
         
     },
     data() {
@@ -230,6 +242,15 @@ export default {
             fondoImage: null,
             mostrarComprar: false,
             terrenoAComprar: null,
+            mostrarComprarCasa: false,
+
+            Jugador: new Jugador(   // Instancia de la clase Jugador
+                'user3', // user
+                '1', // CasillaID
+                1500, // dinero
+                [], // propiedades
+                'token1' // tokenID
+            ),
             step: 5, // Porcentaje de movimiento en cada dirección
             socket: null,
             partidaActual: null,
@@ -237,11 +258,39 @@ export default {
             Figure: null, //new URL('@/assets/hollow.png', import.meta.url).href
             activeCardIndex: null,  // Aquí se almacena el índice de la carta activa
             duenos: {}, // Aquí se almacenan los dueños de las propiedades
+            propiedades: {}, // Aquí se almacenan las propiedades de los jugadores
+            preciosTerrenos: {
+                2: 60,
+                4: 60,
+                5: -200,
+                7: 100,
+                9: 100,
+                10: 120,
+                12: 140,
+                14: 140,
+                15: 160,
+                17: 180,
+                19: 180,
+                20: 200,
+                22: 220,
+                24: 220,
+                25: 240,
+                27: 260,
+                28: 260,
+                30: 280,
+                32: 300,
+                33: 300,
+                35: 320,
+                38: 350,
+                39: -100,
+                40: 400
+            },
             colorPopup: false,
             selectedColor: '#ffffff', // Color predeterminado
-          colors: ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'], // Lista de colores disponibles
-          userName: localStorage.getItem('user') || sessionStorage.getItem('user') || 'Usuario', // Nombre del usuario
-          mostrarPopupCasitas: false
+            colors: ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'], // Lista de colores disponibles
+            userName: localStorage.getItem('user') || sessionStorage.getItem('user') || 'Usuario', // Nombre del usuario
+            mostrarPopupCasitas: false,
+            partida: null
             
         };
         
@@ -323,7 +372,7 @@ export default {
             this.Figure = figura;
             console.log(`Figura seleccionada por el usuario ${usuario}: ${figura}`);
         });
-      
+
         // Escuchar cuando otro usuario selecciona un color
     this.socket.on("colorSeleccionado", (data) => {
       const { color, usuario } = data;
@@ -337,7 +386,18 @@ export default {
       console.log(`Nombre seleccionado por el usuario ${usuario}: ${nombre}`);
     });
 
-
+        this.socket.on("terrenoComprado", (data) => {
+            const { terreno, usuario } = data;
+            this.duenos[terreno] = usuario;
+            this.propiedades[terreno] = this.propiedades[terreno] || [];
+            console.log(`Terreno ${terreno} comprado por el usuario ${usuario}`);
+        });
+        
+        this.socket.on("casaComprada", (data) => {
+            const { terreno, usuario } = data;
+            this.propiedades[terreno].push(usuario);
+            console.log(`Casa comprada en el terreno ${terreno} por el usuario ${usuario}`);
+        });
     },
    
 // Método para obtener el índice del jugador actual
@@ -368,21 +428,6 @@ export default {
         togglePopupCasitas() {
         this.mostrarPopupCasitas = !this.mostrarPopupCasitas;
     },
-        // Metodo para añadir jugador a la lista
-        asignarFicha(player) {
-            // Crear una ficha para el jugador
-            const ficha = {
-                currentPosition: 1, 
-                style: {
-                    top: '1850px',
-                    left: '1850px',
-                    transform: 'translate(-50%, -50%)'
-                },
-                Figure: player.tokenID
-            };
-            this.pieces.push(ficha);
-        },
-
         movePiece(index) {
             const usuario = localStorage.getItem('user') || sessionStorage.getItem('user');
             const playerIndex = this.partida.jugadores.indexOf(usuario);
@@ -417,34 +462,68 @@ export default {
 
         // Mover la ficha según los pasos dados
         movePieceBasedOnDice(steps) {
+          steps = 25;
             console.log("Aqui esta jugadores: " + this.piezajugador);      
-            const usuario= localStorage.getItem('user') || sessionStorage.getItem('user');
             const promises = [];
             const indice = this.piezajugador; // Jugador actual
             let position = this.pieces[indice].currentPosition || 0; // Posición actual de la ficha
-
+            const usuario = localStorage.getItem('user') || sessionStorage.getItem('user');
+            let dineroPorInicio = false;
             for (let i = 1; i <= steps; i++) {
               promises.push(new Promise((resolve) => {
                 setTimeout(() => {
-                    position = (position + 1) % 40; // Asegurarse de que no se pase de las 40 casillas
+                    let nuevaPosicion = (position + 1) % 40; // Asegurarse de que no se pase de las 40 casillas
+                    if(position + 1 >= 40){
+                      dineroPorInicio = true;
+                    }
+                    position = nuevaPosicion;
                     this.pieces[indice].currentPosition = position;
-
+                    
                       // Determinar la nueva casilla
                       const casillaId = this.getCasillaIdFromPosition(position);
                       this.movePieceToCasilla(casillaId);
                       resolve();
-                  }, i * 500); // 300ms de pausa entre cada movimiento, ajustable para la velocidad de la animación
+                  }, i * 100); // 300ms de pausa entre cada movimiento, ajustable para la velocidad de la animación
               }));
             }
+            if(dineroPorInicio){
+              const playerIndex = this.partida.jugadores.indexOf(usuario);
+              this.partida.jugadores[playerIndex].dinero += 200; //dinero por pasar por la casilla de salida
+            }
+            
+
             Promise.all(promises).then(() => {
-              const posicionFicha = this.pieces[0].currentPosition;
+              const posicionFicha = this.pieces[indice].currentPosition;
+              this.terrenoAComprar = posicionFicha;
               if(posicionFicha == 3 || posicionFicha == 5 || posicionFicha == 8 || posicionFicha == 11 || posicionFicha == 18 || posicionFicha == 21 
                 || posicionFicha == 23 || posicionFicha == 31 || posicionFicha == 34 || posicionFicha == 37 || posicionFicha == 39){
                 return;
               }
-                this.terrenoAComprar = posicionFicha;
+              
+              
+              if(this.duenos[posicionFicha] == null){
                 this.mostrarComprar = true;
                 console.log(`Ficha movida ${this.terrenoAComprar}`);
+              }
+              else if(this.duenos[posicionFicha] == usuario){
+                this.mostrarComprarCasa = true;
+              }
+              else if(this.duenos[posicionFicha] != usuario){
+                console.log(`Debe pagar al dueño de la propiedad`);
+                const playerIndex = this.partida.jugadores.indexOf(usuario);
+                const dueñoIndex = this.partida.jugadores.indexOf(this.duenos[posicionFicha]);
+                this.partida.jugadores[dueñoIndex].dinero += 10;
+                this.partida.jugadores[playerIndex].dinero -= 10;
+                console.log(`El jugador ${usuario} paga 10 al jugador ${this.duenos[posicionFicha]}`);
+                this.actualizarJugador();
+                console.log(`Dinero del jugador ${usuario}: ${this.partida.jugadores[playerIndex].dinero}`);
+
+              }
+              else if(this.duenos[posicionFicha] == "impuesto"){
+                const playerIndex = this.partida.jugadores.indexOf(usuario);
+                this.partida.jugadores[playerIndex].dinero -= this.preciosTerrenos[posicionFicha];
+                console.log(`Descuenta ${this.preciosTerrenos[posicionFicha]} al jugador ${usuario}`)
+              }
             });
         },
 
@@ -527,7 +606,6 @@ export default {
             this.activeCardIndex = null;
           } else {
             this.activeCardIndex = index;
-            this.mostrarComprar = true;
           }
         },
         cancelarCompra() {
@@ -536,19 +614,33 @@ export default {
         comprarTerreno() {
           const selectedId = this.terrenoAComprar;
           const usuario = localStorage.getItem('user') || sessionStorage.getItem('user');
-          this.duenos[selectedId] = usuario; // Replace "player1" with dynamic player identifier
+          this.duenos[selectedId] = usuario;
           console.log(`Propiedad ${selectedId} comprada por ${usuario}`);
+          this.propiedades[selectedId] = [];
           this.mostrarComprar = false;
+          console.log(`El jugador ${usuario} paga ${this.preciosTerrenos[selectedId]}`)
+          this.socket.emit("comprarTerreno", { terreno: selectedId, usuario: usuario, partida: this.partidaActual });
+        },
+        cancelarCompraCasa() {
+          this.mostrarComprarCasa = false;
+        },
+        comprarCasa() {
+          const selectedId = this.terrenoAComprar;
+          const usuario = localStorage.getItem('user') || sessionStorage.getItem('user');
+          this.propiedades[selectedId].push("casa");
+          console.log(`Casa comprada en ${selectedId} por ${usuario}`);
+          this.mostrarComprarCasa = false;
+          console.log(`El jugador ${usuario} paga 10`)
+          this.socket.emit("comprarCasa", { terreno: selectedId, usuario: usuario, partida: this.partidaActual });
         },
         selectColor(color) {
-      this.selectedColor = color;
-      this.colorPopup = false;
+          this.selectedColor = color;
+          this.colorPopup = false;
 
-      
-      const usuario = localStorage.getItem('user') || sessionStorage.getItem('user');
-      this.socket.emit("seleccionarColor", { color: this.selectedColor, usuario: usuario, partida: this.partidaActual });
-      console.log("Evento seleccionarColor emitido", { color: this.selectedColor, usuario: usuario, partida: this.partidaActual });
-    },
+          const usuario = localStorage.getItem('user') || sessionStorage.getItem('user');
+          this.socket.emit("seleccionarColor", { color: this.selectedColor, usuario: usuario, partida: this.partidaActual });
+          console.log("Evento seleccionarColor emitido", { color: this.selectedColor, usuario: usuario, partida: this.partidaActual });
+        },
 
     async actualizarJugador() {
         try {
@@ -1013,6 +1105,35 @@ img{
     margin-left: 10px;
 }
 
+.comprarCasaDiv{
+    position: absolute;
+    top: 1400px;
+    left: 700px;
+    background-color: #9c1616c2;
+    color: white;
+    border: 1px solid #F8E8A0;
+    border-radius: 10px;
+    padding: 20px;
+    z-index: 10;
+}
+
+.botonCancelar{
+    background-color: #9c1616c2;
+    color: white;
+    border: 1px solid #F8E8A0;
+    border-radius: 10px;
+    padding: 10px;
+    margin-right: 10px;
+}
+
+.botonComprarCasa{
+    background-color: #9c1616c2;
+    color: white;
+    border: 1px solid #F8E8A0;
+    border-radius: 10px;
+    padding: 10px;
+    margin-left: 10px;
+}
 
 .color-picker {
   display: flex;
@@ -1113,6 +1234,17 @@ img{
     width: 100px;
     height: 100px;
     margin-bottom: 10px;
+}
+
+.dinero-container {
+    position: absolute;
+    top: 700px;
+    right: 0;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin: 10px;
 }
 
 </style>
