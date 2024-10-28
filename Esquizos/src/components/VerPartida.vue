@@ -24,16 +24,13 @@
   import autenticadorSesion from '../mixins/AutenticadorSesion.js';
   import Jugador from '@/models/jugador.js';
   import Reglas from './Reglas.vue';
-  import PopUp from './PopUp.vue';
 
   export default {
     name: 'VerPartida',
     mixins: [autenticadorSesion],
     components: {
       MonopolyView,
-      Jugador,
-      Reglas,
-      PopUp
+      Reglas
     },
     data() {
       return {

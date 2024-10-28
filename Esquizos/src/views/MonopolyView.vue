@@ -290,7 +290,8 @@ export default {
             colors: ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'], // Lista de colores disponibles
             userName: localStorage.getItem('user') || sessionStorage.getItem('user') || 'Usuario', // Nombre del usuario
             mostrarPopupCasitas: false,
-            partida: null
+            partida: null,
+            jugadorATirar: null,
             
         };
         
@@ -400,7 +401,23 @@ export default {
             }
             console.log(`Casa comprada en el terreno ${terreno} por el usuario ${usuario}`);
         });
+        this.socket.on("ultimoTurno", (data) => {
+          const { user } = data;
+          if(user == this.userName){
+            const siguiente = this.partida.jugadores.indexOf(user) + 1;
+            console.log(`El siguiente jugador es ${this.partida.jugadores[siguiente]}`);
+            if(siguiente >= this.partida.jugadores.length){
+              this.socket.emit("tirarDado", { actual: this.partida.jugadores[0], partida: this.partidaActual });
+            }
+            else{
+              this.socket.emit("tirarDado", { actual: this.partida.jugadores[siguiente], partida: this.partidaActual });
+            }
+          }
+
+        });
     },
+
+
    
 // Método para obtener el índice del jugador actual
 
@@ -418,8 +435,8 @@ export default {
                     const usuario = localStorage.getItem('user') || sessionStorage.getItem('user');
                     console.log("Usuario: " + usuario);
                     this.piezajugador = this.partida.jugadores.indexOf(usuario);
-                    
-                       
+                    const actual = this.partida.jugadores[0];
+                    this.socket.emit("tirarDado", { actual: actual, partida: nombrePartida });
                     
                 })
                 .catch((error) => {
@@ -443,7 +460,7 @@ export default {
             const ficha = {
                 currentPosition: 1, 
                 style: {
-                top: '2050px',
+                top: '1950px',
                 left: '1850px',
                 transform: 'translate(-50%, -50%)'
                 },
