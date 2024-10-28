@@ -70,7 +70,7 @@ export default {
       return randomIndex + 1; // El valor de la cara del dado
     };
 
-    const rollDiceWithDeceleration = (timeElapsed = 0, intervalTime = 50) => {
+    const rollDiceWithDeceleration = (timeElapsed = 0, intervalTime = 1) => {
       if (timeElapsed >= 5000) {
         rolling.value = false;
         emitRollDice(finalDice1, finalDice2);  // Emitimos los valores finales cuando la animación termina
@@ -84,7 +84,7 @@ export default {
       finalDice2 = changeImage(currentImage2); // Guardamos el valor final del dado 2
 
       emitRollDice(finalDice1, finalDice2); // Emitir los valores de los dados
-      intervalTime = Math.min(1000, intervalTime + 50)
+      intervalTime = Math.min(500, intervalTime + 5)
       currentTimeout = setTimeout(() => {
         rollDiceWithDeceleration(timeElapsed + intervalTime, intervalTime);
       }, intervalTime);

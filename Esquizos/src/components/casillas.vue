@@ -8,14 +8,13 @@
       <p class="card__descr">{{ description }}</p>
       <div class="card__price">{{ price }}</div>
     </div>
-    <div v-if="dueno" class="duenoInfo">
+    <div v-if="dueno && dueno!='impuesto'" class="duenoInfo">
       Dueño: {{ dueno }}
     </div>
     <div v-if="propiedades.length > 0">
-      <p>Propiedades:</p>
-      <ul>
-        <li v-for="propiedad in propiedades" :key="propiedad">{{ propiedad }}</li>
-      </ul>
+        <div v-for="(index) in propiedades" :key="index">
+          <img src="@/assets/casaVerde.png" style="width: 40px; height: 40px; margin-right: 5px;" />
+        </div>
     </div>
     <!-- Cara trasera -->
     <div class="card__back">
