@@ -443,7 +443,7 @@ export default {
             const ficha = {
                 currentPosition: 1, 
                 style: {
-                top: '2050px',
+                top: '1900px',
                 left: '1850px',
                 transform: 'translate(-50%, -50%)'
                 },
