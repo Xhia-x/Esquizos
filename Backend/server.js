@@ -25,7 +25,8 @@ server.listen(9992, function check(err){
 
 async function connectToDatabase() {
     try {
-        await mongoose.connect('mongodb+srv://yanko:KW2auVzu0h02eDOt@cluster0.ycbhi.mongodb.net/Proyecto1?retryWrites=true&w=majority&appName=Cluster0')
+        //await mongoose.connect('mongodb+srv://yanko:KW2auVzu0h02eDOt@cluster0.ycbhi.mongodb.net/Proyecto1?retryWrites=true&w=majority&appName=Cluster0')
+        await mongoose.connect('mongodb://yanko:KW2auVzu0h02eDOt@cluster0-shard-00-00.ycbhi.mongodb.net:27017,cluster0-shard-00-01.ycbhi.mongodb.net:27017,cluster0-shard-00-02.ycbhi.mongodb.net:27017/Proyecto1?ssl=true&replicaSet=atlas-jqzm0w-shard-0&authSource=admin&retryWrites=true&w=majority&appName=Cluster0')
         console.log("Connected to DB");
     } catch (err) {
         console.log("Error connecting to DB", err);
@@ -106,6 +107,17 @@ io.on('connection', (socket) => {
         io.to(partida).emit('nombreSeleccionado', { nombre, usuario });
     });
 
+    socket.on('comprarTerreno', (data) => {
+        const { terreno, usuario, partida } = data;
+        console.log(`Evento comprarTerreno recibido: ${terreno} por ${usuario} en la partida ${partida}`);
+        io.to(partida).emit('terrenoComprado', { terreno, usuario });
+    });
+
+    socket.on('comprarCasa', (data) => {
+        const { terreno, usuario, partida } = data;
+        console.log(`Evento comprarCasa recibido: ${terreno} por ${usuario} en la partida ${partida}`);
+        io.to(partida).emit('casaComprada', { terreno, usuario });
+    });
     
 });
 

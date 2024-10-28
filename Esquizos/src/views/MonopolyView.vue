@@ -60,7 +60,7 @@
       <div class="property-rotate-right" id="38"><Casilla color="blue" title="PLAZA PARK" :price="preciosTerrenos[38]" :isCardActive="activeCardIndex === 38"
         :oriented="1" @toggleActive="setActiveCard(38)" :dueno="duenos[38]"/></div>
       <div class="property-rotate-right" id="39"><Casilla color="" title="IMPUESTO SOBRE POSESIONES DE LUJO - PÁGUESE $100" :price="preciosTerrenos[39]" :isCardActive="activeCardIndex === 39"
-        :oriented="1" @toggleActive="setActiveCard(39)"/></div>
+        :oriented="1" @toggleActive="setActiveCard(39)" dueno="impuesto"/></div>
       <div class="property-rotate-right" id="40"><Casilla color="blue" title="EL MUELLE" :price="preciosTerrenos[40]" :isCardActive="activeCardIndex === 40"
         :oriented="1" @toggleActive="setActiveCard(40)" :dueno="duenos[40]"/></div>
     </div>
@@ -78,7 +78,7 @@
       <div class="property-bottom" id="6"><Casilla color="" title="FERROCARRIL READING" :price="preciosTerrenos[6]" :image="trenImage" :isCardActive="activeCardIndex === 6"
         @toggleActive="setActiveCard(6)" :dueno="duenos[6]"/></div>
       <div class="property-bottom" id="5"><Casilla color="" title="Impuesto sobre ingreso - Páguese $200" :price="preciosTerrenos[5]" :isCardActive="activeCardIndex === 5"
-        @toggleActive="setActiveCard(5)"/></div>
+        @toggleActive="setActiveCard(5)" dueno="impuesto"/></div>
       <div class="property-bottom" id="4"><Casilla color="brown" title="AV. BÁLTICA" :price="preciosTerrenos[4]" :isCardActive="activeCardIndex === 4"
         @toggleActive="setActiveCard(4)" :dueno="duenos[4]"/></div>
       <div class="property-bottom" id="3"><Casilla color="" title="" price="" :image="chestImage" :isCardActive="activeCardIndex === 3"
@@ -136,7 +136,7 @@
                         <p>Se agrega cuando el jugador posee todas las propiedades de un cierto color. Aumenta el Impuesto según la propiedad (Max: 4).</p>
                     </div>
                 </div>
-            </div>
+            </div>              
         </div>
 
             
@@ -149,6 +149,11 @@
         <div class="ruletaDado">
             <dados @diceRolled="movePieceBasedOnDice" />
         </div>
+
+        <div v-if="partida" class="dinero-container">
+                <h1>Dinero del jugador</h1>
+                <p>El jugador tiene ${{ partida.jugadores[partida.jugadores.indexOf(userName)].dinero}}</p>
+            </div>
     </div>
 
     <!-- Ficha -->
@@ -282,7 +287,8 @@ export default {
             selectedColor: '#ffffff', // Color predeterminado
             colors: ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'], // Lista de colores disponibles
             userName: localStorage.getItem('user') || sessionStorage.getItem('user') || 'Usuario', // Nombre del usuario
-            mostrarPopupCasitas: false
+            mostrarPopupCasitas: false,
+            partida: null
             
         };
         
@@ -356,7 +362,7 @@ export default {
             this.Figure = figura;
             console.log(`Figura seleccionada por el usuario ${usuario}: ${figura}`);
         });
-      
+
         // Escuchar cuando otro usuario selecciona un color
     this.socket.on("colorSeleccionado", (data) => {
       const { color, usuario } = data;
@@ -370,7 +376,18 @@ export default {
       console.log(`Nombre seleccionado por el usuario ${usuario}: ${nombre}`);
     });
 
-
+        this.socket.on("terrenoComprado", (data) => {
+            const { terreno, usuario } = data;
+            this.duenos[terreno] = usuario;
+            this.propiedades[terreno] = this.propiedades[terreno] || [];
+            console.log(`Terreno ${terreno} comprado por el usuario ${usuario}`);
+        });
+        
+        this.socket.on("casaComprada", (data) => {
+            const { terreno, usuario } = data;
+            this.propiedades[terreno].push(usuario);
+            console.log(`Casa comprada en el terreno ${terreno} por el usuario ${usuario}`);
+        });
     },
    
 // Método para obtener el índice del jugador actual
@@ -427,32 +444,44 @@ export default {
 
         // Mover la ficha según los pasos dados
         movePieceBasedOnDice(steps) {
+          steps = 25;
             console.log("Aqui esta jugadores: " + this.piezajugador);      
             const promises = [];
             const indice = this.piezajugador; // Jugador actual
             let position = this.pieces[indice].currentPosition || 0; // Posición actual de la ficha
-
+            const usuario = localStorage.getItem('user') || sessionStorage.getItem('user');
+            let dineroPorInicio = false;
             for (let i = 1; i <= steps; i++) {
               promises.push(new Promise((resolve) => {
                 setTimeout(() => {
-                    position = (position + 1) % 40; // Asegurarse de que no se pase de las 40 casillas
+                    let nuevaPosicion = (position + 1) % 40; // Asegurarse de que no se pase de las 40 casillas
+                    if(position + 1 >= 40){
+                      dineroPorInicio = true;
+                    }
+                    position = nuevaPosicion;
                     this.pieces[indice].currentPosition = position;
-
+                    
                       // Determinar la nueva casilla
                       const casillaId = this.getCasillaIdFromPosition(position);
                       this.movePieceToCasilla(casillaId);
                       resolve();
-                  }, i * 500); // 300ms de pausa entre cada movimiento, ajustable para la velocidad de la animación
+                  }, i * 100); // 300ms de pausa entre cada movimiento, ajustable para la velocidad de la animación
               }));
             }
+            if(dineroPorInicio){
+              const playerIndex = this.partida.jugadores.indexOf(usuario);
+              this.partida.jugadores[playerIndex].dinero += 200; //dinero por pasar por la casilla de salida
+            }
+            
+
             Promise.all(promises).then(() => {
-              const posicionFicha = this.pieces[0].currentPosition;
+              const posicionFicha = this.pieces[indice].currentPosition;
               this.terrenoAComprar = posicionFicha;
               if(posicionFicha == 3 || posicionFicha == 5 || posicionFicha == 8 || posicionFicha == 11 || posicionFicha == 18 || posicionFicha == 21 
                 || posicionFicha == 23 || posicionFicha == 31 || posicionFicha == 34 || posicionFicha == 37 || posicionFicha == 39){
                 return;
               }
-              const usuario = localStorage.getItem('user') || sessionStorage.getItem('user');
+              
               
               if(this.duenos[posicionFicha] == null){
                 this.mostrarComprar = true;
@@ -463,6 +492,19 @@ export default {
               }
               else if(this.duenos[posicionFicha] != usuario){
                 console.log(`Debe pagar al dueño de la propiedad`);
+                const playerIndex = this.partida.jugadores.indexOf(usuario);
+                const dueñoIndex = this.partida.jugadores.indexOf(this.duenos[posicionFicha]);
+                this.partida.jugadores[dueñoIndex].dinero += 10;
+                this.partida.jugadores[playerIndex].dinero -= 10;
+                console.log(`El jugador ${usuario} paga 10 al jugador ${this.duenos[posicionFicha]}`);
+                this.actualizarJugador();
+                console.log(`Dinero del jugador ${usuario}: ${this.partida.jugadores[playerIndex].dinero}`);
+
+              }
+              else if(this.duenos[posicionFicha] == "impuesto"){
+                const playerIndex = this.partida.jugadores.indexOf(usuario);
+                this.partida.jugadores[playerIndex].dinero -= this.preciosTerrenos[posicionFicha];
+                console.log(`Descuenta ${this.preciosTerrenos[posicionFicha]} al jugador ${usuario}`)
               }
             });
         },
@@ -558,6 +600,8 @@ export default {
           console.log(`Propiedad ${selectedId} comprada por ${usuario}`);
           this.propiedades[selectedId] = [];
           this.mostrarComprar = false;
+          console.log(`El jugador ${usuario} paga ${this.preciosTerrenos[selectedId]}`)
+          this.socket.emit("comprarTerreno", { terreno: selectedId, usuario: usuario, partida: this.partidaActual });
         },
         cancelarCompraCasa() {
           this.mostrarComprarCasa = false;
@@ -568,6 +612,8 @@ export default {
           this.propiedades[selectedId].push("casa");
           console.log(`Casa comprada en ${selectedId} por ${usuario}`);
           this.mostrarComprarCasa = false;
+          console.log(`El jugador ${usuario} paga 10`)
+          this.socket.emit("comprarCasa", { terreno: selectedId, usuario: usuario, partida: this.partidaActual });
         },
         selectColor(color) {
           this.selectedColor = color;
@@ -1160,6 +1206,17 @@ img{
     width: 100px;
     height: 100px;
     margin-bottom: 10px;
+}
+
+.dinero-container {
+    position: absolute;
+    top: 700px;
+    right: 0;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin: 10px;
 }
 
 </style>
