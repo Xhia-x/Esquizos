@@ -625,15 +625,6 @@ export default {
             this.activeCardIndex = null;
           } else {
             this.activeCardIndex = index;
-            if(this.duenos[index] == null){
-              this.terrenoAComprar = index;
-              this.mostrarComprar = true;
-            }
-            else{
-              this.terrenoAComprar = index;
-              this.mostrarComprarCasa = true;
-
-            }
            
           }
         },
