@@ -501,7 +501,7 @@ export default {
                       const casillaId = this.getCasillaIdFromPosition(position);
                       this.movePieceToCasilla(casillaId);
                       resolve();
-                  }, i * 10); // 300ms de pausa entre cada movimiento, ajustable para la velocidad de la animación
+                  }, i * 300); // 300ms de pausa entre cada movimiento, ajustable para la velocidad de la animación
               }));
             }
             if(dineroPorInicio){

@@ -13,7 +13,7 @@ module.exports.registerPartidaDBService = (partidaData) => {
         partida.dineroInicial = partidaData.dineroInicial;
         partida.tiempoMaximo = partidaData.tiempoMaximo;
         partida.tiempoPorTurno = partidaData.tiempoPorTurno;
-        partida.tablero = partidaData.tablero;
+        partida.tableroSeleccionado = partidaData.tableroSeleccionado;
 
         try {
             const resultNombre = await partidaModel.findOne({ nombre: partidaData.nombre });

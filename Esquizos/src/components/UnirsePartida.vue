@@ -54,7 +54,7 @@ export default {
         buscarPartidas(nombreUsuario) {
             axios.get(`http://localhost:9992/partida/invitado/${nombreUsuario}`)
                 .then(({ data }) => {
-                    this.partidas = data.map(partida => new Partida(partida.nombre, partida.nJugadores, partida.jugadores, partida.link, partida.dineroinicial, partida.tiempomaximo, partida.tiempoporturno));
+                    this.partidas = data.map(partida => new Partida(partida.nombre, partida.nJugadores, partida.jugadores, partida.link, partida.dineroinicial, partida.tiempomaximo, partida.tiempoporturno, partida.tableroSeleccionado));
                 })
                 .catch(err => {
                     console.error(err);

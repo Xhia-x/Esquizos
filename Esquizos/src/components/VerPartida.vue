@@ -10,8 +10,14 @@
         <button type="button" class="volverHomeBoton" @click="volverHome">Volver al inicio</button>
       </div>
     </div>
-    <div class="content">
+    <div v-if="partida.tableroSeleccionado==1" class="content">
       <MonopolyView />
+    </div>
+    <div v-if="partida.tableroSeleccionado==2" class="content">
+      <MonopolyView2 />
+    </div>
+    <div v-if="partida.tableroSeleccionado==3" class="content">
+      <MonopolyView3 />
     </div>
   </div>
 </template>
@@ -24,12 +30,16 @@
   import autenticadorSesion from '../mixins/AutenticadorSesion.js';
   import Jugador from '@/models/jugador.js';
   import Reglas from './Reglas.vue';
+  import MonopolyView2 from '@/views/MonopolyView2.vue';
+  import MonopolyView3 from '@/views/MonopolyView3.vue';
 
   export default {
     name: 'VerPartida',
     mixins: [autenticadorSesion],
     components: {
       MonopolyView,
+      MonopolyView2,
+      MonopolyView3,
       Reglas
     },
     data() {
@@ -82,6 +92,7 @@
               return;
             }
             localStorage.setItem('partida',  JSON.stringify({nombre: nombrePartida, usuario: usuario}));
+            console.log("Partida tablero:", this.partida.tableroSeleccionado);
           })
           .catch(err => {
             console.error(err);

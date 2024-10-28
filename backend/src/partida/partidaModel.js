@@ -10,7 +10,7 @@ var partidaSchema = new Schema ({
     dineroInicial: {type: Number, required: true},
     tiempoMaximo: {type: Number, required: true},
     tiempoPorTurno: {type: Number, required: true},
-    tablero: { type: String, required: true }
+    tableroSeleccionado: { type: String, required: true }
 
 })
 

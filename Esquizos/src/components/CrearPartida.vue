@@ -280,7 +280,7 @@ export default {
             this.partida.tiempoPorTurno = parseInt(this.tiempoPorTurno);
             this.partida.administrador = localStorage.getItem('user') || sessionStorage.getItem('user');
             this.partida.jugadores = [this.partida.administrador];
-            this.partida.tablero = this.tableroSeleccionado; // Asigna el tablero seleccionado aquí
+            this.partida.tableroSeleccionado = this.tableroSeleccionado; // Asigna el tablero seleccionado aquí
             this.generarLink();
 
             axios.post("http://localhost:9992/partida", this.partida)
