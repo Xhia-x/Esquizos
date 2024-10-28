@@ -166,7 +166,7 @@
             </div> <!-- Agregar variable de estado -->
           </div>
             <div class="color-circle" :style="{ backgroundColor: selectedColor }"></div>
-            <div class="user-name">{{ userName }}</div>
+            <div class="user-name">{{ partida.jugadores[index] }}</div>
       
         
        
@@ -1034,7 +1034,7 @@ img{
   z-index: 1; /* Asegúrate de que el círculo de color esté por encima de la ficha */
 }
 .user-name {
-  margin-top: 100px;
+  margin-top: -50px;
   font-size: 20px;
   color: #000;
 }
