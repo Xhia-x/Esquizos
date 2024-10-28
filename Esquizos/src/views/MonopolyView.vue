@@ -312,7 +312,7 @@ export default {
         });
         import('@/assets/fondo.jpg')
         .then((module) => {
-          this.trenImage = module.default;
+          this.fondoImage = module.default;
         })
         .catch((err) => {
           console.error("Error al cargar la imagen: ", err);
