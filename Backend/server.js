@@ -58,6 +58,7 @@ io.on('connection', (socket) => {
         const { user, dice1, dice2, partida } = data;
         console.log(`Usuario ${user} en la partida ${partida}, numeros: ${dice1} - ${dice2}`);
         io.to(partida).emit('diceRolled', { dice1, dice2 });
+        io.to(partida).emit('ultimoTurno', {user });
       });
 
     socket.on('disconnect', () => {
@@ -118,6 +119,13 @@ io.on('connection', (socket) => {
         console.log(`Evento comprarCasa recibido: ${terreno} por ${usuario} en la partida ${partida}`);
         io.to(partida).emit('casaComprada', { terreno, usuario });
     });
+
+    socket.on('tirarDado', (data) => {
+        const { actual, partida } = data;
+        console.log(`Evento tirarDado recibido por ${actual} en la partida ${partida}`);
+        io.to(partida).emit('turnoActual', {actual});
+    });
+
     
 });
 

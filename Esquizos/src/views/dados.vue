@@ -6,7 +6,7 @@
       <!-- Segundo dado -->
       <img :src="currentImage2.url" :alt="currentImage2.name" class="dado dado2" />
     </div>
-    <button @click="startRolling">Lanzar Dados</button>
+    <button v-if="mostrarLanzarDados" @click="startRolling">Lanzar Dados</button>
   </div>
 </template>
 
@@ -30,6 +30,7 @@ const images = ref([
   { id: 6, url: dice6, name: 'dado6' },
 ]);
 
+const usuario = localStorage.getItem('user') || sessionStorage.getItem('user');
 const socket = io('http://localhost:9992');
 // Función para emitir el evento de lanzamiento de dados
 const emitRollDice = (dice1Value, dice2Value) => {
@@ -38,11 +39,21 @@ const emitRollDice = (dice1Value, dice2Value) => {
 };
 
 // Función para inicializar el socket
-const initializeSocket = (currentImage1, currentImage2) => {
+const initializeSocket = (currentImage1, currentImage2, mostrarLanzarDados) => {
   socket.on('diceRolled', (data) => {
     currentImage1.value = images.value[data.dice1 - 1];
     currentImage2.value = images.value[data.dice2 - 1];
     
+  });
+  socket.on("turnoActual", (data) => {
+    
+    const { actual } = data;
+    console.log("turnoActual: "+actual);
+    if(actual == usuario){
+      mostrarLanzarDados.value = true;
+    } else {
+      mostrarLanzarDados.value = false;
+    }
   });
 };
 
@@ -57,11 +68,13 @@ export default {
 
     let finalDice1 = 1;
     let finalDice2 = 1;
+    const mostrarLanzarDados = ref(false);
 
     onMounted(() => {
       const partidaActual = window.location.pathname.split('/').pop(); 
       socket.emit('joinPartida', partidaActual);
-      initializeSocket(currentImage1, currentImage2, emit);
+      initializeSocket(currentImage1, currentImage2, mostrarLanzarDados, emit);
+      
     });
 
     const changeImage = (currentImage) => {
@@ -97,7 +110,7 @@ export default {
       rollDiceWithDeceleration();
     };
 
-    return { currentImage1, currentImage2, startRolling };
+    return { currentImage1, currentImage2, startRolling, mostrarLanzarDados };
   }
 };
 </script>

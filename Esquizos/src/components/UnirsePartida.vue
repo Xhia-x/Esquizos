@@ -29,14 +29,12 @@ import axios from "axios";
 import autenticadorSesion from '../mixins/AutenticadorSesion.js';
 import Partida from '../models/Partida.js';
 import Reglas from './Reglas.vue';
-import PopUp from './PopUp.vue';
 
 export default {
     name: "UnirsePartida",
     mixins: [autenticadorSesion],
     components: {
-        Reglas,
-        PopUp
+        Reglas
     },
     data() {
         return {
