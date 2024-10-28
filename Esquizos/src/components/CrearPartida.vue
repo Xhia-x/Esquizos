@@ -367,7 +367,8 @@ export default {
             this.$router.push({
                 name: 'VerPartida',
                 params: {
-                    nombrePartida: this.partida.nombre
+                    nombrePartida: this.partida.nombre,
+                    tableroSeleccionado: this.tableroSeleccionado 
                 }
             });
         },
