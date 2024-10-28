@@ -9,7 +9,8 @@ var partidaSchema = new Schema ({
     link: {type: String, required: true, unique: true},
     dineroInicial: {type: Number, required: true},
     tiempoMaximo: {type: Number, required: true},
-    tiempoPorTurno: {type: Number, required: true}
+    tiempoPorTurno: {type: Number, required: true},
+    tablero: { type: String, required: true }
 
 })
 
