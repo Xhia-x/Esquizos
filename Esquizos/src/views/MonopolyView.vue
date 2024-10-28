@@ -1,6 +1,6 @@
 <template>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Chelsea Market">
-  <div class="monopoly-board">
+  <div class="monopoly-board" :image="fondoImage">
     <!-- Esquinas vacías -->
     <div class="corner top-left" id="21">
         <h1 class="carceletra1">De Paso</h1>
@@ -111,10 +111,11 @@
 
 
     <div class="center-container">
+      <div class="button-group">
         <button class="figuras-button" @click="togglePopup">Seleccionar Figuras</button>
         <button class="colores-button" @click="toggleColorPopup">Seleccionar Colores</button>
-        <button class=" casitas-button" @click="togglePopupCasitas">ver Casitas</button>
-
+        <button class="casitas-button" @click="togglePopupCasitas">Ver Casitas</button>
+      </div>
         <div class="center-logo">
             <img src="@/assets/monopolylogo.png" alt="Monopoly Logo" />
             <div class="pop-up" v-if="Popup" >
@@ -226,6 +227,7 @@ export default {
             trenImage: null,
             signoImage: null,
             luzImage: null,
+            fondoImage: null,
             mostrarComprar: false,
             terrenoAComprar: null,
             step: 5, // Porcentaje de movimiento en cada dirección
@@ -271,6 +273,7 @@ export default {
           this.signoImage = module.default;
           this.trenImage = module.default;
           this.grifoImage = module.default;
+          this.fondoImage = module.default;
         })
         .catch((err) => {
           console.error("Error al cargar la imagen: ", err);
@@ -303,6 +306,13 @@ export default {
         import('@/assets/Luz.gif')
         .then((module) => {
           this.luzImage = module.default;
+        })
+        .catch((err) => {
+          console.error("Error al cargar la imagen: ", err);
+        });
+        import('@/assets/fondo.jpg')
+        .then((module) => {
+          this.trenImage = module.default;
         })
         .catch((err) => {
           console.error("Error al cargar la imagen: ", err);
@@ -569,7 +579,7 @@ export default {
 
 
 .pop-up{
-    position: fixed;
+  position: fixed;
   top: 0;
   left: 0;
   z-index: 10;
@@ -590,10 +600,16 @@ export default {
     position: relative; 
     grid-column: 5 / span 3; 
     grid-row: 4 / span 2; 
-    background-color: rgba(255, 255, 255, 0.64);
+    background-color: #cfe2f3;
     margin-block: 5%;
     padding: 5vw; 
     border-radius: 15px; 
+}
+
+.button-group {
+    display: flex;
+    gap: 10px; 
+    margin-bottom: 10px;
 }
 
 .monopoly-board {
@@ -602,8 +618,12 @@ export default {
     grid-template-rows: 230px repeat(9, 170px) 230px;
     width: auto;
     height: auto;
+    background-image: url('@/assets/fondo.jpg'); 
+    background-size: 200rem;
+    background-repeat: no-repeat; 
+    background-position: left; 
+    background-position-x: -90rem;
     border: 2px solid black;
-
     padding: 0;
     margin: 0;
     gap: 0;
@@ -842,19 +862,19 @@ export default {
 }
 
 
-/* Estilo para el botón Figuras */
-.figuras-button {
-    margin-bottom: 5%;
-    position: relative;
+
+.figuras-button, .colores-button, .casitas-button {
     background-color: #9c1616c2;
     color: white;
     border: 1px solid #F8E8A0;
     border-radius: 10px;
     color: #F8E8A0;
     cursor: pointer;
+    padding: 8px 15px;
+    width: 9rem;
 }
 
-.figuras-button:hover {
+.figuras-button:hover, .colores-button:hover, .casitas-button:hover {
     background-color: #8a1616c2;
 }
 
