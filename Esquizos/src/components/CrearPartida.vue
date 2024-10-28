@@ -8,7 +8,7 @@
 
     <video src="../assets/video.mp4" autoplay="true" muted="true" loop="true"></video>
 
-    <div class="mainContainer">
+    <div v-if="showCrearPartida" class="mainContainer">
 
         <div class="crear-partida">
             <h1>Crear Partida de Monopoly</h1>
@@ -153,6 +153,7 @@
                         </div>
                     </div>
                 </div>
+                <button class="button2" type="button" @click="toggleView">Seleccionar Tablero</button>
 
                 <button class="button2" type="submit">
                     Crear partida
@@ -177,12 +178,32 @@
             <InvitarJugador v-if="partida.nombre === partidaInvitacion" :partida="partida" :partidaInvitacion="partidaInvitacion" />
 
             <div>
-                <button type="button" @click="redirigirUsuario">ir al seleccionar tablero</button>
+                <button class="button2" type="button" @click="redirigirUsuario">ir al seleccionar tablero</button>
             </div>
         </div>
 
         <button type="button" class="volverAtrasBoton" @click="volverAtras">volver atrás</button>
 
+    </div>
+
+    <div v-if="mostrarLevelSelector" class="level-selector-wrapper">
+        <div class="level-selector">
+            <div class="level" :key="1">
+                <img src="@/assets/tablero1.png" alt="Tablero 1" class="level-image" />
+                <h3>Tablero 1</h3>
+                <button class="button" @click="selectBoard(1)">Seleccionar</button>
+            </div>
+            <div class="level" :key="2">
+                <img src="@/assets/tablero2.png" alt="Tablero 2" class="level-image" />
+                <h3>Tablero 2</h3>
+                <button class="button" @click="selectBoard(2)">Seleccionar</button>
+            </div>
+            <div class="level" :key="3">
+                <img src="@/assets/tablero3.png" alt="Tablero 3" class="level-image" />
+                <h3>Tablero 3</h3>
+                <button class="button" @click="selectBoard(3)">Seleccionar</button>
+            </div>
+        </div>
     </div>
 
 </body>
@@ -195,6 +216,9 @@ import axios from 'axios';
 import autenticadorSesion from '../mixins/AutenticadorSesion.js';
 import InvitarJugador from './InvitarJugador.vue';
 import Swal from 'sweetalert2'; // Importa SweetAlert2
+import {
+    io
+} from 'socket.io-client'; // Importa socket.io-client
 
 export default {
     name: 'CrearPartida',
@@ -205,6 +229,24 @@ export default {
     mixins: [autenticadorSesion],
     data() {
         return {
+            showCrearPartida: true, // Muestra la sección de "Crear Partida"
+            mostrarLevelSelector: false, // Muestra la sección de selección de tablero
+            levels: [{
+                    id: 1,
+                    name: 'Tablero 1',
+                    image: 'tablero1.png'
+                },
+                {
+                    id: 2,
+                    name: 'Tablero 2',
+                    image: 'tablero2.png'
+                },
+                {
+                    id: 3,
+                    name: 'Tablero 3',
+                    image: 'tablero3.png'
+                },
+            ],
             partida: new Partida('', '', 0, [], '', 0, 0, 0),
             nombre: '',
             jugadores: 3,
@@ -212,42 +254,44 @@ export default {
             tiempoMaximo: -1,
             tiempoPorTurno: -1,
             partidaCreada: false,
-            partidaInvitacion: null
+            partidaInvitacion: null,
+            tableroSeleccionado: null,
+            socket: null // Socket para conexión en tiempo real
         };
+    },
+    mounted() {
+        // Inicializa el socket al montar el componente
+        this.socket = io('http://localhost:3000');
     },
     methods: {
         crearPartida() {
-            if (!this.comprobacionesDinero()) {
+            if (!this.comprobacionesDinero()) return;
+
+            if (!this.tableroSeleccionado) { // Verifica que el tablero esté seleccionado
+                Swal.fire({
+                    icon: "error",
+                    title: "Error",
+                    text: "Debes seleccionar un tablero antes de crear la partida"
+                });
                 return;
             }
+
             this.partida.nombre = this.nombre;
             this.partida.nJugadores = this.jugadores;
             this.partida.dineroInicial = this.dineroInicial;
             this.partida.tiempoMaximo = parseInt(this.tiempoMaximo);
             this.partida.tiempoPorTurno = parseInt(this.tiempoPorTurno);
-
             this.partida.administrador = localStorage.getItem('user') || sessionStorage.getItem('user');
             this.partida.jugadores = [this.partida.administrador];
+            this.partida.tablero = this.tableroSeleccionado; // Asigna el tablero seleccionado aquí
             this.generarLink();
-            console.log(localStorage.getItem('user'));
-            console.log("jugadores: " + this.partida.jugadores);
-            console.log("admin: " + this.partida.administrador);
-            console.log(this.partida.nombre);
-            console.log(this.partida.link);
-            console.log(this.partida.nJugadores);
-            console.log(this.partida.dineroInicial);
-            console.log(this.partida.tiempoMaximo);
-            console.log(this.partida.jugadores);
-            console.log(this.partida.tiempoPorTurno);
-            console.log(this.partida.nombre);
+
             axios.post("http://localhost:9992/partida", this.partida)
                 .then(({
                     data
                 }) => {
                     if (data.status === true) {
                         this.partidaCreada = true;
-
-                        // SweetAlert2 para mostrar que la partida fue creada correctamente
                         Swal.fire({
                             position: "top-end",
                             icon: "success",
@@ -255,7 +299,6 @@ export default {
                             showConfirmButton: false,
                             timer: 1500
                         });
-
                     } else {
                         this.partidaCreada = false;
                         Swal.fire({
@@ -282,6 +325,16 @@ export default {
             this.$router.push({
                 name: 'Home'
             });
+        },
+        toggleView() {
+            // Alterna entre mostrar la interfaz de crear partida y el selector de nivel
+            this.showCrearPartida = !this.showCrearPartida;
+            this.mostrarLevelSelector = !this.mostrarLevelSelector;
+        },
+        selectBoard(tablero) {
+            this.tableroSeleccionado = tablero; // Actualiza el tablero seleccionado
+            this.showCrearPartida = true; // Vuelve a mostrar la interfaz de "Crear Partida"
+            this.mostrarLevelSelector = false; // Oculta el selector de nivel
         },
         comprobacionesDinero() {
             if (isNaN(this.dineroInicial)) {
@@ -314,7 +367,8 @@ export default {
             this.$router.push({
                 name: 'VerPartida',
                 params: {
-                    nombrePartida: this.partida.nombre
+                    nombrePartida: this.partida.nombre,
+                    tableroSeleccionado: this.tableroSeleccionado 
                 }
             });
         },
@@ -324,25 +378,10 @@ export default {
         mostrarCampoInvitar(partida) {
             this.partidaInvitacion = this.partidaInvitacion === partida.nombre ? null : partida.nombre;
         },
-        redirigirUsuario() {
-
-            if (this.partida.administrador) {
-                this.$router.push({
-                    name: 'LevelSelector',
-                    params: {
-                        nombrePartida: this.partida.nombre
-                    }
-                });
-            } else {
-                this.$router.push({
-                    name: 'Waitingroom',
-                    params: {
-                        nombrePartida: this.partida.nombre
-                    }
-                });
-            }
-        }
-
+    },
+    beforeDestroy() {
+        // Desconectar el socket al destruir el componente
+        if (this.socket) this.socket.disconnect();
     }
 };
 </script>
@@ -352,7 +391,7 @@ export default {
     width: 90%;
     max-width: 50%;
     height: 90%;
-    background-color: #33333346;
+
     margin-top: 15px;
     margin-bottom: 15px;
 }
@@ -679,5 +718,141 @@ button {
     width: 100%;
     margin-bottom: 20px;
 
+}
+
+.level-selector-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+
+}
+
+.level-selector {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+}
+
+.level {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s;
+    max-width: 300px;
+    margin: auto;
+}
+
+.level:hover {
+    transform: scale(1.05);
+}
+
+.level-image {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 10px;
+}
+
+.button {
+    position: relative;
+    padding: 10px 22px;
+    border-radius: 6px;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    background-color: #c70000c2;
+    transition: all 0.2s ease;
+}
+
+.button:active {
+    transform: scale(0.96);
+}
+
+.button:before,
+.button:after {
+    position: absolute;
+    content: "";
+    width: 150%;
+    left: 50%;
+    height: 100%;
+    transform: translateX(-50%);
+    z-index: -1000;
+    background-repeat: no-repeat;
+}
+
+.button:hover:before {
+    top: -70%;
+    background-image: radial-gradient(circle, #c70000c2 20%, transparent 20%),
+        radial-gradient(circle, transparent 20%, #c70000c2 20%, transparent 30%),
+        radial-gradient(circle, #c70000c2 20%, transparent 20%),
+        radial-gradient(circle, #c70000c2 20%, transparent 20%),
+        radial-gradient(circle, transparent 10%, #c70000c2 15%, transparent 20%),
+        radial-gradient(circle, #c70000c2 20%, transparent 20%),
+        radial-gradient(circle, #c70000c2 20%, transparent 20%),
+        radial-gradient(circle, #c70000c2 20%, transparent 20%),
+        radial-gradient(circle, #c70000c2 20%, transparent 20%);
+    background-size: 10% 10%, 20% 20%, 15% 15%, 20% 20%, 18% 18%, 10% 10%, 15% 15%,
+        10% 10%, 18% 18%;
+    background-position: 50% 120%;
+    animation: greentopBubbles 0.6s ease;
+}
+
+@keyframes greentopBubbles {
+    0% {
+        background-position: 5% 90%, 10% 90%, 10% 90%, 15% 90%, 25% 90%, 25% 90%,
+            40% 90%, 55% 90%, 70% 90%;
+    }
+
+    50% {
+        background-position: 0% 80%, 0% 20%, 10% 40%, 20% 0%, 30% 30%, 22% 50%,
+            50% 50%, 65% 20%, 90% 30%;
+    }
+
+    100% {
+        background-position: 0% 70%, 0% 10%, 10% 30%, 20% -10%, 30% 20%, 22% 40%,
+            50% 40%, 65% 10%, 90% 20%;
+        background-size: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+    }
+}
+
+.button:hover::after {
+    bottom: -70%;
+    background-image: radial-gradient(circle, #c70000c2 20%, transparent 20%),
+        radial-gradient(circle, #c70000c2 20%, transparent 20%),
+        radial-gradient(circle, transparent 10%, #c70000c2 15%, transparent 20%),
+        radial-gradient(circle, #c70000c2 20%, transparent 20%),
+        radial-gradient(circle, #c70000c2 20%, transparent 20%),
+        radial-gradient(circle, #c70000c2 20%, transparent 20%),
+        radial-gradient(circle, #c70000c2 20%, transparent 20%);
+    background-size: 15% 15%, 20% 20%, 18% 18%, 20% 20%, 15% 15%, 20% 20%, 18% 18%;
+    background-position: 50% 0%;
+    animation: greenbottomBubbles 0.6s ease;
+}
+
+@keyframes greenbottomBubbles {
+    0% {
+        background-position: 10% -10%, 30% 10%, 55% -10%, 70% -10%, 85% -10%,
+            70% -10%, 70% 0%;
+    }
+
+    50% {
+        background-position: 0% 80%, 20% 80%, 45% 60%, 60% 100%, 75% 70%, 95% 60%,
+            105% 0%;
+    }
+
+    100% {
+        background-position: 0% 90%, 20% 90%, 45% 70%, 60% 110%, 75% 80%, 95% 70%,
+            110% 10%;
+        background-size: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+    }
 }
 </style>
