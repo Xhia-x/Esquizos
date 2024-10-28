@@ -177,9 +177,6 @@
             </button>
             <InvitarJugador v-if="partida.nombre === partidaInvitacion" :partida="partida" :partidaInvitacion="partidaInvitacion" />
 
-            <div>
-                <button class="button2" type="button" @click="redirigirUsuario">ir al seleccionar tablero</button>
-            </div>
         </div>
 
         <button type="button" class="volverAtrasBoton" @click="volverAtras">volver atrás</button>
