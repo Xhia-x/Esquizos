@@ -1,22 +1,20 @@
 <template>
-    <div v-if="partida">
+  <div>
+    <div class="navbar" v-if="partida">
       <Reglas></Reglas>
       <h1>Partida: {{ partida.nombre }}</h1>
       <p>Número de jugadores: {{ partida.nJugadores }}</p>
       <p>Administrador: {{ partida.administrador }}</p>
-      <ul>
-        <li v-for="jugador in partida.jugadores" :key="jugador">{{ jugador }}</li>
-      </ul>
-       
-      <button v-if="comprobarAdministrador()" type="button" class="finalizarPartidaBoton" @click="finalizarPartida">Finalizar Partida</button>
-      <button type="button" class="volverHomeBoton" @click="volverHome">Volver al inicio</button>
-     
-     
+      <div class="button-group">
+        <button v-if="comprobarAdministrador()" type="button" class="finalizarPartidaBoton" @click="finalizarPartida">Finalizar Partida</button>
+        <button type="button" class="volverHomeBoton" @click="volverHome">Volver al inicio</button>
+      </div>
+    </div>
+    <div class="content">
       <MonopolyView />
     </div>
-    
-
-  </template>
+  </div>
+</template>
   
   <script>
   import axios from 'axios';
@@ -215,27 +213,48 @@
   </script>
 
   <style scoped>
-  .finalizarPartidaBoton {
-    position: absolute;
-    top: 0.5%;
-    right: 1%;
-    border: 1px solid #F8E8A0;
-    border-radius: 10px;
-    color: #F8E8A0;
+  .navbar {
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 8%; 
+  background-color: #2a5934;
+  color: #F8E8A0;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  z-index: 1000;
   }
 
+  .navbar h1,
+  .navbar p {
+  margin: 1rem;
+  padding: 0;
+  font-size: 1rem; 
+  display: inline;
+  }
+
+  .content {
+  margin-top: 0.02%; 
+  }
+
+  .button-group {
+  margin-left: auto; 
+  display: flex;
+  gap: 10px; 
+}
+
+  .finalizarPartidaBoton,
   .volverHomeBoton {
-    position: absolute;
-    top: 0.5%;
-    right: 12%;
-    border: 1px solid #F8E8A0;
-    border-radius: 10px;
-    color: #F8E8A0;
+  margin-left: auto; 
+  margin-right: 10px;
+  border: 1px solid #F8E8A0;
+  border-radius: 10px;
+  color: #F8E8A0;
+  padding: 5px 10px;
+  font-size: 0.9rem;
   }
 
-  
-
-  
   </style>
 
   
