@@ -25,7 +25,8 @@ server.listen(9992, function check(err){
 
 async function connectToDatabase() {
     try {
-        await mongoose.connect('mongodb+srv://yanko:KW2auVzu0h02eDOt@cluster0.ycbhi.mongodb.net/Proyecto1?retryWrites=true&w=majority&appName=Cluster0')
+        //await mongoose.connect('mongodb+srv://yanko:KW2auVzu0h02eDOt@cluster0.ycbhi.mongodb.net/Proyecto1?retryWrites=true&w=majority&appName=Cluster0')
+        await mongoose.connect('mongodb://yanko:KW2auVzu0h02eDOt@cluster0-shard-00-00.ycbhi.mongodb.net:27017,cluster0-shard-00-01.ycbhi.mongodb.net:27017,cluster0-shard-00-02.ycbhi.mongodb.net:27017/Proyecto1?ssl=true&replicaSet=atlas-jqzm0w-shard-0&authSource=admin&retryWrites=true&w=majority&appName=Cluster0')
         console.log("Connected to DB");
     } catch (err) {
         console.log("Error connecting to DB", err);
@@ -57,6 +58,7 @@ io.on('connection', (socket) => {
         const { user, dice1, dice2, partida } = data;
         console.log(`Usuario ${user} en la partida ${partida}, numeros: ${dice1} - ${dice2}`);
         io.to(partida).emit('diceRolled', { dice1, dice2 });
+        io.to(partida).emit('ultimoTurno', {user });
       });
 
     socket.on('disconnect', () => {
@@ -87,6 +89,43 @@ io.on('connection', (socket) => {
         console.log(`Usuario ${usuario} en la partida ${partida}, mueve ficha ${indice}`);
         io.to(partida).emit('movimientoGenerado', { ficha, indice, usuario });
     });
+
+    socket.on('seleccionarFigura', (data) => {
+        const { figura, usuario, partida } = data;
+        console.log(`Evento seleccionarFigura recibido: ${figura} por ${usuario} en la partida ${partida}`); // Verificación de recepción
+        io.to(partida).emit('figuraSeleccionada', { figura, usuario });
+    });
+
+    socket.on('seleccionarColor', (data) => {
+        const { color, usuario, partida } = data;
+        console.log(`Evento seleccionarColor recibido: ${color} por ${usuario} en la partida ${partida}`);
+        io.to(partida).emit('colorSeleccionado', { color, usuario });
+    });
+
+    socket.on('seleccionarNombre', (data) => {
+        const { nombre, usuario, partida } = data;
+        console.log(`Evento seleccionarNombre recibido: ${nombre} por ${usuario} en la partida ${partida}`);
+        io.to(partida).emit('nombreSeleccionado', { nombre, usuario });
+    });
+
+    socket.on('comprarTerreno', (data) => {
+        const { terreno, usuario, partida } = data;
+        console.log(`Evento comprarTerreno recibido: ${terreno} por ${usuario} en la partida ${partida}`);
+        io.to(partida).emit('terrenoComprado', { terreno, usuario });
+    });
+
+    socket.on('comprarCasa', (data) => {
+        const { terreno, usuario, partida } = data;
+        console.log(`Evento comprarCasa recibido: ${terreno} por ${usuario} en la partida ${partida}`);
+        io.to(partida).emit('casaComprada', { terreno, usuario });
+    });
+
+    socket.on('tirarDado', (data) => {
+        const { actual, partida } = data;
+        console.log(`Evento tirarDado recibido por ${actual} en la partida ${partida}`);
+        io.to(partida).emit('turnoActual', {actual});
+    });
+
     
 });
 

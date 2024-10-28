@@ -184,6 +184,7 @@ export default {
     background-color: rgba($color:#52a07e, $alpha: 0.5);
     display: grid;
     place-items: center;
+ 
 
     &-close{
         position: absolute;

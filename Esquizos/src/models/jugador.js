@@ -6,4 +6,13 @@ export default class Partida {
         this.propiedades = propiedades;
         this.tokenID = tokenID;
     }
+
+    comprarPropiedad(propiedad){
+        this.propiedades.push(propiedad);
+    }
+
+    venderPropiedad(propiedad){
+        this.propiedades = this.propiedades.filter(prop => prop !== propiedad);
+    }
+    
 }
